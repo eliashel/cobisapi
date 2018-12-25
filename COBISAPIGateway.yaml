@@ -1,0 +1,49 @@
+openapi: 3.0.0
+
+info:
+  title: COBIS API
+  description: "This is de API for COBIS Core Banking System. You can get more information about company from our Web Site: [http://www.cobiscorp.com](http://www.cobiscorp.com)."
+  version: 0.1.0
+  termsOfService: "http://cobiscorp.com/terms/"
+  contact:
+    name: COBIS API Administrator from Cobiscorp
+    url: "http://www.cobiscorp.com/support"
+    email: "someone@cobiscorp.com"
+  license:
+    name: "COBIS 5"
+    url: "http://www.cobiscorp.com/licenses/LICENSE-1.0.html"
+
+servers:
+  - url: http://cobisapi.cobiscorp.com/lastest
+    description: Main (production) server
+  - url: http://staging-cobisapi.cobiscorp.com
+    description: Internal staging server for testing
+
+tags:
+- name: "customer"
+  description: "Operations about Customers"
+  externalDocs:
+    description: "Find out more"
+    url: "http://www.cobiscorp.com/products/customers"
+- name: "savings"
+  description: "Operations about Savings"
+  externalDocs:
+    description: "Find out more"
+    url: "http://www.cobiscorp.com/products/savings"
+- name: "credit"
+  description: Operations about Credit"
+  externalDocs:
+    description: "Find out more"
+    url: "http://www.cobiscorp.com/products/credit"
+
+
+paths:
+  /customer/basic-info/{idType}/{idNumber}:
+    $ref: 'Services/Customers/Customer/Customer-GetBasicInfoById.yaml'
+  /customer/financial-info/{idType}/{idNumber}:
+    $ref: 'Services/Customers/Customer/Customer-GetFinancialInfoById.yaml'
+
+components:
+  schemas:
+    Customer:
+      $ref: 'Dictionary/objects/Customers/Customer.yaml#Customer'

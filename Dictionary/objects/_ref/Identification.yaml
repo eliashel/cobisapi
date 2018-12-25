@@ -1,0 +1,13 @@
+Identification:
+  properties:
+    number:
+      type: number
+      minimum: 10000
+      maximum: 999999999999
+    type:
+      $ref: "IdentificationType.yaml#IdentificationType"
+    birthCity:
+      type: "City.yaml#City"
+    expedicionDate:
+      type: string
+      format: date
