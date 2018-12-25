@@ -1,0 +1,31 @@
+get:
+  tags:
+  - "customer"
+  summary: Gets basic information of a customer by ID
+  description: Returns a single basic information of a customer for its ID.
+  operationId: getCustomerById
+  produces:
+  - "application/xml"
+  - "application/json"
+  parameters:
+    - name: idType
+      in: path
+      required: true
+      description: Type of customer identification
+      schema:
+        type: string
+    - name: idNumber
+      in: path
+      required: true
+      description: Number of customer identification 
+      schema:
+        type: string
+  responses:
+    200:
+      description: Basic information of the customer
+      content:
+        application/json:
+          schema:
+            $ref: '../../../Dictionary/objects/Customers/Customer.yaml#Customer'
+    404:
+      description: Customer does not exist.

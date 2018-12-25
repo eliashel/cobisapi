@@ -1,0 +1,14 @@
+City:
+  properties:
+    code:
+      type: string
+      minimum: 2
+      maximum: 3
+    name:
+      type: string
+      minLength: 3
+      maxLength: 30
+    state:
+      type: string
+      minLength: 1
+      maxLength: 1
