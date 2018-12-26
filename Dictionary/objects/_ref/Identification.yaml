@@ -7,7 +7,7 @@ Identification:
     type:
       $ref: "IdentificationType.yaml#IdentificationType"
     birthCity:
-      type: "City.yaml#City"
+      $ref: "City.yaml#City"
     expedicionDate:
       type: string
       format: date

@@ -23,6 +23,6 @@ get:
       content:
         application/json:
           schema:
-            type: string
+            $ref: '#/components/schemas/Customer'
     404:
       description: Customer does not exist.

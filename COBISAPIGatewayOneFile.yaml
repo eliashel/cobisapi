@@ -45,9 +45,6 @@ paths:
       summary: Gets basic information of a customer by ID
       description: Returns a single basic information of a customer for its ID.
       operationId: GetBasicInfoById
-      produces:
-      - "application/xml"
-      - "application/json"
       parameters:
         - name: idType
           in: path
@@ -96,7 +93,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Customer'
         404:
           description: Customer does not exist.
 
