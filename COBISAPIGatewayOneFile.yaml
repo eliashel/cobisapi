@@ -131,7 +131,7 @@ components:
         type:
           $ref: "#/components/schemas/IdentificationType"
         birthCity:
-          type: "#/components/schemas/City"
+          $ref: "#/components/schemas/City"
         expedicionDate:
           type: string
           format: date
@@ -154,7 +154,7 @@ components:
         code:
           type: string
           minimum: 2
-          maximum: 3
+          maximum: 10
         name:
           type: string
           minLength: 3
