@@ -1,0 +1,165 @@
+openapi: 3.0.0
+
+info:
+  title: COBIS API
+  description: "This is de API for COBIS Core Banking System. You can get more information about company from our Web Site: [http://www.cobiscorp.com](http://www.cobiscorp.com)."
+  version: 0.1.0
+  termsOfService: "http://cobiscorp.com/terms/"
+  contact:
+    name: COBIS API Administrator from Cobiscorp
+    url: "http://www.cobiscorp.com/support"
+    email: "someone@cobiscorp.com"
+  license:
+    name: "COBIS 5"
+    url: "http://www.cobiscorp.com/licenses/LICENSE-1.0.html"
+
+servers:
+  - url: http://cobisapi.cobiscorp.com/lastest
+    description: Main (production) server
+  - url: http://staging-cobisapi.cobiscorp.com
+    description: Internal staging server for testing
+
+tags:
+- name: "customer"
+  description: "Operations about Customers"
+  externalDocs:
+    description: "Find out more"
+    url: "http://www.cobiscorp.com/products/customers"
+- name: "savings"
+  description: "Operations about Savings"
+  externalDocs:
+    description: "Find out more"
+    url: "http://www.cobiscorp.com/products/savings"
+- name: "credit"
+  description: Operations about Credit"
+  externalDocs:
+    description: "Find out more"
+    url: "http://www.cobiscorp.com/products/credit"
+
+
+paths:
+  /customer/basic-info/{idType}/{idNumber}:
+    get:
+      tags:
+      - "customer"
+      summary: Gets basic information of a customer by ID
+      description: Returns a single basic information of a customer for its ID.
+      operationId: GetBasicInfoById
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+        - name: idType
+          in: path
+          required: true
+          description: Type of customer identification
+          schema:
+            type: string
+        - name: idNumber
+          in: path
+          required: true
+          description: Number of customer identification 
+          schema:
+            type: string
+      responses:
+        200:
+          description: Basic information of the customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+        404:
+          description: Customer does not exist.
+  /customer/financial-info/{idType}/{idNumber}:
+    get:
+      tags:
+      - "customer"
+      summary: Gets financial information of a customer by ID
+      description: Returns a single financial information of a customer for its ID.
+      operationId: GetFinancialInfoById
+      parameters:
+        - name: idType
+          in: path
+          required: true
+          description: Type of customer identification
+          schema:
+            type: string
+        - name: idNumber
+          in: path
+          required: true
+          description: Number of customer identification 
+          schema:
+            type: string
+      responses:
+        200:
+          description: Financial information of the customer
+          content:
+            application/json:
+              schema:
+                type: string
+        404:
+          description: Customer does not exist.
+
+components:
+  schemas:
+    Customer:
+      properties:
+        code:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 9999999999
+        identification:
+          $ref: "#/components/schemas/Identification"
+        name:
+          type: string
+          pattern: "[a-z0-9]{3,64}"
+        lastName:
+          type: string
+          minLength: 3
+          maxLength: 30
+        state:
+          type: string
+          minLength: 1
+          maxLength: 1
+    Identification:
+      properties:
+        number:
+          type: number
+          minimum: 10000
+          maximum: 999999999999
+        type:
+          $ref: "IdentificationType.yaml#IdentificationType"
+        birthCity:
+          type: "City.yaml#City"
+        expedicionDate:
+          type: string
+          format: date
+    IdentificationType:
+      properties:
+        code:
+          type: string
+          minimum: 2
+          maximum: 3
+        name:
+          type: string
+          minLength: 3
+          maxLength: 30
+        state:
+          type: string
+          minLength: 1
+          maxLength: 1
+    City:
+      properties:
+        code:
+          type: string
+          minimum: 2
+          maximum: 3
+        name:
+          type: string
+          minLength: 3
+          maxLength: 30
+        state:
+          type: string
+          minLength: 1
+          maxLength: 1
