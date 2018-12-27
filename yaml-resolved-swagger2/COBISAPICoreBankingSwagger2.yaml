@@ -1,0 +1,148 @@
+---
+swagger: "2.0"
+info:
+  description: 'This is de API for COBIS Core Banking System. You can get more information
+    about company from our Web Site: [http://www.cobiscorp.com](http://www.cobiscorp.com).'
+  version: 1.0.0
+  title: COBIS API
+  termsOfService: http://cobiscorp.com/terms/
+  contact:
+    name: COBIS API Administrator from Cobiscorp
+    url: http://www.cobiscorp.com/support
+    email: someone@cobiscorp.com
+  license:
+    name: COBIS 5
+    url: http://www.cobiscorp.com/licenses/LICENSE-1.0.html
+host: virtserver.swaggerhub.com
+basePath: /Cobiscorp/COBISAPICoreBankingSwagger2/1.0.0
+tags:
+- name: customer
+  description: Operations about Customers
+  externalDocs:
+    description: Find out more
+    url: http://www.cobiscorp.com/products/customers
+- name: savings
+  description: Operations about Savings
+  externalDocs:
+    description: Find out more
+    url: http://www.cobiscorp.com/products/savings
+- name: credit
+  description: Operations about Credit"
+  externalDocs:
+    description: Find out more
+    url: http://www.cobiscorp.com/products/credit
+schemes:
+- https
+- http
+paths:
+  /customer/basic-info/{idType}/{idNumber}:
+    get:
+      tags:
+      - customer
+      summary: Gets basic information of a customer by ID
+      description: Returns a single basic information of a customer for its ID.
+      operationId: GetBasicInfoById
+      produces:
+      - application/xml
+      - application/json
+      parameters:
+      - name: idType
+        in: path
+        description: Type of customer identification
+        required: true
+        type: string
+      - name: idNumber
+        in: path
+        description: Number of customer identification
+        required: true
+        type: string
+      responses:
+        200:
+          description: Basic information of the customer
+          schema:
+            $ref: '#/definitions/Customer'
+        404:
+          description: Customer does not exist.
+  /customer/financial-info/{idType}/{idNumber}:
+    get:
+      tags:
+      - customer
+      summary: Gets financial information of a customer by ID
+      description: Returns a single financial information of a customer for its ID.
+      operationId: GetFinancialInfoById
+      parameters:
+      - name: idType
+        in: path
+        description: Type of customer identification
+        required: true
+        type: string
+      - name: idNumber
+        in: path
+        description: Number of customer identification
+        required: true
+        type: string
+      responses:
+        200:
+          description: Financial information of the customer
+          schema:
+            $ref: '#/definitions/Customer'
+        404:
+          description: Customer does not exist.
+definitions:
+  Customer:
+    properties:
+      code:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 9999999999
+      identification:
+        $ref: '#/definitions/Identification'
+      name:
+        type: string
+        pattern: '[a-z0-9]{3,64}'
+      lastName:
+        type: string
+        minLength: 3
+        maxLength: 30
+      state:
+        type: string
+        minLength: 1
+        maxLength: 1
+  Identification:
+    properties:
+      number:
+        type: number
+        minimum: 10000
+        maximum: 999999999999
+      type:
+        $ref: '#/definitions/IdentificationType'
+      birthCity:
+        $ref: '#/definitions/City'
+      expedicionDate:
+        type: string
+        format: date
+  IdentificationType:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+        minLength: 3
+        maxLength: 30
+      state:
+        type: string
+        minLength: 1
+        maxLength: 1
+  City:
+    properties:
+      code:
+        type: string
+      name:
+        type: string
+        minLength: 3
+        maxLength: 30
+      state:
+        type: string
+        minLength: 1
+        maxLength: 1
