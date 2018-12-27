@@ -146,3 +146,4 @@ definitions:
         type: string
         minLength: 1
         maxLength: 1
+x-aws-api-id: 1rim649904
