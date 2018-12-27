@@ -11,8 +11,10 @@ info:
   license:
     name: COBIS 5
     url: http://www.cobiscorp.com/licenses/LICENSE-1.0.html
-  version: 0.1.0
+  version: 1.0.0
 servers:
+- url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICoreBanking/1.0.0
+  description: SwaggerHub API Auto Mocking
 - url: http://cobisapi.cobiscorp.com/lastest
   description: Main (production) server
 - url: http://staging-cobisapi.cobiscorp.com
