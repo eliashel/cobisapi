@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: COBIS API
+  title: COBIS API Core Banking System
   description: 'This is de API for COBIS Core Banking System. You can get more information
     about company from our Web Site: [http://www.cobiscorp.com](http://www.cobiscorp.com).'
   termsOfService: http://cobiscorp.com/terms/
@@ -30,11 +30,6 @@ tags:
   externalDocs:
     description: Find out more
     url: http://www.cobiscorp.com/products/savings
-- name: credit
-  description: Operations about Credit"
-  externalDocs:
-    description: Find out more
-    url: http://www.cobiscorp.com/products/credit
 paths:
   /customer/basic-info/{idType}/{idNumber}:
     get:
@@ -162,6 +157,17 @@ components:
           minimum: 2
           type: string
         name:
+          maxLength: 30
+          minLength: 3
+          type: string
+        state:
+          maxLength: 1
+          minLength: 1
+          type: string
+    SavingsAccount:
+      type: object
+      properties:
+        number:
           maxLength: 30
           minLength: 3
           type: string
