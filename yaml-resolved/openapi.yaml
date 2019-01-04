@@ -199,12 +199,13 @@ components:
           description: Código interno de la cuenta de ahorros
           format: int32
         number:
-          maxLength: 30
-          minLength: 3
+          maxLength: 16
+          minLength: 1
           type: string
           description: Número de la cuenta que corresponde al banco
         state:
           maxLength: 1
           minLength: 1
           type: string
+          description: Estado de la cuenta
       description: Cuenta de ahorros
