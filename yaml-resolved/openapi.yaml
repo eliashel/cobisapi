@@ -193,7 +193,7 @@ components:
       type: object
       properties:
         code:
-          maximum: 4
+          maximum: 9999
           minimum: 1
           type: integer
           description: Código interno de la cuenta de ahorros
@@ -216,9 +216,15 @@ components:
           - T
           - X
         controlCode:
-          maximum: 4
+          maximum: 9999
           minimum: 1
           type: integer
           description: Número secuencial de control
+          format: int32
+        subsidiaryCode:
+          maximum: 9
+          minimum: 1
+          type: integer
+          description: Código de la filial
           format: int32
       description: Cuenta de ahorros
