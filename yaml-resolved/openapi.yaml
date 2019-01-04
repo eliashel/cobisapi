@@ -215,4 +215,10 @@ components:
           - N
           - T
           - X
+        controlCode:
+          maximum: 4
+          minimum: 1
+          type: integer
+          description: Número secuencial de control
+          format: int32
       description: Cuenta de ahorros
