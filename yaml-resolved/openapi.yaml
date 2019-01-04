@@ -202,7 +202,7 @@ components:
           maxLength: 30
           minLength: 3
           type: string
-          description: Número de cuenta de ahorros
+          description: Número de la cuenta que corresponde al banco
         state:
           maxLength: 1
           minLength: 1
