@@ -97,6 +97,31 @@ paths:
                 type: string
         404:
           description: Customer does not exist.
+  /savings-account/{number}:
+    get:
+      tags:
+      - savings
+      summary: Gets a savings accounts information of a customer by account number
+      description: Returns a single financial information of a customer for its ID.
+      operationId: GetSavingsAccountByNumber
+      parameters:
+      - name: number
+        in: path
+        description: Account number
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        200:
+          description: Financial information of the customer
+          content:
+            application/json:
+              schema:
+                type: string
+        404:
+          description: Customer does not exist.
 components:
   schemas:
     Customer:
