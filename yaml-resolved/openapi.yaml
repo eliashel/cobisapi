@@ -192,6 +192,11 @@ components:
     SavingsAccount:
       type: object
       properties:
+        code:
+          maximum: 4
+          minimum: 1
+          type: integer
+          format: int32
         number:
           maxLength: 30
           minLength: 3
