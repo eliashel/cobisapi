@@ -121,7 +121,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/SavingsAccount'
         404:
-          description: Customer does not exist.
+          description: Savings account does not exist.
 components:
   schemas:
     Customer:
