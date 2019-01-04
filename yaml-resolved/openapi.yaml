@@ -196,11 +196,13 @@ components:
           maximum: 4
           minimum: 1
           type: integer
+          description: Código interno de la cuenta de ahorros
           format: int32
         number:
           maxLength: 30
           minLength: 3
           type: string
+          description: Número de cuenta de ahorros
         state:
           maxLength: 1
           minLength: 1
