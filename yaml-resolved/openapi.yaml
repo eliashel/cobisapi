@@ -204,8 +204,15 @@ components:
           type: string
           description: Número de la cuenta que corresponde al banco
         state:
-          maxLength: 1
-          minLength: 1
           type: string
-          description: Estado de la cuenta
+          description: 'Estado de la cuenta: A: ACTIVA, C: CANCELADA, G: INGRESADA,
+            I: INACTIVA, N: NO PERFECCIONADA, T: TRASLADADA-INACTIVA, X: TRASLADADA-CANCELADA'
+          enum:
+          - A
+          - C
+          - G
+          - I
+          - N
+          - T
+          - X
       description: Cuenta de ahorros
