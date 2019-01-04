@@ -205,3 +205,4 @@ components:
           maxLength: 1
           minLength: 1
           type: string
+      description: Savings account
