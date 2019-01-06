@@ -280,13 +280,19 @@ components:
       description: Cuenta de ahorros
   responses:
     404NotFound:
-      description: El objeto no fue encontrado
+      description: El objeto no fue encontrado.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
     401Unauthorized:
-      description: No se encuentra autorizado para ejecutar la operación.
+      description: Lo sentimos, no se encuentra autorizado para ejecutar la operación.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    403Forbidden:
+      description: La solicitud ha sido denegada.
       content:
         application/json:
           schema:
