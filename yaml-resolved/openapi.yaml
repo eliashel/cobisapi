@@ -144,6 +144,21 @@ paths:
         schema:
           type: string
           format: uuid
+      - name: X-ChannelCode
+        in: header
+        description: |
+          Sort order:
+            * `1` - Ascending, from A to Z
+            * `2` - Descending, from Z to A
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+          enum:
+          - 1
+          - 2
       - name: number
         in: path
         description: Account number
@@ -338,8 +353,8 @@ components:
       schema:
         type: string
         format: uuid
-    X-Channel-ID:
-      name: X-Channel-ID
+    X-ChannelCode:
+      name: X-ChannelCode
       in: header
       description: |
         Sort order:
