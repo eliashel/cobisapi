@@ -5,11 +5,11 @@ info:
     about company from our Web Site: [http://www.cobiscorp.com](http://www.cobiscorp.com).'
   termsOfService: http://cobiscorp.com/terms/
   contact:
-    name: COBIS API Administrator from Cobiscorp
-    url: http://www.cobiscorp.com/support
-    email: someone@cobiscorp.com
+    name: COBIS Support Center
+    url: http://www.cobiscorp.com/contact-us/customer-technical-support/
+    email: support.center@cobiscorp.com
   license:
-    name: COBIS 5
+    name: COBIS API
     url: http://www.cobiscorp.com/licenses/LICENSE-1.0.html
   version: 1.0.0
 servers:
