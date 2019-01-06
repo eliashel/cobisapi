@@ -253,6 +253,25 @@ components:
           maxLength: 1
           minLength: 1
           type: string
+    SavingsAccountState:
+      type: string
+      description: |
+        'Estados de cuenta de ahorros'
+          * A: ACTIVA
+          * C: CANCELADA
+          * G: INGRESADA
+          * I: INACTIVA
+          * N: NO PERFECCIONADA
+          * T: TRASLADADA-INACTIVA
+          * X: TRASLADADA-CANCELADA
+      enum:
+      - A
+      - C
+      - G
+      - I
+      - N
+      - T
+      - X
     SavingsAccount:
       type: object
       properties:
@@ -268,18 +287,7 @@ components:
           type: string
           description: Número de la cuenta que corresponde al banco
         state:
-          type: string
-          description: "'Estado de la cuenta.' \n  * A: ACTIVA\n  * C: CANCELADA\n\
-            \  * G: INGRESADA\n  * I: INACTIVA\n  * N: NO PERFECCIONADA\n  * T: TRASLADADA-INACTIVA\n\
-            \  * X: TRASLADADA-CANCELADA\n"
-          enum:
-          - A
-          - C
-          - G
-          - I
-          - N
-          - T
-          - X
+          $ref: '#/components/schemas/SavingsAccountState'
         controlCode:
           maximum: 9999
           minimum: 1
