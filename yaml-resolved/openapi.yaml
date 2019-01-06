@@ -317,3 +317,9 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    504GatewayTimeout:
+      description: El servicio proxy no respondió en el tiempo para procesar la solicitud.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
