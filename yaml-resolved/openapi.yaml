@@ -72,6 +72,22 @@ paths:
       description: Returns a single financial information of a customer for its ID.
       operationId: GetFinancialInfoById
       parameters:
+      - name: X-Authorization
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: X-Request-ID
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
       - name: idType
         in: path
         description: Type of customer identification
@@ -91,6 +107,14 @@ paths:
       responses:
         200:
           description: Financial information of the customer
+          headers:
+            X-Correlation-ID:
+              description: Request limit per hour.
+              style: simple
+              explode: false
+              schema:
+                type: string
+                format: uuid
           content:
             application/json:
               schema:
