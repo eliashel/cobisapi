@@ -288,7 +288,7 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
     401Unauthorized:
-      description: Lo sentimos, no se encuentra autorizado para ejecutar la operación.
+      description: No se encuentra autorizado para ejecutar la operación.
       content:
         application/json:
           schema:
@@ -300,13 +300,13 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
     500InternalServerError:
-      description: Lo sentimos, se presentó un error durante el procesamiento de la petición.
+      description: Se presentó un error durante el procesamiento de la solicitud.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    501:
-      description: La solicitud ha sido denegada.
+    502BadGateway:
+      description: Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud.
       content:
         application/json:
           schema:
