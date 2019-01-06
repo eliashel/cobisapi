@@ -136,7 +136,6 @@ paths:
         explode: false
         schema:
           type: string
-          format: uuid
       - name: X-Request-ID
         in: header
         required: true
@@ -321,3 +320,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    X-Authorization:
+      name: X-Authorization
+      in: header
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+    X-Request-ID:
+      name: X-Request-ID
+      in: header
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: uuid
