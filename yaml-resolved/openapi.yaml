@@ -256,7 +256,7 @@ components:
     SavingsAccountState:
       type: string
       description: |
-        'Estados de cuenta de ahorros'
+        'Estado de cuenta de ahorros'
           * A: ACTIVA
           * C: CANCELADA
           * G: INGRESADA
