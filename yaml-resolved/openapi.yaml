@@ -338,3 +338,22 @@ components:
       schema:
         type: string
         format: uuid
+    X-Channel-ID:
+      name: X-Channel-ID
+      in: header
+      description: |
+        Sort order:
+          * `1` - Ascending, from A to Z
+          * `2` - Descending, from Z to A
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: integer
+        format: int32
+        enum:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
