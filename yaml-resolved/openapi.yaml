@@ -31,7 +31,7 @@ tags:
     description: Find out more
     url: http://www.cobiscorp.com/products/savings
 paths:
-  /customer/basic-info/{idType}/{idNumber}:
+  /customer/{idType}/{idNumber}/basic-info:
     get:
       tags:
       - customer
@@ -64,7 +64,7 @@ paths:
                 $ref: '#/components/schemas/Customer'
         404:
           description: Customer does not exist.
-  /customer/financial-info/{idType}/{idNumber}:
+  /customer/{idType}/{idNumber}/financial-info:
     get:
       tags:
       - customer
@@ -94,7 +94,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Customer'
         404:
           description: Customer does not exist.
   /savings-account/{number}:
