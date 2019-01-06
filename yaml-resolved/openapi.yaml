@@ -15,8 +15,6 @@ info:
 servers:
 - url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICoreBanking/1.0.0
   description: SwaggerHub API Auto Mocking
-- url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICoreBanking/1.0
-  description: SwaggerHub API Auto Mocking
 - url: http://cobisapi.cobiscorp.com/lastest
   description: Main (production) server
 - url: http://staging-cobisapi.cobiscorp.com
