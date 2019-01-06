@@ -311,8 +311,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    505Forbidden:
-      description: La solicitud ha sido denegada.
+    503ServiceUnavailable:
+      description: El servicio no se encuentra disponible en el momento.
       content:
         application/json:
           schema:
