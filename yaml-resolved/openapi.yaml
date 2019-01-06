@@ -129,6 +129,22 @@ paths:
       description: Returns a single financial information of a customer for its ID.
       operationId: GetSavingsAccountByNumber
       parameters:
+      - name: X-Authorization
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: X-Request-ID
+        in: header
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
       - name: number
         in: path
         description: Account number
