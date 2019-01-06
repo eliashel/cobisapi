@@ -100,7 +100,7 @@ paths:
   /savings-accounts/{number}:
     get:
       tags:
-      - savings
+      - saving
       summary: Gets a savings accounts information of a customer by account number
       description: Returns a single financial information of a customer for its ID.
       operationId: GetSavingsAccountByNumber
