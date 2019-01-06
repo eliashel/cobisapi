@@ -269,8 +269,9 @@ components:
           description: Número de la cuenta que corresponde al banco
         state:
           type: string
-          description: 'Estado de la cuenta: A: ACTIVA, C: CANCELADA, G: INGRESADA,
-            I: INACTIVA, N: NO PERFECCIONADA, T: TRASLADADA-INACTIVA, X: TRASLADADA-CANCELADA'
+          description: "'Estado de la cuenta.' \n  * A: ACTIVA\n  * C: CANCELADA\n\
+            \  * G: INGRESADA\n  * I: INACTIVA\n  * N: NO PERFECCIONADA\n  * T: TRASLADADA-INACTIVA\n\
+            \  * X: TRASLADADA-CANCELADA\n"
           enum:
           - A
           - C
