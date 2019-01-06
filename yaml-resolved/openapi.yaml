@@ -25,13 +25,13 @@ tags:
   externalDocs:
     description: Find out more
     url: http://www.cobiscorp.com/products/customers
-- name: savings
+- name: saving
   description: Operations about Savings
   externalDocs:
     description: Find out more
     url: http://www.cobiscorp.com/products/savings
 paths:
-  /customer/{idType}/{idNumber}/basic-info:
+  /customers/{idType}/{idNumber}/basic-info:
     get:
       tags:
       - customer
@@ -64,7 +64,7 @@ paths:
                 $ref: '#/components/schemas/Customer'
         404:
           description: Customer does not exist.
-  /customer/{idType}/{idNumber}/financial-info:
+  /customers/{idType}/{idNumber}/financial-info:
     get:
       tags:
       - customer
@@ -97,7 +97,7 @@ paths:
                 $ref: '#/components/schemas/Customer'
         404:
           description: Customer does not exist.
-  /savings-account/{number}:
+  /savings-accounts/{number}:
     get:
       tags:
       - savings
