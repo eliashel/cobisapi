@@ -164,6 +164,16 @@ paths:
           description: Savings account does not exist.
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        description:
+          maxLength: 30
+          minLength: 3
+          type: string
     Customer:
       type: object
       properties:
@@ -268,3 +278,16 @@ components:
           description: Código de la filial
           format: int32
       description: Cuenta de ahorros
+  responses:
+    404NotFound:
+      description: The specified resource was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
