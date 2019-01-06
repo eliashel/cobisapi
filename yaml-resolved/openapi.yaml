@@ -285,7 +285,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
+    401Unauthorized:
       description: Unauthorized
       content:
         application/json:
