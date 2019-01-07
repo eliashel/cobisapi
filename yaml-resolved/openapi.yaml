@@ -164,6 +164,7 @@ paths:
           format: date-time
       - name: X-Channel
         in: header
+        description: Canal desde el cual se origina la solicitud
         required: false
         style: simple
         explode: false
@@ -421,6 +422,7 @@ components:
     X-Channel:
       name: X-Channel
       in: header
+      description: Canal desde el cual se origina la solicitud
       required: false
       style: simple
       explode: false
@@ -429,6 +431,7 @@ components:
     X-Correlation-ID:
       name: X-Request-ID
       in: header
+      description: ID que relaciona la respuesta con la solicitud. El valor de este campo corresponde al X-Request-ID de la solicitud
       required: false
       style: simple
       explode: false
