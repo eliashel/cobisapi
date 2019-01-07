@@ -173,7 +173,7 @@ paths:
           $ref: '#/components/schemas/Channel'
       - name: number
         in: path
-        description: Account number to query
+        description: Account number for query
         required: true
         style: simple
         explode: false
