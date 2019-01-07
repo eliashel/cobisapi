@@ -201,9 +201,10 @@ components:
           maxLength: 30
           minLength: 3
           type: string
+      description: Error retornado cuando un procesamiento no fue realizado exitosamente
     RequestID:
       type: string
-      description: Unique ID for a request
+      description: Identificación única de una petición o solicitud
       format: uuid
     Channel:
       type: integer
