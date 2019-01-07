@@ -144,7 +144,7 @@ paths:
         schema:
           type: string
           format: uuid
-      - name: X-ChannelCode
+      - name: X-Channel
         in: header
         required: false
         style: simple
@@ -370,8 +370,8 @@ components:
       schema:
         type: string
         format: uuid
-    X-ChannelCode:
-      name: X-ChannelCode
+    X-Channel:
+      name: X-Channel
       in: header
       required: false
       style: simple
