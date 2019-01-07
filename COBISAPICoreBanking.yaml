@@ -375,22 +375,53 @@ components:
   ####################################################################
   schemas:
     #########################
-    #  GENERAL COMPONENTS   #
+    #  COBIS SAVINGS MODEL  #
     #########################
-    Error:
-      description: 'Error retornado cuando una operación no se realiza exitosamente'
+    # REFERENCES & CATALOGS
+    SavingsAccountState: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
+      description: >
+        'Estado de cuenta de ahorros'
+          * A: ACTIVA
+          * C: CANCELADA
+          * G: INGRESADA
+          * I: INACTIVA
+          * N: NO PERFECCIONADA
+          * T: TRASLADADA-INACTIVA
+          * X: TRASLADADA-CANCELADA
+      type: string
+      enum: [A, C, G, I, N, T, X]
+    
+    # KEY ELEMENTS
+    SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
+      description: 'Número de cuena de ahorros'
+      type: string
+      minLength: 5
+      maxLength: 16
+    
+    # OBJECTS
+    SavingsAccount: # table:ah_cuenta
+      description: 'Cuenta de ahorros' 
+      type: object
       properties:
         code:
+          description: 'Código interno de la cuenta de ahorros' # field:ah_cuenta
           type: integer
-          format: int32
-        description:
-          type: string
-          minLength: 3
-          maxLength: 30
-    RequestID:
-      description: 'Identificación única de una petición o solicitud'
-      type: string
-      format: uuid
+          minimum: 1
+          maximum: 9999
+        number: # field:ah_cta_banco
+          $ref: "#/components/schemas/SavingsAccountNumber"
+        state: # field:ah_estado
+          $ref: "#/components/schemas/SavingsAccountState"
+        controlCode: # field:ah_control # TODO: Revisar relación
+          description: 'Número secuencial de control'
+          type: integer
+          minimum: 1
+          maximum: 9999
+        subsidiaryCode: # field:ah_filial # Revisar relación
+          description: 'Código de la filial' 
+          type: integer
+          minimum: 1
+          maximum: 9
     #################################
     # COBIS ADMIN & CUSTOMERS MODEL #
     #################################
@@ -476,50 +507,20 @@ components:
           minLength: 1
           maxLength: 1
     #########################
-    #  COBIS SAVINGS MODEL  #
+    #  GENERAL COMPONENTS   #
     #########################
-    # REFERENCES & CATALOGS
-    SavingsAccountState: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
-      description: >
-        'Estado de cuenta de ahorros'
-          * A: ACTIVA
-          * C: CANCELADA
-          * G: INGRESADA
-          * I: INACTIVA
-          * N: NO PERFECCIONADA
-          * T: TRASLADADA-INACTIVA
-          * X: TRASLADADA-CANCELADA
-      type: string
-      enum: [A, C, G, I, N, T, X]
-    
-    # KEY ELEMENTS
-    SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
-      description: 'Número de cuena de ahorros'
-      type: string
-      minLength: 5
-      maxLength: 16
-    
-    # OBJECTS
-    SavingsAccount: # table:ah_cuenta
-      description: 'Cuenta de ahorros' 
-      type: object
+    Error:
+      description: 'Error retornado cuando una operación no se realiza exitosamente'
       properties:
         code:
-          description: 'Código interno de la cuenta de ahorros' # field:ah_cuenta
           type: integer
-          minimum: 1
-          maximum: 9999
-        number: # field:ah_cta_banco
-          $ref: "#/components/schemas/SavingsAccountNumber"
-        state: # field:ah_estado
-          $ref: "#/components/schemas/SavingsAccountState"
-        controlCode: # field:ah_control # TODO: Revisar relación
-          description: 'Número secuencial de control'
-          type: integer
-          minimum: 1
-          maximum: 9999
-        subsidiaryCode: # field:ah_filial # Revisar relación
-          description: 'Código de la filial' 
-          type: integer
-          minimum: 1
-          maximum: 9
+          format: int32
+        description:
+          type: string
+          minLength: 3
+          maxLength: 30
+    RequestID:
+      description: 'Identificación única de una petición o solicitud'
+      type: string
+      format: uuid
+    
