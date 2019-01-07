@@ -56,13 +56,13 @@ paths:
           required: true
           description: 'Tipo de identificación del cliente'
           schema:
-            type: string
+            $ref: '#/components/schemas/IdentificationType'
         - name: idNumber
           in: path
           required: true
           description: 'Número de identificación del cliente' 
           schema:
-            type: string
+            $ref: "#/components/schemas/IdentificationNumber"
       responses:
         200:
           description: 'Información báscia del cliente'
@@ -92,13 +92,13 @@ paths:
           required: true
           description: 'Tipo de identificación del cliente'
           schema:
-            type: string
+            $ref: '#/components/schemas/IdentificationType'
         - name: idNumber
           in: path
           required: true
           description: 'Número de identificación del cliente' 
           schema:
-            type: string
+            $ref: "#/components/schemas/IdentificationNumber"
       responses:
         200:
           description: 'Información financiera del cliente'
@@ -133,7 +133,7 @@ paths:
           required: true
           description: 'Número de cuenta de ahorros a consultar'
           schema:
-            type: string
+            $ref: '#/components/schemas/SavingsAccountNumber'
       responses:
         200:
           description: 'Información de la cuenta de ahorros'
@@ -185,7 +185,7 @@ paths:
           description: 'Número de cuenta a la cual se realiza el depósito'
           required: true
           schema:
-            type: string # TODO: Validar 
+            $ref: '#/components/schemas/SavingsAccountNumber' 
       requestBody:
         content:
           application/x-www-form-urlencoded:
@@ -405,13 +405,12 @@ components:
           * 5: APP Móvil
       type: integer
       enum: [1,2,3,4,5]
+    
     Identification: # TODO: Validar mínimo y máximo
       description: 'Identificación de un cliente'
       properties:
         number:
-          type: number
-          minimum: 10000
-          maximum: 999999999999
+          $ref: "#/components/schemas/IdentificationNumber"
         type:
           $ref: "#/components/schemas/IdentificationType"
         birthCity:
@@ -419,16 +418,26 @@ components:
         expedicionDate:
           type: string
           format: date
+    
+    # KEY ELEMENTS
     IdentificationType: # TODO: Revisar implementación en BD.
       description: >
-        'Tipo de identificación de un cliente'
+        'Tipo de identificación de una persona natural o jurídica'
           * CC: Cédula de Ciudadania
           * CE: Cédula de Extranjería
           * NI: Número de Identificación Tributaria (NIT) 
       type: string
-      enum: [1,2,3,4,5]
+      enum: [CC,CE,NI]
     
-    # OBJETOS
+    IdentificationNumber: # cobis..cl_ente.en_ced_ruc # TODO: Revisar implementación en BD.
+      description: 'Número de identificación de una persona natural o jurídica'
+      type: string
+      minLength: 5
+      maxLength: 16
+    
+    
+    
+    # OBJECTS
     Customer: # TODO: Revisar implementación, definir persona natural y jurídica.
       description: 'Cliente o prospecto de cliente que está interesado en adquirir un producto financiero'
       properties:
@@ -450,6 +459,7 @@ components:
           type: string
           minLength: 1
           maxLength: 1
+    
     City: # TODO: Revisar implementación
       description: 'Cuidad'
       properties:
@@ -481,6 +491,14 @@ components:
           * X: TRASLADADA-CANCELADA
       type: string
       enum: [A, C, G, I, N, T, X]
+    
+    # KEY ELEMENTS
+    SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
+      description: 'Número de cuena de ahorros'
+      type: string
+      minLength: 5
+      maxLength: 16
+    
     # OBJECTS
     SavingsAccount: # table:ah_cuenta
       description: 'Cuenta de ahorros' 
@@ -492,10 +510,7 @@ components:
           minimum: 1
           maximum: 9999
         number: # field:ah_cta_banco
-          description: 'Número de la cuenta que corresponde al banco' 
-          type: string
-          minLength: 1
-          maxLength: 16
+          $ref: "#/components/schemas/SavingsAccountNumber"
         state: # field:ah_estado
           $ref: "#/components/schemas/SavingsAccountState"
         controlCode: # field:ah_control # TODO: Revisar relación
