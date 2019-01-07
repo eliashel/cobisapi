@@ -212,27 +212,6 @@ components:
       - 3
       - 4
       - 5
-    Customer:
-      type: object
-      properties:
-        code:
-          maximum: 9999999999
-          minimum: 1
-          type: integer
-          format: int32
-        identification:
-          $ref: '#/components/schemas/Identification'
-        name:
-          pattern: '[a-z0-9]{3,64}'
-          type: string
-        lastName:
-          maxLength: 30
-          minLength: 3
-          type: string
-        state:
-          maxLength: 1
-          minLength: 1
-          type: string
     Identification:
       type: object
       properties:
@@ -255,6 +234,27 @@ components:
           minimum: 2
           type: string
         name:
+          maxLength: 30
+          minLength: 3
+          type: string
+        state:
+          maxLength: 1
+          minLength: 1
+          type: string
+    Customer:
+      type: object
+      properties:
+        code:
+          maximum: 9999999999
+          minimum: 1
+          type: integer
+          format: int32
+        identification:
+          $ref: '#/components/schemas/Identification'
+        name:
+          pattern: '[a-z0-9]{3,64}'
+          type: string
+        lastName:
           maxLength: 30
           minLength: 3
           type: string
