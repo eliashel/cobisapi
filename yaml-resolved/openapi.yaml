@@ -146,19 +146,11 @@ paths:
           format: uuid
       - name: X-ChannelCode
         in: header
-        description: |
-          Sort order:
-            * `1` - Ascending, from A to Z
-            * `2` - Descending, from Z to A
         required: false
         style: simple
         explode: false
         schema:
-          type: integer
-          format: int32
-          enum:
-          - 1
-          - 2
+          $ref: '#/components/schemas/Channel'
       - name: number
         in: path
         description: Account number
@@ -188,6 +180,22 @@ components:
           maxLength: 30
           minLength: 3
           type: string
+    Channel:
+      type: integer
+      description: |
+        'Canal transccional'
+          * 1: Oficina
+          * 2: Agilizador
+          * 3: Internet
+          * 4: ATM
+          * 5: APP Móvil
+      format: int32
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
     Customer:
       type: object
       properties:
@@ -365,16 +373,8 @@ components:
     X-ChannelCode:
       name: X-ChannelCode
       in: header
-      description: |
-        Sort order:
-          * `1` - Ascending, from A to Z
-          * `2` - Descending, from Z to A
       required: false
       style: simple
       explode: false
       schema:
-        type: integer
-        format: int32
-        enum:
-        - 1
-        - 2
+        $ref: '#/components/schemas/Channel'
