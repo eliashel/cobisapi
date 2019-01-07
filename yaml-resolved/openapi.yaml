@@ -269,6 +269,7 @@ components:
           maxLength: 1
           minLength: 1
           type: string
+      description: Cliente o prospecto de cliente que está interesado en adquirir un producto financiero
     City:
       type: object
       properties:
@@ -284,6 +285,7 @@ components:
           maxLength: 1
           minLength: 1
           type: string
+      description: Cuidad
     SavingsAccountState:
       type: string
       description: |
