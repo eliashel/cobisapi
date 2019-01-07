@@ -125,8 +125,8 @@ paths:
     get:
       tags:
       - saving
-      summary: Gets a savings accounts information of a customer by account number
-      description: Returns a single financial information of a customer for its ID.
+      summary: Consulta una cuenta de ahorros por el número de cuenta
+      description: Retorna la información de la cuenta de ahorros.
       operationId: GetSavingsAccountByNumber
       parameters:
       - name: X-Authorization
@@ -173,7 +173,7 @@ paths:
           $ref: '#/components/schemas/Channel'
       - name: number
         in: path
-        description: Account number for query
+        description: Número de cuenta de ahorros a consultar
         required: true
         style: simple
         explode: false
@@ -181,7 +181,7 @@ paths:
           type: string
       responses:
         200:
-          description: Information of Saving Account
+          description: Información de la cuenta de ahorros
           headers:
             X-Correlation-ID:
               style: simple
@@ -193,7 +193,29 @@ paths:
               schema:
                 $ref: '#/components/schemas/SavingsAccount'
         404:
-          description: Savings account does not exist.
+          description: La cuenta de ahorros no existe
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/404NotFound'
+        405:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/405MethodNotAllowed'
 components:
   schemas:
     Error:
@@ -340,12 +362,6 @@ components:
           format: int32
       description: Cuenta de ahorros
   responses:
-    404NotFound:
-      description: El objeto no fue encontrado.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
       content:
@@ -358,12 +374,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    500InternalServerError:
-      description: Se presentó un error durante el procesamiento de la solicitud.
+    404NotFound:
+      description: El objeto no fue encontrado.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    405MethodNotAllowed:
+      description: El mensaje de solicitud no se encuentra debidamente formateado.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    500InternalServerError:
+      description: 'Se presentó un error durante el procesamiento de la solicitud.''
+        content: application/json: schema: $ref: '
     502BadGateway:
       description: Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud.
       content:
@@ -439,3 +464,11 @@ components:
       explode: false
       schema:
         $ref: '#/components/schemas/RequestID'
+  requestBodies:
+    DepositSavingsAccount:
+      description: Déposito para cuenta de ahorros
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SavingsAccount'
+      required: true
