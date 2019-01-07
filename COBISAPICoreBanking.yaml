@@ -70,26 +70,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
         404:
-          description: 'El cliente no existe'
-          headers:
-            X-Correlation-ID:
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/404NotFound'
+          $ref: '#/components/responses/404NotFound'
         405:
-          description: 'El mensaje de solicitud no se encuentra debidamente formateado.'
-          headers:
-            X-Correlation-ID:
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: '#/components/responses/405MethodNotAllowed'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
                 
   /customers/{idType}/{idNumber}/financial-info: # TODO: Ajustar
     get:
@@ -129,26 +117,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Customer'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
         404:
-          description: 'El cliente no existe'
-          headers:
-            X-Correlation-ID:
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/404NotFound'
+          $ref: '#/components/responses/404NotFound'
         405:
-          description: 'El mensaje de solicitud no se encuentra debidamente formateado.'
-          headers:
-            X-Correlation-ID:
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: '#/components/responses/405MethodNotAllowed'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
   
   /savings-accounts/{number}:
     get:
@@ -182,26 +158,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SavingsAccount'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
         404:
-          description: 'La cuenta de ahorros no existe'
-          headers:
-            X-Correlation-ID:
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/404NotFound'
+          $ref: '#/components/responses/404NotFound'
         405:
-          description: 'El mensaje de solicitud no se encuentra debidamente formateado.'
-          headers:
-            X-Correlation-ID:
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: '#/components/responses/405MethodNotAllowed'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+  
   /savings-accounts/{number}/deposit:
     post:
       tags:
@@ -224,10 +189,7 @@ paths:
           schema:
             $ref: '#/components/schemas/SavingsAccountNumber' 
       requestBody:
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/requestBodies/DepositSavingsAccount'
+        $ref: '#/components/requestBodies/DepositSavingsAccount'
       responses:
         201:
           description: 'El depósito ha sido realizado exitosamente.'
@@ -239,26 +201,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SavingsAccount' # TODO: Revisar respuesta de la transacción
+        401:
+          $ref: '#/components/responses/401Unauthorized'
         404:
-          description: 'La cuenta de ahorros no existe'
-          headers:
-            X-Correlation-ID:
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/404NotFound'
+          $ref: '#/components/responses/404NotFound'
         405:
-          description: 'El mensaje de solicitud no se encuentra debidamente formateado.'
-          headers:
-            X-Correlation-ID:
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: '#/components/responses/405MethodNotAllowed'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
     
 externalDocs:
   description: 'Encuentra más información acerca de Cobiscorp en:'
@@ -323,32 +273,32 @@ components:
   ####################################################################
   # Security scheme definitions (see Authentication)
   ####################################################################
-  securitySchemes:
-    cobiscbs_auth:
-      type: oauth2
-      flows:
-        implicit:
-          authorizationUrl: 'http://cobisapi.cobiscorp.com/oauth/dialog'
-          scopes:
-            'write:savings-accounts': 'Modificar y eliminar cuentas de ahorros'
-            'read:savints-accounts': 'Consultar información de cuentas de ahorros'
-            
-    api_key:
-      type: apiKey
-      name: api_key # TODO: Revisar implementación y concordancia con el header X-Authorization de cada servicio.
-      in: header
+  #securitySchemes:
+  #  cobiscbs_auth:
+  #    type: oauth2
+  #    flows:
+  #      implicit:
+  #        authorizationUrl: 'http://cobisapi.cobiscorp.com/oauth/dialog'
+  #        scopes:
+  #          'write:savings-accounts': 'Modificar y eliminar cuentas de ahorros'
+  #          'read:savints-accounts': 'Consultar información de cuentas de ahorros'
+  #          
+  #  api_key:
+  #    type: apiKey
+  #    name: api_key # TODO: Revisar implementación y concordancia con el header X-Authorization de cada servicio.
+  #    in: header
   
   ####################################################################
   # Reusable request bodies
   ####################################################################
   requestBodies:
     DepositSavingsAccount: # TODO: Revisar
+      description: 'Datos para realizar el déposito a la cuenta de ahorros'
+      required: true
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/SavingsAccount' # TODO: Crear objeto y actualizar
-      description: 'Déposito para cuenta de ahorros'
-      required: true
   
   ####################################################################
   # Reusable responses, such as 401 Unauthorized or 400 Bad Request
@@ -356,52 +306,84 @@ components:
   responses:
     401Unauthorized:
       description: 'No se encuentra autorizado para ejecutar la operación.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorMessage'
     403Forbidden:
       description: 'La solicitud ha sido denegada.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorMessage'
     404NotFound:
       description: 'El objeto no fue encontrado.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorMessage'
     405MethodNotAllowed:
       description: 'El mensaje de solicitud no se encuentra debidamente formateado.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorMessage'
     500InternalServerError:
       description: 'Se presentó un error durante el procesamiento de la solicitud.''
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorMessage'
     502BadGateway:
       description: 'Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorMessage'
     503ServiceUnavailable:
       description: 'El servicio no se encuentra disponible en el momento.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorMessage'
     504GatewayTimeout:
       description: 'El servicio proxy no respondió en el tiempo para procesar la solicitud.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Error'
+            $ref: '#/components/schemas/ErrorMessage'
   
   ####################################################################
   # Reusable response headers
@@ -430,27 +412,6 @@ components:
     #########################
     #  COBIS SAVINGS MODEL  #
     #########################
-    # REFERENCES & CATALOGS
-    SavingsAccountState: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
-      description: >
-        'Estado de cuenta de ahorros'
-          * A: ACTIVA
-          * C: CANCELADA
-          * G: INGRESADA
-          * I: INACTIVA
-          * N: NO PERFECCIONADA
-          * T: TRASLADADA-INACTIVA
-          * X: TRASLADADA-CANCELADA
-      type: string
-      enum: [A, C, G, I, N, T, X]
-    
-    # KEY ELEMENTS
-    SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
-      description: 'Número de cuena de ahorros'
-      type: string
-      minLength: 5
-      maxLength: 16
-    
     # OBJECTS
     SavingsAccount: # table:ah_cuenta
       description: 'Cuenta de ahorros' 
@@ -475,9 +436,70 @@ components:
           type: integer
           minimum: 1
           maximum: 9
+    
+    # REFERENCES & CATALOGS
+    SavingsAccountState: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
+      description: >
+        'Estado de cuenta de ahorros'
+          * A: ACTIVA
+          * C: CANCELADA
+          * G: INGRESADA
+          * I: INACTIVA
+          * N: NO PERFECCIONADA
+          * T: TRASLADADA-INACTIVA
+          * X: TRASLADADA-CANCELADA
+      type: string
+      enum: [A, C, G, I, N, T, X]
+    
+    # KEY ELEMENTS
+    SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
+      description: 'Número de cuena de ahorros'
+      type: string
+      minLength: 5
+      maxLength: 16
+    
     #################################
     # COBIS ADMIN & CUSTOMERS MODEL #
     #################################
+    # OBJECTS
+    Customer: # TODO: Revisar implementación, definir persona natural y jurídica.
+      description: 'Cliente o prospecto de cliente que está interesado en adquirir un producto financiero'
+      properties:
+        code:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 9999999999
+        identification:
+          $ref: "#/components/schemas/Identification"
+        name:
+          type: string
+          pattern: "[a-z0-9]{3,64}"
+        lastName:
+          type: string
+          minLength: 3
+          maxLength: 30
+        state:
+          type: string
+          minLength: 1
+          maxLength: 1
+    
+    City: # TODO: Revisar implementación
+      description: 'Cuidad'
+      properties:
+        code:
+          type: string
+          minimum: 2
+          maximum: 10
+        name:
+          type: string
+          minLength: 3
+          maxLength: 30
+        state:
+          type: string
+          minLength: 1
+          maxLength: 1
+    
     # REFERENCES & CATALOGS
     Channel: # TODO: Validar implementación de objeto en BD.
       description: >
@@ -519,50 +541,10 @@ components:
       minLength: 5
       maxLength: 16
     
-    
-    
-    # OBJECTS
-    Customer: # TODO: Revisar implementación, definir persona natural y jurídica.
-      description: 'Cliente o prospecto de cliente que está interesado en adquirir un producto financiero'
-      properties:
-        code:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 9999999999
-        identification:
-          $ref: "#/components/schemas/Identification"
-        name:
-          type: string
-          pattern: "[a-z0-9]{3,64}"
-        lastName:
-          type: string
-          minLength: 3
-          maxLength: 30
-        state:
-          type: string
-          minLength: 1
-          maxLength: 1
-    
-    City: # TODO: Revisar implementación
-      description: 'Cuidad'
-      properties:
-        code:
-          type: string
-          minimum: 2
-          maximum: 10
-        name:
-          type: string
-          minLength: 3
-          maxLength: 30
-        state:
-          type: string
-          minLength: 1
-          maxLength: 1
     #########################
     #  GENERAL COMPONENTS   #
     #########################
-    Error:
+    ErrorMessage:
       description: 'Error retornado cuando una operación no se realiza exitosamente'
       properties:
         code:
@@ -576,4 +558,3 @@ components:
       description: 'Identificación única de una petición o solicitud'
       type: string
       format: uuid
-    
