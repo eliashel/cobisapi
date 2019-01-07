@@ -370,6 +370,24 @@ components:
       schema:
         type: string
         format: uuid
+    X-EndUser-Login:
+      name: X-EndUser-Login
+      in: header
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: date-time
+    X-EndUser-Datetime:
+      name: X-EndUser-Datetime
+      in: header
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: date-time
     X-Channel:
       name: X-Channel
       in: header
