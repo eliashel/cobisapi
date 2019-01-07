@@ -179,12 +179,10 @@ paths:
           description: Information of Saving Account
           headers:
             X-Correlation-ID:
-              description: Request limit per hour.
               style: simple
               explode: false
               schema:
-                type: integer
-                format: int32
+                $ref: '#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -205,6 +203,7 @@ components:
           type: string
     RequestID:
       type: string
+      description: Unique ID for a request
       format: uuid
     Channel:
       type: integer
