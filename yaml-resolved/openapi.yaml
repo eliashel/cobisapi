@@ -236,21 +236,18 @@ components:
         expedicionDate:
           type: string
           format: date
+      description: Identificación de un cliente
     IdentificationType:
-      type: object
-      properties:
-        code:
-          maximum: 3
-          minimum: 2
-          type: string
-        name:
-          maxLength: 30
-          minLength: 3
-          type: string
-        state:
-          maxLength: 1
-          minLength: 1
-          type: string
+      type: string
+      description: "'Tipo de identificación de un cliente'\n  * CC: Cédula de Ciudadania\n\
+        \  * CE: Cédula de Extranjería\n  * NI: Número de Identificación Tributaria\
+        \ (NIT) \n"
+      enum:
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
     Customer:
       type: object
       properties:
