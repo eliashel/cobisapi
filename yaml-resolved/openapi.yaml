@@ -506,30 +506,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
 components:
   schemas:
-    SavingsAccountState:
-      type: string
-      description: |
-        'Estado de cuenta de ahorros'
-          * A: ACTIVA
-          * C: CANCELADA
-          * G: INGRESADA
-          * I: INACTIVA
-          * N: NO PERFECCIONADA
-          * T: TRASLADADA-INACTIVA
-          * X: TRASLADADA-CANCELADA
-      enum:
-      - A
-      - C
-      - G
-      - I
-      - N
-      - T
-      - X
-    SavingsAccountNumber:
-      maxLength: 16
-      minLength: 5
-      type: string
-      description: Número de cuena de ahorros
     SavingsAccount:
       type: object
       properties:
@@ -556,6 +532,68 @@ components:
           description: Código de la filial
           format: int32
       description: Cuenta de ahorros
+    SavingsAccountState:
+      type: string
+      description: |
+        'Estado de cuenta de ahorros'
+          * A: ACTIVA
+          * C: CANCELADA
+          * G: INGRESADA
+          * I: INACTIVA
+          * N: NO PERFECCIONADA
+          * T: TRASLADADA-INACTIVA
+          * X: TRASLADADA-CANCELADA
+      enum:
+      - A
+      - C
+      - G
+      - I
+      - N
+      - T
+      - X
+    SavingsAccountNumber:
+      maxLength: 16
+      minLength: 5
+      type: string
+      description: Número de cuena de ahorros
+    Customer:
+      type: object
+      properties:
+        code:
+          maximum: 9999999999
+          minimum: 1
+          type: integer
+          format: int32
+        identification:
+          $ref: '#/components/schemas/Identification'
+        name:
+          pattern: '[a-z0-9]{3,64}'
+          type: string
+        lastName:
+          maxLength: 30
+          minLength: 3
+          type: string
+        state:
+          maxLength: 1
+          minLength: 1
+          type: string
+      description: Cliente o prospecto de cliente que está interesado en adquirir un producto financiero
+    City:
+      type: object
+      properties:
+        code:
+          maximum: 10
+          minimum: 2
+          type: string
+        name:
+          maxLength: 30
+          minLength: 3
+          type: string
+        state:
+          maxLength: 1
+          minLength: 1
+          type: string
+      description: Cuidad
     Channel:
       type: integer
       description: |
@@ -599,44 +637,6 @@ components:
       minLength: 5
       type: string
       description: Número de identificación de una persona natural o jurídica
-    Customer:
-      type: object
-      properties:
-        code:
-          maximum: 9999999999
-          minimum: 1
-          type: integer
-          format: int32
-        identification:
-          $ref: '#/components/schemas/Identification'
-        name:
-          pattern: '[a-z0-9]{3,64}'
-          type: string
-        lastName:
-          maxLength: 30
-          minLength: 3
-          type: string
-        state:
-          maxLength: 1
-          minLength: 1
-          type: string
-      description: Cliente o prospecto de cliente que está interesado en adquirir un producto financiero
-    City:
-      type: object
-      properties:
-        code:
-          maximum: 10
-          minimum: 2
-          type: string
-        name:
-          maxLength: 30
-          minLength: 3
-          type: string
-        state:
-          maxLength: 1
-          minLength: 1
-          type: string
-      description: Cuidad
     ErrorMessage:
       type: object
       properties:
