@@ -131,6 +131,7 @@ paths:
       parameters:
       - name: X-Authorization
         in: header
+        description: JSON Web Token (JWT) entregado al usuario en la autenticación
         required: true
         style: simple
         explode: false
@@ -138,6 +139,7 @@ paths:
           type: string
       - name: X-Request-ID
         in: header
+        description: Identificación única de la solicitud o petición
         required: true
         style: simple
         explode: false
@@ -381,6 +383,7 @@ components:
     X-Authorization:
       name: X-Authorization
       in: header
+      description: JSON Web Token (JWT) entregado al usuario en la autenticación
       required: true
       style: simple
       explode: false
@@ -389,6 +392,7 @@ components:
     X-Request-ID:
       name: X-Request-ID
       in: header
+      description: Identificación única de la solicitud o petición
       required: true
       style: simple
       explode: false
