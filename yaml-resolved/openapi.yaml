@@ -142,8 +142,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: string
-          format: uuid
+          $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
         required: false
@@ -178,6 +177,14 @@ paths:
       responses:
         200:
           description: Information of Saving Account
+          headers:
+            X-Correlation-ID:
+              description: Request limit per hour.
+              style: simple
+              explode: false
+              schema:
+                type: integer
+                format: int32
           content:
             application/json:
               schema:
@@ -196,6 +203,9 @@ components:
           maxLength: 30
           minLength: 3
           type: string
+    RequestID:
+      type: string
+      format: uuid
     Channel:
       type: integer
       description: |
@@ -384,8 +394,7 @@ components:
       style: simple
       explode: false
       schema:
-        type: string
-        format: uuid
+        $ref: '#/components/schemas/RequestID'
     X-EndUser-Login:
       name: X-EndUser-Login
       in: header
@@ -412,3 +421,11 @@ components:
       explode: false
       schema:
         $ref: '#/components/schemas/Channel'
+    X-Correlation-ID:
+      name: X-Request-ID
+      in: header
+      required: false
+      style: simple
+      explode: false
+      schema:
+        $ref: '#/components/schemas/RequestID'
