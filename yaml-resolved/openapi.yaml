@@ -147,6 +147,7 @@ paths:
           $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
+        description: Login de usuario en la aplicación de front-end que realiza la petición
         required: false
         style: simple
         explode: false
@@ -401,6 +402,7 @@ components:
     X-EndUser-Login:
       name: X-EndUser-Login
       in: header
+      description: Login de usuario en la aplicación de front-end que realiza la petición
       required: false
       style: simple
       explode: false
