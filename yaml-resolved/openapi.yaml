@@ -156,6 +156,7 @@ paths:
           format: date-time
       - name: X-EndUser-RequestDateTime
         in: header
+        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
         required: false
         style: simple
         explode: false
@@ -172,7 +173,7 @@ paths:
           $ref: '#/components/schemas/Channel'
       - name: number
         in: path
-        description: Account number
+        description: Account number to query
         required: true
         style: simple
         explode: false
@@ -413,6 +414,7 @@ components:
     X-EndUser-RequestDateTime:
       name: X-EndUser-RequestDateTime
       in: header
+      description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
       required: false
       style: simple
       explode: false
