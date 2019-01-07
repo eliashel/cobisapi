@@ -144,6 +144,22 @@ paths:
         schema:
           type: string
           format: uuid
+      - name: X-EndUser-Login
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-EndUser-RequestDateTime
+        in: header
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: date-time
       - name: X-Channel
         in: header
         required: false
@@ -373,16 +389,16 @@ components:
     X-EndUser-Login:
       name: X-EndUser-Login
       in: header
-      required: true
+      required: false
       style: simple
       explode: false
       schema:
         type: string
         format: date-time
-    X-EndUser-Datetime:
-      name: X-EndUser-Datetime
+    X-EndUser-RequestDateTime:
+      name: X-EndUser-RequestDateTime
       in: header
-      required: true
+      required: false
       style: simple
       explode: false
       schema:
