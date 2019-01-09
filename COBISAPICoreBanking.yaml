@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 info:
   title: COBIS API Core Banking System
-  description: "Este es el API para COBIS Core Banking System. En esta versión de API se encuentran definidos los servicios de nuestro producto COBIS Ahorros, el cual permite gestionar todas las operaciones de cuentas de ahorros de un sistema financiero. Puedes conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com)."
+  description: 'Este es el API para COBIS Core Banking System. En esta versión de API se encuentran definidos los servicios de nuestro producto COBIS Ahorros, el cual permite gestionar todas las operaciones de cuentas de ahorros de un sistema financiero. Puedes conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com).'
   version: 1.0.0
   termsOfService: http://cobiscorp.com/terms/
   contact:
@@ -56,13 +56,13 @@ paths:
           required: true
           description: 'Tipo de identificación del cliente'
           schema:
-            $ref: '#/components/schemas/IdentificationType'
+            $ref: '#/components/schemas/IdentificationTypeCode'
         - name: idNumber
           in: path
           required: true
           description: 'Número de identificación del cliente' 
           schema:
-            $ref: "#/components/schemas/IdentificationNumber"
+            $ref: '#/components/schemas/IdentificationNumber'
       responses:
         200:
           description: 'Información básica del cliente'
@@ -99,13 +99,13 @@ paths:
           required: true
           description: 'Tipo de identificación del cliente'
           schema:
-            $ref: '#/components/schemas/IdentificationType'
+            $ref: '#/components/schemas/IdentificationTypeCode'
         - name: idNumber
           in: path
           required: true
           description: 'Número de identificación del cliente' 
           schema:
-            $ref: "#/components/schemas/IdentificationNumber"
+            $ref: '#/components/schemas/IdentificationNumber'
       responses:
         200:
           description: 'Información financiera del cliente'
@@ -257,7 +257,7 @@ components:
       description: 'Canal desde el cual se origina la solicitud'
       in: header
       schema:
-        $ref: '#/components/schemas/Channel'
+        $ref: '#/components/schemas/ChannelCode'
       required: false
     #############################
     # REQUEST HEADER PARAMETERS #
@@ -417,28 +417,37 @@ components:
       description: 'Cuenta de ahorros' 
       type: object
       properties:
-        code:
+        code: # field:ah_cuenta
           description: 'Código interno de la cuenta de ahorros' # field:ah_cuenta
           type: integer
           minimum: 1
           maximum: 9999
         number: # field:ah_cta_banco
-          $ref: "#/components/schemas/SavingsAccountNumber"
-        state: # field:ah_estado
-          $ref: "#/components/schemas/SavingsAccountState"
+          $ref: '#/components/schemas/SavingsAccountNumber'
+        status: # field:ah_estado
+          $ref: '#/components/schemas/SavingsAccountStatus'
         controlCode: # field:ah_control # TODO: Revisar relación
           description: 'Número secuencial de control'
           type: integer
+          format: int32
           minimum: 1
           maximum: 9999
-        subsidiaryCode: # field:ah_filial # Revisar relación
-          description: 'Código de la filial' 
-          type: integer
-          minimum: 1
-          maximum: 9
+        subsidiary: # field:ah_filial -> cobis..cl_filial
+          $ref: '#/components/schemas/Subsidiary'
     
     # REFERENCES & CATALOGS
-    SavingsAccountState: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
+    SavingsAccountStatus: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
+      description: 'Estado de cuenta de ahorros'
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/SavingsAccountStatusCode'
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+      
+    SavingsAccountStatusCode: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
       description: >
         'Estado de cuenta de ahorros'
           * A: ACTIVA
@@ -462,6 +471,18 @@ components:
     # COBIS ADMIN & CUSTOMERS MODEL #
     #################################
     # OBJECTS
+    Branch: # table:cl_oficina
+      description: 'Oficina'
+      properties:
+        code: # field:of_oficina
+          type: integer
+          minimum: 1
+          maximum: 32767
+        name: # field:of_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+    
     Customer: # TODO: Revisar implementación, definir persona natural y jurídica.
       description: 'Cliente o prospecto de cliente que está interesado en adquirir un producto financiero'
       properties:
@@ -471,15 +492,15 @@ components:
           minimum: 1
           maximum: 9999999999
         identification:
-          $ref: "#/components/schemas/Identification"
+          $ref: '#/components/schemas/Identification'
         name:
           type: string
-          pattern: "[a-z0-9]{3,64}"
+          pattern: '[a-z0-9]{3,64}'
         lastName:
           type: string
           minLength: 3
           maxLength: 30
-        state:
+        status:
           type: string
           minLength: 1
           maxLength: 1
@@ -495,13 +516,81 @@ components:
           type: string
           minLength: 3
           maxLength: 30
-        state:
+        status:
           type: string
           minLength: 1
           maxLength: 1
     
+    Currency: # table:cl_moneda
+      description: 'Moneda'
+      properties:
+        code: # field:mo_moneda
+          type: integer
+          minimum: 1
+          maximum: 32767
+        description: # field:mo_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
+    
+    
+    Subsidiary: # table:cl_filial
+      description: 'Filial'
+      properties:
+        code: # field:fi_filial
+          type: integer
+          minimum: 1
+          maximum: 255
+        name: # field:fi_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+    
+    
     # REFERENCES & CATALOGS
-    Channel: # TODO: Validar implementación de objeto en BD.
+    Identification: # TODO: Validar mínimo y máximo
+      description: 'Identificación de un cliente'
+      properties:
+        number:
+          $ref: '#/components/schemas/IdentificationNumber'
+        type:
+          $ref: '#/components/schemas/IdentificationType'
+        birthCity:
+          $ref: '#/components/schemas/City'
+        expedicionDate:
+          type: string
+          format: date
+    
+    IdentificationType: # TODO: Revisar implementación en BD.
+      description: 'Tipo de identificación de una persona natural o jurídica'
+      properties:
+        code:
+          $ref: '#/components/schemas/IdentificationTypeCode'
+        name:
+          type: string
+          minLength: 3
+          maxLength: 30
+        status:
+          type: string
+          minLength: 1
+          maxLength: 1
+    
+    Channel: # TODO: Revisar implementación
+      description: 'Canal transaccional'
+      properties:
+        code:
+          $ref: '#/components/schemas/ChannelCode'
+        name:
+          type: string
+          minLength: 3
+          maxLength: 30
+        status:
+          type: string
+          minLength: 1
+          maxLength: 1
+    
+    # KEY ELEMENTS
+    ChannelCode: # TODO: Validar implementación de objeto en BD.
       description: >
         'Canal transccional'
           * 1: Oficina
@@ -512,21 +601,25 @@ components:
       type: integer
       enum: [1,2,3,4,5]
     
-    Identification: # TODO: Validar mínimo y máximo
-      description: 'Identificación de un cliente'
-      properties:
-        number:
-          $ref: "#/components/schemas/IdentificationNumber"
-        type:
-          $ref: "#/components/schemas/IdentificationType"
-        birthCity:
-          $ref: "#/components/schemas/City"
-        expedicionDate:
-          type: string
-          format: date
+    CatalogCode: # cobis..cl_catalogo.codigo
+      description: 'Código de un elemento de un catálogo'
+      type: string
+      minLength: 1
+      maxLength: 10
+      
+    CatalogDescription: # cobis..cl_catalogo.descripcion
+      description: 'Descripción de un elemento de un catálogo'
+      type: string
+      minLength: 1
+      maxLength: 64
     
-    # KEY ELEMENTS
-    IdentificationType: # TODO: Revisar implementación en BD.
+    CatalogStatus: # cobis..cl_catalogo.estado
+      description: 'Estado de un elemento de un catálogo'
+      type: string
+      minLength: 1
+      maxLength: 1
+    
+    IdentificationTypeCode: # TODO: Revisar implementación en BD.
       description: >
         'Tipo de identificación de una persona natural o jurídica'
           * CC: Cédula de Ciudadania
@@ -540,6 +633,7 @@ components:
       type: string
       minLength: 5
       maxLength: 16
+    
     
     #########################
     #  GENERAL COMPONENTS   #
