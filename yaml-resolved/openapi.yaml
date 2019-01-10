@@ -1002,5 +1002,5 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SavingsAccount'
+            $ref: '#/components/schemas/Transaction'
       required: true
