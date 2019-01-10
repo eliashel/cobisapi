@@ -414,8 +414,131 @@ paths:
       tags:
       - saving
       summary: Realiza un depósito a una cuenta de ahorros en efectivo
-      description: Realiza un depósito en efectivo al número de cuenta de ahorros determinada
-      operationId: CreateCashDepositToSavingsAccount
+      description: Realiza un depósito al número de cuenta de ahorros determinada
+      operationId: CreateDepositToSavingsAccount
+      parameters:
+      - name: X-Authorization
+        in: header
+        description: JSON Web Token (JWT) entregado al usuario en la autenticación
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Request-ID
+        in: header
+        description: Identificación única de la solicitud o petición
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/RequestID'
+      - name: X-EndUser-Login
+        in: header
+        description: Login de usuario en la aplicación de front-end que realiza la petición
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-EndUser-RequestDateTime
+        in: header
+        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-EndUser-Terminal
+        in: header
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Channel
+        in: header
+        description: Canal desde el cual se origina la solicitud
+        required: false
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/ChannelCode'
+      - name: number
+        in: path
+        description: Número de cuenta a la cual se realiza el depósito
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/SavingsAccountNumber'
+      requestBody:
+        $ref: '#/components/requestBodies/DepositSavingsAccount'
+      responses:
+        201:
+          description: El depósito ha sido realizado exitosamente.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavingsAccount'
+        401:
+          description: No se encuentra autorizado para ejecutar la operación.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        404:
+          description: El objeto no fue encontrado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        405:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        500:
+          description: 'Se presentó un error durante el procesamiento de la solicitud.''
+            headers: X-Correlation-ID: schema: $ref: '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /savings-accounts/{number}/deposit/book:
+    post:
+      tags:
+      - saving
+      summary: Realiza un depósito con libreta a una cuenta de ahorros en efectivo
+      description: Realiza un depósito con libreta al número de cuenta de ahorros determinada
+      operationId: CreateDepositWithBookToSavingsAccount
       parameters:
       - name: X-Authorization
         in: header
@@ -534,28 +657,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
 components:
   schemas:
-    Transaction:
-      type: object
-      properties:
-        processDate:
-          type: string
-          description: Fecha de proceso de la transacción
-          format: date
-        branch:
-          $ref: '#/components/schemas/Branch'
-        transactionAmount:
-          $ref: '#/components/schemas/Amount'
-        cashAmount:
-          $ref: '#/components/schemas/Amount'
-        ownChecksAmount:
-          $ref: '#/components/schemas/Amount'
-        localChecksAmount:
-          $ref: '#/components/schemas/Amount'
-        othersChecksAmount:
-          $ref: '#/components/schemas/Amount'
-        currency:
-          $ref: '#/components/schemas/Currency'
-      description: Transacción de una cuenta de ahorros
     SavingsAccount:
       type: object
       properties:
@@ -569,12 +670,8 @@ components:
           $ref: '#/components/schemas/SavingsAccountNumber'
         status:
           $ref: '#/components/schemas/SavingsAccountStatus'
-        controlCode:
-          maximum: 9999
-          minimum: 1
-          type: integer
-          description: Número secuencial de control
-          format: int32
+        savingsBook:
+          $ref: '#/components/schemas/SavingsBook'
         subsidiary:
           $ref: '#/components/schemas/Subsidiary'
         branch:
@@ -593,8 +690,6 @@ components:
           type: string
           description: Nombre de la cuenta
         availableBalance:
-          $ref: '#/components/schemas/Amount'
-        bookBalance:
           $ref: '#/components/schemas/Amount'
         dateOfLastMovement:
           type: string
@@ -643,6 +738,52 @@ components:
       minLength: 5
       type: string
       description: Número de cuena de ahorros
+    SavingsBook:
+      type: object
+      properties:
+        number:
+          type: number
+          description: Número de la libreta de ahorros
+          format: int32
+        controlNumber:
+          type: number
+          description: Número de control de la libreta
+          format: int32
+        line:
+          maximum: 32767
+          minimum: 1
+          type: number
+          description: Número de lineas impresas en la libreta
+          format: int32
+        balance:
+          $ref: '#/components/schemas/Amount'
+      description: Libreta de cuenta de ahorros
+    Transaction:
+      type: object
+      properties:
+        processDate:
+          type: string
+          description: Fecha de proceso de la transacción
+          format: date
+        branch:
+          $ref: '#/components/schemas/Branch'
+        transactionAmount:
+          $ref: '#/components/schemas/Amount'
+        cashAmount:
+          $ref: '#/components/schemas/Amount'
+        ownChecksAmount:
+          $ref: '#/components/schemas/Amount'
+        localChecksAmount:
+          $ref: '#/components/schemas/Amount'
+        othersChecksAmount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        origenAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        destinationAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+      description: Transacción de una cuenta de ahorros
     Branch:
       type: object
       properties:
