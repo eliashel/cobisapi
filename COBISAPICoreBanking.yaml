@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 info:
   title: COBIS API Core Banking System
-  description: "Este es el API para COBIS Core Banking System. En esta versión de API se encuentran definidos los servicios de nuestro producto COBIS Ahorros, el cual permite gestionar todas las operaciones de cuentas de ahorros de un sistema financiero. Puedes conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com)."
+  description: 'Este es el API para COBIS Core Banking System. En esta versión de API se encuentran definidos los servicios de nuestro producto COBIS Ahorros, el cual permite gestionar todas las operaciones de cuentas de ahorros de un sistema financiero. Puedes conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com).'
   version: 1.0.0
   termsOfService: http://cobiscorp.com/terms/
   contact:
@@ -49,6 +49,7 @@ paths:
         - $ref: '#/components/parameters/X-Request-ID'
         - $ref: '#/components/parameters/X-EndUser-Login'
         - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
         - $ref: '#/components/parameters/X-Channel'
         # BODY REQUEST
         - name: idType
@@ -56,13 +57,13 @@ paths:
           required: true
           description: 'Tipo de identificación del cliente'
           schema:
-            $ref: '#/components/schemas/IdentificationType'
+            $ref: '#/components/schemas/IdentificationTypeCode'
         - name: idNumber
           in: path
           required: true
           description: 'Número de identificación del cliente' 
           schema:
-            $ref: "#/components/schemas/IdentificationNumber"
+            $ref: '#/components/schemas/IdentificationNumber'
       responses:
         200:
           description: 'Información básica del cliente'
@@ -92,6 +93,7 @@ paths:
         - $ref: '#/components/parameters/X-Request-ID'
         - $ref: '#/components/parameters/X-EndUser-Login'
         - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
         - $ref: '#/components/parameters/X-Channel'
         # BODY REQUEST
         - name: idType
@@ -99,13 +101,13 @@ paths:
           required: true
           description: 'Tipo de identificación del cliente'
           schema:
-            $ref: '#/components/schemas/IdentificationType'
+            $ref: '#/components/schemas/IdentificationTypeCode'
         - name: idNumber
           in: path
           required: true
           description: 'Número de identificación del cliente' 
           schema:
-            $ref: "#/components/schemas/IdentificationNumber"
+            $ref: '#/components/schemas/IdentificationNumber'
       responses:
         200:
           description: 'Información financiera del cliente'
@@ -139,6 +141,7 @@ paths:
         - $ref: '#/components/parameters/X-Request-ID'
         - $ref: '#/components/parameters/X-EndUser-Login'
         - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
         - $ref: '#/components/parameters/X-Channel'
         # BODY REQUEST
         - name: number
@@ -172,14 +175,59 @@ paths:
       tags:
         - saving
       summary: 'Realiza un depósito a una cuenta de ahorros en efectivo'
-      description: 'Realiza un depósito en efectivo al número de cuenta de ahorros determinada'
-      operationId: CreateCashDepositToSavingsAccount
+      description: 'Realiza un depósito al número de cuenta de ahorros determinada'
+      operationId: CreateDepositToSavingsAccount
       parameters:
         # HEADER REQUEST
         - $ref: '#/components/parameters/X-Authorization'
         - $ref: '#/components/parameters/X-Request-ID'
         - $ref: '#/components/parameters/X-EndUser-Login'
         - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+        # BODY REQUEST
+        - name: number
+          in: path
+          description: 'Número de cuenta a la cual se realiza el depósito'
+          required: true
+          schema:
+            $ref: '#/components/schemas/SavingsAccountNumber' 
+      requestBody:
+        $ref: '#/components/requestBodies/DepositSavingsAccount'
+      responses:
+        201:
+          description: 'El depósito ha sido realizado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavingsAccount' # TODO: Revisar respuesta de la transacción
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        405:
+          $ref: '#/components/responses/405MethodNotAllowed'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+    
+  /savings-accounts/{number}/deposit/book:
+    post:
+      tags:
+        - saving
+      summary: 'Realiza un depósito con libreta a una cuenta de ahorros en efectivo'
+      description: 'Realiza un depósito con libreta al número de cuenta de ahorros determinada'
+      operationId: CreateDepositWithBookToSavingsAccount
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
         - $ref: '#/components/parameters/X-Channel'
         # BODY REQUEST
         - name: number
@@ -242,7 +290,6 @@ components:
       in: header
       schema:
         type: string
-        format: date-time
       required: false
     X-EndUser-RequestDateTime:
       name: X-EndUser-RequestDateTime
@@ -252,12 +299,19 @@ components:
         type: string
         format: date-time
       required: false
+    X-EndUser-Terminal:
+      name: X-EndUser-Terminal
+      description: 'Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end'
+      in: header
+      schema:
+        type: string
+      required: false
     X-Channel:
       name: X-Channel
       description: 'Canal desde el cual se origina la solicitud'
       in: header
       schema:
-        $ref: '#/components/schemas/Channel'
+        $ref: '#/components/schemas/ChannelCode'
       required: false
     #############################
     # REQUEST HEADER PARAMETERS #
@@ -298,7 +352,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SavingsAccount' # TODO: Crear objeto y actualizar
+            $ref: '#/components/schemas/Transaction'
   
   ####################################################################
   # Reusable responses, such as 401 Unauthorized or 400 Bad Request
@@ -417,28 +471,197 @@ components:
       description: 'Cuenta de ahorros' 
       type: object
       properties:
-        code:
+        code: # field:ah_cuenta
           description: 'Código interno de la cuenta de ahorros' # field:ah_cuenta
           type: integer
           minimum: 1
           maximum: 9999
         number: # field:ah_cta_banco
-          $ref: "#/components/schemas/SavingsAccountNumber"
-        state: # field:ah_estado
-          $ref: "#/components/schemas/SavingsAccountState"
-        controlCode: # field:ah_control # TODO: Revisar relación
-          description: 'Número secuencial de control'
-          type: integer
-          minimum: 1
-          maximum: 9999
-        subsidiaryCode: # field:ah_filial # Revisar relación
-          description: 'Código de la filial' 
-          type: integer
-          minimum: 1
-          maximum: 9
+          $ref: '#/components/schemas/SavingsAccountNumber'
+        status: # field:ah_estado
+          $ref: '#/components/schemas/SavingsAccountStatus'
+        #ah_control: OK # savingsBook.controlNumber
+        savingsBook:
+            $ref: '#/components/schemas/SavingsBook'
+        subsidiary: # field:ah_filial -> cobis..cl_filial
+          $ref: '#/components/schemas/Subsidiary'
+        branch: # field:ah_oficina
+          $ref: '#/components/schemas/Branch'
+        #product: # field:ah_producto
+        #  $ref: '#/components/schemas/Product'
+        #type: # field:ah_tipo
+        #  $ref: '#/components/schemas/XXX'
+        currency: # field:ah_moneda
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          description: 'Fecha de apertura de la cuenta'
+          type: string
+          format: date
+        #ah_oficial
+        customer: # field:ah_cliente
+          $ref: '#/components/schemas/Customer'
+        #ah_ced_ruc
+        name: # field:ah_nombre
+          description: 'Nombre de la cuenta'
+          type: string
+          minLength: 1
+          maxLength: 60
+        #ah_categoria # cobis..cl_catalogo[table:ah_categoria]
+        #ah_tipo_promedio # cobis..cl_catalogo[table:ah_tpromedio]
+        #ah_capitalizacion # cobis..cl_catalogo[table:ah_capitalizacion]
+        #ah_ciclo # cobis..cl_catalogo[table:ah_ciclo]
+        #suspenceCount: #field:ah_suspensos
+        #  description: 'Cantidad de suspensos'
+        #  type: number
+        #  format: int32
+        #  minimum: 0
+        #  maximum: 32767
+        #ah_bloqueos
+        #ah_condiciones
+        #ah_monto_bloq
+        #ah_num_blqmonto
+        #ah_cred_24
+        #ah_cred_rem
+        #ah_tipo_def
+        #ah_default
+        #ah_rol_ente # cobis..cl_catalogo[table:cl_rol]
+        availableBalance: #field:ah_disponible
+          #description: 'Saldo disponible en la cuenta'
+          $ref: '#/components/schemas/Amount'
+        #ah_12h
+        #ah_12h_dif
+        #ah_24h
+        #ah_48h
+        #ah_remesas
+        #ah_rem_hoy
+        #ah_interes
+        #ah_interes_ganado
+        #ah_saldo_libreta # SavingsBook.balance
+        #ah_saldo_interes: # field:ah_saldo_interes
+        #  description: 'Intereses la cuenta' # TODO: Ajustar descripción
+        #  type: 
+        #    $ref: '#/components/schemas/Amount'
+        #ah_saldo_anterior
+        #ah_saldo_ult_corte
+        #  description: 'Saldo de último corte'
+        #    type: 
+        #      $ref: '#/components/schemas/Amount'
+        #ah_saldo_ayer
+        #ah_creditos
+        #ah_debitos
+        #ah_creditos_hoy
+        #ah_debitos_hoy
+        dateOfLastMovement: # field:ah_fecha_ult_mov
+          description: 'Fecha de último movimiento de la cuenta'
+          type: string
+          format: date
+        dateOfLastInternalMovement: #field:ah_fecha_ult_mov_int
+          description: 'Fecha de último movimiento interno de la cuenta'
+          type: string
+          format: date
+        dateOfLastUpdated: #field:ah_fecha_ult_upd
+          description: 'Fecha de última actualización de la cuenta'
+          type: string
+          format: date
+        #ah_fecha_prx_corte
+        #ah_fecha_ult_corte
+        #ah_fecha_ult_capi
+        #ah_fecha_prx_capita
+        #ah_linea # SavingsBook.line
+        #ah_ult_linea # no se usa
+        #ah_cliente_ec
+        #ah_direccion_ec
+        #ah_descripcion_ec
+        #ah_tipo_dir
+        #ah_agen_ec
+        #ah_parroquia
+        #ah_zona
+        #ah_prom_disponible
+        #ah_promedio1
+        #ah_promedio2
+        #ah_promedio3
+        #ah_promedio4
+        #ah_promedio5
+        #ah_promedio6
+        #ah_personalizada
+        #ah_contador_trx
+        #ah_cta_funcionario
+        #ah_tipocta
+        #ah_prod_banc
+        #ah_origen
+        #ah_numlib # SavingsBook.number
+        #ah_dep_ini
+        #ah_contador_firma
+        #ah_telefono
+        #ah_int_hoy
+        #ah_tasa_hoy
+        #ah_min_dispmes
+        #ah_fecha_ult_ret
+        #ah_cliente1
+        #ah_nombre1
+        #ah_cedruc1
+        #ah_sector
+        #ah_monto_imp
+        #ah_monto_consumos
+        #ah_ctitularidad # cobis..cl_catalogo[table:ah_titularidad]
+        #ah_promotor # cobis..cl_catalogo[table:ah_promotor]
+        #ah_int_mes
+        #ah_tipocta_super
+        #ah_direccion_dv
+        #ah_descripcion_dv
+        #ah_tipodir_dv
+        #ah_parroquia_dv
+        #ah_zona_dv
+        #ah_agen_dv # cobis..cl_agencia
+        #ah_cliente_dv # cobis..cl_direccion
+        #ah_traslado
+        #ah_aplica_tasacorp
+        #ah_monto_emb
+        #ah_monto_ult_capi
+        #ah_saldo_mantval
+        #ah_cuota
+        #ah_creditos2
+        #ah_creditos3
+        #ah_creditos4
+        #ah_creditos5
+        #ah_creditos6
+        #ah_debitos2
+        #ah_debitos3
+        #ah_debitos4
+        #ah_debitos5
+        #ah_debitos6
+        #ah_tasa_ayer
+        #ah_estado_cuenta
+        #ah_permite_sldcero
+        #ah_rem_ayer
+        #ah_numsol
+        #ah_patente
+        #ah_fideicomiso
+        #ah_nxmil
+        #ah_clase_clte
+        #ah_deb_mes_ant
+        #ah_cred_mes_ant
+        #ah_num_deb_mes
+        #ah_num_cred_mes
+        #ah_num_con_mes
+        #ah_num_deb_mes_ant
+        #ah_num_cred_mes_ant
+        #ah_num_con_mes_ant
+        #ah_fecha_ult_proceso
     
     # REFERENCES & CATALOGS
-    SavingsAccountState: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
+    SavingsAccountStatus: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
+      description: 'Estado de cuenta de ahorros'
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/SavingsAccountStatusCode'
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+      
+    SavingsAccountStatusCode: # cobis..cl_catalogo[table:ah_estado_cta]
       description: >
         'Estado de cuenta de ahorros'
           * A: ACTIVA
@@ -455,13 +678,130 @@ components:
     SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
       description: 'Número de cuena de ahorros'
       type: string
+      #pattern: '[0-9]*'
       minLength: 5
       maxLength: 16
+    
+    SavingsBook: # TODO: Validar
+      description: 'Libreta de cuenta de ahorros'
+      properties:
+        number:
+          description: 'Número de la libreta de ahorros'
+          type: number
+          format: int32
+        controlNumber:
+          description: 'Número de control de la libreta'
+          type: number
+          format: int32
+        line:
+          description: 'Número de lineas impresas en la libreta'
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 32767
+        balance:
+          $ref: '#/components/schemas/Amount'
+         
+    
+    Transaction: # table:ah_tran_monet
+      description: 'Transacción de una cuenta de ahorros'
+      type: object
+      properties:
+        processDate:  #field:tm_fecha
+          description: 'Fecha de proceso de la transacción'
+          type: string
+          format: date
+        #tm_secuencial
+        #tm_ssn_branch
+        #tm_cod_alterno
+        #tm_tipo_tran
+        #tm_filial
+        branch: #tm_oficina
+          $ref: '#/components/schemas/Branch'
+        #tm_usuario
+        #tm_terminal
+        #tm_correccion
+        #tm_sec_correccion
+        #tm_origen
+        #tm_nodo
+        #tm_reentry
+        #tm_signo
+        #tm_fecha_ult_mov
+        #tm_cta_banco
+        transactionAmount: # field: tm_valor
+          $ref: '#/components/schemas/Amount'
+        cashAmount: # field:tm_efectivo
+          $ref: '#/components/schemas/Amount'
+        ownChecksAmount: # field:tm_chq_propios
+          $ref: '#/components/schemas/Amount'
+        localChecksAmount: # field:tm_chq_locales
+          $ref: '#/components/schemas/Amount'
+        othersChecksAmount: # field: tm_chq_ot_plazas
+          $ref: '#/components/schemas/Amount'
+        #tm_remoto_ssn
+        currency: #tm_moneda
+          $ref: '#/components/schemas/Currency'
+        #tm_indicador
+        #tm_causa
+        #tm_departamento
+        #tm_saldo_lib
+        #tm_saldo_contable
+        #tm_saldo_disponible
+        #tm_saldo_interes
+        #tm_fecha_efec
+        #tm_interes
+        #tm_control
+        origenAccount: 
+          $ref: '#/components/schemas/SavingsAccount'
+        destinationAccount: #tm_ctadestino # TODO: Validar banco destino
+          $ref: '#/components/schemas/SavingsAccount'
+        #tm_tipo_xfer
+        #tm_estado
+        #tm_concepto
+        #tm_oficina_cta
+        #tm_hora
+        #tm_banco
+        #tm_valor_comision
+        #tm_prod_banc
+        #tm_categoria
+        #tm_monto_imp
+        #tm_tipo_exonerado_imp
+        #tm_serial
+        #tm_tipocta_super
+        #tm_turno
+        #tm_cheque
+        #tm_forma_pg
+        #tm_canal
+        #tm_stand_in
+        #tm_doc_propios
+        #tm_factor
+        #tm_cotizacion
+        #tm_valor_convertido
+        #tm_moneda_destino
+        #tm_idcaja
+        #tm_val_conv_prop
+        #tm_val_conv_loc
+        #tm_interes_cte
+        #tm_interes_emb
+        #tm_interes_bloq
+        #tm_ref_canal
     
     #################################
     # COBIS ADMIN & CUSTOMERS MODEL #
     #################################
     # OBJECTS
+    Branch: # table:cl_oficina
+      description: 'Oficina'
+      properties:
+        code: # field:of_oficina
+          type: integer
+          minimum: 1
+          maximum: 32767
+        name: # field:of_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+    
     Customer: # TODO: Revisar implementación, definir persona natural y jurídica.
       description: 'Cliente o prospecto de cliente que está interesado en adquirir un producto financiero'
       properties:
@@ -471,15 +811,16 @@ components:
           minimum: 1
           maximum: 9999999999
         identification:
-          $ref: "#/components/schemas/Identification"
+          $ref: '#/components/schemas/Identification'
         name:
           type: string
-          pattern: "[a-z0-9]{3,64}"
+          minLength: 1
+          maxLength: 1
         lastName:
           type: string
           minLength: 3
           maxLength: 30
-        state:
+        status:
           type: string
           minLength: 1
           maxLength: 1
@@ -495,13 +836,92 @@ components:
           type: string
           minLength: 3
           maxLength: 30
-        state:
+        status:
           type: string
           minLength: 1
           maxLength: 1
     
+    Currency: # table:cl_moneda
+      description: 'Moneda'
+      properties:
+        code: # field:mo_moneda
+          type: integer
+          minimum: 1
+          maximum: 32767
+        description: # field:mo_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
+    
+    Product: # table:cl_producto
+      description: 'Producto'
+      properties:
+        code: # field:pd_producto
+          type: integer
+          minimum: 1
+          maximum: 255
+        description: # field:pd_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
+    
+    Subsidiary: # table:cl_filial
+      description: 'Filial'
+      properties:
+        code: # field:fi_filial
+          type: integer
+          minimum: 1
+          maximum: 255
+        name: # field:fi_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+    
+    
     # REFERENCES & CATALOGS
-    Channel: # TODO: Validar implementación de objeto en BD.
+    Identification: # TODO: Validar mínimo y máximo
+      description: 'Identificación de un cliente'
+      properties:
+        number:
+          $ref: '#/components/schemas/IdentificationNumber'
+        type:
+          $ref: '#/components/schemas/IdentificationType'
+        birthCity:
+          $ref: '#/components/schemas/City'
+        expedicionDate:
+          type: string
+          format: date
+    
+    IdentificationType: # TODO: Revisar implementación en BD.
+      description: 'Tipo de identificación de una persona natural o jurídica'
+      properties:
+        code:
+          $ref: '#/components/schemas/IdentificationTypeCode'
+        name:
+          type: string
+          minLength: 3
+          maxLength: 30
+        status:
+          type: string
+          minLength: 1
+          maxLength: 1
+    
+    Channel: # TODO: Revisar implementación
+      description: 'Canal transaccional'
+      properties:
+        code:
+          $ref: '#/components/schemas/ChannelCode'
+        name:
+          type: string
+          minLength: 3
+          maxLength: 30
+        status:
+          type: string
+          minLength: 1
+          maxLength: 1
+    
+    # KEY ELEMENTS
+    ChannelCode: # TODO: Validar implementación de objeto en BD.
       description: >
         'Canal transccional'
           * 1: Oficina
@@ -512,21 +932,25 @@ components:
       type: integer
       enum: [1,2,3,4,5]
     
-    Identification: # TODO: Validar mínimo y máximo
-      description: 'Identificación de un cliente'
-      properties:
-        number:
-          $ref: "#/components/schemas/IdentificationNumber"
-        type:
-          $ref: "#/components/schemas/IdentificationType"
-        birthCity:
-          $ref: "#/components/schemas/City"
-        expedicionDate:
-          type: string
-          format: date
+    CatalogCode: # cobis..cl_catalogo.codigo
+      description: 'Código de un elemento de un catálogo'
+      type: string
+      minLength: 1
+      maxLength: 10
+      
+    CatalogDescription: # cobis..cl_catalogo.descripcion
+      description: 'Descripción de un elemento de un catálogo'
+      type: string
+      minLength: 1
+      maxLength: 64
     
-    # KEY ELEMENTS
-    IdentificationType: # TODO: Revisar implementación en BD.
+    CatalogStatus: # cobis..cl_catalogo.estado
+      description: 'Estado de un elemento de un catálogo'
+      type: string
+      minLength: 1
+      maxLength: 1
+    
+    IdentificationTypeCode: # TODO: Revisar implementación en BD.
       description: >
         'Tipo de identificación de una persona natural o jurídica'
           * CC: Cédula de Ciudadania
@@ -541,9 +965,15 @@ components:
       minLength: 5
       maxLength: 16
     
+    
     #########################
     #  GENERAL COMPONENTS   #
     #########################
+    Amount:
+      description: 'Valor monetario'
+      type: string
+      pattern: '[0-9]{1,16}(\.[0-9]{1,2})'
+    
     ErrorMessage:
       description: 'Error retornado cuando una operación no se realiza exitosamente'
       properties:
@@ -554,7 +984,10 @@ components:
           type: string
           minLength: 3
           maxLength: 30
+    
     RequestID:
       description: 'Identificación única de una petición o solicitud'
       type: string
       format: uuid
+    
+    
