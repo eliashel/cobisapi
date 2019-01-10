@@ -552,7 +552,7 @@ components:
           type: string
           description: Fecha de último movimiento de la cuenta
           format: date
-        dateOfLastInternalMovimient:
+        dateOfLastInternalMovement:
           type: string
           description: Fecha de último movimiento interno de la cuenta
           format: date
