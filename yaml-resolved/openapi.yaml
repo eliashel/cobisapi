@@ -85,7 +85,7 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/Channel'
+          $ref: '#/components/schemas/ChannelCode'
       - name: idType
         in: path
         description: Tipo de identificación del cliente
@@ -93,7 +93,7 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/IdentificationType'
+          $ref: '#/components/schemas/IdentificationTypeCode'
       - name: idNumber
         in: path
         description: Número de identificación del cliente
@@ -201,7 +201,7 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/Channel'
+          $ref: '#/components/schemas/ChannelCode'
       - name: idType
         in: path
         description: Tipo de identificación del cliente
@@ -209,7 +209,7 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/IdentificationType'
+          $ref: '#/components/schemas/IdentificationTypeCode'
       - name: idNumber
         in: path
         description: Número de identificación del cliente
@@ -323,7 +323,7 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/Channel'
+          $ref: '#/components/schemas/ChannelCode'
       - name: number
         in: path
         description: Número de cuenta de ahorros a consultar
@@ -437,7 +437,7 @@ paths:
         style: simple
         explode: false
         schema:
-          $ref: '#/components/schemas/Channel'
+          $ref: '#/components/schemas/ChannelCode'
       - name: number
         in: path
         description: Número de cuenta a la cual se realiza el depósito
@@ -517,22 +517,61 @@ components:
           format: int32
         number:
           $ref: '#/components/schemas/SavingsAccountNumber'
-        state:
-          $ref: '#/components/schemas/SavingsAccountState'
+        status:
+          $ref: '#/components/schemas/SavingsAccountStatus'
         controlCode:
           maximum: 9999
           minimum: 1
           type: integer
           description: Número secuencial de control
           format: int32
-        subsidiaryCode:
-          maximum: 9
-          minimum: 1
-          type: integer
-          description: Código de la filial
-          format: int32
+        subsidiary:
+          $ref: '#/components/schemas/Subsidiary'
+        branch:
+          $ref: '#/components/schemas/Branch'
+        product:
+          $ref: '#/components/schemas/Product'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          type: string
+          description: Fecha de apertura de la cuenta
+          format: date
+        customer:
+          $ref: '#/components/schemas/Customer'
+        name:
+          maxLength: 60
+          minLength: 1
+          type: string
+          description: Nombre de la cuenta
+        availableBalance:
+          $ref: '#/components/schemas/Amount'
+        bookBalance:
+          $ref: '#/components/schemas/Amount'
+        dateOfLastMovement:
+          type: string
+          description: Fecha de último movimiento de la cuenta
+          format: date
+        dateOfLastInternalMovimient:
+          type: string
+          description: Fecha de último movimiento interno de la cuenta
+          format: date
+        dateOfLastUpdated:
+          type: string
+          description: Fecha de última actualización de la cuenta
+          format: date
       description: Cuenta de ahorros
-    SavingsAccountState:
+    SavingsAccountStatus:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/SavingsAccountStatusCode'
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+      description: Estado de cuenta de ahorros
+    SavingsAccountStatusCode:
       type: string
       description: |
         'Estado de cuenta de ahorros'
@@ -556,6 +595,19 @@ components:
       minLength: 5
       type: string
       description: Número de cuena de ahorros
+    Branch:
+      type: object
+      properties:
+        code:
+          maximum: 32767
+          minimum: 1
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+      description: Oficina
     Customer:
       type: object
       properties:
@@ -567,13 +619,14 @@ components:
         identification:
           $ref: '#/components/schemas/Identification'
         name:
-          pattern: '[a-z0-9]{3,64}'
+          maxLength: 1
+          minLength: 1
           type: string
         lastName:
           maxLength: 30
           minLength: 3
           type: string
-        state:
+        status:
           maxLength: 1
           minLength: 1
           type: string
@@ -589,12 +642,92 @@ components:
           maxLength: 30
           minLength: 3
           type: string
-        state:
+        status:
           maxLength: 1
           minLength: 1
           type: string
       description: Cuidad
+    Currency:
+      type: object
+      properties:
+        code:
+          maximum: 32767
+          minimum: 1
+          type: integer
+          format: int32
+        description:
+          maxLength: 64
+          minLength: 1
+          type: string
+      description: Moneda
+    Product:
+      type: object
+      properties:
+        code:
+          maximum: 255
+          minimum: 1
+          type: integer
+          format: int32
+        description:
+          maxLength: 64
+          minLength: 1
+          type: string
+      description: Producto
+    Subsidiary:
+      type: object
+      properties:
+        code:
+          maximum: 255
+          minimum: 1
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+      description: Filial
+    Identification:
+      type: object
+      properties:
+        number:
+          $ref: '#/components/schemas/IdentificationNumber'
+        type:
+          $ref: '#/components/schemas/IdentificationType'
+        birthCity:
+          $ref: '#/components/schemas/City'
+        expedicionDate:
+          type: string
+          format: date
+      description: Identificación de un cliente
+    IdentificationType:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/IdentificationTypeCode'
+        name:
+          maxLength: 30
+          minLength: 3
+          type: string
+        status:
+          maxLength: 1
+          minLength: 1
+          type: string
+      description: Tipo de identificación de una persona natural o jurídica
     Channel:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/ChannelCode'
+        name:
+          maxLength: 30
+          minLength: 3
+          type: string
+        status:
+          maxLength: 1
+          minLength: 1
+          type: string
+      description: Canal transaccional
+    ChannelCode:
       type: integer
       description: |
         'Canal transccional'
@@ -610,20 +743,22 @@ components:
       - 3
       - 4
       - 5
-    Identification:
-      type: object
-      properties:
-        number:
-          $ref: '#/components/schemas/IdentificationNumber'
-        type:
-          $ref: '#/components/schemas/IdentificationType'
-        birthCity:
-          $ref: '#/components/schemas/City'
-        expedicionDate:
-          type: string
-          format: date
-      description: Identificación de un cliente
-    IdentificationType:
+    CatalogCode:
+      maxLength: 10
+      minLength: 1
+      type: string
+      description: Código de un elemento de un catálogo
+    CatalogDescription:
+      maxLength: 64
+      minLength: 1
+      type: string
+      description: Descripción de un elemento de un catálogo
+    CatalogStatus:
+      maxLength: 1
+      minLength: 1
+      type: string
+      description: Estado de un elemento de un catálogo
+    IdentificationTypeCode:
       type: string
       description: "'Tipo de identificación de una persona natural o jurídica'\n \
         \ * CC: Cédula de Ciudadania\n  * CE: Cédula de Extranjería\n  * NI: Número\
@@ -637,6 +772,10 @@ components:
       minLength: 5
       type: string
       description: Número de identificación de una persona natural o jurídica
+    Amount:
+      pattern: '[0-9]+(\.[0-9]{1,2})'
+      type: string
+      description: Valor monetario
     ErrorMessage:
       type: object
       properties:
@@ -791,7 +930,7 @@ components:
       style: simple
       explode: false
       schema:
-        $ref: '#/components/schemas/Channel'
+        $ref: '#/components/schemas/ChannelCode'
     X-Correlation-ID:
       name: X-Request-ID
       in: header
