@@ -434,6 +434,174 @@ components:
           maximum: 9999
         subsidiary: # field:ah_filial -> cobis..cl_filial
           $ref: '#/components/schemas/Subsidiary'
+        branch: # field:ah_oficina
+          $ref: '#/components/schemas/Branch'
+        product: # field:ah_producto
+          $ref: '#/components/schemas/Product'
+        #type: # field:ah_tipo
+        #  $ref: '#/components/schemas/XXX'
+        currency: # field:ah_moneda
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          description: 'Fecha de apertura de la cuenta'
+          type: string
+          format: date
+        #ah_oficial
+        customer: # field:ah_cliente
+          $ref: '#/components/schemas/Customer'
+        #ah_ced_ruc
+        name: # field:ah_nombre
+          description: 'Nombre de la cuenta'
+          type: string
+          minLength: 1
+          maxLength: 60
+        #ah_categoria
+        #ah_tipo_promedio
+        #ah_capitalizacion
+        #ah_ciclo
+        #suspenceCount: #field:ah_suspensos
+        #  description: 'Cantidad de suspensos'
+        #  type: number
+        #  format: int32
+        #  minimum: 0
+        #  maximum: 32767
+        #ah_bloqueos
+        #ah_condiciones
+        #ah_monto_bloq
+        #ah_num_blqmonto
+        #ah_cred_24
+        #ah_cred_rem
+        #ah_tipo_def
+        #ah_default
+        #ah_rol_ente
+        availableBalance: #field:ah_disponible
+          #description: 'Saldo disponible en la cuenta'
+          $ref: '#/components/schemas/Amount'
+        #ah_12h
+        #ah_12h_dif
+        #ah_24h
+        #ah_48h
+        #ah_remesas
+        #ah_rem_hoy
+        #ah_interes
+        #ah_interes_ganado
+        bookBalance: # field:ah_saldo_libreta
+          #description: 'Saldo impreso en la libreta de la cuenta'
+          $ref: '#/components/schemas/Amount'
+        #ah_saldo_interes: # field:ah_saldo_interes
+        #  description: 'Intereses la cuenta' # TODO: Ajustar descripción
+        #  type: 
+        #    $ref: '#/components/schemas/Amount'
+        #ah_saldo_anterior
+        #ah_saldo_ult_corte
+        #  description: 'Saldo de último corte'
+        #    type: 
+        #      $ref: '#/components/schemas/Amount'
+        #ah_saldo_ayer
+        #ah_creditos
+        #ah_debitos
+        #ah_creditos_hoy
+        #ah_debitos_hoy
+        dateOfLastMovement: # field:ah_fecha_ult_mov
+          description: 'Fecha de último movimiento de la cuenta'
+          type: string
+          format: date
+        dateOfLastInternalMovimient: #field:ah_fecha_ult_mov_int
+          description: 'Fecha de último movimiento interno de la cuenta'
+          type: string
+          format: date
+        dateOfLastUpdated: #field:ah_fecha_ult_upd
+          description: 'Fecha de última actualización de la cuenta'
+          type: string
+          format: date
+        #ah_fecha_prx_corte
+        #ah_fecha_ult_corte
+        #ah_fecha_ult_capi
+        #ah_fecha_prx_capita
+        #ah_linea
+        #ah_ult_linea
+        #ah_cliente_ec
+        #ah_direccion_ec
+        #ah_descripcion_ec
+        #ah_tipo_dir
+        #ah_agen_ec
+        #ah_parroquia
+        #ah_zona
+        #ah_prom_disponible
+        #ah_promedio1
+        #ah_promedio2
+        #ah_promedio3
+        #ah_promedio4
+        #ah_promedio5
+        #ah_promedio6
+        #ah_personalizada
+        #ah_contador_trx
+        #ah_cta_funcionario
+        #ah_tipocta
+        #ah_prod_banc
+        #ah_origen
+        #ah_numlib
+        #ah_dep_ini
+        #ah_contador_firma
+        #ah_telefono
+        #ah_int_hoy
+        #ah_tasa_hoy
+        #ah_min_dispmes
+        #ah_fecha_ult_ret
+        #ah_cliente1
+        #ah_nombre1
+        #ah_cedruc1
+        #ah_sector
+        #ah_monto_imp
+        #ah_monto_consumos
+        #ah_ctitularidad
+        #ah_promotor
+        #ah_int_mes
+        #ah_tipocta_super
+        #ah_direccion_dv
+        #ah_descripcion_dv
+        #ah_tipodir_dv
+        #ah_parroquia_dv
+        #ah_zona_dv
+        #ah_agen_dv
+        #ah_cliente_dv
+        #ah_traslado
+        #ah_aplica_tasacorp
+        #ah_monto_emb
+        #ah_monto_ult_capi
+        #ah_saldo_mantval
+        #ah_cuota
+        #ah_creditos2
+        #ah_creditos3
+        #ah_creditos4
+        #ah_creditos5
+        #ah_creditos6
+        #ah_debitos2
+        #ah_debitos3
+        #ah_debitos4
+        #ah_debitos5
+        #ah_debitos6
+        #ah_tasa_ayer
+        #ah_estado_cuenta
+        #ah_permite_sldcero
+        #ah_rem_ayer
+        #ah_numsol
+        #ah_patente
+        #ah_fideicomiso
+        #ah_nxmil
+        #ah_clase_clte
+        #ah_deb_mes_ant
+        #ah_cred_mes_ant
+        #ah_num_deb_mes
+        #ah_num_cred_mes
+        #ah_num_con_mes
+        #ah_num_deb_mes_ant
+        #ah_num_cred_mes_ant
+        #ah_num_con_mes_ant
+        #ah_fecha_ult_proceso
+
+
+          
     
     # REFERENCES & CATALOGS
     SavingsAccountStatus: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
@@ -464,6 +632,7 @@ components:
     SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
       description: 'Número de cuena de ahorros'
       type: string
+      #pattern: '[0-9]*'
       minLength: 5
       maxLength: 16
     
@@ -495,7 +664,8 @@ components:
           $ref: '#/components/schemas/Identification'
         name:
           type: string
-          pattern: '[a-z0-9]{3,64}'
+          minLength: 1
+          maxLength: 1
         lastName:
           type: string
           minLength: 3
@@ -533,6 +703,17 @@ components:
           minLength: 1
           maxLength: 64
     
+    Product: # table:cl_producto
+      description: 'Producto'
+      properties:
+        code: # field:pd_producto
+          type: integer
+          minimum: 1
+          maximum: 255
+        description: # field:pd_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
     
     Subsidiary: # table:cl_filial
       description: 'Filial'
@@ -638,6 +819,11 @@ components:
     #########################
     #  GENERAL COMPONENTS   #
     #########################
+    Amount:
+      description: 'Valor monetario'
+      type: string
+      pattern: '[0-9]+(\.[0-9]{1,2})'
+    
     ErrorMessage:
       description: 'Error retornado cuando una operación no se realiza exitosamente'
       properties:
@@ -648,7 +834,10 @@ components:
           type: string
           minLength: 3
           maxLength: 30
+    
     RequestID:
       description: 'Identificación única de una petición o solicitud'
       type: string
       format: uuid
+    
+    
