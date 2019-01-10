@@ -551,6 +551,8 @@ components:
           $ref: '#/components/schemas/Amount'
         localChecksAmount:
           $ref: '#/components/schemas/Amount'
+        othersChecksAmount:
+          $ref: '#/components/schemas/Amount'
         currency:
           $ref: '#/components/schemas/Currency'
       description: Transacción de una cuenta de ahorros
