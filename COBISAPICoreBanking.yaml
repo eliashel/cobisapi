@@ -49,6 +49,7 @@ paths:
         - $ref: '#/components/parameters/X-Request-ID'
         - $ref: '#/components/parameters/X-EndUser-Login'
         - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
         - $ref: '#/components/parameters/X-Channel'
         # BODY REQUEST
         - name: idType
@@ -92,6 +93,7 @@ paths:
         - $ref: '#/components/parameters/X-Request-ID'
         - $ref: '#/components/parameters/X-EndUser-Login'
         - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
         - $ref: '#/components/parameters/X-Channel'
         # BODY REQUEST
         - name: idType
@@ -139,6 +141,7 @@ paths:
         - $ref: '#/components/parameters/X-Request-ID'
         - $ref: '#/components/parameters/X-EndUser-Login'
         - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
         - $ref: '#/components/parameters/X-Channel'
         # BODY REQUEST
         - name: number
@@ -172,14 +175,59 @@ paths:
       tags:
         - saving
       summary: 'Realiza un depósito a una cuenta de ahorros en efectivo'
-      description: 'Realiza un depósito en efectivo al número de cuenta de ahorros determinada'
-      operationId: CreateCashDepositToSavingsAccount
+      description: 'Realiza un depósito al número de cuenta de ahorros determinada'
+      operationId: CreateDepositToSavingsAccount
       parameters:
         # HEADER REQUEST
         - $ref: '#/components/parameters/X-Authorization'
         - $ref: '#/components/parameters/X-Request-ID'
         - $ref: '#/components/parameters/X-EndUser-Login'
         - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+        # BODY REQUEST
+        - name: number
+          in: path
+          description: 'Número de cuenta a la cual se realiza el depósito'
+          required: true
+          schema:
+            $ref: '#/components/schemas/SavingsAccountNumber' 
+      requestBody:
+        $ref: '#/components/requestBodies/DepositSavingsAccount'
+      responses:
+        201:
+          description: 'El depósito ha sido realizado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavingsAccount' # TODO: Revisar respuesta de la transacción
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        405:
+          $ref: '#/components/responses/405MethodNotAllowed'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+    
+  /savings-accounts/{number}/deposit/book:
+    post:
+      tags:
+        - saving
+      summary: 'Realiza un depósito con libreta a una cuenta de ahorros en efectivo'
+      description: 'Realiza un depósito con libreta al número de cuenta de ahorros determinada'
+      operationId: CreateDepositWithBookToSavingsAccount
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
         - $ref: '#/components/parameters/X-Channel'
         # BODY REQUEST
         - name: number
@@ -242,7 +290,6 @@ components:
       in: header
       schema:
         type: string
-        format: date-time
       required: false
     X-EndUser-RequestDateTime:
       name: X-EndUser-RequestDateTime
@@ -251,6 +298,13 @@ components:
       schema:
         type: string
         format: date-time
+      required: false
+    X-EndUser-Terminal:
+      name: X-EndUser-Terminal
+      description: 'Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end'
+      in: header
+      schema:
+        type: string
       required: false
     X-Channel:
       name: X-Channel
@@ -298,7 +352,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/SavingsAccount' # TODO: Crear objeto y actualizar
+            $ref: '#/components/schemas/Transaction'
   
   ####################################################################
   # Reusable responses, such as 401 Unauthorized or 400 Bad Request
@@ -426,18 +480,15 @@ components:
           $ref: '#/components/schemas/SavingsAccountNumber'
         status: # field:ah_estado
           $ref: '#/components/schemas/SavingsAccountStatus'
-        controlCode: # field:ah_control # TODO: Revisar relación
-          description: 'Número secuencial de control'
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 9999
+        #ah_control: OK # savingsBook.controlNumber
+        savingsBook:
+            $ref: '#/components/schemas/SavingsBook'
         subsidiary: # field:ah_filial -> cobis..cl_filial
           $ref: '#/components/schemas/Subsidiary'
         branch: # field:ah_oficina
           $ref: '#/components/schemas/Branch'
-        product: # field:ah_producto
-          $ref: '#/components/schemas/Product'
+        #product: # field:ah_producto
+        #  $ref: '#/components/schemas/Product'
         #type: # field:ah_tipo
         #  $ref: '#/components/schemas/XXX'
         currency: # field:ah_moneda
@@ -455,10 +506,10 @@ components:
           type: string
           minLength: 1
           maxLength: 60
-        #ah_categoria
-        #ah_tipo_promedio
-        #ah_capitalizacion
-        #ah_ciclo
+        #ah_categoria # cobis..cl_catalogo[table:ah_categoria]
+        #ah_tipo_promedio # cobis..cl_catalogo[table:ah_tpromedio]
+        #ah_capitalizacion # cobis..cl_catalogo[table:ah_capitalizacion]
+        #ah_ciclo # cobis..cl_catalogo[table:ah_ciclo]
         #suspenceCount: #field:ah_suspensos
         #  description: 'Cantidad de suspensos'
         #  type: number
@@ -473,7 +524,7 @@ components:
         #ah_cred_rem
         #ah_tipo_def
         #ah_default
-        #ah_rol_ente
+        #ah_rol_ente # cobis..cl_catalogo[table:cl_rol]
         availableBalance: #field:ah_disponible
           #description: 'Saldo disponible en la cuenta'
           $ref: '#/components/schemas/Amount'
@@ -485,9 +536,7 @@ components:
         #ah_rem_hoy
         #ah_interes
         #ah_interes_ganado
-        bookBalance: # field:ah_saldo_libreta
-          #description: 'Saldo impreso en la libreta de la cuenta'
-          $ref: '#/components/schemas/Amount'
+        #ah_saldo_libreta # SavingsBook.balance
         #ah_saldo_interes: # field:ah_saldo_interes
         #  description: 'Intereses la cuenta' # TODO: Ajustar descripción
         #  type: 
@@ -506,7 +555,7 @@ components:
           description: 'Fecha de último movimiento de la cuenta'
           type: string
           format: date
-        dateOfLastInternalMovimient: #field:ah_fecha_ult_mov_int
+        dateOfLastInternalMovement: #field:ah_fecha_ult_mov_int
           description: 'Fecha de último movimiento interno de la cuenta'
           type: string
           format: date
@@ -518,8 +567,8 @@ components:
         #ah_fecha_ult_corte
         #ah_fecha_ult_capi
         #ah_fecha_prx_capita
-        #ah_linea
-        #ah_ult_linea
+        #ah_linea # SavingsBook.line
+        #ah_ult_linea # no se usa
         #ah_cliente_ec
         #ah_direccion_ec
         #ah_descripcion_ec
@@ -540,7 +589,7 @@ components:
         #ah_tipocta
         #ah_prod_banc
         #ah_origen
-        #ah_numlib
+        #ah_numlib # SavingsBook.number
         #ah_dep_ini
         #ah_contador_firma
         #ah_telefono
@@ -554,8 +603,8 @@ components:
         #ah_sector
         #ah_monto_imp
         #ah_monto_consumos
-        #ah_ctitularidad
-        #ah_promotor
+        #ah_ctitularidad # cobis..cl_catalogo[table:ah_titularidad]
+        #ah_promotor # cobis..cl_catalogo[table:ah_promotor]
         #ah_int_mes
         #ah_tipocta_super
         #ah_direccion_dv
@@ -563,8 +612,8 @@ components:
         #ah_tipodir_dv
         #ah_parroquia_dv
         #ah_zona_dv
-        #ah_agen_dv
-        #ah_cliente_dv
+        #ah_agen_dv # cobis..cl_agencia
+        #ah_cliente_dv # cobis..cl_direccion
         #ah_traslado
         #ah_aplica_tasacorp
         #ah_monto_emb
@@ -599,9 +648,6 @@ components:
         #ah_num_cred_mes_ant
         #ah_num_con_mes_ant
         #ah_fecha_ult_proceso
-
-
-          
     
     # REFERENCES & CATALOGS
     SavingsAccountStatus: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
@@ -615,7 +661,7 @@ components:
         status:
           $ref: '#/components/schemas/CatalogStatus'
       
-    SavingsAccountStatusCode: # cobis..cl_catalogo[table:XXXX] # TODO: Indicar tabla
+    SavingsAccountStatusCode: # cobis..cl_catalogo[table:ah_estado_cta]
       description: >
         'Estado de cuenta de ahorros'
           * A: ACTIVA
@@ -635,6 +681,110 @@ components:
       #pattern: '[0-9]*'
       minLength: 5
       maxLength: 16
+    
+    SavingsBook: # TODO: Validar
+      description: 'Libreta de cuenta de ahorros'
+      properties:
+        number:
+          description: 'Número de la libreta de ahorros'
+          type: number
+          format: int32
+        controlNumber:
+          description: 'Número de control de la libreta'
+          type: number
+          format: int32
+        line:
+          description: 'Número de lineas impresas en la libreta'
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 32767
+        balance:
+          $ref: '#/components/schemas/Amount'
+         
+    
+    Transaction: # table:ah_tran_monet
+      description: 'Transacción de una cuenta de ahorros'
+      type: object
+      properties:
+        processDate:  #field:tm_fecha
+          description: 'Fecha de proceso de la transacción'
+          type: string
+          format: date
+        #tm_secuencial
+        #tm_ssn_branch
+        #tm_cod_alterno
+        #tm_tipo_tran
+        #tm_filial
+        branch: #tm_oficina
+          $ref: '#/components/schemas/Branch'
+        #tm_usuario
+        #tm_terminal
+        #tm_correccion
+        #tm_sec_correccion
+        #tm_origen
+        #tm_nodo
+        #tm_reentry
+        #tm_signo
+        #tm_fecha_ult_mov
+        #tm_cta_banco
+        transactionAmount: # field: tm_valor
+          $ref: '#/components/schemas/Amount'
+        cashAmount: # field:tm_efectivo
+          $ref: '#/components/schemas/Amount'
+        ownChecksAmount: # field:tm_chq_propios
+          $ref: '#/components/schemas/Amount'
+        localChecksAmount: # field:tm_chq_locales
+          $ref: '#/components/schemas/Amount'
+        othersChecksAmount: # field: tm_chq_ot_plazas
+          $ref: '#/components/schemas/Amount'
+        #tm_remoto_ssn
+        currency: #tm_moneda
+          $ref: '#/components/schemas/Currency'
+        #tm_indicador
+        #tm_causa
+        #tm_departamento
+        #tm_saldo_lib
+        #tm_saldo_contable
+        #tm_saldo_disponible
+        #tm_saldo_interes
+        #tm_fecha_efec
+        #tm_interes
+        #tm_control
+        origenAccount: 
+          $ref: '#/components/schemas/SavingsAccount'
+        destinationAccount: #tm_ctadestino # TODO: Validar banco destino
+          $ref: '#/components/schemas/SavingsAccount'
+        #tm_tipo_xfer
+        #tm_estado
+        #tm_concepto
+        #tm_oficina_cta
+        #tm_hora
+        #tm_banco
+        #tm_valor_comision
+        #tm_prod_banc
+        #tm_categoria
+        #tm_monto_imp
+        #tm_tipo_exonerado_imp
+        #tm_serial
+        #tm_tipocta_super
+        #tm_turno
+        #tm_cheque
+        #tm_forma_pg
+        #tm_canal
+        #tm_stand_in
+        #tm_doc_propios
+        #tm_factor
+        #tm_cotizacion
+        #tm_valor_convertido
+        #tm_moneda_destino
+        #tm_idcaja
+        #tm_val_conv_prop
+        #tm_val_conv_loc
+        #tm_interes_cte
+        #tm_interes_emb
+        #tm_interes_bloq
+        #tm_ref_canal
     
     #################################
     # COBIS ADMIN & CUSTOMERS MODEL #
@@ -822,7 +972,7 @@ components:
     Amount:
       description: 'Valor monetario'
       type: string
-      pattern: '[0-9]+(\.[0-9]{1,2})'
+      pattern: '[0-9]{1,16}(\.[0-9]{1,2})'
     
     ErrorMessage:
       description: 'Error retornado cuando una operación no se realiza exitosamente'
