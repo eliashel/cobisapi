@@ -773,7 +773,7 @@ components:
       type: string
       description: Número de identificación de una persona natural o jurídica
     Amount:
-      pattern: '[0-9]+(\.[0-9]{1,2})'
+      pattern: '[0-9]{1,16}(\.[0-9]{1,2})'
       type: string
       description: Valor monetario
     ErrorMessage:
