@@ -68,7 +68,6 @@ paths:
         explode: false
         schema:
           type: string
-          format: date-time
       - name: X-EndUser-RequestDateTime
         in: header
         description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
@@ -78,6 +77,14 @@ paths:
         schema:
           type: string
           format: date-time
+      - name: X-EndUser-Terminal
+        in: header
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-Channel
         in: header
         description: Canal desde el cual se origina la solicitud
@@ -184,7 +191,6 @@ paths:
         explode: false
         schema:
           type: string
-          format: date-time
       - name: X-EndUser-RequestDateTime
         in: header
         description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
@@ -194,6 +200,14 @@ paths:
         schema:
           type: string
           format: date-time
+      - name: X-EndUser-Terminal
+        in: header
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-Channel
         in: header
         description: Canal desde el cual se origina la solicitud
@@ -306,7 +320,6 @@ paths:
         explode: false
         schema:
           type: string
-          format: date-time
       - name: X-EndUser-RequestDateTime
         in: header
         description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
@@ -316,6 +329,14 @@ paths:
         schema:
           type: string
           format: date-time
+      - name: X-EndUser-Terminal
+        in: header
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-Channel
         in: header
         description: Canal desde el cual se origina la solicitud
@@ -420,7 +441,6 @@ paths:
         explode: false
         schema:
           type: string
-          format: date-time
       - name: X-EndUser-RequestDateTime
         in: header
         description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
@@ -430,6 +450,14 @@ paths:
         schema:
           type: string
           format: date-time
+      - name: X-EndUser-Terminal
+        in: header
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-Channel
         in: header
         description: Canal desde el cual se origina la solicitud
@@ -506,6 +534,26 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
 components:
   schemas:
+    Transaction:
+      type: object
+      properties:
+        processDate:
+          type: string
+          description: Fecha de proceso de la transacción
+          format: date
+        branch:
+          $ref: '#/components/schemas/Branch'
+        transactionAmount:
+          $ref: '#/components/schemas/Amount'
+        cashAmount:
+          $ref: '#/components/schemas/Amount'
+        ownChecksAmount:
+          $ref: '#/components/schemas/Amount'
+        localChecksAmount:
+          $ref: '#/components/schemas/Amount'
+        currency:
+          $ref: '#/components/schemas/Currency'
+      description: Transacción de una cuenta de ahorros
     SavingsAccount:
       type: object
       properties:
@@ -529,8 +577,6 @@ components:
           $ref: '#/components/schemas/Subsidiary'
         branch:
           $ref: '#/components/schemas/Branch'
-        product:
-          $ref: '#/components/schemas/Product'
         currency:
           $ref: '#/components/schemas/Currency'
         openingDate:
@@ -911,7 +957,6 @@ components:
       explode: false
       schema:
         type: string
-        format: date-time
     X-EndUser-RequestDateTime:
       name: X-EndUser-RequestDateTime
       in: header
@@ -922,6 +967,15 @@ components:
       schema:
         type: string
         format: date-time
+    X-EndUser-Terminal:
+      name: X-EndUser-Terminal
+      in: header
+      description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: string
     X-Channel:
       name: X-Channel
       in: header
