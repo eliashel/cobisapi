@@ -1,7 +1,7 @@
 openapi: 3.0.0
 
 info:
-  title: COBIS API Core Banking System
+  title: COBIS API Savings Account
   description: 'Este es el API para COBIS Core Banking System. En esta versión de API se encuentran definidos los servicios de nuestro producto COBIS Ahorros, el cual permite gestionar todas las operaciones de cuentas de ahorros de un sistema financiero. Puedes conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com).'
   version: 1.0.0
   termsOfService: http://cobiscorp.com/terms/
@@ -169,13 +169,13 @@ paths:
           $ref: '#/components/responses/405MethodNotAllowed'
         500:
           $ref: '#/components/responses/500InternalServerError'
-  
-  /savings-accounts/{number}/deposit:
+      
+  /savings-accounts/deposit:
     post:
       tags:
         - saving
-      summary: 'Realiza un depósito a una cuenta de ahorros en efectivo'
-      description: 'Realiza un depósito al número de cuenta de ahorros determinada'
+      summary: 'Realiza un depósito con o sin libreta a una cuenta de ahorros en efectivo'
+      description: 'Realiza un depósito con o sin libreta al número de cuenta de ahorros determinada'
       operationId: CreateDepositToSavingsAccount
       parameters:
         # HEADER REQUEST
@@ -185,15 +185,36 @@ paths:
         - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
         - $ref: '#/components/parameters/X-EndUser-Terminal'
         - $ref: '#/components/parameters/X-Channel'
-        # BODY REQUEST
-        - name: number
-          in: path
-          description: 'Número de cuenta a la cual se realiza el depósito'
-          required: true
-          schema:
-            $ref: '#/components/schemas/SavingsAccountNumber' 
+      # BODY REQUEST
       requestBody:
-        $ref: '#/components/requestBodies/DepositSavingsAccount'
+        #$ref: '#/components/requestBodies/DepositSavingsAccount'
+        description: 'Datos para realizar el déposito a la cuenta de ahorros'
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/SavingsAccount'
+                - $ref: '#/components/schemas/Transaction'
+            examples:
+              DepositWithoutBook: # Depósito sin libreta
+                value:
+                  number: '1234567890'
+                  cashAmount: '300.00'
+                  localChecksAmount: '200.00'
+                  othersChecksAmount: '100.00'
+                  totalAmount: '1600.00'
+              DepositWithBook: # Depósito con libreta
+                value:
+                  number: '1234567890'
+                  savingsBook:
+                    number: 1234
+                    controlNumber: 12
+                    balance: '1000.00'
+                  cashAmount: '300.00'
+                  localChecksAmount: '200.00'
+                  othersChecksAmount: '100.00'
+                  totalAmount: '1600.00'
       responses:
         201:
           description: 'El depósito ha sido realizado exitosamente.'
@@ -204,51 +225,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SavingsAccount' # TODO: Revisar respuesta de la transacción
-        401:
-          $ref: '#/components/responses/401Unauthorized'
-        404:
-          $ref: '#/components/responses/404NotFound'
-        405:
-          $ref: '#/components/responses/405MethodNotAllowed'
-        500:
-          $ref: '#/components/responses/500InternalServerError'
-    
-  /savings-accounts/{number}/deposit/book:
-    post:
-      tags:
-        - saving
-      summary: 'Realiza un depósito con libreta a una cuenta de ahorros en efectivo'
-      description: 'Realiza un depósito con libreta al número de cuenta de ahorros determinada'
-      operationId: CreateDepositWithBookToSavingsAccount
-      parameters:
-        # HEADER REQUEST
-        - $ref: '#/components/parameters/X-Authorization'
-        - $ref: '#/components/parameters/X-Request-ID'
-        - $ref: '#/components/parameters/X-EndUser-Login'
-        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
-        - $ref: '#/components/parameters/X-EndUser-Terminal'
-        - $ref: '#/components/parameters/X-Channel'
-        # BODY REQUEST
-        - name: number
-          in: path
-          description: 'Número de cuenta a la cual se realiza el depósito'
-          required: true
-          schema:
-            $ref: '#/components/schemas/SavingsAccountNumber' 
-      requestBody:
-        $ref: '#/components/requestBodies/DepositSavingsAccount'
-      responses:
-        201:
-          description: 'El depósito ha sido realizado exitosamente.'
-          headers:
-            X-Correlation-ID:
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SavingsAccount' # TODO: Revisar respuesta de la transacción
+                $ref: '#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
         401:
           $ref: '#/components/responses/401Unauthorized'
         404:
@@ -345,14 +322,7 @@ components:
   ####################################################################
   # Reusable request bodies
   ####################################################################
-  requestBodies:
-    DepositSavingsAccount: # TODO: Revisar
-      description: 'Datos para realizar el déposito a la cuenta de ahorros'
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Transaction'
+  #requestBodies:
   
   ####################################################################
   # Reusable responses, such as 401 Unauthorized or 400 Bad Request
@@ -399,7 +369,7 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
     500InternalServerError:
-      description: 'Se presentó un error durante el procesamiento de la solicitud.''
+      description: 'Se presentó un error durante el procesamiento de la solicitud.'
       headers:
         X-Correlation-ID:
           schema:
@@ -707,14 +677,20 @@ components:
       description: 'Transacción de una cuenta de ahorros'
       type: object
       properties:
-        processDate:  #field:tm_fecha
+        postingDate:  #field:tm_fecha
           description: 'Fecha de proceso de la transacción'
           type: string
           format: date
-        #tm_secuencial
+        primaryTransactionId: # field:tm_secuencial
+          description: 'Número de secuencial de transacción'
+          type: number
+          format: int32
         #tm_ssn_branch
-        #tm_cod_alterno
-        #tm_tipo_tran
+        secondaryTransactionId: #field:tm_cod_alterno
+          description: 'Número de alterno de secuencial de transacción'
+          type: number
+          format: int32
+        transactionCode: #tm_tipo_tran
         #tm_filial
         branch: #tm_oficina
           $ref: '#/components/schemas/Branch'
@@ -728,8 +704,6 @@ components:
         #tm_signo
         #tm_fecha_ult_mov
         #tm_cta_banco
-        transactionAmount: # field: tm_valor
-          $ref: '#/components/schemas/Amount'
         cashAmount: # field:tm_efectivo
           $ref: '#/components/schemas/Amount'
         ownChecksAmount: # field:tm_chq_propios
@@ -737,6 +711,8 @@ components:
         localChecksAmount: # field:tm_chq_locales
           $ref: '#/components/schemas/Amount'
         othersChecksAmount: # field: tm_chq_ot_plazas
+          $ref: '#/components/schemas/Amount'
+        totalAmount: # field: tm_valor
           $ref: '#/components/schemas/Amount'
         #tm_remoto_ssn
         currency: #tm_moneda
@@ -785,6 +761,8 @@ components:
         #tm_interes_emb
         #tm_interes_bloq
         #tm_ref_canal
+    
+    
     
     #################################
     # COBIS ADMIN & CUSTOMERS MODEL #
@@ -923,7 +901,7 @@ components:
     # KEY ELEMENTS
     ChannelCode: # TODO: Validar implementación de objeto en BD.
       description: >
-        'Canal transccional'
+        'Canal transaccional'
           * 1: Oficina
           * 2: Agilizador
           * 3: Internet
