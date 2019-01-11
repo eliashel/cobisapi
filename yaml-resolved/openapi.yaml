@@ -676,10 +676,18 @@ components:
     Transaction:
       type: object
       properties:
-        processDate:
+        postingDate:
           type: string
           description: Fecha de proceso de la transacción
           format: date
+        primaryTransactionId:
+          type: number
+          description: Número de secuencial de transacción
+          format: int32
+        secondaryTransactionId:
+          type: number
+          description: Número de alterno de secuencial de transacción
+          format: int32
         branch:
           $ref: '#/components/schemas/Branch'
         cashAmount:
