@@ -474,6 +474,25 @@ paths:
               allOf:
               - $ref: '#/components/schemas/SavingsAccount'
               - $ref: '#/components/schemas/Transaction'
+            examples:
+              DepositWithoutBook:
+                value:
+                  number: "1234567890"
+                  cashAmount: "300.00"
+                  localChecksAmount: "200.00"
+                  othersChecksAmount: "100.00"
+                  totalAmount: "1600.00"
+              DepositWithBook:
+                value:
+                  number: "1234567890"
+                  savingsBook:
+                    number: 1234
+                    controlNumber: 12
+                    balance: "1000.00"
+                  cashAmount: "300.00"
+                  localChecksAmount: "200.00"
+                  othersChecksAmount: "100.00"
+                  totalAmount: "1600.00"
         required: true
       responses:
         201:
@@ -643,8 +662,6 @@ components:
           format: date
         branch:
           $ref: '#/components/schemas/Branch'
-        transactionAmount:
-          $ref: '#/components/schemas/Amount'
         cashAmount:
           $ref: '#/components/schemas/Amount'
         ownChecksAmount:
@@ -652,6 +669,8 @@ components:
         localChecksAmount:
           $ref: '#/components/schemas/Amount'
         othersChecksAmount:
+          $ref: '#/components/schemas/Amount'
+        totalAmount:
           $ref: '#/components/schemas/Amount'
         currency:
           $ref: '#/components/schemas/Currency'
