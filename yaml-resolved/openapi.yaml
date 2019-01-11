@@ -702,7 +702,7 @@ components:
           $ref: '#/components/schemas/Amount'
         currency:
           $ref: '#/components/schemas/Currency'
-        origenAccount:
+        account:
           $ref: '#/components/schemas/SavingsAccount'
         destinationAccount:
           $ref: '#/components/schemas/SavingsAccount'
