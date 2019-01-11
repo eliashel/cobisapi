@@ -415,7 +415,7 @@ paths:
       - saving
       summary: Realiza un depósito con o sin libreta a una cuenta de ahorros en efectivo
       description: Realiza un depósito con libreta al número de cuenta de ahorros determinada
-      operationId: CreateDepositWithBookToSavingsAccount
+      operationId: CreateDepositToSavingsAccount
       parameters:
       - name: X-Authorization
         in: header
