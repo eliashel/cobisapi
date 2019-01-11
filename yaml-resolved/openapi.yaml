@@ -153,8 +153,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         500:
-          description: 'Se presentó un error durante el procesamiento de la solicitud.''
-            headers: X-Correlation-ID: schema: $ref: '
+          description: Se presentó un error durante el procesamiento de la solicitud.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -282,8 +287,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         500:
-          description: 'Se presentó un error durante el procesamiento de la solicitud.''
-            headers: X-Correlation-ID: schema: $ref: '
+          description: Se presentó un error durante el procesamiento de la solicitud.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -403,8 +413,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         500:
-          description: 'Se presentó un error durante el procesamiento de la solicitud.''
-            headers: X-Correlation-ID: schema: $ref: '
+          description: Se presentó un error durante el procesamiento de la solicitud.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -544,8 +559,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         500:
-          description: 'Se presentó un error durante el procesamiento de la solicitud.''
-            headers: X-Correlation-ID: schema: $ref: '
+          description: Se presentó un error durante el procesamiento de la solicitud.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
@@ -925,8 +945,13 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
     500InternalServerError:
-      description: 'Se presentó un error durante el procesamiento de la solicitud.''
-        headers: X-Correlation-ID: schema: $ref: '
+      description: Se presentó un error durante el procesamiento de la solicitud.
+      headers:
+        X-Correlation-ID:
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
       content:
         application/json:
           schema:
