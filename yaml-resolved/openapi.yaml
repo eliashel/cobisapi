@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: COBIS API Core Banking System
+  title: COBIS API Savings Account
   description: 'Este es el API para COBIS Core Banking System. En esta versión de
     API se encuentran definidos los servicios de nuestro producto COBIS Ahorros, el
     cual permite gestionar todas las operaciones de cuentas de ahorros de un sistema
