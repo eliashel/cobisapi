@@ -409,130 +409,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
-  /savings-accounts/{number}/deposit:
-    post:
-      tags:
-      - saving
-      summary: Realiza un depósito a una cuenta de ahorros en efectivo
-      description: Realiza un depósito al número de cuenta de ahorros determinada
-      operationId: CreateDepositToSavingsAccount
-      parameters:
-      - name: X-Authorization
-        in: header
-        description: JSON Web Token (JWT) entregado al usuario en la autenticación
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: X-Request-ID
-        in: header
-        description: Identificación única de la solicitud o petición
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/RequestID'
-      - name: X-EndUser-Login
-        in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: X-EndUser-RequestDateTime
-        in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: date-time
-      - name: X-EndUser-Terminal
-        in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: X-Channel
-        in: header
-        description: Canal desde el cual se origina la solicitud
-        required: false
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/ChannelCode'
-      - name: number
-        in: path
-        description: Número de cuenta a la cual se realiza el depósito
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/SavingsAccountNumber'
-      requestBody:
-        $ref: '#/components/requestBodies/DepositSavingsAccount'
-      responses:
-        201:
-          description: El depósito ha sido realizado exitosamente.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SavingsAccount'
-        401:
-          description: No se encuentra autorizado para ejecutar la operación.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        404:
-          description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        500:
-          description: 'Se presentó un error durante el procesamiento de la solicitud.''
-            headers: X-Correlation-ID: schema: $ref: '
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-  /savings-accounts/{number}/deposit/book:
+  /savings-accounts/deposit:
     post:
       tags:
       - saving
@@ -589,16 +466,15 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/ChannelCode'
-      - name: number
-        in: path
-        description: Número de cuenta a la cual se realiza el depósito
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/SavingsAccountNumber'
       requestBody:
-        $ref: '#/components/requestBodies/DepositSavingsAccount'
+        description: Datos para realizar el déposito a la cuenta de ahorros
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SavingsAccount'
+              - $ref: '#/components/schemas/Transaction'
+        required: true
       responses:
         201:
           description: El depósito ha sido realizado exitosamente.
@@ -611,7 +487,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SavingsAccount'
+                $ref: '#/components/schemas/Transaction'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -1137,11 +1013,3 @@ components:
       explode: false
       schema:
         $ref: '#/components/schemas/RequestID'
-  requestBodies:
-    DepositSavingsAccount:
-      description: Datos para realizar el déposito a la cuenta de ahorros
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Transaction'
-      required: true
