@@ -1059,7 +1059,7 @@ components:
     X-Correlation-ID:
       name: X-Request-ID
       in: header
-      description: ID que relaciona la respuesta con la solicitud. El valor de este campo corresponde al X-Request-ID de la solicitud
+      description: ID que relaciona la respuesta con la solicitud. El valor de este campo corresponde al X-Request-ID de la solicitud.
       required: false
       style: simple
       explode: false
