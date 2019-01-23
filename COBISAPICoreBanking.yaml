@@ -42,7 +42,7 @@ paths:
       - customer
       summary: 'Consulta la información básica de un cliente'
       description: 'Retorna la información básica de un cliente por el tipo y número de identificación'
-      operationId: GetBasicInfoById
+      operationId: GetCustomerBasicInfoById
       parameters:
         # HEADER REQUEST
         - $ref: '#/components/parameters/X-Authorization'
@@ -86,7 +86,7 @@ paths:
       - customer
       summary: 'Consulta la información financiera de un cliente'
       description: 'Retorna la información financiera de un cliente por el tipo y número de identificación'
-      operationId: GetFinancialInfoById
+      operationId: GetCustomerFinancialInfoById
       parameters:
         # HEADER REQUEST
         - $ref: '#/components/parameters/X-Authorization'
@@ -176,7 +176,7 @@ paths:
         - saving
       summary: 'Realiza un depósito con o sin libreta a una cuenta de ahorros en efectivo'
       description: 'Realiza un depósito con o sin libreta al número de cuenta de ahorros determinada'
-      operationId: CreateDepositToSavingsAccount
+      operationId: CreateSavingsAccountDeposit
       parameters:
         # HEADER REQUEST
         - $ref: '#/components/parameters/X-Authorization'
@@ -690,20 +690,19 @@ components:
           description: 'Número de alterno de secuencial de transacción'
           type: number
           format: int32
-        transactionCode: #tm_tipo_tran
-        #tm_filial
+        #transactionCode: #tm_tipo_tran,  table:cl_ttrasaccion 
+        #finantialInstitution: #tm_filial table:cl_filial
         branch: #tm_oficina
           $ref: '#/components/schemas/Branch'
         #tm_usuario
         #tm_terminal
-        #tm_correccion
+        #tm_correccion # boolean
         #tm_sec_correccion
         #tm_origen
         #tm_nodo
         #tm_reentry
         #tm_signo
         #tm_fecha_ult_mov
-        #tm_cta_banco
         cashAmount: # field:tm_efectivo
           $ref: '#/components/schemas/Amount'
         ownChecksAmount: # field:tm_chq_propios
@@ -727,15 +726,15 @@ components:
         #tm_fecha_efec
         #tm_interes
         #tm_control
-        origenAccount: 
-          $ref: '#/components/schemas/SavingsAccount'
-        destinationAccount: #tm_ctadestino # TODO: Validar banco destino
+        account: 
+          $ref: '#/components/schemas/SavingsAccount' # #field:tm_cta_banco
+        destinationAccount: #tm_ctadestino # banco destino
           $ref: '#/components/schemas/SavingsAccount'
         #tm_tipo_xfer
         #tm_estado
         #tm_concepto
-        #tm_oficina_cta
-        #tm_hora
+        #tm_oficina_cta # oficina en la que fue creada la cuenta 
+        #timestamp: #tm_hora
         #tm_banco
         #tm_valor_comision
         #tm_prod_banc
@@ -747,7 +746,7 @@ components:
         #tm_turno
         #tm_cheque
         #tm_forma_pg
-        #tm_canal
+        # canal de la transacción #tm_canal #TODO
         #tm_stand_in
         #tm_doc_propios
         #tm_factor
@@ -901,7 +900,7 @@ components:
     # KEY ELEMENTS
     ChannelCode: # TODO: Validar implementación de objeto en BD.
       description: >
-        'Canal transaccional'
+        'Canal transccional'
           * 1: Oficina
           * 2: Agilizador
           * 3: Internet
@@ -967,5 +966,3 @@ components:
       description: 'Identificación única de una petición o solicitud'
       type: string
       format: uuid
-    
-    
