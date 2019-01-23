@@ -42,7 +42,7 @@ paths:
       - customer
       summary: Consulta la información básica de un cliente
       description: Retorna la información básica de un cliente por el tipo y número de identificación
-      operationId: GetBasicInfoById
+      operationId: GetCustomerBasicInfoById
       parameters:
       - name: X-Authorization
         in: header
@@ -170,7 +170,7 @@ paths:
       - customer
       summary: Consulta la información financiera de un cliente
       description: Retorna la información financiera de un cliente por el tipo y número de identificación
-      operationId: GetFinancialInfoById
+      operationId: GetCustomerFinancialInfoById
       parameters:
       - name: X-Authorization
         in: header
