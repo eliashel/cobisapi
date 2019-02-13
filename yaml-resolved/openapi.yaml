@@ -24,14 +24,8 @@ servers:
 tags:
 - name: customer
   description: Operaciones sobre clientes
-  externalDocs:
-    description: Encuentre más información en
-    url: http://www.cobiscorp.com/products/customers
 - name: saving
   description: Operaciones sobre cuentas de ahorros
-  externalDocs:
-    description: Encuentre más información en
-    url: http://www.cobiscorp.com/products/savings
 paths:
   /customers/{idType}/{idNumber}/basic-info:
     get:
