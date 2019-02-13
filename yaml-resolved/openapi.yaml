@@ -493,7 +493,7 @@ paths:
         required: true
       responses:
         201:
-          description: El retiro ha sido realizado exitosamente.
+          description: El depósito ha sido realizado exitosamente.
           headers:
             X-Correlation-ID:
               style: simple
@@ -627,7 +627,7 @@ paths:
         required: true
       responses:
         201:
-          description: El depósito ha sido realizado exitosamente.
+          description: El retiro ha sido realizado exitosamente.
           headers:
             X-Correlation-ID:
               style: simple
