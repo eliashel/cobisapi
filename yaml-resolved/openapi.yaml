@@ -15,7 +15,7 @@ info:
     url: http://www.cobiscorp.com/licenses/LICENSE-1.0.html
   version: 1.0.0
 externalDocs:
-  description: 'Encuentra más información acerca de Cobiscorp en:'
+  description: Encuentra más información acerca de Cobiscorp en http://www.cobiscorp.com
   url: http://www.cobiscorp.com
 servers:
 - url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICoreBanking/1.0.0
