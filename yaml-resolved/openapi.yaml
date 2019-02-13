@@ -552,6 +552,143 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+  /savings-accounts/withdraw:
+    post:
+      tags:
+      - saving
+      summary: Realiza un retiro en efectivo con o sin libreta de una cuenta de ahorros
+      description: Realiza un retiro en efectivo con o sin libreta de una cuenta de ahorros determinada.
+      operationId: CreateSavingsAccountWithdraw
+      parameters:
+      - name: X-Authorization
+        in: header
+        description: JSON Web Token (JWT) entregado al usuario en la autenticación
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Request-ID
+        in: header
+        description: Identificación única de la solicitud o petición
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/RequestID'
+      - name: X-EndUser-Login
+        in: header
+        description: Login de usuario en la aplicación de front-end que realiza la petición
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-EndUser-RequestDateTime
+        in: header
+        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-EndUser-Terminal
+        in: header
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Channel
+        in: header
+        description: Canal desde el cual se origina la solicitud
+        required: false
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/ChannelCode'
+      requestBody:
+        description: Datos para realizar el retiro en efectivo de una cuenta de ahorros. Si el retiro es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/SavingsAccount'
+              - $ref: '#/components/schemas/Transaction'
+            example:
+              number: "1234567890"
+              savingsBook:
+                number: 1234
+                controlNumber: 12
+                balance: "1000.00"
+              cashAmount: "300.00"
+              localChecksAmount: "200.00"
+              othersChecksAmount: "100.00"
+              totalAmount: "1600.00"
+        required: true
+      responses:
+        201:
+          description: El depósito ha sido realizado exitosamente.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        401:
+          description: No se encuentra autorizado para ejecutar la operación.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        404:
+          description: El objeto no fue encontrado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        405:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        500:
+          description: Se presentó un error durante el procesamiento de la solicitud.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
 components:
   schemas:
     SavingsAccount:
