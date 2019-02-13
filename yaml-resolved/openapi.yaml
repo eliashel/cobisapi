@@ -419,7 +419,7 @@ paths:
     post:
       tags:
       - saving
-      summary: Realiza un depósito con o sin libreta a una cuenta de ahorros en efectivo
+      summary: Realiza un depósito con o sin libreta a una cuenta de ahorros
       description: Realiza un depósito con o sin libreta al número de cuenta de ahorros determinada
       operationId: CreateSavingsAccountDeposit
       parameters:
