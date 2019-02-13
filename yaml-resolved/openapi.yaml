@@ -473,7 +473,7 @@ paths:
         schema:
           $ref: '#/components/schemas/ChannelCode'
       requestBody:
-        description: Datos para realizar el déposito a la cuenta de ahorros
+        description: Datos para realizar el déposito a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook.
         content:
           application/json:
             schema:
