@@ -26,6 +26,10 @@ servers:
 tags:
 - name: saving
   description: Operaciones sobre cuentas de ahorros
+- name: retrieve
+  description: Operaciones de consulta
+- name: execute
+  description: Operaciones transaccionales
 paths:
   /savings-accounts/{number}:
     get:
