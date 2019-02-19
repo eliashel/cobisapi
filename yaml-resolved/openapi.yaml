@@ -24,8 +24,6 @@ servers:
 - url: http://staging-cobisapi.cobiscorp.com
   description: Internal staging server for testing
 tags:
-- name: saving
-  description: Operaciones sobre cuentas de ahorros
 - name: retrieve
   description: Operaciones de consulta
 - name: execute
@@ -34,7 +32,7 @@ paths:
   /savings-accounts/{number}:
     get:
       tags:
-      - saving
+      - retrieve
       summary: Consulta una cuenta de ahorros por el número de cuenta
       description: Retorna la información de la cuenta de ahorros.
       operationId: GetSavingsAccountByNumber
@@ -160,7 +158,7 @@ paths:
   /savings-accounts/deposit:
     post:
       tags:
-      - saving
+      - execute
       summary: Realiza un depósito con o sin libreta a una cuenta de ahorros
       description: Realiza un depósito a una cuenta de ahorros, indicando el número de cuenta a la cual se desea depositar. El depósito puede hacerse con libreta o sin ella.
       operationId: CreateSavingsAccountDeposit
@@ -330,7 +328,7 @@ paths:
   /savings-accounts/withdraw:
     post:
       tags:
-      - saving
+      - execute
       summary: Realiza un retiro en efectivo con o sin libreta de una cuenta de ahorros
       description: Realiza un retiro en efectivo con o sin libreta de una cuenta de ahorros determinada.
       operationId: CreateSavingsAccountWithdraw
