@@ -993,7 +993,7 @@ components:
       explode: true
       schema:
         maximum: 50
-        minimum: 0
+        minimum: 1
         type: number
         format: int32
         default: 50
