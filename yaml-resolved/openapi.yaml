@@ -996,3 +996,4 @@ components:
         minimum: 0
         type: number
         format: int32
+        default: 50
