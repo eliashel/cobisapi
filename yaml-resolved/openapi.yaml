@@ -824,13 +824,13 @@ components:
         self:
           type: integer
           format: int32
+        first:
+          type: integer
+          format: int32
         prev:
           type: integer
           format: int32
         next:
-          type: integer
-          format: int32
-        first:
           type: integer
           format: int32
         last:
