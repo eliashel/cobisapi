@@ -818,13 +818,6 @@ components:
           minLength: 3
           type: string
       description: Error retornado cuando una operación no se realiza exitosamente
-    Pagination:
-      type: object
-      properties:
-        limit:
-          type: integer
-          format: int32
-      description: Paginación para aplicarse sobre el resultado de una consulta de registros.
     RequestID:
       type: string
       description: Identificación única de una petición o solicitud
@@ -991,3 +984,13 @@ components:
       explode: false
       schema:
         $ref: '#/components/schemas/RequestID'
+    pagingLimitSize:
+      name: pagingLimitSize
+      in: query
+      description: Tamaño límite de paginación para una consulta que retorne una lista de elementos
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: number
+        format: int32
