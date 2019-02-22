@@ -1005,8 +1005,7 @@ components:
       style: form
       explode: true
       schema:
-        maximum: 50
-        minimum: 1
+        minimum: 0
         type: number
         format: int32
-        default: 50
+        default: 0
