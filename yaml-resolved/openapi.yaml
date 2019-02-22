@@ -992,5 +992,7 @@ components:
       style: form
       explode: true
       schema:
+        maximum: 50
+        minimum: 0
         type: number
         format: int32
