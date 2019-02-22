@@ -987,7 +987,20 @@ components:
     pagingLimitSize:
       name: pagingLimitSize
       in: query
-      description: Tamaño límite de paginación para una consulta que retorne una lista de elementos
+      description: Tamaño límite de paginación para una consulta que retorne una lista de elementos.
+      required: false
+      style: form
+      explode: true
+      schema:
+        maximum: 50
+        minimum: 1
+        type: number
+        format: int32
+        default: 50
+    pagingOffset:
+      name: pagingOffset
+      in: query
+      description: Número del registro desde el cual, a partir del siguiente se inicia el siguiente conjunto de resultados de la página.
       required: false
       style: form
       explode: true
