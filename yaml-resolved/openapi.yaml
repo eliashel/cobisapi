@@ -818,6 +818,25 @@ components:
           minLength: 3
           type: string
       description: Error retornado cuando una operación no se realiza exitosamente
+    Pagination:
+      type: object
+      properties:
+        self:
+          type: integer
+          format: int32
+        prev:
+          type: integer
+          format: int32
+        next:
+          type: integer
+          format: int32
+        first:
+          type: integer
+          format: int32
+        last:
+          type: integer
+          format: int32
+      description: Paginación del resultado de una lista de elementos o registros.
     RequestID:
       type: string
       description: Identificación única de una petición o solicitud
