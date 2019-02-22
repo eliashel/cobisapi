@@ -818,24 +818,40 @@ components:
           minLength: 3
           type: string
       description: Error retornado cuando una operación no se realiza exitosamente
+    Page:
+      type: object
+      properties:
+        offset:
+          $ref: '#/components/schemas/PagingOffset'
+        PagingLimitSize:
+          $ref: '#/components/schemas/PagingLimitSize'
+      description: Página de una lista de elementos o registros.
+    PagingLimitSize:
+      maximum: 50
+      minimum: 1
+      type: number
+      description: Tamaño límite de paginación para una consulta que retorne una lista de elementos.
+      format: int32
+      default: 50
+    PagingOffset:
+      minimum: 0
+      type: number
+      description: Número del registro desde el cual, a partir del siguiente se inicia el siguiente conjunto de resultados de la página.
+      format: int32
+      default: 0
     Pagination:
       type: object
       properties:
         self:
-          type: integer
-          format: int32
+          $ref: '#/components/schemas/Page'
         first:
-          type: integer
-          format: int32
+          $ref: '#/components/schemas/Page'
         prev:
-          type: integer
-          format: int32
+          $ref: '#/components/schemas/Page'
         next:
-          type: integer
-          format: int32
+          $ref: '#/components/schemas/Page'
         last:
-          type: integer
-          format: int32
+          $ref: '#/components/schemas/Page'
       description: Paginación del resultado de una lista de elementos o registros.
     RequestID:
       type: string
@@ -1011,11 +1027,7 @@ components:
       style: form
       explode: true
       schema:
-        maximum: 50
-        minimum: 1
-        type: number
-        format: int32
-        default: 50
+        $ref: '#/components/schemas/PagingLimitSize'
     pagingOffset:
       name: pagingOffset
       in: query
@@ -1024,7 +1036,4 @@ components:
       style: form
       explode: true
       schema:
-        minimum: 0
-        type: number
-        format: int32
-        default: 0
+        $ref: '#/components/schemas/PagingOffset'
