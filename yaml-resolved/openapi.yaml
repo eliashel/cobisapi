@@ -34,7 +34,7 @@ paths:
       tags:
       - retrieve
       summary: Consulta una cuenta de ahorros por el número de cuenta
-      description: Retorna la información de la cuenta de ahorros.
+      description: Retorna la información básica de la cuenta de ahorros.
       operationId: GetSavingsAccountByNumber
       parameters:
       - name: X-Authorization
@@ -155,6 +155,83 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+    delete:
+      tags:
+      - execute
+      summary: Cancela una cuenta de ahorros.
+      description: Cancela una cuenta de ahorros dado el número de cuenta.
+      operationId: terminateSavingsAccount
+      parameters:
+      - name: X-Authorization
+        in: header
+        description: JSON Web Token (JWT) entregado al usuario en la autenticación
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Request-ID
+        in: header
+        description: Identificación única de la solicitud o petición
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/RequestID'
+      - name: X-EndUser-Login
+        in: header
+        description: Login de usuario en la aplicación de front-end que realiza la petición
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-EndUser-RequestDateTime
+        in: header
+        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-EndUser-Terminal
+        in: header
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Channel
+        in: header
+        description: Canal desde el cual se origina la solicitud
+        required: false
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/ChannelCode'
+      - name: number
+        in: path
+        description: Número de cuenta de ahorros a consultar
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/SavingsAccountNumber'
+      responses:
+        200:
+          description: Información de la cuenta de ahorros
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavingsAccount'
   /savings-accounts/deposit:
     post:
       tags:
@@ -499,7 +576,6 @@ components:
           minimum: 1
           type: integer
           description: Código interno de la cuenta de ahorros
-          format: int32
         number:
           $ref: '#/components/schemas/SavingsAccountNumber'
         status:
@@ -633,7 +709,6 @@ components:
           maximum: 32767
           minimum: 1
           type: integer
-          format: int32
         name:
           maxLength: 64
           minLength: 1
@@ -685,7 +760,6 @@ components:
           maximum: 32767
           minimum: 1
           type: integer
-          format: int32
         description:
           maxLength: 64
           minLength: 1
@@ -698,7 +772,6 @@ components:
           maximum: 255
           minimum: 1
           type: integer
-          format: int32
         description:
           maxLength: 64
           minLength: 1
@@ -711,7 +784,6 @@ components:
           maximum: 255
           minimum: 1
           type: integer
-          format: int32
         name:
           maxLength: 64
           minLength: 1
@@ -767,7 +839,6 @@ components:
           * 3: Internet
           * 4: ATM
           * 5: APP Móvil
-      format: int32
       enum:
       - 1
       - 2
