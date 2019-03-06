@@ -28,6 +28,8 @@ tags:
   description: Operaciones de consulta
 - name: execute
   description: Operaciones transaccionales
+- name: terminate
+  description: Operaciones para el cierre
 paths:
   /savings-accounts/{number}:
     get:
