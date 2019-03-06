@@ -232,7 +232,7 @@ paths:
         required: true
       responses:
         200:
-          description: Información de la cuenta de ahorros
+          description: La cuenta se ha sido cerrada exitosamente.
           headers:
             X-Correlation-ID:
               style: simple
