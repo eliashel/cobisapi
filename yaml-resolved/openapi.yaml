@@ -221,15 +221,6 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/SavingsAccountNumber'
-      requestBody:
-        description: Datos para realizar el déposito a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.
-        content:
-          application/json:
-            schema:
-              allOf:
-              - $ref: '#/components/schemas/SavingsAccount'
-              - $ref: '#/components/schemas/Transaction'
-        required: true
       responses:
         200:
           description: La cuenta se ha sido cerrada exitosamente.
