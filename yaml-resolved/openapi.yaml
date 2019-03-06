@@ -159,7 +159,7 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
     delete:
       tags:
-      - execute
+      - terminate
       summary: Cancela una cuenta de ahorros.
       description: Cancela una cuenta de ahorros dado el número de cuenta.
       operationId: terminateSavingsAccount
