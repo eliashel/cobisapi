@@ -243,6 +243,54 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SavingsAccount'
+        401:
+          description: No se encuentra autorizado para ejecutar la operación.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        404:
+          description: El objeto no fue encontrado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        405:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        500:
+          description: Se presentó un error durante el procesamiento de la solicitud.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
   /savings-accounts/deposit:
     post:
       tags:
