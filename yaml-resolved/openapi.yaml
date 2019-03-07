@@ -167,7 +167,7 @@ paths:
       - terminate
       summary: Cancela una cuenta de ahorros.
       description: Cancela una cuenta de ahorros dado el número de cuenta.
-      operationId: terminateSavingsAccount
+      operationId: closeSavingsAccount
       parameters:
       - name: X-Authorization
         in: header
