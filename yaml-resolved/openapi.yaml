@@ -11,7 +11,7 @@ info:
     url: http://www.cobiscorp.com/contact-us/customer-technical-support/
     email: support.center@cobiscorp.com
   license:
-    name: COBIS API
+    name: Licencia COBIS API
     url: http://www.cobiscorp.com/licenses/LICENSE-1.0.html
   version: 1.0.0
 servers:
