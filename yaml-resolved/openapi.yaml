@@ -789,7 +789,7 @@ paths:
       tags:
       - request
       summary: Personifica la libreta de una cuenta de ahorros.
-      description: Personificación la libreta de una cuenta de ahorros.
+      description: Personifica la libreta de una cuenta de ahorros.
       operationId: updateIniBookSavingsAccount
       parameters:
       - name: X-Authorization
