@@ -1744,20 +1744,6 @@ components:
           minLength: 1
           type: string
       description: Tipo de identificación de una persona natural o jurídica
-    Channel:
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/ChannelCode'
-        name:
-          maxLength: 30
-          minLength: 3
-          type: string
-        status:
-          maxLength: 1
-          minLength: 1
-          type: string
-      description: Canal transaccional
     ChannelCode:
       type: integer
       description: |
