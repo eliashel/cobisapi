@@ -344,19 +344,7 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-              - $ref: '#/components/schemas/SavingsAccount'
-              - $ref: '#/components/schemas/Transaction'
-            example:
-              number: "1234567890"
-              savingsBook:
-                number: 1234
-                controlNumber: 12
-                balance: "1000.00"
-              cashAmount: "300.00"
-              localChecksAmount: "200.00"
-              othersChecksAmount: "100.00"
-              totalAmount: "600.00"
+              $ref: '#/components/schemas/body'
         required: true
       responses:
         201:
@@ -978,6 +966,13 @@ components:
       type: string
       description: Identificación única de una petición o solicitud
       format: uuid
+    body:
+      type: object
+      properties:
+        offset:
+          $ref: '#/components/schemas/PagingOffset'
+        PagingLimitSize:
+          $ref: '#/components/schemas/PagingLimitSize'
   responses:
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
