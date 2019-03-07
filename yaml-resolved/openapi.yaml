@@ -901,7 +901,7 @@ paths:
         required: true
       responses:
         201:
-          description: La nota débito se ha realizado exitosamente.
+          description: La nota crédito se ha realizado exitosamente.
           headers:
             X-Correlation-ID:
               style: simple
