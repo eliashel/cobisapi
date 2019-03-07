@@ -221,6 +221,23 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/SavingsAccountNumber'
+      requestBody:
+        description: Datos para realizar el déposito a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body'
+            example:
+              number: "1234567890"
+              savingsBook:
+                number: 1234
+                controlNumber: 12
+                balance: "1000.00"
+              cashAmount: "300.00"
+              localChecksAmount: "200.00"
+              othersChecksAmount: "100.00"
+              totalAmount: "600.00"
+        required: true
       responses:
         200:
           description: La cuenta se ha sido cerrada exitosamente.
@@ -344,7 +361,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body'
+              $ref: '#/components/schemas/body_1'
             example:
               number: "1234567890"
               savingsBook:
@@ -512,7 +529,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_1'
+              $ref: '#/components/schemas/body_2'
             example:
               number: "1234567890"
               savingsBook:
@@ -982,6 +999,13 @@ components:
         transaction:
           $ref: '#/components/schemas/Transaction'
     body_1:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+    body_2:
       type: object
       properties:
         savingsAccount:
