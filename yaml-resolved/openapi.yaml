@@ -157,6 +157,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+  /savings-accounts/close:
     delete:
       tags:
       - terminate
