@@ -28,6 +28,8 @@ tags:
   description: Operaciones de consulta
 - name: iniciate
   description: Operaciones de creación y originación
+- name: request
+  description: Operaciones de solicitud de actualización
 - name: execute
   description: Operaciones transaccionales
 - name: terminate
