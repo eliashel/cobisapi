@@ -715,7 +715,7 @@ paths:
         schema:
           $ref: '#/components/schemas/ChannelCode'
       requestBody:
-        description: Datos para realizar el déposito a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.
+        description: Datos para realizar la nota crédito a la cuenta de ahorros.
         content:
           application/json:
             schema:
@@ -733,7 +733,175 @@ paths:
         required: true
       responses:
         201:
-          description: El depósito se ha realizado exitosamente.
+          description: La nota débito se ha realizado exitosamente.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+              example:
+                postingDate: 2019-02-13
+                primaryTransactionId: 12345678
+                secondaryTransactionId: 123123
+                code: 123
+                cashAmount: "300.00"
+                localChecksAmount: "200.00"
+                othersChecksAmount: "100.00"
+                totalAmount: "600.00"
+                currency:
+                  code: 5
+                  description: COP
+                account:
+                  number: "1234567890"
+                  status:
+                    code: A
+                  savingsBook:
+                    number: 1234
+                    controlNumber: 12
+                    line: 50
+                    balance: "1600.00"
+                  currency:
+                    code: 5
+                    description: COP
+                  customer:
+                    identification:
+                      number: "123123123"
+                      type:
+                        code: CC
+                    name: Pablo
+                    lastName: Puertas
+                  name: PABLO PUERTAS
+                  availableBalance: "1600.00"
+        401:
+          description: No se encuentra autorizado para ejecutar la operación.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        404:
+          description: El objeto no fue encontrado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        405:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        500:
+          description: Se presentó un error durante el procesamiento de la solicitud.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /savings-accounts/credit-note:
+    post:
+      tags:
+      - execute
+      summary: Realiza una nota crédito sin libreta a una cuenta de ahorros
+      description: Realiza una nota crédito a una cuenta de ahorros. Esta operación se realiza sin libreta de ahorros.
+      operationId: CreateSavingsAccountCreditNote
+      parameters:
+      - name: X-Authorization
+        in: header
+        description: JSON Web Token (JWT) entregado al usuario en la autenticación
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Request-ID
+        in: header
+        description: Identificación única de la solicitud o petición
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/RequestID'
+      - name: X-EndUser-Login
+        in: header
+        description: Login de usuario en la aplicación de front-end que realiza la petición
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-EndUser-RequestDateTime
+        in: header
+        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-EndUser-Terminal
+        in: header
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Channel
+        in: header
+        description: Canal desde el cual se origina la solicitud
+        required: false
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/ChannelCode'
+      requestBody:
+        description: Datos para realizar la nota crédito a la cuenta de ahorros.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_4'
+            example:
+              number: "1234567890"
+              savingsBook:
+                number: 1234
+                controlNumber: 12
+                balance: "1000.00"
+              cashAmount: "300.00"
+              localChecksAmount: "200.00"
+              othersChecksAmount: "100.00"
+              totalAmount: "600.00"
+        required: true
+      responses:
+        201:
+          description: La nota débito se ha realizado exitosamente.
           headers:
             X-Correlation-ID:
               style: simple
@@ -887,7 +1055,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_4'
+              $ref: '#/components/schemas/body_5'
             example:
               number: "1234567890"
               savingsBook:
@@ -1014,7 +1182,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_5'
+              $ref: '#/components/schemas/body_6'
             example:
               number: "1234567890"
               savingsBook:
@@ -1141,7 +1309,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_6'
+              $ref: '#/components/schemas/body_7'
             example:
               number: "1234567890"
               savingsBook:
@@ -1268,7 +1436,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_7'
+              $ref: '#/components/schemas/body_8'
             example:
               number: "1234567890"
               savingsBook:
@@ -1732,6 +1900,8 @@ components:
       properties:
         savingsAccount:
           $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
     body_5:
       type: object
       properties:
@@ -1743,6 +1913,11 @@ components:
         savingsAccount:
           $ref: '#/components/schemas/SavingsAccount'
     body_7:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+    body_8:
       type: object
       properties:
         savingsAccount:
