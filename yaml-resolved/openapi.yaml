@@ -788,7 +788,7 @@ paths:
     put:
       tags:
       - request
-      summary: Personificación de la libreta de una cuenta de ahorros.
+      summary: Personifica la libreta de una cuenta de ahorros.
       description: Personificación la libreta de una cuenta de ahorros.
       operationId: updateIniBookSavingsAccount
       parameters:
