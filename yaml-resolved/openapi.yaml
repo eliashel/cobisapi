@@ -161,137 +161,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
-  /savings-accounts/close:
-    delete:
-      tags:
-      - terminate
-      summary: Cancela una cuenta de ahorros.
-      description: Cancela una cuenta de ahorros dado el número de cuenta.
-      operationId: closeSavingsAccount
-      parameters:
-      - name: X-Authorization
-        in: header
-        description: JSON Web Token (JWT) entregado al usuario en la autenticación
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: X-Request-ID
-        in: header
-        description: Identificación única de la solicitud o petición
-        required: true
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/RequestID'
-      - name: X-EndUser-Login
-        in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: X-EndUser-RequestDateTime
-        in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-          format: date-time
-      - name: X-EndUser-Terminal
-        in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
-        required: false
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: X-Channel
-        in: header
-        description: Canal desde el cual se origina la solicitud
-        required: false
-        style: simple
-        explode: false
-        schema:
-          $ref: '#/components/schemas/ChannelCode'
-      requestBody:
-        description: Datos para realizar el déposito a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/body'
-            example:
-              number: "1234567890"
-              savingsBook:
-                number: 1234
-                controlNumber: 12
-                balance: "1000.00"
-              cashAmount: "300.00"
-              localChecksAmount: "200.00"
-              othersChecksAmount: "100.00"
-              totalAmount: "600.00"
-        required: true
-      responses:
-        200:
-          description: La cuenta se ha sido cerrada exitosamente.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-        401:
-          description: No se encuentra autorizado para ejecutar la operación.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        404:
-          description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        500:
-          description: Se presentó un error durante el procesamiento de la solicitud.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
   /savings-accounts/deposit:
     post:
       tags:
@@ -354,7 +223,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_1'
+              $ref: '#/components/schemas/body'
             example:
               number: "1234567890"
               savingsBook:
@@ -522,7 +391,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_2'
+              $ref: '#/components/schemas/body_1'
             example:
               number: "1234567890"
               savingsBook:
@@ -574,6 +443,268 @@ paths:
                     lastName: Puertas
                   name: PABLO PUERTAS
                   availableBalance: "1300.00"
+        401:
+          description: No se encuentra autorizado para ejecutar la operación.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        404:
+          description: El objeto no fue encontrado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        405:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        500:
+          description: Se presentó un error durante el procesamiento de la solicitud.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /savings-accounts/book:
+    put:
+      tags:
+      - request
+      summary: Actualiza la libreta de una cuenta de ahorros.
+      description: Actualiza los datos de una libreta de una cuenta de ahorros.
+      operationId: updateBookSavingsAccount
+      parameters:
+      - name: X-Authorization
+        in: header
+        description: JSON Web Token (JWT) entregado al usuario en la autenticación
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Request-ID
+        in: header
+        description: Identificación única de la solicitud o petición
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/RequestID'
+      - name: X-EndUser-Login
+        in: header
+        description: Login de usuario en la aplicación de front-end que realiza la petición
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-EndUser-RequestDateTime
+        in: header
+        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-EndUser-Terminal
+        in: header
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Channel
+        in: header
+        description: Canal desde el cual se origina la solicitud
+        required: false
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/ChannelCode'
+      requestBody:
+        description: Datos para realizar el déposito a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_2'
+            example:
+              number: "1234567890"
+              savingsBook:
+                number: 1234
+                controlNumber: 12
+                balance: "1000.00"
+              cashAmount: "300.00"
+              localChecksAmount: "200.00"
+              othersChecksAmount: "100.00"
+              totalAmount: "600.00"
+        required: true
+      responses:
+        200:
+          description: La cuenta se ha sido cerrada exitosamente.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+        401:
+          description: No se encuentra autorizado para ejecutar la operación.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        404:
+          description: El objeto no fue encontrado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        405:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        500:
+          description: Se presentó un error durante el procesamiento de la solicitud.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+  /savings-accounts/close:
+    delete:
+      tags:
+      - terminate
+      summary: Cancela una cuenta de ahorros.
+      description: Cierra y cancela una cuenta de ahorros.
+      operationId: closeSavingsAccount
+      parameters:
+      - name: X-Authorization
+        in: header
+        description: JSON Web Token (JWT) entregado al usuario en la autenticación
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Request-ID
+        in: header
+        description: Identificación única de la solicitud o petición
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/RequestID'
+      - name: X-EndUser-Login
+        in: header
+        description: Login de usuario en la aplicación de front-end que realiza la petición
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-EndUser-RequestDateTime
+        in: header
+        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-EndUser-Terminal
+        in: header
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: X-Channel
+        in: header
+        description: Canal desde el cual se origina la solicitud
+        required: false
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/ChannelCode'
+      requestBody:
+        description: Datos para realizar el déposito a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/body_3'
+            example:
+              number: "1234567890"
+              savingsBook:
+                number: 1234
+                controlNumber: 12
+                balance: "1000.00"
+              cashAmount: "300.00"
+              localChecksAmount: "200.00"
+              othersChecksAmount: "100.00"
+              totalAmount: "600.00"
+        required: true
+      responses:
+        200:
+          description: La cuenta se ha sido cerrada exitosamente.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -999,6 +1130,13 @@ components:
         transaction:
           $ref: '#/components/schemas/Transaction'
     body_2:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+    body_3:
       type: object
       properties:
         savingsAccount:
