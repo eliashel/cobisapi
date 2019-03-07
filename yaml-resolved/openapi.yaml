@@ -1759,11 +1759,6 @@ components:
       - 3
       - 4
       - 5
-    CatalogCode:
-      maxLength: 10
-      minLength: 1
-      type: string
-      description: Código de un elemento de un catálogo
     CatalogDescription:
       maxLength: 64
       minLength: 1
