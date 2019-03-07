@@ -1705,18 +1705,6 @@ components:
           minLength: 1
           type: string
       description: Moneda
-    Product:
-      type: object
-      properties:
-        code:
-          maximum: 255
-          minimum: 1
-          type: integer
-        description:
-          maxLength: 64
-          minLength: 1
-          type: string
-      description: Producto
     Subsidiary:
       type: object
       properties:
