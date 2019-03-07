@@ -502,9 +502,7 @@ paths:
         content:
           application/json:
             schema:
-              allOf:
-              - $ref: '#/components/schemas/SavingsAccount'
-              - $ref: '#/components/schemas/Transaction'
+              $ref: '#/components/schemas/body_1'
             example:
               number: "1234567890"
               savingsBook:
@@ -967,6 +965,13 @@ components:
       description: Identificación única de una petición o solicitud
       format: uuid
     body:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+    body_1:
       type: object
       properties:
         savingsAccount:
