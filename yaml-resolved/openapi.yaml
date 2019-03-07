@@ -247,10 +247,6 @@ paths:
               explode: false
               schema:
                 $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/SavingsAccount'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
