@@ -969,10 +969,10 @@ components:
     body:
       type: object
       properties:
-        offset:
-          $ref: '#/components/schemas/PagingOffset'
-        PagingLimitSize:
-          $ref: '#/components/schemas/PagingLimitSize'
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
   responses:
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
