@@ -563,7 +563,7 @@ paths:
         required: true
       responses:
         200:
-          description: La cuenta se ha sido cerrada exitosamente.
+          description: La libreta se ha actuailzado exitosamente.
           headers:
             X-Correlation-ID:
               style: simple
