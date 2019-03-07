@@ -5,7 +5,7 @@ info:
     API se encuentran definidos los servicios de nuestro producto COBIS Ahorros, el
     cual permite gestionar todas las operaciones de cuentas de ahorros de un sistema
     financiero. Puedes conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com).'
-  termsOfService: http://cobiscorp.com/terms/
+  termsOfService: http://cobiscorp.com/terms/cobisapi
   contact:
     name: COBIS Support Center
     url: http://www.cobiscorp.com/contact-us/customer-technical-support/
