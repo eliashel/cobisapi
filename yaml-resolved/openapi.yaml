@@ -1793,7 +1793,7 @@ components:
         code:
           type: integer
           format: int32
-        description:
+        message:
           maxLength: 30
           minLength: 3
           type: string
