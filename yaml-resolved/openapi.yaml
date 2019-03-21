@@ -1858,6 +1858,11 @@ components:
       minLength: 5
       type: string
       description: Número de identificación de una persona natural o jurídica
+    UserLogin:
+      maxLength: 30
+      minLength: 1
+      type: string
+      description: Login de usuario en el sistema CORE. Los usuarios autorizados realizan y autorizan transacciones en  el sistema.
     Amount:
       pattern: '[0-9]{1,16}(\.[0-9]{1,2})'
       type: string
