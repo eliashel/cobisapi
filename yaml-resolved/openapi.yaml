@@ -1566,7 +1566,7 @@ components:
       description: |
         'Estado de cuenta de ahorros'
           * A: Activa
-          * G: Aperturada (sin uso)
+          * G: Aperturada (pendiente primer depósito)
           * I: Inactiva
           * C: Cancelada
     SavingsAccountStatusCode:
