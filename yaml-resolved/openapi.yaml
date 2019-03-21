@@ -1767,6 +1767,15 @@ components:
     Official:
       type: object
       properties:
+        code:
+          maximum: 32767
+          minimum: 0
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
         subsidiary:
           $ref: '#/components/schemas/Subsidiary'
         branch:
