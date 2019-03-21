@@ -1767,6 +1767,10 @@ components:
     User:
       type: object
       properties:
+        subsidiary:
+          $ref: '#/components/schemas/Subsidiary'
+        branch:
+          $ref: '#/components/schemas/Branch'
         code:
           maximum: 32767
           minimum: 1
