@@ -1729,7 +1729,7 @@ components:
           maxLength: 64
           minLength: 1
           type: string
-        globalCode:
+        isoCode:
           maxLength: 3
           minLength: 3
           type: string
