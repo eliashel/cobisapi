@@ -1993,7 +1993,9 @@ components:
           format: int32
         description:
           $ref: '#/components/schemas/CatalogDescription'
-      description: 'Causa de cierre de una cuenta de ahorros. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det).'
+      description: 'Detalle de la causa de cierre de una cuenta de ahorros. La lista
+        de causales detalladas depende de la causa de cierre (causeOfClosure).  Ver
+        listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det).'
   responses:
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
