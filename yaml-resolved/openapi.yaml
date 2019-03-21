@@ -1773,6 +1773,9 @@ components:
           $ref: '#/components/schemas/Branch'
         login:
           $ref: '#/components/schemas/UserLogin'
+        assignmentDate:
+          type: string
+          format: date
         code:
           maximum: 32767
           minimum: 1
