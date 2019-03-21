@@ -1708,6 +1708,10 @@ components:
           maxLength: 3
           minLength: 3
           type: string
+        symbol:
+          maxLength: 5
+          minLength: 1
+          type: string
         status:
           maxLength: 1
           minLength: 1
