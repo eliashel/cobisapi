@@ -1778,15 +1778,15 @@ components:
           type: string
         Gender:
           $ref: '#/components/schemas/Gender'
-        subsidiary:
-          $ref: '#/components/schemas/Subsidiary'
         branch:
           $ref: '#/components/schemas/Branch'
-        login:
-          $ref: '#/components/schemas/UserLogin'
-        assignmentDate:
+        creationDate:
           type: string
           format: date
+        user:
+          $ref: '#/components/schemas/UserLogin'
+        identification:
+          $ref: '#/components/schemas/Identification'
       description: Funcionario o responsable de un usuario del sistema.
     User:
       type: object
