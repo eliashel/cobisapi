@@ -1582,6 +1582,8 @@ components:
           $ref: '#/components/schemas/Amount'
         currency:
           $ref: '#/components/schemas/Currency'
+        causeOfClosure:
+          $ref: '#/components/schemas/ClosedSavingsAccount_causeOfClosure'
       description: Cuenta de ahorros cerrada
     SavingsAccountStatus:
       type: object
@@ -1968,6 +1970,21 @@ components:
           $ref: '#/components/schemas/SavingsAccount'
         transaction:
           $ref: '#/components/schemas/Transaction'
+    ClosedSavingsAccount_causeOfClosure:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/SavingsAccountStatusCode'
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+      description: |
+        'Causa de cierre de una cuenta de ahorros.'
+          * A: Activa
+          * G: Aperturada (pendiente primer depósito)
+          * I: Inactiva
+          * C: Cancelada
   responses:
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
