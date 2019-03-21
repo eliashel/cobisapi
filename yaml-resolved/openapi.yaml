@@ -1693,6 +1693,22 @@ components:
           minLength: 1
           type: string
       description: Cuidad
+    Country:
+      type: object
+      properties:
+        code:
+          minimum: 1
+          type: number
+          format: int32
+        name:
+          minimum: 1
+          type: number
+          format: int32
+        status:
+          maxLength: 1
+          minLength: 1
+          type: string
+      description: Pais
     Currency:
       type: object
       properties:
