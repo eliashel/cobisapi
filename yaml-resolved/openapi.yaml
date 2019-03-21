@@ -1566,6 +1566,20 @@ components:
           $ref: '#/components/schemas/SavingsAccountNumber'
         status:
           $ref: '#/components/schemas/SavingsAccountStatus'
+        primaryTransactionId:
+          type: number
+          description: Número de secuencial de transacción
+          format: int32
+        branch:
+          $ref: '#/components/schemas/Branch'
+        postingDate:
+          type: string
+          description: Fecha de proceso de la transacción
+          format: date
+        account:
+          $ref: '#/components/schemas/SavingsAccount'
+        currency:
+          $ref: '#/components/schemas/Currency'
       description: Cuenta de ahorros cerrada
     SavingsAccountStatus:
       type: object
