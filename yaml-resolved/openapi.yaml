@@ -235,7 +235,7 @@ paths:
         required: true
       responses:
         201:
-          description: El depósito se ha realizado exitosamente.
+          description: Se ha realizado la transacción exitosamente.
           headers:
             X-Correlation-ID:
               style: simple
