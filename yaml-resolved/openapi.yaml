@@ -1704,6 +1704,10 @@ components:
           maxLength: 64
           minLength: 1
           type: string
+        status:
+          maxLength: 1
+          minLength: 1
+          type: string
       description: Moneda
     Subsidiary:
       type: object
