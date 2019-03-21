@@ -1776,6 +1776,12 @@ components:
         assignmentDate:
           type: string
           format: date
+        lastUpdatedDate:
+          type: string
+          format: date
+        lastUpdatedPasswordDate:
+          type: string
+          format: date
         status:
           maxLength: 1
           minLength: 1
