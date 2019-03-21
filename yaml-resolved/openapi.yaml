@@ -1578,6 +1578,8 @@ components:
           format: date
         account:
           $ref: '#/components/schemas/SavingsAccount'
+        finalWithdraw:
+          $ref: '#/components/schemas/Amount'
         currency:
           $ref: '#/components/schemas/Currency'
       description: Cuenta de ahorros cerrada
