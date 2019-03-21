@@ -1764,6 +1764,18 @@ components:
           - B
           - E
       description: Moneda
+    User:
+      type: object
+      properties:
+        code:
+          maximum: 32767
+          minimum: 1
+          type: integer
+        description:
+          maxLength: 64
+          minLength: 1
+          type: string
+      description: Usuario
     Subsidiary:
       type: object
       properties:
