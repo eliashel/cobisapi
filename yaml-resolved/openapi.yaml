@@ -1882,15 +1882,12 @@ components:
           maxLength: 1
           minLength: 1
           type: string
-          enum:
-          - M
-          - F
         description:
           $ref: '#/components/schemas/CatalogDescription'
         status:
           $ref: '#/components/schemas/CatalogStatus'
-      description: "'Género o sexo de la persona.'\n  * M: Masculino\n  * F: Femenino\
-        \ \n"
+      description: |
+        'Género o sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
     IdentificationTypeCode:
       type: object
       properties:
@@ -1899,7 +1896,7 @@ components:
           minLength: 1
           type: string
       description: |
-        'Tipo de identificación de una persona natural o jurídica. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.'
+        'Tipo de identificación de una persona natural o jurídica. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
     IdentificationNumber:
       maxLength: 16
       minLength: 5
