@@ -1764,6 +1764,19 @@ components:
           - B
           - E
       description: Moneda
+    Official:
+      type: object
+      properties:
+        subsidiary:
+          $ref: '#/components/schemas/Subsidiary'
+        branch:
+          $ref: '#/components/schemas/Branch'
+        login:
+          $ref: '#/components/schemas/UserLogin'
+        assignmentDate:
+          type: string
+          format: date
+      description: Funcionario o responsable de un usuario del sistema.
     User:
       type: object
       properties:
