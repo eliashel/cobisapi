@@ -1892,14 +1892,14 @@ components:
       description: "'Género o sexo de la persona.'\n  * M: Masculino\n  * F: Femenino\
         \ \n"
     IdentificationTypeCode:
-      type: string
-      description: "'Tipo de identificación de una persona natural o jurídica'\n \
-        \ * CC: Cédula de Ciudadania\n  * CE: Cédula de Extranjería\n  * NI: Número\
-        \ de Identificación Tributaria (NIT) \n"
-      enum:
-      - CC
-      - CE
-      - NI
+      type: object
+      properties:
+        code:
+          maxLength: 4
+          minLength: 1
+          type: string
+      description: |
+        'Tipo de identificación de una persona natural o jurídica. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.'
     IdentificationNumber:
       maxLength: 16
       minLength: 5
