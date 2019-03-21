@@ -1896,7 +1896,7 @@ components:
           $ref: '#/components/schemas/CatalogDescription'
         status:
           $ref: '#/components/schemas/CatalogStatus'
-      description: "'Género o sexo del funcionario.'\n  * M: Masculino\n  * F: Femenino\
+      description: "'Género o sexo de la persona.'\n  * M: Masculino\n  * F: Femenino\
         \ \n"
     IdentificationTypeCode:
       type: string
