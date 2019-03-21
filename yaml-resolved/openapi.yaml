@@ -1519,7 +1519,24 @@ components:
         number:
           $ref: '#/components/schemas/SavingsAccountNumber'
         status:
-          $ref: '#/components/schemas/SavingsAccountStatus'
+          type: string
+          description: |
+            'Estado de cuenta de ahorros'
+              * A: ACTIVA
+              * C: CANCELADA
+              * G: INGRESADA
+              * I: INACTIVA
+              * N: NO PERFECCIONADA
+              * T: TRASLADADA-INACTIVA
+              * X: TRASLADADA-CANCELADA
+          enum:
+          - A
+          - C
+          - G
+          - I
+          - N
+          - T
+          - X
         savingsBook:
           $ref: '#/components/schemas/SavingsBook'
         subsidiary:
@@ -1602,25 +1619,6 @@ components:
           * G: Aperturada (pendiente primer depósito)
           * I: Inactiva
           * C: Cancelada
-    SavingsAccountStatusCode:
-      type: string
-      description: |
-        'Estado de cuenta de ahorros'
-          * A: ACTIVA
-          * C: CANCELADA
-          * G: INGRESADA
-          * I: INACTIVA
-          * N: NO PERFECCIONADA
-          * T: TRASLADADA-INACTIVA
-          * X: TRASLADADA-CANCELADA
-      enum:
-      - A
-      - C
-      - G
-      - I
-      - N
-      - T
-      - X
     SavingsAccountNumber:
       maxLength: 16
       minLength: 5
