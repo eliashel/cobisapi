@@ -1974,17 +1974,17 @@ components:
       type: object
       properties:
         code:
-          $ref: '#/components/schemas/SavingsAccountStatusCode'
+          type: number
+          description: Código de causal de cierre de cuenta.
+          format: int32
         description:
           $ref: '#/components/schemas/CatalogDescription'
         status:
           $ref: '#/components/schemas/CatalogStatus'
       description: |
         'Causa de cierre de una cuenta de ahorros.'
-          * A: Activa
-          * G: Aperturada (pendiente primer depósito)
-          * I: Inactiva
-          * C: Cancelada
+          * 1: Decisión del cliente
+          * 2: Cliente fallecido
   responses:
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
