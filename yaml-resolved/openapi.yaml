@@ -1732,6 +1732,8 @@ components:
           maxLength: 5
           minLength: 1
           type: string
+        country:
+          $ref: '#/components/schemas/Country'
         status:
           maxLength: 1
           minLength: 1
