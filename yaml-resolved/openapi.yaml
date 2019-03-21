@@ -1604,21 +1604,6 @@ components:
         detailedCauseOfClosure:
           $ref: '#/components/schemas/ClosedSavingsAccount_detailedCauseOfClosure'
       description: Cuenta de ahorros cerrada
-    SavingsAccountStatus:
-      type: object
-      properties:
-        code:
-          $ref: '#/components/schemas/SavingsAccountStatusCode'
-        description:
-          $ref: '#/components/schemas/CatalogDescription'
-        status:
-          $ref: '#/components/schemas/CatalogStatus'
-      description: |
-        'Estado de cuenta de ahorros'
-          * A: Activa
-          * G: Aperturada (pendiente primer depósito)
-          * I: Inactiva
-          * C: Cancelada
     SavingsAccountNumber:
       maxLength: 16
       minLength: 5
