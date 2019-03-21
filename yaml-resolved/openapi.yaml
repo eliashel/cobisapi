@@ -1738,6 +1738,12 @@ components:
           maxLength: 1
           minLength: 1
           type: string
+          description: "'Tipo de identificación de una persona natural o jurídica'\n\
+            \  * V: Vigente\n  * B: Bloqueado\n  * E: Eliminado \n"
+          enum:
+          - V
+          - B
+          - E
       description: Moneda
     Subsidiary:
       type: object
