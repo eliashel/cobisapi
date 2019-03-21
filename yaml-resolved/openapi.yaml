@@ -1780,10 +1780,8 @@ components:
           maxLength: 1
           minLength: 1
           type: string
-          description: |
-            'Género o sexo del funcionario.'
-              * M: Masculino
-              * F: Femenino
+          description: "'Género o sexo del funcionario.'\n  * M: Masculino\n  * F:\
+            \ Femenino \n"
           enum:
           - M
           - F
@@ -1884,6 +1882,22 @@ components:
       minLength: 1
       type: string
       description: Estado de un elemento de un catálogo
+    Gender:
+      type: object
+      properties:
+        code:
+          maxLength: 1
+          minLength: 1
+          type: string
+          enum:
+          - M
+          - F
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+      description: "'Género o sexo del funcionario.'\n  * M: Masculino\n  * F: Femenino\
+        \ \n"
     IdentificationTypeCode:
       type: string
       description: "'Tipo de identificación de una persona natural o jurídica'\n \
