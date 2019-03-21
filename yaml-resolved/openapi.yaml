@@ -1554,6 +1554,19 @@ components:
           description: Fecha de última actualización de la cuenta
           format: date
       description: Cuenta de ahorros
+    ClosedSavingsAccount:
+      type: object
+      properties:
+        code:
+          maximum: 9999
+          minimum: 1
+          type: integer
+          description: Código interno de la cuenta de ahorros
+        number:
+          $ref: '#/components/schemas/SavingsAccountNumber'
+        status:
+          $ref: '#/components/schemas/SavingsAccountStatus'
+      description: Cuenta de ahorros cerrada
     SavingsAccountStatus:
       type: object
       properties:
