@@ -1563,7 +1563,12 @@ components:
           $ref: '#/components/schemas/CatalogDescription'
         status:
           $ref: '#/components/schemas/CatalogStatus'
-      description: Estado de cuenta de ahorros
+      description: |
+        'Estado de cuenta de ahorros'
+          * A: Activa
+          * G: Aperturada (sin uso)
+          * I: Inactiva
+          * C: Cancelada
     SavingsAccountStatusCode:
       type: string
       description: |
