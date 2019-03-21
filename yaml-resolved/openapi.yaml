@@ -1974,6 +1974,7 @@ components:
       type: object
       properties:
         code:
+          minimum: 1
           type: number
           description: Código de causal de cierre de cuenta.
           format: int32
