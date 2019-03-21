@@ -1776,12 +1776,8 @@ components:
         assignmentDate:
           type: string
           format: date
-        code:
-          maximum: 32767
-          minimum: 1
-          type: integer
-        description:
-          maxLength: 64
+        status:
+          maxLength: 1
           minLength: 1
           type: string
       description: Usuario
