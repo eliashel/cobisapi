@@ -1776,6 +1776,17 @@ components:
           maxLength: 64
           minLength: 1
           type: string
+        Gender:
+          maxLength: 1
+          minLength: 1
+          type: string
+          description: |
+            'Género o sexo del funcionario.'
+              * M: Masculino
+              * F: Femenino
+          enum:
+          - M
+          - F
         subsidiary:
           $ref: '#/components/schemas/Subsidiary'
         branch:
