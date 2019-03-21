@@ -1581,8 +1581,6 @@ components:
           description: Código interno de la cuenta de ahorros
         number:
           $ref: '#/components/schemas/SavingsAccountNumber'
-        status:
-          $ref: '#/components/schemas/SavingsAccountStatus'
         primaryTransactionId:
           type: number
           description: Número de secuencial de transacción
