@@ -1882,12 +1882,13 @@ components:
           maxLength: 1
           minLength: 1
           type: string
+          description: 'Código del sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).'
         description:
           $ref: '#/components/schemas/CatalogDescription'
         status:
           $ref: '#/components/schemas/CatalogStatus'
       description: |
-        'Género o sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+        'Género o sexo de la persona.'
     IdentificationTypeCode:
       type: object
       properties:
