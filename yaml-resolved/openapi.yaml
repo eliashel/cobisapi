@@ -221,7 +221,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DepositSavingsAccountRq'
+              $ref: '#/components/schemas/DepositSavingsAccount'
             example:
               number: "011201000019"
               savingsBook:
@@ -1508,7 +1508,7 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
 components:
   schemas:
-    DepositSavingsAccountRq:
+    DepositSavingsAccount:
       type: object
       properties:
         savingsAccount:
