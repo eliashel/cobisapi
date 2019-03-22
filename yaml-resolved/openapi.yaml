@@ -1509,22 +1509,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
 components:
   schemas:
-    DepositSavingsAccountRq:
-      type: object
-      properties:
-        savingsAccount:
-          $ref: '#/components/schemas/SavingsAccount'
-        transaction:
-          $ref: '#/components/schemas/Transaction'
-      description: Depósito de cuenta de ahorros
-    DebitNoteSavingsAccountRq:
-      type: object
-      properties:
-        savingsAccount:
-          $ref: '#/components/schemas/SavingsAccount'
-        transaction:
-          $ref: '#/components/schemas/Transaction'
-      description: Depósito de cuenta de ahorros
     CreditNoteSavingsAccountRq:
       type: object
       properties:
@@ -1541,6 +1525,22 @@ components:
         detailToCloseSavingsAccount:
           $ref: '#/components/schemas/ClosedSavingsAccount'
       description: Cierre de cuenta de ahorros
+    DepositSavingsAccountRq:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      description: Depósito de cuenta de ahorros
+    DebitNoteSavingsAccountRq:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      description: Depósito de cuenta de ahorros
     SavingsAccount:
       type: object
       properties:
