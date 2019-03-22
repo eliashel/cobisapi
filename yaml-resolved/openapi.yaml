@@ -1675,6 +1675,8 @@ components:
           $ref: '#/components/schemas/Amount'
         currency:
           $ref: '#/components/schemas/Currency'
+        indicator:
+          $ref: '#/components/schemas/ClosedSavingsAccount_detailedCauseOfClosure'
         account:
           $ref: '#/components/schemas/SavingsAccount'
         destinationAccount:
