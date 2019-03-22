@@ -2092,8 +2092,11 @@ components:
           description: Código del causal de la nota crédito.
         description:
           $ref: '#/components/schemas/CatalogDescription'
-      description: 'Razón por la cual se hace el ajuste ayudando a generar una contabilidad
-        espeficica. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).'
+      description: 'Razón por la cual se hace el ajuste para una nota débito o una
+        nota crédito, ayudando a generar una contabilidad espeficica. Según el tipo
+        de transacción, este campo puede ser diligenciado con diferentes listas. Para
+        una transacción de nota crédito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nc](http://www.cobiscorp.com/api/catlogo#ah_causa_nc).
+        Para una transacción de nota débito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nd](http://www.cobiscorp.com/api/catlogo#ah_causa_nd)'
   responses:
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
