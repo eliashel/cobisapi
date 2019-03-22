@@ -2072,7 +2072,7 @@ components:
           maxLength: 3
           minLength: 1
           type: string
-          description: Código de la causa.
+          description: Código del causal de la nota crédito.
         description:
           $ref: '#/components/schemas/CatalogDescription'
       description: 'Razón por la cual se hace el ajuste ayudando a generar una contabilidad
