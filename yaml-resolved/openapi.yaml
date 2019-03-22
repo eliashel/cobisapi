@@ -2068,11 +2068,10 @@ components:
       type: object
       properties:
         code:
-          maximum: 255
-          minimum: 1
-          type: number
-          description: Código del tipo de indicador.
-          format: int32
+          maxLength: 3
+          minLength: 1
+          type: string
+          description: Código de la causa.
         description:
           $ref: '#/components/schemas/CatalogDescription'
       description: 'Causa. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).'
