@@ -897,6 +897,7 @@ paths:
               transaction:
                 cause: "1"
                 indicator: 1
+                departament: 1
                 totalAmount: "600.00"
         required: true
       responses:
