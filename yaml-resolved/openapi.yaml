@@ -1796,6 +1796,10 @@ components:
           maxLength: 64
           minLength: 1
           type: string
+        subsidiary:
+          $ref: '#/components/schemas/Subsidiary'
+        branch:
+          $ref: '#/components/schemas/Branch'
       description: Departamento de la organización.
     Official:
       type: object
