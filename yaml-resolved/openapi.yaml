@@ -221,7 +221,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body'
+              $ref: '#/components/schemas/DepositSavingsAccountRq'
             example:
               number: "011201000019"
               savingsBook:
@@ -390,7 +390,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_1'
+              $ref: '#/components/schemas/body'
             example:
               number: "1234567890"
               savingsBook:
@@ -558,7 +558,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_2'
+              $ref: '#/components/schemas/body_1'
             example:
               number: "1234567890"
               savingsBook:
@@ -720,7 +720,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_3'
+              $ref: '#/components/schemas/body_2'
             example:
               number: "1234567890"
               savingsBook:
@@ -888,7 +888,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_4'
+              $ref: '#/components/schemas/body_3'
             example:
               number: "1234567890"
               savingsBook:
@@ -1056,7 +1056,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_5'
+              $ref: '#/components/schemas/body_4'
             example:
               number: "1234567890"
               savingsBook:
@@ -1183,7 +1183,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_6'
+              $ref: '#/components/schemas/body_5'
             example:
               number: "1234567890"
               savingsBook:
@@ -1310,7 +1310,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_7'
+              $ref: '#/components/schemas/body_6'
             example:
               number: "1234567890"
               savingsBook:
@@ -1437,7 +1437,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_8'
+              $ref: '#/components/schemas/body_7'
             example:
               number: "1234567890"
               savingsBook:
@@ -2003,8 +2003,6 @@ components:
       properties:
         savingsAccount:
           $ref: '#/components/schemas/SavingsAccount'
-        transaction:
-          $ref: '#/components/schemas/Transaction'
     body_5:
       type: object
       properties:
@@ -2016,11 +2014,6 @@ components:
         savingsAccount:
           $ref: '#/components/schemas/SavingsAccount'
     body_7:
-      type: object
-      properties:
-        savingsAccount:
-          $ref: '#/components/schemas/SavingsAccount'
-    body_8:
       type: object
       properties:
         savingsAccount:
