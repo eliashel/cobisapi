@@ -1677,6 +1677,8 @@ components:
           $ref: '#/components/schemas/Currency'
         indicator:
           $ref: '#/components/schemas/Transaction_indicator'
+        cause:
+          $ref: '#/components/schemas/Transaction_cause'
         account:
           $ref: '#/components/schemas/SavingsAccount'
         destinationAccount:
@@ -2062,6 +2064,18 @@ components:
         description:
           $ref: '#/components/schemas/CatalogDescription'
       description: 'Indicador. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).'
+    Transaction_cause:
+      type: object
+      properties:
+        code:
+          maximum: 255
+          minimum: 1
+          type: number
+          description: Código del tipo de indicador.
+          format: int32
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+      description: 'Causa. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).'
   responses:
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
