@@ -1444,6 +1444,9 @@ paths:
                 number: 1234
                 controlNumber: 12
                 balance: "1000.00"
+              finalWithdraw: "1000.00"
+              detailedCauseOfClosure:
+                code: 1
               cashAmount: "300.00"
               localChecksAmount: "200.00"
               othersChecksAmount: "100.00"
