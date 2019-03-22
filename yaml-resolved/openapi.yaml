@@ -2223,3 +2223,16 @@ components:
       explode: true
       schema:
         $ref: '#/components/schemas/PagingOffset'
+  requestBodies:
+    DepositSavingsAccountRq:
+      description: Solicitud de depósito de cuenta de ahorros.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              savingsAccount:
+                $ref: '#/components/schemas/SavingsAccount'
+              transaction:
+                $ref: '#/components/schemas/Transaction'
+      required: true
