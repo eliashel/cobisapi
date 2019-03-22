@@ -718,21 +718,19 @@ paths:
         schema:
           $ref: '#/components/schemas/ChannelCode'
       requestBody:
-        description: Datos para realizar la nota crédito a la cuenta de ahorros.
+        description: Datos para realizar la nota débito a la cuenta de ahorros.
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/DebitNoteSavingsAccountRq'
             example:
-              number: "1234567890"
-              savingsBook:
-                number: 1234
-                controlNumber: 12
-                balance: "1000.00"
-              cashAmount: "300.00"
-              localChecksAmount: "200.00"
-              othersChecksAmount: "100.00"
-              totalAmount: "600.00"
+              savingsAccount:
+                number: "011201000019"
+              transaction:
+                cause: "1"
+                indicator: 1
+                department: 1
+                totalAmount: "600.00"
         required: true
       responses:
         201:
