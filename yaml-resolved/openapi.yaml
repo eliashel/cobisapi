@@ -1508,6 +1508,14 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
 components:
   schemas:
+    DepositSavingsAccount:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      description: Depósito de cuenta de ahorros
     SavingsAccount:
       type: object
       properties:
