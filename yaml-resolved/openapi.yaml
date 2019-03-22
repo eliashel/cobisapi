@@ -222,18 +222,31 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/DepositSavingsAccountRq'
-            example:
-              savingsAccount:
-                number: "011201000019"
-                savingsBook:
-                  number: 1234
-                  controlNumber: 12
-                  balance: "1000.00"
-              transaction:
-                cashAmount: "300.00"
-                localChecksAmount: "200.00"
-                othersChecksAmount: "100.00"
-                totalAmount: "600.00"
+            examples:
+              DepositWithoutBook:
+                summary: Depósito sin libreta
+                value:
+                  savingsAccount:
+                    number: "011201000019"
+                  transaction:
+                    cashAmount: "300.00"
+                    localChecksAmount: "200.00"
+                    othersChecksAmount: "100.00"
+                    totalAmount: "600.00"
+              DepositWithBook:
+                summary: Depósito con libreta
+                value:
+                  savingsAccount:
+                    number: "011201000019"
+                    savingsBook:
+                      number: 1234
+                      controlNumber: 12
+                      balance: "1000.00"
+                  transaction:
+                    cashAmount: "300.00"
+                    localChecksAmount: "200.00"
+                    othersChecksAmount: "100.00"
+                    totalAmount: "600.00"
         required: true
       responses:
         201:
