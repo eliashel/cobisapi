@@ -727,7 +727,7 @@ paths:
               savingsAccount:
                 number: "011201000019"
               transaction:
-                cause: "1"
+                cause: "10"
                 indicator: 1
                 department: 1
                 totalAmount: "600.00"
