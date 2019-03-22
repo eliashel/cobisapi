@@ -1784,6 +1784,19 @@ components:
           - B
           - E
       description: Moneda
+    Department:
+      type: object
+      properties:
+        code:
+          maximum: 32767
+          minimum: 0
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+      description: Departamento de la organización.
     Official:
       type: object
       properties:
