@@ -2057,7 +2057,7 @@ components:
           maximum: 255
           minimum: 1
           type: number
-          description: Código de causal de cierre de cuenta.
+          description: Código del tipo de indicador.
           format: int32
         description:
           $ref: '#/components/schemas/CatalogDescription'
