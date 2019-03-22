@@ -1676,6 +1676,8 @@ components:
           $ref: '#/components/schemas/Transaction_indicator'
         cause:
           $ref: '#/components/schemas/Transaction_cause'
+        department:
+          $ref: '#/components/schemas/Department'
         account:
           $ref: '#/components/schemas/SavingsAccount'
         destinationAccount:
