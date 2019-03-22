@@ -892,15 +892,11 @@ paths:
             schema:
               $ref: '#/components/schemas/body_3'
             example:
-              number: "1234567890"
-              savingsBook:
-                number: 1234
-                controlNumber: 12
-                balance: "1000.00"
-              cashAmount: "300.00"
-              localChecksAmount: "200.00"
-              othersChecksAmount: "100.00"
-              totalAmount: "600.00"
+              savingsAccount:
+                number: "011201000019"
+              transaction:
+                cause: 1
+                totalAmount: "600.00"
         required: true
       responses:
         201:
