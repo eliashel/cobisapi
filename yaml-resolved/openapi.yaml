@@ -1508,7 +1508,7 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
 components:
   schemas:
-    DepositSavingsAccount:
+    DepositSavingsAccountRq:
       type: object
       properties:
         savingsAccount:
