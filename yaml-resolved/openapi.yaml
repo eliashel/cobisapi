@@ -1517,6 +1517,14 @@ components:
         transaction:
           $ref: '#/components/schemas/Transaction'
       description: Depósito de cuenta de ahorros
+    DebitNoteSavingsAccountRq:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      description: Depósito de cuenta de ahorros
     CreditNoteSavingsAccountRq:
       type: object
       properties:
