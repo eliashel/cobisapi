@@ -221,7 +221,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DepositSavingsAccount'
+              $ref: '#/components/schemas/DepositSavingsAccountRq'
             example:
               number: "011201000019"
               savingsBook:
@@ -1508,7 +1508,7 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
 components:
   schemas:
-    DepositSavingsAccount:
+    DepositSavingsAccountRq:
       type: object
       properties:
         savingsAccount:
@@ -1516,6 +1516,14 @@ components:
         transaction:
           $ref: '#/components/schemas/Transaction'
       description: Depósito de cuenta de ahorros
+    CloseSavingsAccountRq:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      description: Cierre de cuenta de ahorros
     SavingsAccount:
       type: object
       properties:
