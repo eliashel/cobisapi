@@ -1521,8 +1521,8 @@ components:
       properties:
         savingsAccount:
           $ref: '#/components/schemas/SavingsAccount'
-        transaction:
-          $ref: '#/components/schemas/Transaction'
+        detailToCloseSavingsAccount:
+          $ref: '#/components/schemas/ClosedSavingsAccount'
       description: Cierre de cuenta de ahorros
     SavingsAccount:
       type: object
