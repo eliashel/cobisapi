@@ -1437,7 +1437,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_7'
+              $ref: '#/components/schemas/CloseSavingsAccountRq'
             example:
               number: "1234567890"
               savingsBook:
@@ -2021,13 +2021,6 @@ components:
       properties:
         savingsAccount:
           $ref: '#/components/schemas/SavingsAccount'
-    body_7:
-      type: object
-      properties:
-        savingsAccount:
-          $ref: '#/components/schemas/SavingsAccount'
-        transaction:
-          $ref: '#/components/schemas/Transaction'
     ClosedSavingsAccount_causeOfClosure:
       type: object
       properties:
