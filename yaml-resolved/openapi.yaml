@@ -2061,7 +2061,7 @@ components:
           format: int32
         description:
           $ref: '#/components/schemas/CatalogDescription'
-      description: 'TODO: detallar descripción, Indicador. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).'
+      description: 'Indicador. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).'
   responses:
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
