@@ -240,6 +240,7 @@ paths:
           description: Se ha realizado la transacción exitosamente.
           headers:
             X-Correlation-ID:
+              description: ID que relaciona la respuesta con la solicitud. El valor de este campo debe coincidir con el valor X-Request-ID enviado en la solicitud.
               style: simple
               explode: false
               schema:
