@@ -2251,7 +2251,7 @@ components:
       schema:
         $ref: '#/components/schemas/ChannelCode'
     X-Correlation-ID:
-      name: X-Request-ID
+      name: X-Correlation-ID
       in: header
       description: ID que relaciona la respuesta con la solicitud. El valor de este campo corresponde al X-Request-ID de la solicitud.
       required: false
