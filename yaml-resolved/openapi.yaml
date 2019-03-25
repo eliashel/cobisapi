@@ -1973,7 +1973,7 @@ components:
           type: integer
           format: int32
         message:
-          maxLength: 30
+          maxLength: 64
           minLength: 3
           type: string
       description: Error retornado cuando una operación no se realiza exitosamente
