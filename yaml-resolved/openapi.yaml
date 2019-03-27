@@ -1090,6 +1090,21 @@ paths:
                   code: 5
                   description: COP
                 account:
+                  number: "011201000019"
+                  status:
+                    code: A
+                  currency:
+                    code: 5
+                    description: COP
+                  customer:
+                    identification:
+                      number: "123123123"
+                      type:
+                        code: CC
+                    name: Pablo
+                    lastName: Puertas
+                  name: PABLO PUERTAS
+                destinationAccount:
                   number: "011303400453"
                   status:
                     code: A
