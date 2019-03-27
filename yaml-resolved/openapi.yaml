@@ -113,7 +113,7 @@ paths:
                 $ref: '#/components/schemas/SavingsAccount'
               example:
                 savingsAccount:
-                  code: 3453
+                  code: 345353
                   number: "011201000019"
                   savingsBook:
                     number: 1234
