@@ -915,7 +915,8 @@ paths:
                 postingDate: 2019-02-13
                 primaryTransactionId: 1521020
                 secondaryTransactionId: 13395
-                code: 123
+                branch:
+                  code: 123
                 cashAmount: "300.00"
                 localChecksAmount: "200.00"
                 othersChecksAmount: "100.00"
