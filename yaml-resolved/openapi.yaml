@@ -1516,8 +1516,6 @@ paths:
               number: "1234567890"
               savingsBook:
                 number: 1234
-                controlNumber: 12
-                balance: "1000.00"
         required: true
       responses:
         200:
