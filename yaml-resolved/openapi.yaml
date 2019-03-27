@@ -1259,15 +1259,12 @@ paths:
             schema:
               $ref: '#/components/schemas/body'
             example:
-              number: "1234567890"
-              savingsBook:
-                number: 1234
-                controlNumber: 12
-                balance: "1000.00"
+              savingsAccount:
+                number: "011201000019"
         required: true
       responses:
         200:
-          description: La libreta se ha actuailzado exitosamente.
+          description: La solicitud se ha ejecutado exitosamente.
           headers:
             X-Correlation-ID:
               style: simple
