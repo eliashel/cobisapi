@@ -250,7 +250,7 @@ paths:
                 $ref: '#/components/schemas/Transaction'
               example:
                 postingDate: 2019-02-13
-                primaryTransactionId: 12345678
+                primaryTransactionId: 1521020
                 secondaryTransactionId: 13395
                 branch:
                   code: 123
@@ -419,7 +419,7 @@ paths:
                 $ref: '#/components/schemas/Transaction'
               example:
                 postingDate: 2019-02-13
-                primaryTransactionId: 12345678
+                primaryTransactionId: 1521020
                 secondaryTransactionId: 13395
                 code: 123
                 cashAmount: "300.00"
@@ -747,7 +747,7 @@ paths:
                 $ref: '#/components/schemas/Transaction'
               example:
                 postingDate: 2019-02-13
-                primaryTransactionId: 12345678
+                primaryTransactionId: 1521020
                 secondaryTransactionId: 13395
                 code: 123
                 cashAmount: "300.00"
@@ -913,7 +913,7 @@ paths:
                 $ref: '#/components/schemas/Transaction'
               example:
                 postingDate: 2019-02-13
-                primaryTransactionId: 12345678
+                primaryTransactionId: 1521020
                 secondaryTransactionId: 13395
                 code: 123
                 cashAmount: "300.00"
