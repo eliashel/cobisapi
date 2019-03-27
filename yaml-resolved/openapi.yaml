@@ -125,6 +125,7 @@ paths:
                   currency:
                     code: 5
                     isoCode: USD
+                  openingDate: 2019-02-13
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
