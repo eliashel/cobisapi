@@ -1054,14 +1054,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DepositSavingsAccountRq'
+              $ref: '#/components/schemas/TransferSavingsAccountRq'
             example:
-              savingsAccount:
+              originSavingsAccount:
                 number: "011201000019"
-                savingsBook:
-                  number: 1234
-                  controlNumber: 12
-                  balance: "1000.00"
+              destinationSavingsAccount:
+                number: "011303400453"
               transaction:
                 cashAmount: "300.00"
                 localChecksAmount: "200.00"
