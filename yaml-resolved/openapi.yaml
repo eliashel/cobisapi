@@ -115,10 +115,15 @@ paths:
                 savingsAccount:
                   code: 345353
                   number: "011201000019"
+                  status: A
                   savingsBook:
                     number: 1234
                     controlNumber: 12
                     balance: "1000.00"
+                  branch:
+                    code: 123
+                  currency:
+                    code: 5
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
