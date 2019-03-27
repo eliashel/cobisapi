@@ -1739,10 +1739,10 @@ components:
       type: object
       properties:
         code:
-          maximum: 9999
           minimum: 1
           type: integer
           description: Código interno de la cuenta de ahorros
+          format: int32
         number:
           $ref: '#/components/schemas/SavingsAccountNumber'
         status:
