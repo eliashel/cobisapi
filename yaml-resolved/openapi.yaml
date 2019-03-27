@@ -1710,6 +1710,16 @@ components:
         transaction:
           $ref: '#/components/schemas/Transaction'
       description: Depósito de cuenta de ahorros
+    TransferSavingsAccountRq:
+      type: object
+      properties:
+        originSavingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        destinationSavingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      description: Depósito de cuenta de ahorros
     SavingsAccount:
       type: object
       properties:
