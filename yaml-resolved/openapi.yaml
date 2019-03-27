@@ -124,7 +124,7 @@ paths:
                     code: 123
                   currency:
                     code: 5
-                    isoCode: COP
+                    isoCode: USD
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -274,7 +274,7 @@ paths:
                 totalAmount: "600.00"
                 currency:
                   code: 5
-                  description: COP
+                  description: USD
                 account:
                   number: "011201000019"
                   status:
@@ -286,7 +286,7 @@ paths:
                     balance: "1600.00"
                   currency:
                     code: 5
-                    description: COP
+                    description: USD
                   customer:
                     identification:
                       number: "123123123"
@@ -441,7 +441,7 @@ paths:
                 totalAmount: "600.00"
                 currency:
                   code: 5
-                  isoCode: COP
+                  isoCode: USD
                 account:
                   number: "011201000019"
                   status:
@@ -453,7 +453,7 @@ paths:
                     balance: "600.00"
                   currency:
                     code: 5
-                    isoCode: COP
+                    isoCode: USD
                   customer:
                     identification:
                       number: "123123123"
@@ -604,7 +604,7 @@ paths:
                 cashAmount: "300.00"
                 currency:
                   code: 5
-                  isoCode: COP
+                  isoCode: USD
                 account:
                   number: "1234567890"
                   status:
@@ -616,7 +616,7 @@ paths:
                     balance: "1300.00"
                   currency:
                     code: 5
-                    isoCode: COP
+                    isoCode: USD
                   customer:
                     identification:
                       number: "123123123"
@@ -771,7 +771,7 @@ paths:
                 totalAmount: "600.00"
                 currency:
                   code: 5
-                  isoCode: COP
+                  isoCode: USD
                 account:
                   number: "1234567890"
                   status:
@@ -783,7 +783,7 @@ paths:
                     balance: "1600.00"
                   currency:
                     code: 5
-                    isoCode: COP
+                    isoCode: USD
                   customer:
                     identification:
                       number: "123123123"
@@ -938,7 +938,7 @@ paths:
                 totalAmount: "600.00"
                 currency:
                   code: 5
-                  isoCode: COP
+                  isoCode: USD
                 account:
                   number: "1234567890"
                   status:
@@ -950,7 +950,7 @@ paths:
                     balance: "1600.00"
                   currency:
                     code: 5
-                    isoCode: COP
+                    isoCode: USD
                   customer:
                     identification:
                       number: "123123123"
@@ -1105,14 +1105,14 @@ paths:
                 totalAmount: "600.00"
                 currency:
                   code: 5
-                  isoCode: COP
+                  isoCode: USD
                 account:
                   number: "011201000019"
                   status:
                     code: A
                   currency:
                     code: 5
-                    isoCode: COP
+                    isoCode: USD
                   customer:
                     identification:
                       number: "123123123"
@@ -1127,7 +1127,7 @@ paths:
                     code: A
                   currency:
                     code: 5
-                    isoCode: COP
+                    isoCode: USD
                   customer:
                     identification:
                       number: "987654321"
