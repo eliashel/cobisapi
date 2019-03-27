@@ -417,7 +417,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body'
+              $ref: '#/components/schemas/InitialDepositSavingsAccountRq'
             example:
               number: "011201000019"
               savingsBook:
@@ -584,7 +584,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_1'
+              $ref: '#/components/schemas/body'
             example:
               number: "1234567890"
               savingsBook:
@@ -1257,7 +1257,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_2'
+              $ref: '#/components/schemas/body_1'
             example:
               number: "1234567890"
               savingsBook:
@@ -1384,7 +1384,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_3'
+              $ref: '#/components/schemas/body_2'
             example:
               number: "1234567890"
               savingsBook:
@@ -1511,7 +1511,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_4'
+              $ref: '#/components/schemas/body_3'
             example:
               number: "1234567890"
               savingsBook:
@@ -1734,6 +1734,14 @@ components:
         transaction:
           $ref: '#/components/schemas/Transaction'
       description: Depósito de cuenta de ahorros
+    InitialDepositSavingsAccountRq:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      description: Depósito inicial de cuenta de ahorros
     DebitNoteSavingsAccountRq:
       type: object
       properties:
@@ -2245,19 +2253,12 @@ components:
       properties:
         savingsAccount:
           $ref: '#/components/schemas/SavingsAccount'
-        transaction:
-          $ref: '#/components/schemas/Transaction'
     body_2:
       type: object
       properties:
         savingsAccount:
           $ref: '#/components/schemas/SavingsAccount'
     body_3:
-      type: object
-      properties:
-        savingsAccount:
-          $ref: '#/components/schemas/SavingsAccount'
-    body_4:
       type: object
       properties:
         savingsAccount:
