@@ -1882,6 +1882,10 @@ components:
           $ref: '#/components/schemas/SavingsAccount'
         destinationAccount:
           $ref: '#/components/schemas/SavingsAccount'
+        transactionConcept:
+          maxLength: 40
+          type: string
+          description: Descripcón del concepto de la transacción
       description: Transacción de una cuenta de ahorros
     Branch:
       type: object
