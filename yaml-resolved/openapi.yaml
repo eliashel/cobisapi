@@ -1734,14 +1734,6 @@ components:
         transaction:
           $ref: '#/components/schemas/Transaction'
       description: Depósito de cuenta de ahorros
-    InitialDepositSavingsAccountRq:
-      type: object
-      properties:
-        savingsAccount:
-          $ref: '#/components/schemas/SavingsAccount'
-        transaction:
-          $ref: '#/components/schemas/Transaction'
-      description: Depósito inicial de cuenta de ahorros
     DebitNoteSavingsAccountRq:
       type: object
       properties:
@@ -1750,6 +1742,14 @@ components:
         transaction:
           $ref: '#/components/schemas/Transaction'
       description: Depósito de cuenta de ahorros
+    InitialDepositSavingsAccountRq:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      description: Depósito inicial de cuenta de ahorros
     TransferSavingsAccountRq:
       type: object
       properties:
@@ -1760,6 +1760,14 @@ components:
         transaction:
           $ref: '#/components/schemas/Transaction'
       description: Depósito de cuenta de ahorros
+    WithdrawSavingsAccountRq:
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+      description: Depósito inicial de cuenta de ahorros
     SavingsAccount:
       type: object
       properties:
