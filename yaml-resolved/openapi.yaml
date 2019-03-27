@@ -131,9 +131,9 @@ paths:
                       number: "123123123"
                       type:
                         code: CC
-                    name: Pablo
-                    lastName: Puertas
-                  name: PABLO PUERTAS
+                    name: Thomas
+                    lastName: Jefferson
+                  name: THOMAS JEFFERSON
                   availableBalance: "600.00"
         401:
           description: No se encuentra autorizado para ejecutar la operación.
@@ -302,9 +302,9 @@ paths:
                       number: "123123123"
                       type:
                         code: CC
-                    name: Pablo
-                    lastName: Puertas
-                  name: PABLO PUERTAS
+                    name: Thomas
+                    lastName: Jefferson
+                  name: THOMAS JEFFERSON
                   availableBalance: "1600.00"
         401:
           description: No se encuentra autorizado para ejecutar la operación.
@@ -469,9 +469,9 @@ paths:
                       number: "123123123"
                       type:
                         code: CC
-                    name: Pablo
-                    lastName: Puertas
-                  name: PABLO PUERTAS
+                    name: Thomas
+                    lastName: Jefferson
+                  name: THOMAS JEFFERSON
                   availableBalance: "600.00"
         401:
           description: No se encuentra autorizado para ejecutar la operación.
@@ -632,9 +632,9 @@ paths:
                       number: "123123123"
                       type:
                         code: CC
-                    name: Pablo
-                    lastName: Puertas
-                  name: PABLO PUERTAS
+                    name: Thomas
+                    lastName: Jefferson
+                  name: THOMAS JEFFERSON
                   availableBalance: "1300.00"
         401:
           description: No se encuentra autorizado para ejecutar la operación.
@@ -799,9 +799,9 @@ paths:
                       number: "123123123"
                       type:
                         code: CC
-                    name: Pablo
-                    lastName: Puertas
-                  name: PABLO PUERTAS
+                    name: Thomas
+                    lastName: Jefferson
+                  name: THOMAS JEFFERSON
                   availableBalance: "1600.00"
         401:
           description: No se encuentra autorizado para ejecutar la operación.
@@ -966,9 +966,9 @@ paths:
                       number: "123123123"
                       type:
                         code: CC
-                    name: Pablo
-                    lastName: Puertas
-                  name: PABLO PUERTAS
+                    name: Thomas
+                    lastName: Jefferson
+                  name: THOMAS JEFFERSON
                   availableBalance: "1600.00"
         401:
           description: No se encuentra autorizado para ejecutar la operación.
@@ -1128,9 +1128,9 @@ paths:
                       number: "123123123"
                       type:
                         code: CC
-                    name: Pablo
-                    lastName: Puertas
-                  name: PABLO PUERTAS
+                    name: Thomas
+                    lastName: Jefferson
+                  name: THOMAS JEFFERSON
                 destinationAccount:
                   number: "011303400453"
                   status:
@@ -1143,8 +1143,8 @@ paths:
                       number: "987654321"
                       type:
                         code: CC
-                    name: Pablo
-                    lastName: Puertas
+                    name: Thomas
+                    lastName: Jefferson
                   name: PABLO PUERTAS
         401:
           description: No se encuentra autorizado para ejecutar la operación.
