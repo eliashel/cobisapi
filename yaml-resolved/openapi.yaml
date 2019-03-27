@@ -419,13 +419,15 @@ paths:
             schema:
               $ref: '#/components/schemas/InitialDepositSavingsAccountRq'
             example:
-              number: "011201000019"
-              savingsBook:
-                number: 1234
-              cashAmount: "300.00"
-              localChecksAmount: "200.00"
-              othersChecksAmount: "100.00"
-              totalAmount: "600.00"
+              savingsAccount:
+                number: "011201000019"
+                savingsBook:
+                  number: 1234
+              transaction:
+                cashAmount: "300.00"
+                localChecksAmount: "200.00"
+                othersChecksAmount: "100.00"
+                totalAmount: "600.00"
         required: true
       responses:
         201:
