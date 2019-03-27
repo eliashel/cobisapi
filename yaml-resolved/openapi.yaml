@@ -119,13 +119,22 @@ paths:
                   savingsBook:
                     number: 1234
                     controlNumber: 12
-                    balance: "1000.00"
+                    balance: "600.00"
                   branch:
                     code: 123
                   currency:
                     code: 5
                     isoCode: USD
                   openingDate: 2019-02-13
+                  customer:
+                    identification:
+                      number: "123123123"
+                      type:
+                        code: CC
+                    name: Pablo
+                    lastName: Puertas
+                  name: PABLO PUERTAS
+                  availableBalance: "600.00"
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
