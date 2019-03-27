@@ -1090,26 +1090,20 @@ paths:
                   code: 5
                   description: COP
                 account:
-                  number: "1234567890"
+                  number: "011303400453"
                   status:
                     code: A
-                  savingsBook:
-                    number: 1234
-                    controlNumber: 12
-                    line: 50
-                    balance: "1600.00"
                   currency:
                     code: 5
                     description: COP
                   customer:
                     identification:
-                      number: "123123123"
+                      number: "987654321"
                       type:
                         code: CC
                     name: Pablo
                     lastName: Puertas
                   name: PABLO PUERTAS
-                  availableBalance: "1600.00"
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
