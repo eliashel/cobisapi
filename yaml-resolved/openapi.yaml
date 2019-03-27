@@ -1145,7 +1145,7 @@ paths:
                         code: CC
                     name: Thomas
                     lastName: Jefferson
-                  name: PABLO PUERTAS
+                  name: THOMAS JEFFERSON
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
