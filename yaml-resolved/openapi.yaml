@@ -584,7 +584,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body'
+              $ref: '#/components/schemas/WithdrawSavingsAccountRq'
             example:
               number: "1234567890"
               savingsBook:
@@ -1257,7 +1257,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_1'
+              $ref: '#/components/schemas/body'
             example:
               number: "1234567890"
               savingsBook:
@@ -1384,7 +1384,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_2'
+              $ref: '#/components/schemas/body_1'
             example:
               number: "1234567890"
               savingsBook:
@@ -1511,7 +1511,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body_3'
+              $ref: '#/components/schemas/body_2'
             example:
               number: "1234567890"
               savingsBook:
@@ -2254,19 +2254,12 @@ components:
       properties:
         savingsAccount:
           $ref: '#/components/schemas/SavingsAccount'
-        transaction:
-          $ref: '#/components/schemas/Transaction'
     body_1:
       type: object
       properties:
         savingsAccount:
           $ref: '#/components/schemas/SavingsAccount'
     body_2:
-      type: object
-      properties:
-        savingsAccount:
-          $ref: '#/components/schemas/SavingsAccount'
-    body_3:
       type: object
       properties:
         savingsAccount:
