@@ -306,6 +306,7 @@ paths:
                     lastName: Jefferson
                   name: THOMAS JEFFERSON
                   availableBalance: "1600.00"
+                  dateOfLastMovement: 2019-03-14
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
