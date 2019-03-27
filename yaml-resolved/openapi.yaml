@@ -251,7 +251,7 @@ paths:
               example:
                 postingDate: 2019-02-13
                 primaryTransactionId: 12345678
-                secondaryTransactionId: 123123
+                secondaryTransactionId: 13395
                 branch:
                   code: 123
                 cashAmount: "300.00"
@@ -420,7 +420,7 @@ paths:
               example:
                 postingDate: 2019-02-13
                 primaryTransactionId: 12345678
-                secondaryTransactionId: 123123
+                secondaryTransactionId: 13395
                 code: 123
                 cashAmount: "300.00"
                 localChecksAmount: "200.00"
@@ -585,7 +585,7 @@ paths:
               example:
                 postingDate: 2019-02-13
                 primaryTransactionId: 12345678
-                secondaryTransactionId: 123123
+                secondaryTransactionId: 13395
                 code: 123
                 cashAmount: "300.00"
                 currency:
@@ -748,7 +748,7 @@ paths:
               example:
                 postingDate: 2019-02-13
                 primaryTransactionId: 12345678
-                secondaryTransactionId: 123123
+                secondaryTransactionId: 13395
                 code: 123
                 cashAmount: "300.00"
                 localChecksAmount: "200.00"
@@ -914,7 +914,7 @@ paths:
               example:
                 postingDate: 2019-02-13
                 primaryTransactionId: 12345678
-                secondaryTransactionId: 123123
+                secondaryTransactionId: 13395
                 code: 123
                 cashAmount: "300.00"
                 localChecksAmount: "200.00"
