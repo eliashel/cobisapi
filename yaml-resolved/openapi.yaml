@@ -1062,6 +1062,7 @@ paths:
                 number: "011303400453"
               transaction:
                 totalAmount: "600.00"
+                transactionConcept: Transferencia para pago de servicios
         required: true
       responses:
         201:
