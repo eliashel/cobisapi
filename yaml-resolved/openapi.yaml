@@ -594,6 +594,7 @@ paths:
                   number: 1234
                   controlNumber: 12
                   balance: "1000.00"
+              transaction:
                 cashAmount: "300.00"
         required: true
       responses:
