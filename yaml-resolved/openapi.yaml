@@ -394,7 +394,7 @@ paths:
             schema:
               $ref: '#/components/schemas/body'
             example:
-              number: "1234567890"
+              number: "011201000019"
               savingsBook:
                 number: 1234
               cashAmount: "300.00"
@@ -429,14 +429,14 @@ paths:
                   code: 5
                   description: COP
                 account:
-                  number: "1234567890"
+                  number: "011201000019"
                   status:
                     code: A
                   savingsBook:
                     number: 1234
-                    controlNumber: 12
-                    line: 50
-                    balance: "1600.00"
+                    controlNumber: 432
+                    line: 1
+                    balance: "600.00"
                   currency:
                     code: 5
                     description: COP
@@ -448,7 +448,7 @@ paths:
                     name: Pablo
                     lastName: Puertas
                   name: PABLO PUERTAS
-                  availableBalance: "1600.00"
+                  availableBalance: "600.00"
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
