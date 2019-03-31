@@ -1261,7 +1261,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SavingsAccount'
+              $ref: '#/components/schemas/InitialDepositSavingsAccountRq'
             example:
               savingsAccount:
                 number: "011201000019"
