@@ -1850,7 +1850,7 @@ components:
           $ref: '#/components/schemas/IdentificationType'
         birthCity:
           $ref: '#/components/schemas/City'
-        expedicionDate:
+        expeditionDate:
           type: string
           format: date
       description: Identificación de un cliente
