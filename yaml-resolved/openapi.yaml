@@ -1713,22 +1713,6 @@ components:
           minLength: 1
           type: string
       description: Oficina
-    City:
-      type: object
-      properties:
-        code:
-          maximum: 10
-          minimum: 2
-          type: string
-        name:
-          maxLength: 30
-          minLength: 3
-          type: string
-        status:
-          maxLength: 1
-          minLength: 1
-          type: string
-      description: Cuidad
     Country:
       type: object
       properties:
@@ -1996,6 +1980,21 @@ components:
       type: string
       description: Identificación única de una petición o solicitud
       format: uuid
+    City:
+      properties:
+        code:
+          maximum: 10
+          minimum: 2
+          type: string
+        name:
+          maxLength: 30
+          minLength: 3
+          type: string
+        status:
+          maxLength: 1
+          minLength: 1
+          type: string
+      description: Cuidad
     body:
       type: object
       properties:
