@@ -1261,7 +1261,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/body'
+              $ref: '#/components/schemas/SavingsAccount'
             example:
               savingsAccount:
                 number: "011201000019"
@@ -1995,11 +1995,6 @@ components:
           minLength: 1
           type: string
       description: Cuidad
-    body:
-      type: object
-      properties:
-        savingsAccount:
-          $ref: '#/components/schemas/SavingsAccount'
     ClosedSavingsAccount_causeOfClosure:
       type: object
       properties:
