@@ -1678,18 +1678,6 @@ components:
           type: string
           description: Descripcón del concepto de la transacción
       description: Transacción de una cuenta de ahorros
-    Branch:
-      type: object
-      properties:
-        code:
-          maximum: 32767
-          minimum: 1
-          type: integer
-        name:
-          maxLength: 64
-          minLength: 1
-          type: string
-      description: Oficina
     Customer:
       type: object
       properties:
@@ -1713,6 +1701,18 @@ components:
           minLength: 1
           type: string
       description: Cliente o prospecto de cliente que está interesado en adquirir un producto financiero
+    Branch:
+      type: object
+      properties:
+        code:
+          maximum: 32767
+          minimum: 1
+          type: integer
+        name:
+          maxLength: 64
+          minLength: 1
+          type: string
+      description: Oficina
     City:
       type: object
       properties:
