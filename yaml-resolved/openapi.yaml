@@ -187,6 +187,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+        429:
+          description: Se ha realizado la solicitud más de una vez.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         500:
           description: Se presentó un error durante el procesamiento de la solicitud.
           headers:
@@ -2152,6 +2164,18 @@ components:
             $ref: '#/components/schemas/ErrorMessage'
     404NotFound:
       description: El objeto no fue encontrado.
+      headers:
+        X-Correlation-ID:
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    429TooManyRequests:
+      description: Se ha realizado la solicitud más de una vez.
       headers:
         X-Correlation-ID:
           style: simple
