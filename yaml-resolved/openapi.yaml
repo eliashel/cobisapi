@@ -164,17 +164,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
+          $ref: '#/components/responses/405MethodNotAllowed'
         500:
           description: Se presentó un error durante el procesamiento de la solicitud.
           headers:
@@ -344,17 +334,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
+          $ref: '#/components/responses/405MethodNotAllowed'
         500:
           description: Se presentó un error durante el procesamiento de la solicitud.
           headers:
@@ -521,17 +501,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
+          $ref: '#/components/responses/405MethodNotAllowed'
         500:
           description: Se presentó un error durante el procesamiento de la solicitud.
           headers:
@@ -693,17 +663,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
+          $ref: '#/components/responses/405MethodNotAllowed'
         500:
           description: Se presentó un error durante el procesamiento de la solicitud.
           headers:
@@ -865,17 +825,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
+          $ref: '#/components/responses/405MethodNotAllowed'
         500:
           description: Se presentó un error durante el procesamiento de la solicitud.
           headers:
@@ -1037,17 +987,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
+          $ref: '#/components/responses/405MethodNotAllowed'
         500:
           description: Se presentó un error durante el procesamiento de la solicitud.
           headers:
@@ -1218,17 +1158,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
+          $ref: '#/components/responses/405MethodNotAllowed'
         500:
           description: Se presentó un error durante el procesamiento de la solicitud.
           headers:
@@ -1346,17 +1276,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
+          $ref: '#/components/responses/405MethodNotAllowed'
         500:
           description: Se presentó un error durante el procesamiento de la solicitud.
           headers:
@@ -1482,17 +1402,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
         405:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
+          $ref: '#/components/responses/405MethodNotAllowed'
         500:
           description: Se presentó un error durante el procesamiento de la solicitud.
           headers:
@@ -2102,6 +2012,18 @@ components:
         una transacción de nota crédito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nc](http://www.cobiscorp.com/api/catlogo#ah_causa_nc).
         Para una transacción de nota débito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nd](http://www.cobiscorp.com/api/catlogo#ah_causa_nd)'
   responses:
+    400BadRequest:
+      description: El mensaje de solicitud no se encuentra debidamente formateado.
+      headers:
+        X-Correlation-ID:
+          style: simple
+          explode: false
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
       headers:
@@ -2128,18 +2050,6 @@ components:
             $ref: '#/components/schemas/ErrorMessage'
     404NotFound:
       description: El objeto no fue encontrado.
-      headers:
-        X-Correlation-ID:
-          style: simple
-          explode: false
-          schema:
-            $ref: '#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
-    405MethodNotAllowed:
-      description: El mensaje de solicitud no se encuentra debidamente formateado.
       headers:
         X-Correlation-ID:
           style: simple
