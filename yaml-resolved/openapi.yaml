@@ -125,7 +125,6 @@ paths:
                   currency:
                     code: 5
                     isoCode: USD
-                  openingDate: 2019-02-13
                   name: THOMAS JEFFERSON
         400:
           description: El mensaje de solicitud no se encuentra debidamente formateado.
