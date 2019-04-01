@@ -1244,7 +1244,7 @@ paths:
   /savings-accounts/book/initizalization:
     put:
       tags:
-      - request
+      - solicitudes
       summary: Personifica la libreta de una cuenta de ahorros.
       description: Personifica la libreta de una cuenta de ahorros.
       operationId: updateIniBookSavingsAccount
