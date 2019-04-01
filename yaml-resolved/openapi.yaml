@@ -26,6 +26,8 @@ servers:
   description: Internal staging server for testing
 tags:
 - name: consulta
+  description: Las operaciones que se listan a continuación permiten obtener información
+    sobre el producto de cuentas de ahorros.
 - name: request
   description: Operaciones de solicitud de actualización
 - name: execute
