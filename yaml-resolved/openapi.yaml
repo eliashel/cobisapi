@@ -1584,7 +1584,8 @@ paths:
         schema:
           $ref: '#/components/schemas/ChannelCode'
       requestBody:
-        description: Datos para realizar la personificación de la cuenta de ahorros.
+        description: Datos para realizar la personificación de la libreta de la cuenta
+          de ahorros.
         content:
           application/json:
             schema:
