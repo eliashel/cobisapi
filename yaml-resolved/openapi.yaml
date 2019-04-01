@@ -30,7 +30,7 @@ tags:
   description: Operaciones de solicitud de actualización
 - name: transacciones
   description: Operaciones transaccionales
-- name: terminate
+- name: terminaciones
   description: Operaciones para el cierre
 paths:
   /savings-accounts/{number}:
@@ -1372,7 +1372,7 @@ paths:
   /savings-accounts/close:
     delete:
       tags:
-      - terminate
+      - terminaciones
       summary: Cancela una cuenta de ahorros.
       description: Cierra y cancela una cuenta de ahorros.
       operationId: closeSavingsAccount
