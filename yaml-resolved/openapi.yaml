@@ -459,10 +459,9 @@ paths:
     post:
       tags:
       - transacciones
-      summary: Realiza el depósito inicial con o sin libreta a una cuenta de ahorros
-      description: Realiza un depósito inicial a una cuenta de ahorros, indicando
-        el número de cuenta a la cual se desea depositar. El depósito puede hacerse
-        con libreta o sin ella.
+      summary: Realiza el depósito inicial de una cuenta de ahorros
+      description: Realiza un depósito inicial a una cuenta de ahorros. El depósito
+        debe hacerse con libreta, siendo este el primer movimiento.
       operationId: SavingsAccountsInitialDepositCreate
       parameters:
       - name: X-Authorization
