@@ -2618,6 +2618,16 @@ components:
       explode: false
       schema:
         $ref: '#/components/schemas/RequestID'
+    X-Financial-ID:
+      name: X-Financial-ID
+      in: header
+      description: ID del banco o entidad financiera que provee el servicio de cuentas
+        de ahorros
+      required: false
+      style: simple
+      explode: false
+      schema:
+        type: string
     X-EndUser-Login:
       name: X-EndUser-Login
       in: header
