@@ -463,7 +463,7 @@ paths:
       description: Realiza un depósito inicial a una cuenta de ahorros, indicando
         el número de cuenta a la cual se desea depositar. El depósito puede hacerse
         con libreta o sin ella.
-      operationId: CreateInitialSavingsAccountDeposit
+      operationId: SavingsAccountInitialDepositCreate
       parameters:
       - name: X-Authorization
         in: header
