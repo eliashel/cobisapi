@@ -2490,7 +2490,7 @@ components:
           format: int32
         description:
           $ref: '#/components/schemas/CatalogDescription'
-      description: 'Indica el tipo de salgo que se afecta con la nota. Ver listado
+      description: 'Indica el tipo de saldo que se afecta con la nota. Ver listado
         en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).'
     Transaction_cause:
       type: object
