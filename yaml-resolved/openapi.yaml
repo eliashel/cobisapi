@@ -28,7 +28,7 @@ tags:
 - name: consultas
 - name: solicitudes
   description: Operaciones de solicitud de actualización
-- name: execute
+- name: transacciones
   description: Operaciones transaccionales
 - name: terminate
   description: Operaciones para el cierre
@@ -190,7 +190,7 @@ paths:
   /savings-accounts/deposit:
     post:
       tags:
-      - execute
+      - transacciones
       summary: Realiza un depósito con o sin libreta a una cuenta de ahorros
       description: Realiza un depósito a una cuenta de ahorros, indicando el número
         de cuenta a la cual se desea depositar. El depósito puede hacerse con libreta
@@ -370,7 +370,7 @@ paths:
   /savings-accounts/deposit/initial:
     post:
       tags:
-      - execute
+      - transacciones
       summary: Realiza el depósito inicial con o sin libreta a una cuenta de ahorros
       description: Realiza un depósito inicial a una cuenta de ahorros, indicando
         el número de cuenta a la cual se desea depositar. El depósito puede hacerse
@@ -547,7 +547,7 @@ paths:
   /savings-accounts/withdraw:
     post:
       tags:
-      - execute
+      - transacciones
       summary: Realiza un retiro en efectivo con o sin libreta de una cuenta de ahorros
       description: Realiza un retiro en efectivo con o sin libreta de una cuenta de
         ahorros determinada.
@@ -719,7 +719,7 @@ paths:
   /savings-accounts/debit-note:
     post:
       tags:
-      - execute
+      - transacciones
       summary: Realiza una nota débito sin libreta a una cuenta de ahorros
       description: Realiza una nota débito a una cuenta de ahorros. Esta operación
         se realiza sin libreta de ahorros.
@@ -891,7 +891,7 @@ paths:
   /savings-accounts/credit-note:
     post:
       tags:
-      - execute
+      - transacciones
       summary: Realiza una nota crédito sin libreta a una cuenta de ahorros
       description: Realiza una nota crédito a una cuenta de ahorros. Esta operación
         se realiza sin libreta de ahorros.
@@ -1063,7 +1063,7 @@ paths:
   /savings-accounts/transfer:
     post:
       tags:
-      - execute
+      - transacciones
       summary: Realiza una transferencia entre cuentas de ahorros.
       description: Realiza una transferencia a una cuenta de ahorros, indicando la
         cuenta origen, la cuenta destino.
