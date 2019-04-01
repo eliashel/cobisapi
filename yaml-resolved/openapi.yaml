@@ -1,10 +1,11 @@
 openapi: 3.0.0
 info:
   title: COBIS API Transactional Savings Account
-  description: 'Este es el API para COBIS Core Banking System. En esta versión de
-    API se encuentran definidos los servicios de nuestro producto COBIS Ahorros, el
-    cual permite gestionar todas las operaciones de cuentas de ahorros de un sistema
-    financiero. Puedes conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com).'
+  description: 'Este es el API del sistema transaccional de cuentas de ahorros del
+    Core Banking System. Se encuentran definidos los servicios comunes para realizar
+    las operaciones transaccionales del producto de Cuentas de Ahorros, y permite
+    gestionar las operaciones de cuentas de ahorros de un sistema financiero. Puedes
+    conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com).'
   termsOfService: http://cobiscorp.com/terms/cobisapi
   contact:
     name: COBIS Support Center
@@ -59,7 +60,8 @@ paths:
           $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
+        description: Login de usuario en la aplicación de front-end que realiza la
+          petición
         required: false
         style: simple
         explode: false
@@ -67,7 +69,8 @@ paths:
           type: string
       - name: X-EndUser-RequestDateTime
         in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Fecha y hora en la que se originó la solicitud o petición por
+          el usuario en la aplicación de front-end
         required: false
         style: simple
         explode: false
@@ -76,7 +79,9 @@ paths:
           format: date-time
       - name: X-EndUser-Terminal
         in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo)
+          desde el cual se originó la solicitud o petición por el usuario en la aplicación
+          de front-end
         required: false
         style: simple
         explode: false
@@ -188,7 +193,9 @@ paths:
       tags:
       - execute
       summary: Realiza un depósito con o sin libreta a una cuenta de ahorros
-      description: Realiza un depósito a una cuenta de ahorros, indicando el número de cuenta a la cual se desea depositar. El depósito puede hacerse con libreta o sin ella.
+      description: Realiza un depósito a una cuenta de ahorros, indicando el número
+        de cuenta a la cual se desea depositar. El depósito puede hacerse con libreta
+        o sin ella.
       operationId: CreateSavingsAccountDeposit
       parameters:
       - name: X-Authorization
@@ -209,7 +216,8 @@ paths:
           $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
+        description: Login de usuario en la aplicación de front-end que realiza la
+          petición
         required: false
         style: simple
         explode: false
@@ -217,7 +225,8 @@ paths:
           type: string
       - name: X-EndUser-RequestDateTime
         in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Fecha y hora en la que se originó la solicitud o petición por
+          el usuario en la aplicación de front-end
         required: false
         style: simple
         explode: false
@@ -226,7 +235,9 @@ paths:
           format: date-time
       - name: X-EndUser-Terminal
         in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo)
+          desde el cual se originó la solicitud o petición por el usuario en la aplicación
+          de front-end
         required: false
         style: simple
         explode: false
@@ -241,7 +252,9 @@ paths:
         schema:
           $ref: '#/components/schemas/ChannelCode'
       requestBody:
-        description: Datos para realizar el déposito a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.
+        description: Datos para realizar el déposito a la cuenta de ahorros. Si el
+          depósito es con libreta, debe enviarse el elemento savingsBook. En caso
+          contrario, el elemento savingsBook no es requerido.
         content:
           application/json:
             schema:
@@ -360,7 +373,9 @@ paths:
       tags:
       - execute
       summary: Realiza el depósito inicial con o sin libreta a una cuenta de ahorros
-      description: Realiza un depósito inicial a una cuenta de ahorros, indicando el número de cuenta a la cual se desea depositar. El depósito puede hacerse con libreta o sin ella.
+      description: Realiza un depósito inicial a una cuenta de ahorros, indicando
+        el número de cuenta a la cual se desea depositar. El depósito puede hacerse
+        con libreta o sin ella.
       operationId: CreateInitialSavingsAccountDeposit
       parameters:
       - name: X-Authorization
@@ -381,7 +396,8 @@ paths:
           $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
+        description: Login de usuario en la aplicación de front-end que realiza la
+          petición
         required: false
         style: simple
         explode: false
@@ -389,7 +405,8 @@ paths:
           type: string
       - name: X-EndUser-RequestDateTime
         in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Fecha y hora en la que se originó la solicitud o petición por
+          el usuario en la aplicación de front-end
         required: false
         style: simple
         explode: false
@@ -398,7 +415,9 @@ paths:
           format: date-time
       - name: X-EndUser-Terminal
         in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo)
+          desde el cual se originó la solicitud o petición por el usuario en la aplicación
+          de front-end
         required: false
         style: simple
         explode: false
@@ -413,7 +432,9 @@ paths:
         schema:
           $ref: '#/components/schemas/ChannelCode'
       requestBody:
-        description: Datos para realizar el déposito inicial a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.
+        description: Datos para realizar el déposito inicial a la cuenta de ahorros.
+          Si el depósito es con libreta, debe enviarse el elemento savingsBook. En
+          caso contrario, el elemento savingsBook no es requerido.
         content:
           application/json:
             schema:
@@ -529,7 +550,8 @@ paths:
       tags:
       - execute
       summary: Realiza un retiro en efectivo con o sin libreta de una cuenta de ahorros
-      description: Realiza un retiro en efectivo con o sin libreta de una cuenta de ahorros determinada.
+      description: Realiza un retiro en efectivo con o sin libreta de una cuenta de
+        ahorros determinada.
       operationId: CreateSavingsAccountWithdraw
       parameters:
       - name: X-Authorization
@@ -550,7 +572,8 @@ paths:
           $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
+        description: Login de usuario en la aplicación de front-end que realiza la
+          petición
         required: false
         style: simple
         explode: false
@@ -558,7 +581,8 @@ paths:
           type: string
       - name: X-EndUser-RequestDateTime
         in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Fecha y hora en la que se originó la solicitud o petición por
+          el usuario en la aplicación de front-end
         required: false
         style: simple
         explode: false
@@ -567,7 +591,9 @@ paths:
           format: date-time
       - name: X-EndUser-Terminal
         in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo)
+          desde el cual se originó la solicitud o petición por el usuario en la aplicación
+          de front-end
         required: false
         style: simple
         explode: false
@@ -582,7 +608,9 @@ paths:
         schema:
           $ref: '#/components/schemas/ChannelCode'
       requestBody:
-        description: Datos para realizar el retiro en efectivo de una cuenta de ahorros. Si el retiro es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.
+        description: Datos para realizar el retiro en efectivo de una cuenta de ahorros.
+          Si el retiro es con libreta, debe enviarse el elemento savingsBook. En caso
+          contrario, el elemento savingsBook no es requerido.
         content:
           application/json:
             schema:
@@ -694,7 +722,8 @@ paths:
       tags:
       - execute
       summary: Realiza una nota débito sin libreta a una cuenta de ahorros
-      description: Realiza una nota débito a una cuenta de ahorros. Esta operación se realiza sin libreta de ahorros.
+      description: Realiza una nota débito a una cuenta de ahorros. Esta operación
+        se realiza sin libreta de ahorros.
       operationId: CreateSavingsAccountDebitNote
       parameters:
       - name: X-Authorization
@@ -715,7 +744,8 @@ paths:
           $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
+        description: Login de usuario en la aplicación de front-end que realiza la
+          petición
         required: false
         style: simple
         explode: false
@@ -723,7 +753,8 @@ paths:
           type: string
       - name: X-EndUser-RequestDateTime
         in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Fecha y hora en la que se originó la solicitud o petición por
+          el usuario en la aplicación de front-end
         required: false
         style: simple
         explode: false
@@ -732,7 +763,9 @@ paths:
           format: date-time
       - name: X-EndUser-Terminal
         in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo)
+          desde el cual se originó la solicitud o petición por el usuario en la aplicación
+          de front-end
         required: false
         style: simple
         explode: false
@@ -861,7 +894,8 @@ paths:
       tags:
       - execute
       summary: Realiza una nota crédito sin libreta a una cuenta de ahorros
-      description: Realiza una nota crédito a una cuenta de ahorros. Esta operación se realiza sin libreta de ahorros.
+      description: Realiza una nota crédito a una cuenta de ahorros. Esta operación
+        se realiza sin libreta de ahorros.
       operationId: CreateSavingsAccountCreditNote
       parameters:
       - name: X-Authorization
@@ -882,7 +916,8 @@ paths:
           $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
+        description: Login de usuario en la aplicación de front-end que realiza la
+          petición
         required: false
         style: simple
         explode: false
@@ -890,7 +925,8 @@ paths:
           type: string
       - name: X-EndUser-RequestDateTime
         in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Fecha y hora en la que se originó la solicitud o petición por
+          el usuario en la aplicación de front-end
         required: false
         style: simple
         explode: false
@@ -899,7 +935,9 @@ paths:
           format: date-time
       - name: X-EndUser-Terminal
         in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo)
+          desde el cual se originó la solicitud o petición por el usuario en la aplicación
+          de front-end
         required: false
         style: simple
         explode: false
@@ -1028,7 +1066,8 @@ paths:
       tags:
       - execute
       summary: Realiza una transferencia entre cuentas de ahorros.
-      description: Realiza una transferencia a una cuenta de ahorros, indicando la cuenta origen, la cuenta destino.
+      description: Realiza una transferencia a una cuenta de ahorros, indicando la
+        cuenta origen, la cuenta destino.
       operationId: CreateSavingsAccountTransfer
       parameters:
       - name: X-Authorization
@@ -1049,7 +1088,8 @@ paths:
           $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
+        description: Login de usuario en la aplicación de front-end que realiza la
+          petición
         required: false
         style: simple
         explode: false
@@ -1057,7 +1097,8 @@ paths:
           type: string
       - name: X-EndUser-RequestDateTime
         in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Fecha y hora en la que se originó la solicitud o petición por
+          el usuario en la aplicación de front-end
         required: false
         style: simple
         explode: false
@@ -1066,7 +1107,9 @@ paths:
           format: date-time
       - name: X-EndUser-Terminal
         in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo)
+          desde el cual se originó la solicitud o petición por el usuario en la aplicación
+          de front-end
         required: false
         style: simple
         explode: false
@@ -1225,7 +1268,8 @@ paths:
           $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
+        description: Login de usuario en la aplicación de front-end que realiza la
+          petición
         required: false
         style: simple
         explode: false
@@ -1233,7 +1277,8 @@ paths:
           type: string
       - name: X-EndUser-RequestDateTime
         in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Fecha y hora en la que se originó la solicitud o petición por
+          el usuario en la aplicación de front-end
         required: false
         style: simple
         explode: false
@@ -1242,7 +1287,9 @@ paths:
           format: date-time
       - name: X-EndUser-Terminal
         in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo)
+          desde el cual se originó la solicitud o petición por el usuario en la aplicación
+          de front-end
         required: false
         style: simple
         explode: false
@@ -1349,7 +1396,8 @@ paths:
           $ref: '#/components/schemas/RequestID'
       - name: X-EndUser-Login
         in: header
-        description: Login de usuario en la aplicación de front-end que realiza la petición
+        description: Login de usuario en la aplicación de front-end que realiza la
+          petición
         required: false
         style: simple
         explode: false
@@ -1357,7 +1405,8 @@ paths:
           type: string
       - name: X-EndUser-RequestDateTime
         in: header
-        description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Fecha y hora en la que se originó la solicitud o petición por
+          el usuario en la aplicación de front-end
         required: false
         style: simple
         explode: false
@@ -1366,7 +1415,9 @@ paths:
           format: date-time
       - name: X-EndUser-Terminal
         in: header
-        description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+        description: Terminal (IP, número de teléfono, o identificador del dispositivo)
+          desde el cual se originó la solicitud o petición por el usuario en la aplicación
+          de front-end
         required: false
         style: simple
         explode: false
@@ -1700,7 +1751,8 @@ components:
           maxLength: 1
           minLength: 1
           type: string
-      description: Cliente o prospecto de cliente que está interesado en adquirir un producto financiero
+      description: Cliente o prospecto de cliente que está interesado en adquirir
+        un producto financiero
     Branch:
       type: object
       properties:
@@ -1925,7 +1977,8 @@ components:
       maxLength: 30
       minLength: 1
       type: string
-      description: Login de usuario en el sistema CORE. Los usuarios autorizados realizan y autorizan transacciones en  el sistema.
+      description: Login de usuario en el sistema CORE. Los usuarios autorizados realizan
+        y autorizan transacciones en  el sistema.
     Amount:
       pattern: '[0-9]{1,16}(\.[0-9]{1,2})'
       type: string
@@ -1953,13 +2006,15 @@ components:
       maximum: 50
       minimum: 1
       type: number
-      description: Tamaño límite de paginación para una consulta que retorne una lista de elementos.
+      description: Tamaño límite de paginación para una consulta que retorne una lista
+        de elementos.
       format: int32
       default: 50
     PagingOffset:
       minimum: 0
       type: number
-      description: Número del registro desde el cual, a partir del siguiente se inicia el siguiente conjunto de resultados de la página.
+      description: Número del registro desde el cual, a partir del siguiente se inicia
+        el siguiente conjunto de resultados de la página.
       format: int32
       default: 0
     Pagination:
@@ -2109,7 +2164,8 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
     502BadGateway:
-      description: Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud.
+      description: Se presentó un error al procesar la respuesta de un servicio proxy
+        requerido para la solicitud.
       headers:
         X-Correlation-ID:
           style: simple
@@ -2175,7 +2231,8 @@ components:
     X-EndUser-RequestDateTime:
       name: X-EndUser-RequestDateTime
       in: header
-      description: Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end
+      description: Fecha y hora en la que se originó la solicitud o petición por el
+        usuario en la aplicación de front-end
       required: false
       style: simple
       explode: false
@@ -2185,7 +2242,9 @@ components:
     X-EndUser-Terminal:
       name: X-EndUser-Terminal
       in: header
-      description: Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end
+      description: Terminal (IP, número de teléfono, o identificador del dispositivo)
+        desde el cual se originó la solicitud o petición por el usuario en la aplicación
+        de front-end
       required: false
       style: simple
       explode: false
@@ -2203,7 +2262,8 @@ components:
     X-Correlation-ID:
       name: X-Correlation-ID
       in: header
-      description: ID que relaciona la respuesta con la solicitud. El valor de este campo debe coincidir con el valor X-Request-ID enviado en la solicitud.
+      description: ID que relaciona la respuesta con la solicitud. El valor de este
+        campo debe coincidir con el valor X-Request-ID enviado en la solicitud.
       required: false
       style: simple
       explode: false
@@ -2212,7 +2272,8 @@ components:
     pagingLimitSize:
       name: pagingLimitSize
       in: query
-      description: Tamaño límite de paginación para una consulta que retorne una lista de elementos.
+      description: Tamaño límite de paginación para una consulta que retorne una lista
+        de elementos.
       required: false
       style: form
       explode: true
@@ -2221,7 +2282,8 @@ components:
     pagingOffset:
       name: pagingOffset
       in: query
-      description: Número del registro desde el cual, a partir del siguiente se inicia el siguiente conjunto de resultados de la página.
+      description: Número del registro desde el cual, a partir del siguiente se inicia
+        el siguiente conjunto de resultados de la página.
       required: false
       style: form
       explode: true
