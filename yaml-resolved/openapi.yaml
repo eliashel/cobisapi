@@ -690,7 +690,7 @@ paths:
       summary: Realiza un retiro en efectivo con o sin libreta de una cuenta de ahorros
       description: Realiza un retiro en efectivo con o sin libreta de una cuenta de
         ahorros determinada.
-      operationId: CreateSavingsAccountWithdraw
+      operationId: SavingsAccountWithdrawCreate
       parameters:
       - name: X-Authorization
         in: header
@@ -913,7 +913,7 @@ paths:
       summary: Realiza una nota débito sin libreta a una cuenta de ahorros
       description: Realiza una nota débito a una cuenta de ahorros. Esta operación
         se realiza sin libreta de ahorros.
-      operationId: CreateSavingsAccountDebitNote
+      operationId: SavingsAccountDebitNoteCreate
       parameters:
       - name: X-Authorization
         in: header
@@ -1136,7 +1136,7 @@ paths:
       summary: Realiza una nota crédito sin libreta a una cuenta de ahorros
       description: Realiza una nota crédito a una cuenta de ahorros. Esta operación
         se realiza sin libreta de ahorros.
-      operationId: CreateSavingsAccountCreditNote
+      operationId: SavingsAccountCreditNoteCreate
       parameters:
       - name: X-Authorization
         in: header
@@ -1359,7 +1359,7 @@ paths:
       summary: Realiza una transferencia entre cuentas de ahorros.
       description: Realiza una transferencia a una cuenta de ahorros, indicando la
         cuenta origen, la cuenta destino.
-      operationId: CreateSavingsAccountTransfer
+      operationId: SavingsAccountsTransferCreate
       parameters:
       - name: X-Authorization
         in: header
@@ -1590,7 +1590,7 @@ paths:
       - solicitudes
       summary: Personifica la libreta de una cuenta de ahorros.
       description: Personifica la libreta de una cuenta de ahorros.
-      operationId: updateIniBookSavingsAccount
+      operationId: SavingsAccountsIniBookUpdate
       parameters:
       - name: X-Authorization
         in: header
