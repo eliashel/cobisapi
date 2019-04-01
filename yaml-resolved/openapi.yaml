@@ -25,7 +25,7 @@ servers:
 - url: http://staging-cobisapi.cobiscorp.com
   description: Internal staging server for testing
 tags:
-- name: retrieve
+- name: consulta
   description: Operaciones de consulta
 - name: request
   description: Operaciones de solicitud de actualización
@@ -37,7 +37,7 @@ paths:
   /savings-accounts/{number}:
     get:
       tags:
-      - retrieve
+      - consulta
       summary: Consulta una cuenta de ahorros por el número de cuenta
       description: Retorna la información básica de la cuenta de ahorros.
       operationId: GetSavingsAccountByNumber
