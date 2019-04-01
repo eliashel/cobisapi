@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: COBIS API Transactional Savings Account
   description: 'Este es el API del sistema transaccional de cuentas de ahorros del
-    Core Banking System. Se encuentran definidos los servicios comunes para realizar
+    Core Banking System. Se encuentran definidos los servicios esenciales para realizar
     las operaciones transaccionales del producto de Cuentas de Ahorros, y permite
     gestionar las operaciones de cuentas de ahorros de un sistema financiero. Puedes
     conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com).'
