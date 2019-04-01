@@ -230,9 +230,8 @@ paths:
       tags:
       - transacciones
       summary: Realiza un depósito con o sin libreta a una cuenta de ahorros
-      description: Realiza un depósito a una cuenta de ahorros, indicando el número
-        de cuenta a la cual se desea depositar. El depósito puede hacerse con libreta
-        o sin ella.
+      description: Realiza un depósito a una cuenta de ahorros. El depósito puede
+        hacerse con libreta o sin ella.
       operationId: CreateSavingsAccountDeposit
       parameters:
       - name: X-Authorization
