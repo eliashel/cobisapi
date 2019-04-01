@@ -26,7 +26,6 @@ servers:
   description: Internal staging server for testing
 tags:
 - name: consulta
-  description: Operaciones de consulta
 - name: request
   description: Operaciones de solicitud de actualización
 - name: execute
