@@ -138,6 +138,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+              example:
+                code: "400"
+                message: El mensaje de solicitud no se encuentra debidamente formateado.
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -342,6 +345,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+              example:
+                code: "400"
+                message: El mensaje de solicitud no se encuentra debidamente formateado.
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -543,6 +549,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+              example:
+                code: "400"
+                message: El mensaje de solicitud no se encuentra debidamente formateado.
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -739,6 +748,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+              example:
+                code: "400"
+                message: El mensaje de solicitud no se encuentra debidamente formateado.
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -935,6 +947,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+              example:
+                code: "400"
+                message: El mensaje de solicitud no se encuentra debidamente formateado.
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -1131,6 +1146,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+              example:
+                code: "400"
+                message: El mensaje de solicitud no se encuentra debidamente formateado.
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -1336,6 +1354,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+              example:
+                code: "400"
+                message: El mensaje de solicitud no se encuentra debidamente formateado.
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -1488,6 +1509,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+              example:
+                code: "400"
+                message: El mensaje de solicitud no se encuentra debidamente formateado.
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -1648,6 +1672,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorMessage'
+              example:
+                code: "400"
+                message: El mensaje de solicitud no se encuentra debidamente formateado.
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -2317,6 +2344,9 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
+          example:
+            code: "400"
+            message: El mensaje de solicitud no se encuentra debidamente formateado.
     401Unauthorized:
       description: No se encuentra autorizado para ejecutar la operación.
       headers:
