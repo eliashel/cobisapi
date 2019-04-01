@@ -33,7 +33,7 @@ tags:
 - name: terminaciones
   description: Operaciones para el cierre
 paths:
-  /savings-accounts/{number}:
+  /savings-accounts/{code}:
     get:
       tags:
       - consultas
@@ -94,9 +94,9 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/ChannelCode'
-      - name: number
+      - name: code
         in: path
-        description: Número de cuenta de ahorros a consultar
+        description: Identificador interno único de cuenta de ahorros.
         required: true
         style: simple
         explode: false
