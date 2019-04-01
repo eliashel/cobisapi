@@ -39,7 +39,7 @@ paths:
       - consultas
       summary: Consulta una cuenta de ahorros por el número de cuenta
       description: Retorna la información básica de la cuenta de ahorros.
-      operationId: GetSavingsAccountByNumber
+      operationId: SavingsAccountGetByNumber
       parameters:
       - name: X-Authorization
         in: header
