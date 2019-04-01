@@ -139,6 +139,18 @@ paths:
                     lastName: Jefferson
                   name: THOMAS JEFFERSON
                   availableBalance: "600.00"
+        400:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -153,18 +165,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
         404:
           description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        400:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
             X-Correlation-ID:
               style: simple
@@ -319,6 +319,18 @@ paths:
                   name: THOMAS JEFFERSON
                   availableBalance: "1600.00"
                   dateOfLastMovement: 2019-03-14
+        400:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -333,18 +345,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
         404:
           description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        400:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
             X-Correlation-ID:
               style: simple
@@ -496,6 +496,18 @@ paths:
                     lastName: Jefferson
                   name: THOMAS JEFFERSON
                   availableBalance: "600.00"
+        400:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -510,18 +522,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
         404:
           description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        400:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
             X-Correlation-ID:
               style: simple
@@ -668,6 +668,18 @@ paths:
                     lastName: Jefferson
                   name: THOMAS JEFFERSON
                   availableBalance: "1300.00"
+        400:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -682,18 +694,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
         404:
           description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        400:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
             X-Correlation-ID:
               style: simple
@@ -840,6 +840,18 @@ paths:
                     lastName: Jefferson
                   name: THOMAS JEFFERSON
                   availableBalance: "1600.00"
+        400:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -854,18 +866,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
         404:
           description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        400:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
             X-Correlation-ID:
               style: simple
@@ -1012,6 +1012,18 @@ paths:
                     lastName: Jefferson
                   name: THOMAS JEFFERSON
                   availableBalance: "1600.00"
+        400:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -1026,18 +1038,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
         404:
           description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        400:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
             X-Correlation-ID:
               style: simple
@@ -1193,6 +1193,18 @@ paths:
                     name: Thomas
                     lastName: Jefferson
                   name: THOMAS JEFFERSON
+        400:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -1207,18 +1219,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
         404:
           description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        400:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
             X-Correlation-ID:
               style: simple
@@ -1321,6 +1321,18 @@ paths:
               explode: false
               schema:
                 $ref: '#/components/parameters/X-Correlation-ID'
+        400:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -1335,18 +1347,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
         404:
           description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        400:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
             X-Correlation-ID:
               style: simple
@@ -1457,6 +1457,18 @@ paths:
               explode: false
               schema:
                 $ref: '#/components/parameters/X-Correlation-ID'
+        400:
+          description: El mensaje de solicitud no se encuentra debidamente formateado.
+          headers:
+            X-Correlation-ID:
+              style: simple
+              explode: false
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
         401:
           description: No se encuentra autorizado para ejecutar la operación.
           headers:
@@ -1471,18 +1483,6 @@ paths:
                 $ref: '#/components/schemas/ErrorMessage'
         404:
           description: El objeto no fue encontrado.
-          headers:
-            X-Correlation-ID:
-              style: simple
-              explode: false
-              schema:
-                $ref: '#/components/parameters/X-Correlation-ID'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorMessage'
-        400:
-          description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
             X-Correlation-ID:
               style: simple
