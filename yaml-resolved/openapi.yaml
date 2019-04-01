@@ -57,6 +57,15 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/RequestID'
+      - name: X-Financial-ID
+        in: header
+        description: ID del banco o entidad financiera que provee el servicio de cuentas
+          de ahorros
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-EndUser-Login
         in: header
         description: Login de usuario en la aplicación de front-end que realiza la
@@ -242,6 +251,15 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/RequestID'
+      - name: X-Financial-ID
+        in: header
+        description: ID del banco o entidad financiera que provee el servicio de cuentas
+          de ahorros
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-EndUser-Login
         in: header
         description: Login de usuario en la aplicación de front-end que realiza la
@@ -464,6 +482,15 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/RequestID'
+      - name: X-Financial-ID
+        in: header
+        description: ID del banco o entidad financiera que provee el servicio de cuentas
+          de ahorros
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-EndUser-Login
         in: header
         description: Login de usuario en la aplicación de front-end que realiza la
@@ -682,6 +709,15 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/RequestID'
+      - name: X-Financial-ID
+        in: header
+        description: ID del banco o entidad financiera que provee el servicio de cuentas
+          de ahorros
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-EndUser-Login
         in: header
         description: Login de usuario en la aplicación de front-end que realiza la
@@ -896,6 +932,15 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/RequestID'
+      - name: X-Financial-ID
+        in: header
+        description: ID del banco o entidad financiera que provee el servicio de cuentas
+          de ahorros
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-EndUser-Login
         in: header
         description: Login de usuario en la aplicación de front-end que realiza la
@@ -1110,6 +1155,15 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/RequestID'
+      - name: X-Financial-ID
+        in: header
+        description: ID del banco o entidad financiera que provee el servicio de cuentas
+          de ahorros
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-EndUser-Login
         in: header
         description: Login de usuario en la aplicación de front-end que realiza la
@@ -1324,6 +1378,15 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/RequestID'
+      - name: X-Financial-ID
+        in: header
+        description: ID del banco o entidad financiera que provee el servicio de cuentas
+          de ahorros
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-EndUser-Login
         in: header
         description: Login de usuario en la aplicación de front-end que realiza la
@@ -1546,6 +1609,15 @@ paths:
         explode: false
         schema:
           $ref: '#/components/schemas/RequestID'
+      - name: X-Financial-ID
+        in: header
+        description: ID del banco o entidad financiera que provee el servicio de cuentas
+          de ahorros
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
       - name: X-EndUser-Login
         in: header
         description: Login de usuario en la aplicación de front-end que realiza la
