@@ -36,7 +36,7 @@ paths:
   /savings-accounts/{number}:
     get:
       tags:
-      - consulta
+      - consultas
       summary: Consulta una cuenta de ahorros por el número de cuenta
       description: Retorna la información básica de la cuenta de ahorros.
       operationId: GetSavingsAccountByNumber
