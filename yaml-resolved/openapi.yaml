@@ -1360,43 +1360,14 @@ paths:
                 secondaryTransactionId: 13395
                 branch:
                   code: 123
-                cashAmount: "300.00"
-                localChecksAmount: "200.00"
-                othersChecksAmount: "100.00"
                 totalAmount: "600.00"
                 currency:
                   code: 5
                   isoCode: USD
                 account:
                   number: "011201000019"
-                  status:
-                    code: A
-                  currency:
-                    code: 5
-                    isoCode: USD
-                  customer:
-                    identification:
-                      number: "123123123"
-                      type:
-                        code: CC
-                    name: Thomas
-                    lastName: Jefferson
-                  name: THOMAS JEFFERSON
                 destinationAccount:
                   number: "011303400453"
-                  status:
-                    code: A
-                  currency:
-                    code: 5
-                    isoCode: USD
-                  customer:
-                    identification:
-                      number: "987654321"
-                      type:
-                        code: CC
-                    name: Thomas
-                    lastName: Jefferson
-                  name: THOMAS JEFFERSON
         400:
           description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
