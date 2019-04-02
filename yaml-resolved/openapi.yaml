@@ -757,25 +757,6 @@ paths:
                   isoCode: USD
                 account:
                   number: "1234567890"
-                  status:
-                    code: A
-                  savingsBook:
-                    number: 1234
-                    controlNumber: 12
-                    line: 50
-                    balance: "1300.00"
-                  currency:
-                    code: 5
-                    isoCode: USD
-                  customer:
-                    identification:
-                      number: "123123123"
-                      type:
-                        code: CC
-                    name: Thomas
-                    lastName: Jefferson
-                  name: THOMAS JEFFERSON
-                  availableBalance: "1300.00"
         400:
           description: El mensaje de solicitud no se encuentra debidamente formateado.
           headers:
