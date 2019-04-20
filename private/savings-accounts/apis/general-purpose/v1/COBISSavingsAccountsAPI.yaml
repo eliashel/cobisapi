@@ -1,0 +1,2143 @@
+openapi: 3.0.0
+
+info:
+  title: COBIS API Cuentas de Ahorros Transaccional # COBIS API Transactional Savings Account
+  description: 'Este es el API del sistema transaccional de cuentas de ahorros del Core Banking System. Se encuentran definidos los servicios esenciales para realizar las operaciones transaccionales del producto de Cuentas de Ahorros, y permite gestionar las operaciones de cuentas de ahorros de un sistema financiero. Puedes conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com).' # TODO: Actualizar enlace al sitio del producto de cuentas de ahorros o mejor de APIs.
+  version: 1.0.0
+  termsOfService: http://cobiscorp.com/terms/cobisapi # TODO: Términos de servicio
+  contact:
+    name: COBIS Support Center
+    url: http://www.cobiscorp.com/contact-us/customer-technical-support/
+    email: support.center@cobiscorp.com
+  license:
+    name: Licencia COBIS API # TODO: Definir el tipo y nombre de la licencia. Condiciones de uso y Legal
+    url: http://www.cobiscorp.com/licenses/LICENSE-1.0.html # TODO: Publicar licencia.
+
+servers:
+# Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPITransactionalSavingsAccount/1.0.0
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICoreBanking/1.0.0
+  - url: http://cobisapi.cobiscorp.com/lastest
+    description: Main (production) server
+  - url: http://staging-cobisapi.cobiscorp.com
+    description: Internal staging server for testing
+
+##########################################################
+##                       FOR AWS                        ##
+##########################################################
+# Validación de solicitudes desde el API Gateway 
+#x-amazon-apigateway-request-validators: {
+#  all: {
+#     validateRequestBody: true,
+#     validateRequestParameters: true
+#  },
+#  params-only: {
+#     validateRequestBody: false,
+#     validateRequestParameters: true
+#  }
+#}
+# Por defecto valida todas las operaciones, tanto parámetros como cuerpo del mensaje.
+#x-amazon-apigateway-request-validator: "all"
+##########################################################
+
+
+tags:
+- name: consultas # retrieve
+  #description: 'Las operaciones que se listan a continuación permiten obtener información sobre el producto de cuentas de ahorros.'
+  # Puede inclurse más documentación
+  #externalDocs: 
+  #  description: 'Encuentre más información en'
+  #  url: http://www.cobiscorp.com/products/savings
+- name: solicitudes # request
+  description: 'Operaciones de solicitud de actualización'
+- name: transacciones # execute
+  description: 'Operaciones transaccionales'
+- name: terminaciones # terminate
+  description: 'Operaciones para el cierre'
+
+
+paths:
+  /savings-accounts/{number}:
+    get:
+      tags:
+      - consultas
+      summary: 'Consulta una cuenta de ahorros por el número de cuenta'
+      description: 'Retorna la información básica de la cuenta de ahorros.'
+      operationId: SavingsAccountsGetByNumber
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-Financial-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+        # BODY REQUEST
+        - name: number
+          in: path
+          required: true
+          #description: 'Identificador interno único de cuenta de ahorros.'
+          description: 'Número de cuenta de ahorros.'
+          schema:
+            $ref: '#/components/schemas/SavingsAccountNumber'
+      responses:
+        200:
+          description: 'Información de la cuenta de ahorros'
+          headers:
+            X-Correlation-ID:
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SavingsAccount'
+              example: # 
+                savingsAccount:
+                  code: 345353
+                  number: '011201000019'
+                  status: 'A'
+                  savingsBook:
+                    number: 1234
+                  #  controlNumber: 12
+                  #  balance: '600.00'
+                  #branch:
+                  #  code: 123
+                  currency:
+                    code: 5
+                    isoCode: 'USD'
+                  #openingDate: '2019-02-13'
+                  #customer:
+                  #  identification:
+                  #    number: '123123123'
+                  #    type:
+                  #      code: 'CC'
+                  #  name: 'Thomas'
+                  #  lastName: 'Jefferson'
+                  name: 'THOMAS JEFFERSON'
+                  #availableBalance: '600.00'
+
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403Forbidden'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        429:
+          $ref: '#/components/responses/429TooManyRequests'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+  
+  
+      
+  /savings-accounts/deposit:
+    post:
+      tags:
+        - transacciones
+      summary: 'Realiza un depósito con o sin libreta a una cuenta de ahorros'
+      description: 'Realiza un depósito a una cuenta de ahorros. El depósito puede hacerse con libreta o sin ella.'
+      operationId: SavingsAccountsDepositCreate
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-Financial-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar el déposito a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepositSavingsAccountRq'
+            example: # Depósito a cuenta de ahorros. 
+              savingsAccount:
+                number: '011201000019'
+                savingsBook:
+                  number: 1234
+                  controlNumber: 12
+                  balance: '1000.00'
+              transaction:
+                cashAmount: '300.00'
+                localChecksAmount: '200.00'
+                othersChecksAmount: '100.00'
+                totalAmount: '600.00'
+#            examples:
+#              DepositWithoutBook: 
+#                summary: Depósito sin libreta
+#                value:
+#                  savingsAccount:
+#                    number: '011201000019'
+#                  transaction:
+#                    cashAmount: '300.00'
+#                    localChecksAmount: '200.00'
+#                    othersChecksAmount: '100.00'
+#                    totalAmount: '600.00'
+#              DepositWithBook: 
+#                summary: Depósito con libreta
+#                value:
+#                  savingsAccount:
+#                    number: '011201000019'
+#                    savingsBook:
+#                      number: 1234
+#                      controlNumber: 12
+#                      balance: '1000.00'
+#                  transaction:
+#                    cashAmount: '300.00'
+#                    localChecksAmount: '200.00'
+#                    othersChecksAmount: '100.00'
+#                    totalAmount: '600.00'
+      responses:
+        201:
+          description: 'Se ha realizado la transacción exitosamente.'
+          headers:
+            X-Correlation-ID:
+              #description: 'ID que relaciona la respuesta con la solicitud. El valor de este campo debe coincidir con el valor X-Request-ID enviado en la solicitud.'
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+              example:
+                postingDate: '2019-02-13'
+                primaryTransactionId: 1521020
+                secondaryTransactionId: 13395
+                branch:
+                  code: 123
+                cashAmount: '300.00'
+                localChecksAmount: '200.00'
+                othersChecksAmount: '100.00'
+                totalAmount: '600.00'
+                currency:
+                  code: 5
+                  description: 'USD'
+                account:
+                  number: '011201000019'
+                #  status:
+                #    code: 'A'
+                #  savingsBook:
+                #    number: 1234
+                #    controlNumber: 12
+                #    line: 50
+                #    balance: '1600.00'
+                #  currency:
+                #    code: 5
+                #    description: 'USD'
+                #  customer:
+                #    identification:
+                #      number: '123123123'
+                #      type:
+                #        code: 'CC'
+                #    name: 'Thomas'
+                #    lastName: 'Jefferson'
+                #  name: 'THOMAS JEFFERSON'
+                #  availableBalance: '1600.00'
+                #  dateOfLastMovement: '2019-03-14'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403Forbidden'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        429:
+          $ref: '#/components/responses/429TooManyRequests'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+        
+  /savings-accounts/deposit/initial:
+    post:
+      tags:
+        - transacciones
+      summary: 'Realiza el depósito inicial de una cuenta de ahorros'
+      description: 'Realiza un depósito inicial a una cuenta de ahorros. El depósito debe hacerse con libreta, siendo este el primer movimiento.'
+      operationId: SavingsAccountsInitialDepositCreate
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-Financial-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar el déposito inicial a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitialDepositSavingsAccountRq'
+            example: # Depósito inicial a cuenta de ahorros. 
+              savingsAccount:
+                number: '011201000019'
+                savingsBook:
+                  number: 1234
+              transaction:
+                cashAmount: '300.00'
+                localChecksAmount: '200.00'
+                othersChecksAmount: '100.00'
+                totalAmount: '600.00'
+      responses:
+        201:
+          description: 'El depósito inicial se ha realizado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+              example:
+                postingDate: '2019-02-13'
+                primaryTransactionId: 1521020
+                secondaryTransactionId: 13395
+                branch:
+                  code: 123
+                cashAmount: '300.00'
+                localChecksAmount: '200.00'
+                othersChecksAmount: '100.00'
+                totalAmount: '600.00'
+                currency:
+                  code: 5
+                  isoCode: 'USD'
+                account:
+                  number: '011201000019'
+                #  status:
+                #    code: 'A'
+                #  savingsBook:
+                #    number: 1234
+                #    controlNumber: 432
+                #    line: 1
+                #    balance: '600.00'
+                #  currency:
+                #    code: 5
+                #    isoCode: 'USD'
+                #  customer:
+                #    identification:
+                #      number: '123123123'
+                #      type:
+                #        code: 'CC'
+                #    name: 'Thomas'
+                #    lastName: 'Jefferson'
+                #  name: 'THOMAS JEFFERSON'
+                #  availableBalance: '600.00'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403Forbidden'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        429:
+          $ref: '#/components/responses/429TooManyRequests'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+
+  /savings-accounts/withdraw:
+    post:
+      tags:
+        - transacciones
+      summary: 'Realiza un retiro en efectivo con o sin libreta de una cuenta de ahorros'
+      description: 'Realiza un retiro en efectivo con o sin libreta de una cuenta de ahorros determinada.'
+      operationId: SavingsAccountsWithdrawCreate
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-Financial-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar el retiro en efectivo de una cuenta de ahorros. Si el retiro es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WithdrawSavingsAccountRq'
+            example: # Retiro en efectivo de cuenta de ahorros. 
+              savingsAccount:
+                number: '011201000019'
+                savingsBook:
+                  number: 1234
+                  controlNumber: 12
+                  balance: '1000.00'
+              transaction:
+                cashAmount: '300.00' # TODO: Validar campo
+      responses:
+        201:
+          description: 'El retiro se ha realizado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+              example:
+                postingDate: '2019-02-13'
+                primaryTransactionId: 12345678
+                secondaryTransactionId: 13395
+                branch:
+                  code: 123
+                cashAmount: '300.00'
+                #localChecksAmount: '200.00'
+                #othersChecksAmount: '100.00'
+                #totalAmount: '600.00'
+                currency:
+                  code: 5
+                  isoCode: 'USD'
+                account:
+                  number: '1234567890'
+                #  status:
+                #    code: 'A'
+                #  savingsBook:
+                #    number: 1234
+                #    controlNumber: 12
+                #    line: 50
+                #    balance: '1300.00'
+                #  currency:
+                #    code: 5
+                #    isoCode: 'USD'
+                #  customer:
+                #    identification:
+                #      number: '123123123'
+                #      type:
+                #        code: 'CC'
+                #    name: 'Thomas'
+                #    lastName: 'Jefferson'
+                #  name: 'THOMAS JEFFERSON'
+                #  availableBalance: '1300.00'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403Forbidden'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        429:
+          $ref: '#/components/responses/429TooManyRequests'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+
+  /savings-accounts/debit-note:
+    post:
+      tags:
+        - transacciones
+      summary: 'Realiza una nota débito sin libreta a una cuenta de ahorros'
+      description: 'Realiza una nota débito a una cuenta de ahorros. Esta operación se realiza sin libreta de ahorros.'
+      operationId: SavingsAccountsDebitNoteCreate
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-Financial-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la nota débito a la cuenta de ahorros.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebitNoteSavingsAccountRq'
+            example: # TODO: Ajustar request. 
+              savingsAccount:
+                number: '011201000019'
+              transaction:
+                cause: '10' # COMISION GASTO CORRESPONSAL CHEQUE REMESA
+                indicator: 1 # Disponible
+                department: 1 # Operaciones
+                totalAmount: '600.00'
+                #description
+      responses:
+        201:
+          description: 'La nota débito se ha realizado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+              example:
+                postingDate: '2019-02-13'
+                primaryTransactionId: 1521020
+                secondaryTransactionId: 13395
+                branch:
+                  code: 123
+                cause: '10'
+                indicator: 1 
+                department: 1 
+                #cashAmount: '300.00'
+                #localChecksAmount: '200.00'
+                #othersChecksAmount: '100.00'
+                totalAmount: '600.00'
+                currency:
+                  code: 5
+                  isoCode: 'USD'
+                account:
+                  number: '1234567890'
+                #  status:
+                #    code: 'A'
+                #  savingsBook:
+                #    number: 1234
+                #    controlNumber: 12
+                #    line: 50
+                #    balance: '1600.00'
+                #  currency:
+                #    code: 5
+                #    isoCode: 'USD'
+                #  customer:
+                #    identification:
+                #      number: '123123123'
+                #      type:
+                #        code: 'CC'
+                #    name: 'Thomas'
+                #    lastName: 'Jefferson'
+                #  name: 'THOMAS JEFFERSON'
+                #  availableBalance: '1600.00'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403Forbidden'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        429:
+          $ref: '#/components/responses/429TooManyRequests'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+          
+  /savings-accounts/credit-note:
+    post:
+      tags:
+        - transacciones
+      summary: 'Realiza una nota crédito sin libreta a una cuenta de ahorros'
+      description: 'Realiza una nota crédito a una cuenta de ahorros. Esta operación se realiza sin libreta de ahorros.'
+      operationId: SavingsAccountsCreditNoteCreate
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-Financial-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la nota crédito a la cuenta de ahorros.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteSavingsAccountRq'
+            example: # TODO: Ajustar request. 
+              savingsAccount:
+                number: '011201000019'
+              transaction:
+                cause: '1' # Por ajuste
+                indicator: 1 # Disponible
+                departament: 1 # Operaciones
+                totalAmount: '600.00'
+                #description
+      responses:
+        201:
+          description: 'La nota crédito se ha realizado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+              example:
+                postingDate: '2019-02-13'
+                primaryTransactionId: 1521020
+                secondaryTransactionId: 13395
+                branch:
+                  code: 123
+                cause: '1' 
+                indicator: 1 
+                departament: 1 
+                #cashAmount: '300.00'
+                #localChecksAmount: '200.00'
+                #othersChecksAmount: '100.00'
+                totalAmount: '600.00'
+                currency:
+                  code: 5
+                  isoCode: 'USD'
+                account:
+                  number: '1234567890'
+                #  status:
+                #    code: 'A'
+                #  savingsBook:
+                #    number: 1234
+                #    controlNumber: 12
+                #    line: 50
+                #    balance: '1600.00'
+                #  currency:
+                #    code: 5
+                #    isoCode: 'USD'
+                #  customer:
+                #    identification:
+                #      number: '123123123'
+                #      type:
+                #        code: 'CC'
+                #    name: 'Thomas'
+                #    lastName: 'Jefferson'
+                #  name: 'THOMAS JEFFERSON'
+                #  availableBalance: '1600.00'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403Forbidden'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        429:
+          $ref: '#/components/responses/429TooManyRequests'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+
+  /savings-accounts/transfer:
+    post:
+      tags:
+        - transacciones
+      summary: 'Realiza una transferencia entre cuentas de ahorros.'
+      description: 'Realiza una transferencia a una cuenta de ahorros, indicando la cuenta origen, la cuenta destino.'
+      operationId: SavingsAccountsTransferCreate
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-Financial-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la transferencia entre las cuentas de ahorros.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferSavingsAccountRq'
+            example: # Transferencia de cuentas de ahorros. 
+              originSavingsAccount:
+                #type: "AHO"
+                number: '011201000019'
+              destinationSavingsAccount:
+                #type: "AHO"
+                number: '011303400453'
+              transaction:
+                totalAmount: '600.00'
+                transactionConcept: 'Transferencia para pago de servicios'
+      responses:
+        201:
+          description: 'Se ha realizado la transacción exitosamente.'
+          headers:
+            X-Correlation-ID:
+              #description: 'ID que relaciona la respuesta con la solicitud. El valor de este campo debe coincidir con el valor X-Request-ID enviado en la solicitud.'
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+              example:
+                postingDate: '2019-02-13'
+                primaryTransactionId: 1521020 
+                secondaryTransactionId: 13395
+                branch:
+                  code: 123
+                #cashAmount: '300.00'
+                #localChecksAmount: '200.00'
+                #othersChecksAmount: '100.00'
+                totalAmount: '600.00'
+                currency:
+                  code: 5
+                  isoCode: 'USD'
+                account:
+                  number: '011201000019'
+                #  status:
+                #    code: 'A'
+                #  currency:
+                #    code: 5
+                #    isoCode: 'USD'
+                #  customer:
+                #    identification:
+                #      number: '123123123'
+                #      type:
+                #        code: 'CC'
+                #    name: 'Thomas'
+                #    lastName: 'Jefferson'
+                #  name: 'THOMAS JEFFERSON'
+                destinationAccount:
+                  number: '011303400453'
+                #  status:
+                #    code: 'A'
+                #  currency:
+                #    code: 5
+                #    isoCode: 'USD'
+                #  customer:
+                #    identification:
+                #      number: '987654321'
+                #      type:
+                #        code: 'CC'
+                #    name: 'Thomas'
+                #    lastName: 'Jefferson'
+                #  name: 'THOMAS JEFFERSON'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403Forbidden'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        429:
+          $ref: '#/components/responses/429TooManyRequests'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+  
+
+#  /savings-accounts/book:
+#    put:
+#      tags:
+#        - solicitudes
+#      summary: 'Actualiza la libreta de una cuenta de ahorros.'
+#      description: 'Actualiza los datos de una libreta de una cuenta de ahorros.'
+#      operationId: SavingsAccountBookUpdate
+#      parameters:
+        # HEADER REQUEST
+#        - $ref: '#/components/parameters/X-Authorization'
+#        - $ref: '#/components/parameters/X-Request-ID'
+#        - $ref: '#/components/parameters/X-Financial-ID'
+#        - $ref: '#/components/parameters/X-EndUser-Login'
+#        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+#        - $ref: '#/components/parameters/X-EndUser-Terminal'
+#        - $ref: '#/components/parameters/X-Channel'
+#      #BODY REQUEST
+#      requestBody:
+#        description: 'Datos para actualizar la libreta de la cuenta de ahorros.'
+#        required: true
+#        content:
+#          application/json:
+#            schema: # TODO: Ajustar request
+#              type: object
+#              properties:
+#                savingsAccount:
+#                  $ref: '#/components/schemas/SavingsAccount'
+#            example: # Cerrar cuenta de ahorros. 
+#              number: '1234567890'
+#              savingsBook:
+#                number: 1234
+#                controlNumber: 12
+#                balance: '1000.00'
+#      responses:
+#        200:
+#          description: 'La libreta se ha actuailzado exitosamente.'
+#          headers:
+#            X-Correlation-ID:
+#              schema:
+#                $ref: '#/components/parameters/X-Correlation-ID'
+#        400:
+#          $ref: '#/components/responses/400BadRequest'
+#        401:
+#          $ref: '#/components/responses/401Unauthorized'
+#        403:
+#          $ref: '#/components/responses/403Forbidden'
+#        404:
+#          $ref: '#/components/responses/404NotFound'
+#        429:
+#          $ref: '#/components/responses/429TooManyRequests'
+#        500:
+#          $ref: '#/components/responses/500InternalServerError'
+
+  /savings-accounts/book/initizalization:
+    put:
+      tags:
+        - solicitudes
+      summary: 'Personifica la libreta de una cuenta de ahorros.'
+      description: 'Personifica la libreta de una cuenta de ahorros.'
+      operationId: SavingsAccountsIniBookUpdate
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-Financial-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+      #BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la personificación de la libreta de la cuenta de ahorros.'
+        required: true
+        content:
+          application/json:
+            schema: # TODO: Ajustar request, incluir ejemplos
+              $ref: '#/components/schemas/InitialDepositSavingsAccountRq'
+            example:
+              savingsAccount:
+                number: '011201000019'
+      responses:
+        200:
+          description: 'La solicitud se ha ejecutado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403Forbidden'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        429:
+          $ref: '#/components/responses/429TooManyRequests'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+
+#  /savings-accounts/book/balance: # TODO: Validar descripciones de la operación, ya que la impresión la hace directamente el front-end.
+#    put:
+#      tags:
+#        - solicitudes
+#      summary: 'Imprime el saldo en la libreta de una cuenta de ahorros.'
+#      description: 'Imprime el saldo en la libreta de una cuenta de ahorros.'
+#      operationId: SavingsAccountsBalanceBookUpdate
+#      parameters:
+#        # HEADER REQUEST
+#        - $ref: '#/components/parameters/X-Authorization'
+#        - $ref: '#/components/parameters/X-Request-ID'
+#        - $ref: '#/components/parameters/X-Financial-ID'
+#        - $ref: '#/components/parameters/X-EndUser-Login'
+#        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+#        - $ref: '#/components/parameters/X-EndUser-Terminal'
+#        - $ref: '#/components/parameters/X-Channel'
+#      #BODY REQUEST
+#      requestBody:
+#        description: 'Datos para realizar la impresión del saldo en la libreta de la cuenta de ahorros.'
+#        required: true
+#        content:
+#          application/json:
+#            schema: # TODO: Ajustar request
+#              type: object
+#              properties:
+#                savingsAccount:
+#                  $ref: '#/components/schemas/SavingsAccount'
+#            example: # Impresión del saldo de la libreta. 
+#              number: '1234567890'
+#              savingsBook:
+#                number: 1234
+#      responses:
+#        200:
+#          description: 'Se han enviado los datos para la impresión del saldo en la libreta exitosamente.'
+#          headers:
+#            X-Correlation-ID:
+#              schema:
+#                $ref: '#/components/parameters/X-Correlation-ID'
+#        400:
+#          $ref: '#/components/responses/400BadRequest'
+#        403:
+#          $ref: '#/components/responses/403Forbidden'
+#        404:
+#          $ref: '#/components/responses/404NotFound'
+#        429:
+#          $ref: '#/components/responses/429TooManyRequests'
+#        404:
+#          $ref: '#/components/responses/404NotFound'
+#        500:
+#          $ref: '#/components/responses/500InternalServerError'
+
+
+  /savings-accounts/close:
+    delete:
+      tags:
+        - terminaciones
+      summary: 'Cancela una cuenta de ahorros.'
+      description: 'Cierra y cancela una cuenta de ahorros.'
+      operationId: SavingsAccountsClose
+      parameters:
+        # HEADER REQUEST
+        - $ref: '#/components/parameters/X-Authorization'
+        - $ref: '#/components/parameters/X-Request-ID'
+        - $ref: '#/components/parameters/X-Financial-ID'
+        - $ref: '#/components/parameters/X-EndUser-Login'
+        - $ref: '#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: '#/components/parameters/X-EndUser-Terminal'
+        - $ref: '#/components/parameters/X-Channel'
+      #BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar el cierre de la cuenta de ahorros.'
+        required: true
+        content:
+          application/json:
+            schema: # TODO: Ajustar request
+              $ref: '#/components/schemas/CloseSavingsAccountRq'
+            example: # Cerrar cuenta de ahorros.
+              savingsAccount:
+                number: '1234567890'
+                savingsBook:
+                  number: 1234
+                  controlNumber: 12
+                  balance: '1000.00'
+              detailToCloseSavingsAccount:
+                finalWithdraw: '1000.00'
+                #causeOfClosure: Solo se requiere el detalle, por usabilidad.
+                detailedCauseOfClosure:
+                  code: 1 # Detalle, para algún CauseOfClosure, ej: 1 (Decisión del cliente)
+                # TODO: Validar autorizante
+      responses:
+        200:
+          description: 'La solicitud se ha ejecutado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              schema:
+                $ref: '#/components/parameters/X-Correlation-ID'
+        400:
+          $ref: '#/components/responses/400BadRequest'
+        401:
+          $ref: '#/components/responses/401Unauthorized'
+        403:
+          $ref: '#/components/responses/403Forbidden'
+        404:
+          $ref: '#/components/responses/404NotFound'
+        429:
+          $ref: '#/components/responses/429TooManyRequests'
+        500:
+          $ref: '#/components/responses/500InternalServerError'
+
+
+#externalDocs:
+#  description: 'Encuentra más información acerca de Cobiscorp en http://www.cobiscorp.com'
+#  url: 'http://www.cobiscorp.com'
+
+components:
+  ####################################################################
+  # Reusable path, query, header and cookie parameters
+  ####################################################################
+  parameters:
+    #############################
+    # REQUEST HEADER PARAMETERS #
+    #############################
+    X-Authorization:
+      name: X-Authorization
+      description: 'JSON Web Token (JWT) entregado al usuario en la autenticación'
+      in: header
+      schema:
+        type: string
+      required: true
+    X-Request-ID:
+      name: X-Request-ID
+      description: 'Identificación única de la solicitud o petición'
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestID'
+      required: true
+    X-Financial-ID:
+      name: X-Financial-ID
+      description: 'ID del banco o entidad financiera que provee el servicio de cuentas de ahorros'
+      in: header
+      schema: 
+        type: string
+      required: false
+    X-EndUser-Login:
+      name: X-EndUser-Login
+      description: 'Login de usuario en la aplicación de front-end que realiza la petición'
+      in: header
+      schema: 
+        type: string
+      required: false
+    X-EndUser-RequestDateTime:
+      name: X-EndUser-RequestDateTime
+      description: 'Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end'
+      in: header
+      schema:
+        type: string
+        format: date-time
+      required: false
+    X-EndUser-Terminal:
+      name: X-EndUser-Terminal
+      description: 'Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end'
+      in: header
+      schema:
+        type: string
+      required: false
+    X-Channel:
+      name: X-Channel
+      description: 'Canal desde el cual se origina la solicitud'
+      in: header
+      schema:
+        $ref: '#/components/schemas/ChannelCode'
+      required: false
+    ##############################
+    # RESPONSE HEADER PARAMETERS #
+    ##############################
+    X-Correlation-ID:
+      name: X-Correlation-ID
+      description: 'ID que relaciona la respuesta con la solicitud. El valor de este campo debe coincidir con el valor X-Request-ID enviado en la solicitud.'
+      in: header
+      schema:
+        $ref: '#/components/schemas/RequestID'
+    
+    #############################
+    # REQUEST QUERY PARAMETERS #
+    #############################
+    pagingLimitSize:
+      name: pagingLimitSize
+      description: 'Tamaño límite de paginación para una consulta que retorne una lista de elementos.'
+      in: query
+      schema:
+        $ref: '#/components/schemas/PagingLimitSize'
+      required: false
+    pagingOffset:
+      name: pagingOffset
+      description: 'Número del registro desde el cual, a partir del siguiente se inicia el siguiente conjunto de resultados de la página.'
+      in: query
+      schema:
+        $ref: '#/components/schemas/PagingOffset'
+      required: false
+      
+
+        
+  ####################################################################
+  # Security scheme definitions (see Authentication)
+  ####################################################################
+  #securitySchemes:
+  #  cobiscbs_auth:
+  #    type: oauth2
+  #    flows:
+  #      implicit:
+  #        authorizationUrl: 'http://cobisapi.cobiscorp.com/oauth/dialog'
+  #        scopes:
+  #          'write:savings-accounts': 'Modificar y eliminar cuentas de ahorros'
+  #          'read:savints-accounts': 'Consultar información de cuentas de ahorros'
+  #          
+  #  api_key:
+  #    type: apiKey
+  #    name: api_key # TODO: Revisar implementación y concordancia con el header X-Authorization de cada servicio.
+  #    in: header
+  
+  ####################################################################
+  # Reusable request bodies
+  ####################################################################
+  #requestBodies:
+  #  DepositSavingsAccountRq:
+  #    description: 'Solicitud de depósito de cuenta de ahorros.'
+  #    required: true
+  #    content:
+  #      application/json:
+  #        schema:
+  #          type: object
+  #          properties:
+  #            savingsAccount:
+  #              $ref: '#/components/schemas/SavingsAccount'
+  #            transaction:
+  #              $ref: '#/components/schemas/Transaction'
+  
+  ####################################################################
+  # Reusable responses, such as 401 Unauthorized or 400 Bad Request
+  ####################################################################
+  responses:
+    400BadRequest:
+      description: 'El mensaje de solicitud no se encuentra debidamente formateado.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            code: '400'
+            message: 'El mensaje de solicitud no se encuentra debidamente formateado.'
+    401Unauthorized:
+      description: 'No se encuentra autorizado para ejecutar la operación.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            code: '401'
+            message: 'No se encuentra autorizado para ejecutar la operación.'
+    403Forbidden:
+      description: 'La solicitud ha sido denegada.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            code: '403'
+            message: 'La solicitud ha sido denegada.'
+    404NotFound:
+      description: 'El objeto no fue encontrado.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            code: '404'
+            message: 'El objeto no fue encontrado.'
+    429TooManyRequests:
+      description: 'Se ha realizado la solicitud más de una vez.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            code: '429'
+            message: 'Se ha realizado la solicitud más de una vez.'
+    500InternalServerError:
+      description: 'Se presentó un error durante el procesamiento de la solicitud.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            code: '500'
+            message: 'Se presentó un error durante el procesamiento de la solicitud.'
+    502BadGateway:
+      description: 'Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+          example:
+            code: '502'
+            message: 'Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud.'
+    503ServiceUnavailable:
+      description: 'El servicio no se encuentra disponible en el momento.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+    504GatewayTimeout:
+      description: 'El servicio proxy no respondió en el tiempo para procesar la solicitud.'
+      headers:
+        X-Correlation-ID:
+          schema:
+            $ref: '#/components/parameters/X-Correlation-ID'
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorMessage'
+  
+  ####################################################################
+  # Reusable response headers
+  ####################################################################
+  #headers:
+  
+  ####################################################################
+  # Reusable examples
+  ####################################################################
+  #examples:
+  
+  ####################################################################
+  # Reusable links
+  ####################################################################
+  #links:
+  
+  ####################################################################
+  # Reusable callbacks
+  ####################################################################
+  #callbacks:
+  
+  ####################################################################
+  # Reusable schemas (data models)
+  ####################################################################
+  schemas:
+    #########################
+    #    COMPLEX REQUEST    #
+    #########################
+    CreditNoteSavingsAccountRq: # REQUEST FOR:/credit-note
+      description: 'Depósito de cuenta de ahorros' 
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+    
+    CloseSavingsAccountRq: # REQUEST FOR:/close
+      description: 'Cierre de cuenta de ahorros' 
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        detailToCloseSavingsAccount:
+          $ref: '#/components/schemas/ClosedSavingsAccount'
+    
+    DepositSavingsAccountRq: # REQUEST FOR:/deposit
+      description: 'Depósito de cuenta de ahorros' 
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+    
+    DebitNoteSavingsAccountRq: # REQUEST FOR:/debit-note
+      description: 'Depósito de cuenta de ahorros' 
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+    
+    InitialDepositSavingsAccountRq: # REQUEST FOR:/deposit/initial
+      description: 'Depósito inicial de cuenta de ahorros' 
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+    
+    TransferSavingsAccountRq: # REQUEST FOR:/transfer
+      description: 'Depósito de cuenta de ahorros' 
+      type: object
+      properties:
+        originSavingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        destinationSavingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+    
+    WithdrawSavingsAccountRq: # REQUEST FOR:/withdraw
+      description: 'Depósito inicial de cuenta de ahorros' 
+      type: object
+      properties:
+        savingsAccount:
+          $ref: '#/components/schemas/SavingsAccount'
+        transaction:
+          $ref: '#/components/schemas/Transaction'
+    
+    #########################
+    #  COBIS SAVINGS MODEL  #
+    #########################
+    # OBJECTS
+    SavingsAccount: # table:ah_cuenta
+      description: 'Cuenta de ahorros' 
+      type: object
+      properties:
+        code: # field:ah_cuenta
+          description: 'Código interno de la cuenta de ahorros' # field:ah_cuenta
+          type: integer
+          format: int32
+          minimum: 1
+        number: # field:ah_cta_banco
+          $ref: '#/components/schemas/SavingsAccountNumber'
+        status: # field:ah_estado
+        #  $ref: '#/components/schemas/SavingsAccountStatus'
+          #SavingsAccountStatusCode: # cobis..cl_catalogo[table:ah_estado_cta] # TODO: No existe en la base
+          description: >
+            'Estado de cuenta de ahorros'
+              * A: ACTIVA
+              * C: CANCELADA
+              * G: INGRESADA
+              * I: INACTIVA
+              * N: NO PERFECCIONADA
+              * T: TRASLADADA-INACTIVA
+              * X: TRASLADADA-CANCELADA
+          type: string
+          enum: [A, C, G, I, N, T, X]
+        #ah_control: OK # savingsBook.controlNumber
+        savingsBook:
+            $ref: '#/components/schemas/SavingsBook'
+        subsidiary: # field:ah_filial -> cobis..cl_filial
+          $ref: '#/components/schemas/Subsidiary'
+        branch: # field:ah_oficina
+          $ref: '#/components/schemas/Branch'
+        #product: # field:ah_producto
+        #  $ref: '#/components/schemas/Product'
+        #type: # field:ah_tipo
+        #  $ref: '#/components/schemas/XXX'
+        currency: # field:ah_moneda
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          description: 'Fecha de apertura de la cuenta'
+          type: string
+          format: date
+        #ah_oficial
+        customer: # field:ah_cliente
+          $ref: '#/components/schemas/Customer'
+        #ah_ced_ruc
+        name: # field:ah_nombre
+          description: 'Nombre de la cuenta'
+          type: string
+          minLength: 1
+          maxLength: 60
+        #ah_categoria # cobis..cl_catalogo[table:ah_categoria]
+        #ah_tipo_promedio # cobis..cl_catalogo[table:ah_tpromedio]
+        #ah_capitalizacion # cobis..cl_catalogo[table:ah_capitalizacion]
+        #ah_ciclo # cobis..cl_catalogo[table:ah_ciclo]
+        #suspenceCount: #field:ah_suspensos
+        #  description: 'Cantidad de suspensos'
+        #  type: number
+        #  format: int32
+        #  minimum: 0
+        #  maximum: 32767
+        #ah_bloqueos
+        #ah_condiciones
+        #ah_monto_bloq
+        #ah_num_blqmonto
+        #ah_cred_24
+        #ah_cred_rem
+        #ah_tipo_def
+        #ah_default
+        #ah_rol_ente # cobis..cl_catalogo[table:cl_rol]
+        availableBalance: #field:ah_disponible
+          #description: 'Saldo disponible en la cuenta'
+          $ref: '#/components/schemas/Amount'
+        #ah_12h
+        #ah_12h_dif
+        #ah_24h
+        #ah_48h
+        #ah_remesas
+        #ah_rem_hoy
+        #ah_interes
+        #ah_interes_ganado
+        #ah_saldo_libreta # SavingsBook.balance
+        #ah_saldo_interes: # field:ah_saldo_interes
+        #  description: 'Intereses la cuenta' # TODO: Ajustar descripción
+        #  type: 
+        #    $ref: '#/components/schemas/Amount'
+        #ah_saldo_anterior
+        #ah_saldo_ult_corte
+        #  description: 'Saldo de último corte'
+        #    type: 
+        #      $ref: '#/components/schemas/Amount'
+        #ah_saldo_ayer
+        #ah_creditos
+        #ah_debitos
+        #ah_creditos_hoy
+        #ah_debitos_hoy
+        dateOfLastMovement: # field:ah_fecha_ult_mov
+          description: 'Fecha de último movimiento de la cuenta'
+          type: string
+          format: date
+        dateOfLastInternalMovement: #field:ah_fecha_ult_mov_int
+          description: 'Fecha de último movimiento interno de la cuenta'
+          type: string
+          format: date
+        dateOfLastUpdated: #field:ah_fecha_ult_upd
+          description: 'Fecha de última actualización de la cuenta'
+          type: string
+          format: date
+        #ah_fecha_prx_corte
+        #ah_fecha_ult_corte
+        #ah_fecha_ult_capi
+        #ah_fecha_prx_capita
+        #ah_linea # SavingsBook.line
+        #ah_ult_linea # no se usa
+        #ah_cliente_ec
+        #ah_direccion_ec
+        #ah_descripcion_ec
+        #ah_tipo_dir
+        #ah_agen_ec
+        #ah_parroquia
+        #ah_zona
+        #ah_prom_disponible
+        #ah_promedio1
+        #ah_promedio2
+        #ah_promedio3
+        #ah_promedio4
+        #ah_promedio5
+        #ah_promedio6
+        #ah_personalizada
+        #ah_contador_trx
+        #ah_cta_funcionario
+        #ah_tipocta
+        #ah_prod_banc
+        #ah_origen
+        #ah_numlib # SavingsBook.number
+        #ah_dep_ini
+        #ah_contador_firma
+        #ah_telefono
+        #ah_int_hoy
+        #ah_tasa_hoy
+        #ah_min_dispmes
+        #ah_fecha_ult_ret
+        #ah_cliente1
+        #ah_nombre1
+        #ah_cedruc1
+        #ah_sector
+        #ah_monto_imp
+        #ah_monto_consumos
+        #ah_ctitularidad # cobis..cl_catalogo[table:ah_titularidad]
+        #ah_promotor # cobis..cl_catalogo[table:ah_promotor]
+        #ah_int_mes
+        #ah_tipocta_super
+        #ah_direccion_dv
+        #ah_descripcion_dv
+        #ah_tipodir_dv
+        #ah_parroquia_dv
+        #ah_zona_dv
+        #ah_agen_dv # cobis..cl_agencia
+        #ah_cliente_dv # cobis..cl_direccion
+        #ah_traslado
+        #ah_aplica_tasacorp
+        #ah_monto_emb
+        #ah_monto_ult_capi
+        #ah_saldo_mantval
+        #ah_cuota
+        #ah_creditos2
+        #ah_creditos3
+        #ah_creditos4
+        #ah_creditos5
+        #ah_creditos6
+        #ah_debitos2
+        #ah_debitos3
+        #ah_debitos4
+        #ah_debitos5
+        #ah_debitos6
+        #ah_tasa_ayer
+        #ah_estado_cuenta
+        #ah_permite_sldcero
+        #ah_rem_ayer
+        #ah_numsol
+        #ah_patente
+        #ah_fideicomiso
+        #ah_nxmil
+        #ah_clase_clte
+        #ah_deb_mes_ant
+        #ah_cred_mes_ant
+        #ah_num_deb_mes
+        #ah_num_cred_mes
+        #ah_num_con_mes
+        #ah_num_deb_mes_ant
+        #ah_num_cred_mes_ant
+        #ah_num_con_mes_ant
+        #ah_fecha_ult_proceso
+    
+    ClosedSavingsAccount: # table:ah_cierre
+      description: 'Cuenta de ahorros cerrada' 
+      type: object
+      properties:
+        code: # field:ah_cuenta
+          description: 'Código interno de la cuenta de ahorros' # field:ah_cuenta
+          type: integer
+          minimum: 1
+          maximum: 9999
+        number: # field:ah_cta_banco
+          $ref: '#/components/schemas/SavingsAccountNumber'
+        primaryTransactionId: # field:secuencial
+          description: 'Número de secuencial de transacción'
+          type: number
+          format: int32
+        #tipo_tran
+        branch: #oficina
+          $ref: '#/components/schemas/Branch'
+        #usuario
+        #terminal
+        #correccion
+        #sec_correccion
+        #reentry
+        #origen
+        #nodo
+        postingDate:  #field:fecha
+          description: 'Fecha de proceso de la transacción'
+          type: string
+          format: date
+        account: 
+          $ref: '#/components/schemas/SavingsAccount' # #field:cta_banco
+        finalWithdraw: # field:ret_efe # Retiro final
+          $ref: '#/components/schemas/Amount'
+        #ret_chq
+        #remoto_ssn
+        currency: #moneda
+          $ref: '#/components/schemas/Currency'
+        #control
+        #saldo_lib
+        #signo
+        #alterno
+        #saldocont
+        #saldodisp
+        #saldoint
+        #impuesto
+        #multa
+        #oficina_cta
+        #hora
+        #estado
+        #prod_banc
+        #categoria
+        #monto_imp
+        #tipo_exoneracion
+        #ssn_branch
+        #tipocta_super
+        #turno
+        #forma_pago
+        #cheque
+        #ctadestino
+        #serial
+        #canal
+        #cliente
+        #indicador
+        #base_gmf
+        #clase_clte
+        causeOfClosure: # field:causa, cobis..cl_catalogo[table:1300:ah_causa_cierre]
+          description: 'Causa de cierre de una cuenta de ahorros. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: object
+          properties:
+            code:
+              description: 'Código de causal de cierre de cuenta.'
+              type: number
+              format: int32
+              minimum: 1
+            description:
+              $ref: '#/components/schemas/CatalogDescription'
+            #status:
+            #  $ref: '#/components/schemas/CatalogStatus'
+        detailedCauseOfClosure: # field:causa, cobis..cl_catalogo[table:545:ah_causa_cierre_det]
+          description: 'Detalle de la causa de cierre de una cuenta de ahorros. La lista de causales detalladas depende de la causa de cierre (causeOfClosure).  Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: object
+          properties:
+            code:
+              description: 'Código de causal de cierre de cuenta.'
+              type: number
+              format: int32
+              minimum: 1
+            description:
+              $ref: '#/components/schemas/CatalogDescription'
+            #status:
+            #  $ref: '#/components/schemas/CatalogStatus'
+    
+    # REFERENCES & CATALOGS
+    #SavingsAccountStatus: # No tiene tabla asignada.
+    #  description: >
+    #    'Estado de cuenta de ahorros'
+    #      * A: Activa
+    #      * G: Aperturada (pendiente primer depósito)
+    #      * I: Inactiva
+    #      * C: Cancelada
+    #  type: object
+    #  properties:
+    #    code:
+    #      $ref: '#/components/schemas/SavingsAccountStatusCode'
+    #    description:
+    #      $ref: '#/components/schemas/CatalogDescription'
+    #    status:
+    #      $ref: '#/components/schemas/CatalogStatus'
+    
+    
+    
+    # KEY ELEMENTS
+    SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
+      description: 'Número de cuena de ahorros'
+      type: string
+      #pattern: '[0-9]*'
+      minLength: 5
+      maxLength: 16
+    
+    SavingsBook: # table:ah_cuenta (virtual)
+      description: 'Libreta de cuenta de ahorros'
+      properties:
+        number: # field:ah_numlib
+          description: 'Número de la libreta de ahorros'
+          type: number
+          format: int32
+        controlNumber: # field:ah_control
+          description: 'Número de control de la libreta'
+          type: number
+          format: int32
+        line: # field:ah_linea
+          description: 'Número de lineas impresas en la libreta'
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 32767
+        balance: # fiield:ah_saldo_libreta
+          $ref: '#/components/schemas/Amount'
+         
+    
+    Transaction: # table:ah_tran_monet
+      description: 'Transacción de una cuenta de ahorros'
+      type: object
+      properties:
+        postingDate:  #field:tm_fecha
+          description: 'Fecha de proceso de la transacción'
+          type: string
+          format: date
+        primaryTransactionId: # field:tm_secuencial
+          description: 'Número de secuencial de transacción'
+          type: number
+          format: int32
+        #tm_ssn_branch
+        secondaryTransactionId: #field:tm_cod_alterno
+          description: 'Número de alterno de secuencial de transacción'
+          type: number
+          format: int32
+        #transactionCode: #tm_tipo_tran,  table:cl_ttrasaccion 
+        #finantialInstitution: #tm_filial table:cl_filial
+        branch: #tm_oficina
+          $ref: '#/components/schemas/Branch'
+        #tm_usuario
+        #tm_terminal
+        #tm_corre ccion # boolean
+        #tm_sec_correccion
+        #tm_origen
+        #tm_nodo
+        #tm_reentry
+        #tm_signo
+        #tm_fecha_ult_mov
+        cashAmount: # field:tm_efectivo
+          $ref: '#/components/schemas/Amount'
+        ownChecksAmount: # field:tm_chq_propios
+          $ref: '#/components/schemas/Amount'
+        localChecksAmount: # field:tm_chq_locales
+          $ref: '#/components/schemas/Amount'
+        othersChecksAmount: # field: tm_chq_ot_plazas
+          $ref: '#/components/schemas/Amount'
+        totalAmount: # field: tm_valor
+          $ref: '#/components/schemas/Amount'
+        #tm_remoto_ssn
+        currency: #tm_moneda
+          $ref: '#/components/schemas/Currency'
+        indicator: # field:tm_indicador, cobis..cl_catalogo[table:1787:ah_tipo_indicador] 
+          description: 'Indica el tipo de saldo que se afecta con la nota. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: object
+          properties:
+            code:
+              description: 'Código del tipo de indicador.'
+              type: number
+              format: int32
+              minimum: 1
+              maximum: 255
+            description:
+              $ref: '#/components/schemas/CatalogDescription'
+        cause: # field:tm_causa, cobis..cl_catalogo[table:1289:ah_causa_nc: cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
+          description: 'Razón por la cual se hace el ajuste para una nota débito o una nota crédito, ayudando a generar una contabilidad espeficica. Según el tipo de transacción, este campo puede ser diligenciado con diferentes listas. Para una transacción de nota crédito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nc](http://www.cobiscorp.com/api/catlogo#ah_causa_nc). Para una transacción de nota débito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nd](http://www.cobiscorp.com/api/catlogo#ah_causa_nd)' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: object
+          properties:
+            code:
+              description: 'Código del causal de la nota crédito.'
+              type: string
+              minLength: 1
+              maxLength: 3
+            description:
+              $ref: '#/components/schemas/CatalogDescription'
+        department: # field:tm_departamento
+          $ref: '#/components/schemas/Department'
+        #tm_saldo_lib
+        #tm_saldo_contable
+        #tm_saldo_disponible
+        #tm_saldo_interes
+        #tm_fecha_efec
+        #tm_interes
+        #tm_control
+        account: 
+          $ref: '#/components/schemas/SavingsAccount' # #field:tm_cta_banco
+        destinationAccount: #tm_ctadestino # banco destino
+          $ref: '#/components/schemas/SavingsAccount'
+        #tm_tipo_xfer
+        #tm_estado
+        transactionConcept: #tm_concepto
+          description: 'Descripcón del concepto de la transacción'
+          type: string
+          maxLength: 40
+        #tm_oficina_cta # oficina en la que fue creada la cuenta 
+        #timestamp: #tm_hora
+        #tm_banco
+        #tm_valor_comision
+        #tm_prod_banc
+        #tm_categoria
+        #tm_monto_imp
+        #tm_tipo_exonerado_imp
+        #tm_serial
+        #tm_tipocta_super
+        #tm_turno
+        #tm_cheque
+        #tm_forma_pg
+        # canal de la transacción #tm_canal #TODO
+        #tm_stand_in
+        #tm_doc_propios
+        #tm_factor
+        #tm_cotizacion
+        #tm_valor_convertido
+        #tm_moneda_destino
+        #tm_idcaja
+        #tm_val_conv_prop
+        #tm_val_conv_loc
+        #tm_interes_cte
+        #tm_interes_emb
+        #tm_interes_bloq
+        #tm_ref_canal
+    
+    
+    #################################
+    # COBIS CUSTOMERS MODEL #
+    #################################
+    # OBJECTS
+    Customer: # TODO: Revisar implementación, definir persona natural y jurídica.
+      description: 'Cliente o prospecto de cliente que está interesado en adquirir un producto financiero'
+      properties:
+        code:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 9999999999
+        identification:
+          $ref: '#/components/schemas/Identification'
+        name:
+          type: string
+          minLength: 1
+          maxLength: 1
+        lastName:
+          type: string
+          minLength: 3
+          maxLength: 30
+        status:
+          type: string
+          minLength: 1
+          maxLength: 1
+    
+    
+    
+    #################################
+    # COBIS ADMIN MODEL #
+    #################################
+    # OBJECTS
+    Branch: # table:cl_oficina
+      description: 'Oficina'
+      properties:
+        code: # field:of_oficina
+          type: integer
+          minimum: 1
+          maximum: 32767
+        name: # field:of_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+    
+    #City: # TODO: Revisar implementación
+    #  description: 'Cuidad'
+    #  properties:
+    #    code:
+    #      type: string
+    #      minimum: 2
+    #      maximum: 10
+    #    name:
+    #      type: string
+    #      minLength: 3
+    #      maxLength: 30
+    #    status:
+    #      type: string
+    #      minLength: 1
+    #      maxLength: 1
+    
+    Country: # table:cl_pais
+      description: 'Pais'
+      properties:
+        code: # field:pa_pais
+          type: number
+          format: int32
+          minimum: 1
+        name: # field:pa_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
+        isoCode: # field:pa_abreviatura
+          type: string
+          minLength: 1
+          maxLength: 3
+        # pa_continente
+        # pa_nacionalidad
+        status: # field:pa_estado
+          type: string
+          minLength: 1
+          maxLength: 1
+    
+    Currency: # table:cl_moneda
+      description: 'Moneda'
+      properties:
+        code: # field:mo_moneda
+          type: integer
+          minimum: 1
+          maximum: 32767
+        description: # field:mo_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
+        isoCode: # field:mo_nemonico
+          type: string
+          minLength: 3
+          maxLength: 3
+        symbol: # field:mo_simbolo
+          type: string
+          minLength: 1
+          maxLength: 5
+        country: # field:mo_pais
+          $ref: '#/components/schemas/Country'
+        # mo_decimales
+        status: # field:mo_estado TODO: Validar catálogo cobis..cl_estado_ser??
+          description: >
+            'Tipo de identificación de una persona natural o jurídica'
+              * V: Vigente
+              * B: Bloqueado
+              * E: Eliminado 
+          type: string
+          enum: [V,B,E]
+          minLength: 1
+          maxLength: 1
+    
+    Department: # table: cobis..cl_departamento
+      description: 'Departamento de la organización.'
+      properties:
+        code: # field:de_departamento
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 32767
+        name: # field:de_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
+        subsidiary: # field:de_filial -> cobis..cl_filial
+          $ref: '#/components/schemas/Subsidiary'
+        branch: # field:de_oficina
+          $ref: '#/components/schemas/Branch'
+        #de_o_oficina
+        #de_o_departamento
+        #de_nivel
+    
+    Official:
+      description: 'Funcionario o responsable de un usuario del sistema.'
+      properties:
+        code: # field:fu_funcionario
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 32767
+        name: # field:fu_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+        Gender: # field:fu_sexo
+          $ref: '#/components/schemas/Gender'
+        # fu_dinero
+        # fu_nomina
+        # fu_departamento
+        branch: # field:fu_oficina
+          $ref: '#/components/schemas/Branch'
+        # fu_cargo
+        # fu_secuencial
+        # fu_jefe
+        # fu_nivel
+        creationDate: # field:fu_fecha_ing
+          type: string
+          format: date
+        user: # field:us_login -> cobis..ad_usuario
+          $ref: '#/components/schemas/UserLogin'
+        # fu_telefono
+        # fu_fec_inicio
+        # fu_fec_final
+        # fu_clave
+        # fu_estado
+        # fu_offset
+        identification: #fu_cedruc -> 
+          $ref: '#/components/schemas/Identification'
+        # fu_causa_bloqueo
+        # fu_fecha_cargo
+    
+    User: # table:ad_usuario
+      description: 'Usuario'
+      properties:
+        subsidiary: # field:us_filial
+          $ref: '#/components/schemas/Subsidiary'
+        branch: # field:us_oficina
+          $ref: '#/components/schemas/Branch'
+        #us_nodo
+        login: # field:us_login
+          $ref: '#/components/schemas/UserLogin'
+        assignmentDate: # filed:us_fecha_asig
+          type: string
+          format: date
+        # us_creador
+        lastUpdatedDate: # filed:us_fecha_ult_mod
+          type: string
+          format: date
+        lastUpdatedPasswordDate: # filed:us_fecha_ult_pwd
+          type: string
+          format: date
+        status: # field: us_estado
+          type: string
+          minLength: 1
+          maxLength: 1
+    
+#    Product: # table:cl_producto
+#      description: 'Producto'
+#      properties:
+#        code: # field:pd_producto
+#          type: integer
+#          minimum: 1
+#          maximum: 255
+#        description: # field:pd_descripcion
+#          type: string
+#          minLength: 1
+#          maxLength: 64
+    
+    Subsidiary: # table:cl_filial
+      description: 'Filial'
+      properties:
+        code: # field:fi_filial
+          type: integer
+          minimum: 1
+          maximum: 255
+        name: # field:fi_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+    
+    
+    # REFERENCES & CATALOGS
+    Identification: # cobis..cl_catalogo[table:1800:cl_tipo_identificacion]
+      description: 'Identificación de un cliente'
+      properties:
+        number:
+          $ref: '#/components/schemas/IdentificationNumber'
+        type:
+          $ref: '#/components/schemas/IdentificationType'
+        birthCity:
+          #$ref: '#/components/schemas/City'
+          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/City'
+        expeditionDate:
+          type: string
+          format: date
+    
+    IdentificationType: # table:cobis..cl_tipo_documento
+      description: 'Tipo de identificación de una persona natural o jurídica'
+      properties:
+        code: # field:td_codigo
+          $ref: '#/components/schemas/IdentificationTypeCode'
+        name: # field:td_descripcion
+          type: string
+          minLength: 3
+          maxLength: 30
+        status: # field:td_estado
+          type: string
+          minLength: 1
+          maxLength: 1
+        #td_secuencial
+        #td_mascara
+        #td_tipoper
+        #td_provincia
+        #td_aperrapida
+        #td_bloquea
+        #td_nacionalidad
+        #td_digito
+        #td_estado
+        #td_desc_corta
+        #td_compuesto
+        #td_nro_compuesto
+        #td_adicional
+        #td_creacion
+        #td_habilitado_mis
+        #td_habilitado_usu
+        #td_prefijo
+        #td_subfijo
+    
+  #  Channel: # TODO: Revisar implementación
+  #    description: 'Canal transaccional'
+  #    properties:
+  #      code:
+  #        $ref: '#/components/schemas/ChannelCode'
+  #      name:
+  #        type: string
+  #        minLength: 3
+  #        maxLength: 30
+  #      status:
+  #        type: string
+  #        minLength: 1
+  #        maxLength: 1
+    
+    # KEY ELEMENTS
+    ChannelCode: # TODO: Validar implementación de objeto en BD.
+      description: >
+        'Canal transccional'
+          * 1: Oficina
+          * 2: Agilizador
+          * 3: Internet
+          * 4: ATM
+          * 5: APP Móvil
+      type: integer
+      enum: [1,2,3,4,5]
+    
+#    CatalogCode: # cobis..cl_catalogo.codigo
+#      description: 'Código de un elemento de un catálogo'
+#      type: string
+#      minLength: 1
+#      maxLength: 10
+      
+    CatalogDescription: # cobis..cl_catalogo.descripcion
+      description: 'Descripción de un elemento de un catálogo'
+      type: string
+      minLength: 1
+      maxLength: 64
+    
+    CatalogStatus: # cobis..cl_catalogo.estado
+      description: 'Estado de un elemento de un catálogo'
+      type: string
+      minLength: 1
+      maxLength: 1
+    
+    Gender: # cobis..cl_catalogo[table:4:cl_sexo]
+      description: >
+        'Género o sexo de la persona.'
+      properties:
+        code:
+          description: 'Código del sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+              $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+    
+    
+    IdentificationTypeCode: # cobis..cl_tipo_documento.td_codigo
+      description: >
+        'Tipo de identificación de una persona natural o jurídica. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+      properties:
+        code: # field:td_codigo 
+          type: string
+          minLength: 1
+          maxLength: 4
+      
+    
+    IdentificationNumber: # cobis..cl_ente.en_ced_ruc # TODO: Revisar implementación en BD.
+      description: 'Número de identificación de una persona natural o jurídica'
+      type: string
+      minLength: 5
+      maxLength: 16
+    
+    UserLogin: # cobis..ad_usuario.us_login
+      description: 'Login de usuario en el sistema CORE. Los usuarios autorizados realizan y autorizan transacciones en  el sistema.'
+      type: string
+      minLength: 1
+      maxLength: 30
+    
+    
+    #########################
+    #  GENERAL COMPONENTS   #
+    #########################
+    Amount:
+      description: 'Valor monetario'
+      type: string
+      pattern: '[0-9]{1,16}(\.[0-9]{1,2})'
+    
+    ErrorMessage:
+      description: 'Error retornado cuando una operación no se realiza exitosamente'
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+          minLength: 3
+          maxLength: 64
+    
+    Page:
+      description: 'Página de una lista de elementos o registros.'
+      properties:
+        offset:
+          $ref: '#/components/schemas/PagingOffset'
+        PagingLimitSize:
+          $ref: '#/components/schemas/PagingLimitSize'
+    
+    PagingLimitSize:
+      description: 'Tamaño límite de paginación para una consulta que retorne una lista de elementos.'
+      type: number
+      format: int32
+      minimum: 1
+      maximum: 50
+      default: 50
+
+    PagingOffset:
+      description: 'Número del registro desde el cual, a partir del siguiente se inicia el siguiente conjunto de resultados de la página.'
+      type: number
+      format: int32
+      minimum: 0
+      default: 0
+
+    Pagination:
+      description: 'Paginación del resultado de una lista de elementos o registros.'
+      properties:
+        self:
+          $ref: '#/components/schemas/Page'
+        first:
+          $ref: '#/components/schemas/Page'
+        prev:
+          $ref: '#/components/schemas/Page'
+        next:
+          $ref: '#/components/schemas/Page'
+        last:
+          $ref: '#/components/schemas/Page'
+        
+    
+    RequestID:
+      description: 'Identificación única de una petición o solicitud'
+      type: string
+      format: uuid
