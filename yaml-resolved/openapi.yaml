@@ -2357,12 +2357,12 @@ components:
     City:
       properties:
         code:
-          maximum: 10
-          minimum: 2
-          type: string
+          minimum: 1
+          type: number
+          format: int32
         name:
-          maxLength: 30
-          minLength: 3
+          maxLength: 64
+          minLength: 1
           type: string
         status:
           maxLength: 1
