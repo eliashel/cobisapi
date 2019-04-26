@@ -256,7 +256,7 @@ definitions:
           maxLength: 1
         subsidiary: # field:en_filial
           $ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
-        branch: # field:en_oficina
+        branch: # field:en_oficina   
           $ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         creationDate: # field:en_fecha_crea
           type: string
