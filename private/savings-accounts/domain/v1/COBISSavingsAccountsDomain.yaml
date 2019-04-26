@@ -1,0 +1,487 @@
+openapi: 3.0.0
+
+info:
+  description: 'This is the domain for definitions of COBIS Savings module.'
+  version: '1.0.0'
+  title: 'COBIS Savings Domain'
+
+components:
+  schemas:
+    #########################
+    #  COBIS SAVINGS MODEL  #
+    #########################
+    # OBJECTS
+    SavingsAccount: # table:ah_cuenta
+      description: 'Cuenta de ahorros' 
+      type: object
+      properties:
+        code: # field:ah_cuenta
+          description: 'Código interno de la cuenta de ahorros' # field:ah_cuenta
+          type: integer
+          format: int32
+          minimum: 1
+        number: # field:ah_cta_banco
+          $ref: '#/components/schemas/SavingsAccountNumber'
+        status: # field:ah_estado
+        #  $ref: '#/components/schemas/SavingsAccountStatus'
+          #SavingsAccountStatusCode: # cobis..cl_catalogo[table:ah_estado_cta] # TODO: No existe en la base
+          description: >
+            'Estado de cuenta de ahorros'
+              * A: ACTIVA
+              * C: CANCELADA
+              * G: INGRESADA
+              * I: INACTIVA
+              * N: NO PERFECCIONADA
+              * T: TRASLADADA-INACTIVA
+              * X: TRASLADADA-CANCELADA
+          type: string
+          enum: [A, C, G, I, N, T, X]
+        #ah_control: OK # savingsBook.controlNumber
+        savingsBook:
+            $ref: '#/components/schemas/SavingsBook'
+        subsidiary: # field:ah_filial -> cobis..cl_filial
+          $ref: '#/components/schemas/Subsidiary'
+        branch: # field:ah_oficina
+          $ref: '#/components/schemas/Branch'
+        #product: # field:ah_producto
+        #  $ref: '#/components/schemas/Product'
+        #type: # field:ah_tipo
+        #  $ref: '#/components/schemas/XXX'
+        currency: # field:ah_moneda
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          description: 'Fecha de apertura de la cuenta'
+          type: string
+          format: date
+        #ah_oficial
+        customer: # field:ah_cliente
+          $ref: '#/components/schemas/Customer'
+        #ah_ced_ruc
+        name: # field:ah_nombre
+          description: 'Nombre de la cuenta'
+          type: string
+          minLength: 1
+          maxLength: 60
+        #ah_categoria # cobis..cl_catalogo[table:ah_categoria]
+        #ah_tipo_promedio # cobis..cl_catalogo[table:ah_tpromedio]
+        #ah_capitalizacion # cobis..cl_catalogo[table:ah_capitalizacion]
+        #ah_ciclo # cobis..cl_catalogo[table:ah_ciclo]
+        #suspenceCount: #field:ah_suspensos
+        #  description: 'Cantidad de suspensos'
+        #  type: number
+        #  format: int32
+        #  minimum: 0
+        #  maximum: 32767
+        #ah_bloqueos
+        #ah_condiciones
+        #ah_monto_bloq
+        #ah_num_blqmonto
+        #ah_cred_24
+        #ah_cred_rem
+        #ah_tipo_def
+        #ah_default
+        #ah_rol_ente # cobis..cl_catalogo[table:cl_rol]
+        availableBalance: #field:ah_disponible
+          #description: 'Saldo disponible en la cuenta'
+          $ref: '#/components/schemas/Amount'
+        #ah_12h
+        #ah_12h_dif
+        #ah_24h
+        #ah_48h
+        #ah_remesas
+        #ah_rem_hoy
+        #ah_interes
+        #ah_interes_ganado
+        #ah_saldo_libreta # SavingsBook.balance
+        #ah_saldo_interes: # field:ah_saldo_interes
+        #  description: 'Intereses la cuenta' # TODO: Ajustar descripción
+        #  type: 
+        #    $ref: '#/components/schemas/Amount'
+        #ah_saldo_anterior
+        #ah_saldo_ult_corte
+        #  description: 'Saldo de último corte'
+        #    type: 
+        #      $ref: '#/components/schemas/Amount'
+        #ah_saldo_ayer
+        #ah_creditos
+        #ah_debitos
+        #ah_creditos_hoy
+        #ah_debitos_hoy
+        dateOfLastMovement: # field:ah_fecha_ult_mov
+          description: 'Fecha de último movimiento de la cuenta'
+          type: string
+          format: date
+        dateOfLastInternalMovement: #field:ah_fecha_ult_mov_int
+          description: 'Fecha de último movimiento interno de la cuenta'
+          type: string
+          format: date
+        dateOfLastUpdated: #field:ah_fecha_ult_upd
+          description: 'Fecha de última actualización de la cuenta'
+          type: string
+          format: date
+        #ah_fecha_prx_corte
+        #ah_fecha_ult_corte
+        #ah_fecha_ult_capi
+        #ah_fecha_prx_capita
+        #ah_linea # SavingsBook.line
+        #ah_ult_linea # no se usa
+        #ah_cliente_ec
+        #ah_direccion_ec
+        #ah_descripcion_ec
+        #ah_tipo_dir
+        #ah_agen_ec
+        #ah_parroquia
+        #ah_zona
+        #ah_prom_disponible
+        #ah_promedio1
+        #ah_promedio2
+        #ah_promedio3
+        #ah_promedio4
+        #ah_promedio5
+        #ah_promedio6
+        #ah_personalizada
+        #ah_contador_trx
+        #ah_cta_funcionario
+        #ah_tipocta
+        #ah_prod_banc
+        #ah_origen
+        #ah_numlib # SavingsBook.number
+        #ah_dep_ini
+        #ah_contador_firma
+        #ah_telefono
+        #ah_int_hoy
+        #ah_tasa_hoy
+        #ah_min_dispmes
+        #ah_fecha_ult_ret
+        #ah_cliente1
+        #ah_nombre1
+        #ah_cedruc1
+        #ah_sector
+        #ah_monto_imp
+        #ah_monto_consumos
+        #ah_ctitularidad # cobis..cl_catalogo[table:ah_titularidad]
+        #ah_promotor # cobis..cl_catalogo[table:ah_promotor]
+        #ah_int_mes
+        #ah_tipocta_super
+        #ah_direccion_dv
+        #ah_descripcion_dv
+        #ah_tipodir_dv
+        #ah_parroquia_dv
+        #ah_zona_dv
+        #ah_agen_dv # cobis..cl_agencia
+        #ah_cliente_dv # cobis..cl_direccion
+        #ah_traslado
+        #ah_aplica_tasacorp
+        #ah_monto_emb
+        #ah_monto_ult_capi
+        #ah_saldo_mantval
+        #ah_cuota
+        #ah_creditos2
+        #ah_creditos3
+        #ah_creditos4
+        #ah_creditos5
+        #ah_creditos6
+        #ah_debitos2
+        #ah_debitos3
+        #ah_debitos4
+        #ah_debitos5
+        #ah_debitos6
+        #ah_tasa_ayer
+        #ah_estado_cuenta
+        #ah_permite_sldcero
+        #ah_rem_ayer
+        #ah_numsol
+        #ah_patente
+        #ah_fideicomiso
+        #ah_nxmil
+        #ah_clase_clte
+        #ah_deb_mes_ant
+        #ah_cred_mes_ant
+        #ah_num_deb_mes
+        #ah_num_cred_mes
+        #ah_num_con_mes
+        #ah_num_deb_mes_ant
+        #ah_num_cred_mes_ant
+        #ah_num_con_mes_ant
+        #ah_fecha_ult_proceso
+    
+    ClosedSavingsAccount: # table:ah_cierre
+      description: 'Cuenta de ahorros cerrada' 
+      type: object
+      properties:
+        code: # field:ah_cuenta
+          description: 'Código interno de la cuenta de ahorros' # field:ah_cuenta
+          type: integer
+          minimum: 1
+          maximum: 9999
+        number: # field:ah_cta_banco
+          $ref: '#/components/schemas/SavingsAccountNumber'
+        primaryTransactionId: # field:secuencial
+          description: 'Número de secuencial de transacción'
+          type: number
+          format: int32
+        #tipo_tran
+        branch: #oficina
+          $ref: '#/components/schemas/Branch'
+        #usuario
+        #terminal
+        #correccion
+        #sec_correccion
+        #reentry
+        #origen
+        #nodo
+        postingDate:  #field:fecha
+          description: 'Fecha de proceso de la transacción'
+          type: string
+          format: date
+        account: 
+          $ref: '#/components/schemas/SavingsAccount' # #field:cta_banco
+        finalWithdraw: # field:ret_efe # Retiro final
+          $ref: '#/components/schemas/Amount'
+        #ret_chq
+        #remoto_ssn
+        currency: #moneda
+          $ref: '#/components/schemas/Currency'
+        #control
+        #saldo_lib
+        #signo
+        #alterno
+        #saldocont
+        #saldodisp
+        #saldoint
+        #impuesto
+        #multa
+        #oficina_cta
+        #hora
+        #estado
+        #prod_banc
+        #categoria
+        #monto_imp
+        #tipo_exoneracion
+        #ssn_branch
+        #tipocta_super
+        #turno
+        #forma_pago
+        #cheque
+        #ctadestino
+        #serial
+        #canal
+        #cliente
+        #indicador
+        #base_gmf
+        #clase_clte
+        causeOfClosure: # field:causa, cobis..cl_catalogo[table:1300:ah_causa_cierre]
+          description: 'Causa de cierre de una cuenta de ahorros. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: object
+          properties:
+            code:
+              description: 'Código de causal de cierre de cuenta.'
+              type: number
+              format: int32
+              minimum: 1
+            description:
+              $ref: '#/components/schemas/CatalogDescription'
+            #status:
+            #  $ref: '#/components/schemas/CatalogStatus'
+        detailedCauseOfClosure: # field:causa, cobis..cl_catalogo[table:545:ah_causa_cierre_det]
+          description: 'Detalle de la causa de cierre de una cuenta de ahorros. La lista de causales detalladas depende de la causa de cierre (causeOfClosure).  Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: object
+          properties:
+            code:
+              description: 'Código de causal de cierre de cuenta.'
+              type: number
+              format: int32
+              minimum: 1
+            description:
+              $ref: '#/components/schemas/CatalogDescription'
+            #status:
+            #  $ref: '#/components/schemas/CatalogStatus'
+    
+    # REFERENCES & CATALOGS
+    #SavingsAccountStatus: # No tiene tabla asignada.
+    #  description: >
+    #    'Estado de cuenta de ahorros'
+    #      * A: Activa
+    #      * G: Aperturada (pendiente primer depósito)
+    #      * I: Inactiva
+    #      * C: Cancelada
+    #  type: object
+    #  properties:
+    #    code:
+    #      $ref: '#/components/schemas/SavingsAccountStatusCode'
+    #    description:
+    #      $ref: '#/components/schemas/CatalogDescription'
+    #    status:
+    #      $ref: '#/components/schemas/CatalogStatus'
+    
+    SavingsBook: # table:ah_cuenta (virtual)
+      description: 'Libreta de cuenta de ahorros'
+      properties:
+        number: # field:ah_numlib
+          description: 'Número de la libreta de ahorros'
+          type: number
+          format: int32
+        controlNumber: # field:ah_control
+          description: 'Número de control de la libreta'
+          type: number
+          format: int32
+        line: # field:ah_linea
+          description: 'Número de lineas impresas en la libreta'
+          type: number
+          format: int32
+          minimum: 1
+          maximum: 32767
+        balance: # fiield:ah_saldo_libreta
+          $ref: '#/components/schemas/Amount'
+         
+    
+    Transaction: # table:ah_tran_monet
+      description: 'Transacción de una cuenta de ahorros'
+      type: object
+      properties:
+        postingDate:  #field:tm_fecha
+          description: 'Fecha de proceso de la transacción'
+          type: string
+          format: date
+        primaryTransactionId: # field:tm_secuencial
+          description: 'Número de secuencial de transacción'
+          type: number
+          format: int32
+        #tm_ssn_branch
+        secondaryTransactionId: #field:tm_cod_alterno
+          description: 'Número de alterno de secuencial de transacción'
+          type: number
+          format: int32
+        #transactionCode: #tm_tipo_tran,  table:cl_ttrasaccion 
+        #finantialInstitution: #tm_filial table:cl_filial
+        branch: #tm_oficina
+          $ref: '#/components/schemas/Branch'
+        #tm_usuario
+        #tm_terminal
+        #tm_corre ccion # boolean
+        #tm_sec_correccion
+        #tm_origen
+        #tm_nodo
+        #tm_reentry
+        #tm_signo
+        #tm_fecha_ult_mov
+        cashAmount: # field:tm_efectivo
+          $ref: '#/components/schemas/Amount'
+        ownChecksAmount: # field:tm_chq_propios
+          $ref: '#/components/schemas/Amount'
+        localChecksAmount: # field:tm_chq_locales
+          $ref: '#/components/schemas/Amount'
+        othersChecksAmount: # field: tm_chq_ot_plazas
+          $ref: '#/components/schemas/Amount'
+        totalAmount: # field: tm_valor
+          $ref: '#/components/schemas/Amount'
+        #tm_remoto_ssn
+        currency: #tm_moneda
+          $ref: '#/components/schemas/Currency'
+        indicator: # field:tm_indicador, cobis..cl_catalogo[table:1787:ah_tipo_indicador] 
+          description: 'Indica el tipo de saldo que se afecta con la nota. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: object
+          properties:
+            code:
+              description: 'Código del tipo de indicador.'
+              type: number
+              format: int32
+              minimum: 1
+              maximum: 255
+            description:
+              $ref: '#/components/schemas/CatalogDescription'
+        cause: # field:tm_causa, cobis..cl_catalogo[table:1289:ah_causa_nc: cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
+          description: 'Razón por la cual se hace el ajuste para una nota débito o una nota crédito, ayudando a generar una contabilidad espeficica. Según el tipo de transacción, este campo puede ser diligenciado con diferentes listas. Para una transacción de nota crédito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nc](http://www.cobiscorp.com/api/catlogo#ah_causa_nc). Para una transacción de nota débito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nd](http://www.cobiscorp.com/api/catlogo#ah_causa_nd)' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: object
+          properties:
+            code:
+              description: 'Código del causal de la nota crédito.'
+              type: string
+              minLength: 1
+              maxLength: 3
+            description:
+              $ref: '#/components/schemas/CatalogDescription'
+        department: # field:tm_departamento
+          $ref: '#/components/schemas/Department'
+        #tm_saldo_lib
+        #tm_saldo_contable
+        #tm_saldo_disponible
+        #tm_saldo_interes
+        #tm_fecha_efec
+        #tm_interes
+        #tm_control
+        account: 
+          $ref: '#/components/schemas/SavingsAccount' # #field:tm_cta_banco
+        destinationAccount: #tm_ctadestino # banco destino
+          $ref: '#/components/schemas/SavingsAccount'
+        #tm_tipo_xfer
+        #tm_estado
+        transactionConcept: #tm_concepto
+          description: 'Descripcón del concepto de la transacción'
+          type: string
+          maxLength: 40
+        #tm_oficina_cta # oficina en la que fue creada la cuenta 
+        #timestamp: #tm_hora
+        #tm_banco
+        #tm_valor_comision
+        #tm_prod_banc
+        #tm_categoria
+        #tm_monto_imp
+        #tm_tipo_exonerado_imp
+        #tm_serial
+        #tm_tipocta_super
+        #tm_turno
+        #tm_cheque
+        #tm_forma_pg
+        # canal de la transacción #tm_canal #TODO
+        #tm_stand_in
+        #tm_doc_propios
+        #tm_factor
+        #tm_cotizacion
+        #tm_valor_convertido
+        #tm_moneda_destino
+        #tm_idcaja
+        #tm_val_conv_prop
+        #tm_val_conv_loc
+        #tm_interes_cte
+        #tm_interes_emb
+        #tm_interes_bloq
+        #tm_ref_canal
+    
+    
+    # KEY ELEMENTS
+    SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
+      description: 'Número de cuena de ahorros'
+      type: string
+      #pattern: '[0-9]*'
+      minLength: 5
+      maxLength: 16
+    
+    
+
+    
+    
+    
+
+  # pathitems:
+  #     GeneralRequest:
+  #       get:
+  #         responses:
+  #           '200':
+  #             $ref: '#/components/responses/GeneralError'
+
+  # responses:
+  #   GeneralError:
+  #     description: A general error
+  #     content:
+  #       application/json:
+  #         schema:
+  #           $ref: "#/components/schemas/ErrorModel"
+
+  # parameters:
+  #   skipParam:
+  #     name: skip
+  #     in: query
+  #     description: number of items to skip
+  #     schema:
+  #       type: integer
