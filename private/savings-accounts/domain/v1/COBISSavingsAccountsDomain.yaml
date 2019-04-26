@@ -40,15 +40,15 @@ components:
         savingsBook:
           $ref: '#/components/schemas/SavingsBook'
         subsidiary: # field:ah_filial -> cobis..cl_filial
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:ah_oficina
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         #product: # field:ah_producto
         #  $ref: '#/components/schemas/Product'
         #type: # field:ah_tipo
         #  $ref: '#/components/schemas/XXX'
         currency: # field:ah_moneda
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
         openingDate:
           description: 'Fecha de apertura de la cuenta'
           type: string
@@ -56,7 +56,7 @@ components:
         #ah_oficial
         customer: # field:ah_cliente
           #$ref: '#/components/schemas/Customer'
-          $ref: './../../../customers/domain/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/customers/domain/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
         #ah_ced_ruc
         name: # field:ah_nombre
           description: 'Nombre de la cuenta'
@@ -84,7 +84,7 @@ components:
         #ah_rol_ente # cobis..cl_catalogo[table:cl_rol]
         availableBalance: #field:ah_disponible
           #description: 'Saldo disponible en la cuenta'
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #ah_12h
         #ah_12h_dif
         #ah_24h
@@ -223,7 +223,7 @@ components:
           format: int32
         #tipo_tran
         branch: #oficina
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         #usuario
         #terminal
         #correccion
@@ -238,11 +238,11 @@ components:
         account: 
           $ref: '#/components/schemas/SavingsAccount' # #field:cta_banco
         finalWithdraw: # field:ret_efe # Retiro final
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #ret_chq
         #remoto_ssn
         currency: #moneda
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
         #control
         #saldo_lib
         #signo
@@ -281,7 +281,7 @@ components:
               format: int32
               minimum: 1
             description:
-              $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
             #status:
             #  $ref: '#/components/schemas/CatalogStatus'
         detailedCauseOfClosure: # field:causa, cobis..cl_catalogo[table:545:ah_causa_cierre_det]
@@ -294,7 +294,7 @@ components:
               format: int32
               minimum: 1
             description:
-              $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
             #status:
             #  $ref: '#/components/schemas/CatalogStatus'
     
@@ -333,7 +333,7 @@ components:
           minimum: 1
           maximum: 32767
         balance: # fiield:ah_saldo_libreta
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
          
     
     Transaction: # table:ah_tran_monet
@@ -356,7 +356,7 @@ components:
         #transactionCode: #tm_tipo_tran,  table:cl_ttrasaccion 
         #finantialInstitution: #tm_filial table:cl_filial
         branch: #tm_oficina
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         #tm_usuario
         #tm_terminal
         #tm_corre ccion # boolean
@@ -368,18 +368,18 @@ components:
         #tm_fecha_ult_mov
         cashAmount: # field:tm_efectivo
           #$ref: '#/components/schemas/Amount'
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         ownChecksAmount: # field:tm_chq_propios
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         localChecksAmount: # field:tm_chq_locales
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         othersChecksAmount: # field: tm_chq_ot_plazas
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         totalAmount: # field: tm_valor
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #tm_remoto_ssn
         currency: #tm_moneda
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
         indicator: # field:tm_indicador, cobis..cl_catalogo[table:1787:ah_tipo_indicador] 
           description: 'Indica el tipo de saldo que se afecta con la nota. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
           type: object
@@ -391,7 +391,7 @@ components:
               minimum: 1
               maximum: 255
             description:
-              $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
         cause: # field:tm_causa, cobis..cl_catalogo[table:1289:ah_causa_nc: cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
           description: 'Razón por la cual se hace el ajuste para una nota débito o una nota crédito, ayudando a generar una contabilidad espeficica. Según el tipo de transacción, este campo puede ser diligenciado con diferentes listas. Para una transacción de nota crédito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nc](http://www.cobiscorp.com/api/catlogo#ah_causa_nc). Para una transacción de nota débito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nd](http://www.cobiscorp.com/api/catlogo#ah_causa_nd)' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
           type: object
@@ -402,9 +402,9 @@ components:
               minLength: 1
               maxLength: 3
             description:
-              $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
         department: # field:tm_departamento
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Department'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Department'
         #tm_saldo_lib
         #tm_saldo_contable
         #tm_saldo_disponible
