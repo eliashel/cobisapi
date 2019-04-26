@@ -75,7 +75,146 @@ components:
         #  ci_cod_remesas
         #  ci_pais
         #  ci_canton
-
+    
+    Country: # table:cl_pais
+      description: 'Pais'
+      properties:
+        code: # field:pa_pais
+          type: number
+          format: int32
+          minimum: 1
+        name: # field:pa_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
+        isoCode: # field:pa_abreviatura
+          type: string
+          minLength: 1
+          maxLength: 3
+        # pa_continente
+        # pa_nacionalidad
+        status: # field:pa_estado
+          type: string
+          minLength: 1
+          maxLength: 1
+    
+    Currency: # table:cl_moneda
+      description: 'Moneda'
+      properties:
+        code: # field:mo_moneda
+          type: integer
+          minimum: 1
+          maximum: 32767
+        description: # field:mo_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
+        isoCode: # field:mo_nemonico
+          type: string
+          minLength: 3
+          maxLength: 3
+        symbol: # field:mo_simbolo
+          type: string
+          minLength: 1
+          maxLength: 5
+        country: # field:mo_pais
+          $ref: '#/components/schemas/Country'
+        # mo_decimales
+        status: # field:mo_estado TODO: Validar catálogo cobis..cl_estado_ser??
+          description: >
+            'Tipo de identificación de una persona natural o jurídica'
+              * V: Vigente
+              * B: Bloqueado
+              * E: Eliminado 
+          type: string
+          enum: [V,B,E]
+          minLength: 1
+          maxLength: 1
+    
+    Department: # table: cobis..cl_departamento
+      description: 'Departamento de la organización.'
+      properties:
+        code: # field:de_departamento
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 32767
+        name: # field:de_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
+        subsidiary: # field:de_filial -> cobis..cl_filial
+          $ref: '#/components/schemas/Subsidiary'
+        branch: # field:de_oficina
+          $ref: '#/components/schemas/Branch'
+        #de_o_oficina
+        #de_o_departamento
+        #de_nivel
+    
+    Official:
+      description: 'Funcionario o responsable de un usuario del sistema.'
+      properties:
+        code: # field:fu_funcionario
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 32767
+        name: # field:fu_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+        Gender: # field:fu_sexo
+          $ref: '#/components/schemas/Gender'
+        # fu_dinero
+        # fu_nomina
+        # fu_departamento
+        branch: # field:fu_oficina
+          $ref: '#/components/schemas/Branch'
+        # fu_cargo
+        # fu_secuencial
+        # fu_jefe
+        # fu_nivel
+        creationDate: # field:fu_fecha_ing
+          type: string
+          format: date
+        user: # field:us_login -> cobis..ad_usuario
+          $ref: '#/components/schemas/UserLogin'
+        # fu_telefono
+        # fu_fec_inicio
+        # fu_fec_final
+        # fu_clave
+        # fu_estado
+        # fu_offset
+        identification: #fu_cedruc -> 
+          $ref: '#/components/schemas/Identification'
+        # fu_causa_bloqueo
+        # fu_fecha_cargo
+    
+    User: # table:ad_usuario
+      description: 'Usuario'
+      properties:
+        subsidiary: # field:us_filial
+          $ref: '#/components/schemas/Subsidiary'
+        branch: # field:us_oficina
+          $ref: '#/components/schemas/Branch'
+        #us_nodo
+        login: # field:us_login
+          $ref: '#/components/schemas/UserLogin'
+        assignmentDate: # filed:us_fecha_asig
+          type: string
+          format: date
+        # us_creador
+        lastUpdatedDate: # filed:us_fecha_ult_mod
+          type: string
+          format: date
+        lastUpdatedPasswordDate: # filed:us_fecha_ult_pwd
+          type: string
+          format: date
+        status: # field: us_estado
+          type: string
+          minLength: 1
+          maxLength: 1
+    
     
     Identification: # virtual object
       description: 'Identificación de un cliente'
