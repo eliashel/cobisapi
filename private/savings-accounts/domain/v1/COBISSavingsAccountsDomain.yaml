@@ -236,7 +236,7 @@ components:
           type: string
           format: date
         account: 
-          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/SavingsAccount' # #field:cta_banco
+          $ref: '#/components/schemas/SavingsAccount' # #field:cta_banco
         finalWithdraw: # field:ret_efe # Retiro final
           $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #ret_chq
