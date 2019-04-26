@@ -5,7 +5,8 @@ info:
   version: '1.0.0'
   title: 'COBIS Customers Domain'
 
-definitions:
+components:
+  schemas:
     # OBJECTS
     Customer: # TODO: Revisar implementación, definir persona natural y jurídica.
       description: 'Cliente o prospecto de cliente que está interesado en adquirir un producto financiero'
