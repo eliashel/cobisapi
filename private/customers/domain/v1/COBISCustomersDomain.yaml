@@ -1,7 +1,7 @@
 openapi: 3.0.0
 
 info:
-  description: 'This is the domain for definitions of COBIS Customer module. This is all about customers objects like, identification, natural and legal persons, catalogs, etc.'
+  description: 'This is the domain for definitions of COBIS Customer module. This is all about customers objects like, identification, natural and legal persons, catalogs, etc..'
   version: '0.0.1'
   title: 'COBIS Customers Domain'
 
@@ -256,7 +256,7 @@ definitions:
           maxLength: 1
         subsidiary: # field:en_filial
           $ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
-        branch: # field:en_oficina   
+        branch: # field:en_oficina
           $ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         creationDate: # field:en_fecha_crea
           type: string
