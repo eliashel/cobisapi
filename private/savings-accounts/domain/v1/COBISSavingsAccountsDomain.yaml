@@ -333,7 +333,7 @@ components:
           minimum: 1
           maximum: 32767
         balance: # fiield:ah_saldo_libreta
-          $ref: '#/components/schemas/Amount'
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
          
     
     Transaction: # table:ah_tran_monet
@@ -368,15 +368,15 @@ components:
         #tm_fecha_ult_mov
         cashAmount: # field:tm_efectivo
           #$ref: '#/components/schemas/Amount'
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         ownChecksAmount: # field:tm_chq_propios
-          $ref: '#/components/schemas/Amount'
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         localChecksAmount: # field:tm_chq_locales
-          $ref: '#/components/schemas/Amount'
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         othersChecksAmount: # field: tm_chq_ot_plazas
-          $ref: '#/components/schemas/Amount'
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         totalAmount: # field: tm_valor
-          $ref: '#/components/schemas/Amount'
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #tm_remoto_ssn
         currency: #tm_moneda
           $ref: '#/components/schemas/Currency'
