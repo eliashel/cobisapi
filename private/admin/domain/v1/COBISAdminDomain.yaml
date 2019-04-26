@@ -147,6 +147,49 @@ components:
 
 
   # KEY ELEMENTS
+    ChannelCode: # TODO: Validar implementación de objeto en BD.
+      description: >
+        'Canal transccional'
+          * 1: Oficina
+          * 2: Agilizador
+          * 3: Internet
+          * 4: ATM
+          * 5: APP Móvil
+      type: integer
+      enum: [1,2,3,4,5]
+    
+#    CatalogCode: # cobis..cl_catalogo.codigo
+#      description: 'Código de un elemento de un catálogo'
+#      type: string
+#      minLength: 1
+#      maxLength: 10
+      
+    CatalogDescription: # cobis..cl_catalogo.descripcion
+      description: 'Descripción de un elemento de un catálogo'
+      type: string
+      minLength: 1
+      maxLength: 64
+    
+    CatalogStatus: # cobis..cl_catalogo.estado
+      description: 'Estado de un elemento de un catálogo'
+      type: string
+      minLength: 1
+      maxLength: 1
+    
+    Gender: # cobis..cl_catalogo[table:4:cl_sexo]
+      description: >
+        'Género o sexo de la persona.'
+      properties:
+        code:
+          description: 'Código del sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+              $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+    
     IdentificationTypeCode: # cobis..cl_tipo_documento.td_codigo
       description: >
         'Tipo de identificación de una persona natural o jurídica. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
@@ -163,7 +206,75 @@ components:
       minLength: 5
       maxLength: 16
     
+    UserLogin: # cobis..ad_usuario.us_login
+      description: 'Login de usuario en el sistema CORE. Los usuarios autorizados realizan y autorizan transacciones en  el sistema.'
+      type: string
+      minLength: 1
+      maxLength: 30
     
+    
+    #########################
+    #  GENERAL COMPONENTS   #
+    #########################
+    Amount:
+      description: 'Valor monetario'
+      type: string
+      pattern: '[0-9]{1,16}(\.[0-9]{1,2})'
+    
+    ErrorMessage:
+      description: 'Error retornado cuando una operación no se realiza exitosamente'
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+          minLength: 3
+          maxLength: 64
+    
+    Page:
+      description: 'Página de una lista de elementos o registros.'
+      properties:
+        offset:
+          $ref: '#/components/schemas/PagingOffset'
+        PagingLimitSize:
+          $ref: '#/components/schemas/PagingLimitSize'
+    
+    PagingLimitSize:
+      description: 'Tamaño límite de paginación para una consulta que retorne una lista de elementos.'
+      type: number
+      format: int32
+      minimum: 1
+      maximum: 50
+      default: 50
+
+    PagingOffset:
+      description: 'Número del registro desde el cual, a partir del siguiente se inicia el siguiente conjunto de resultados de la página.'
+      type: number
+      format: int32
+      minimum: 0
+      default: 0
+
+    Pagination:
+      description: 'Paginación del resultado de una lista de elementos o registros.'
+      properties:
+        self:
+          $ref: '#/components/schemas/Page'
+        first:
+          $ref: '#/components/schemas/Page'
+        prev:
+          $ref: '#/components/schemas/Page'
+        next:
+          $ref: '#/components/schemas/Page'
+        last:
+          $ref: '#/components/schemas/Page'
+        
+    
+    RequestID:
+      description: 'Identificación única de una petición o solicitud'
+      type: string
+      format: uuid
+
 
   # pathitems:
   #     GeneralRequest:
