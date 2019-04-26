@@ -16,7 +16,7 @@ definitions:
           minimum: 1
         #en_subtipo: N/A
         identification: #field:en_ced_ruc > Identification.number
-          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Identification'
+          $ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
         # field:en_tipo_ced > Identificacion.type
         name: # field:en_nombre
           type: string
@@ -30,7 +30,7 @@ definitions:
           #$ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Subsidiary'
           $ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:en_oficina
-          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Branch'
+          $ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         creationDate: # field:en_fecha_crea
           type: string
           format: date-time
@@ -236,7 +236,7 @@ definitions:
           minimum: 1
         #en_subtipo: N/A
         identification: #field:en_ced_ruc > Identification.number
-          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Identification'
+          $ref: '$ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
         # field:en_tipo_ced > Identificacion.type
         names: # field:en_nombre
           type: string
@@ -255,9 +255,9 @@ definitions:
           minLength: 1
           maxLength: 1
         subsidiary: # field:en_filial
-          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Subsidiary'
+          $ref: '$ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:en_oficina
-          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Branch'
+          $ref: '$ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         creationDate: # field:en_fecha_crea
           type: string
           format: date-time
