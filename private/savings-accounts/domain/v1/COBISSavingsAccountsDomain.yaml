@@ -55,7 +55,8 @@ components:
           format: date
         #ah_oficial
         customer: # field:ah_cliente
-          $ref: '#/components/schemas/Customer'
+          #$ref: '#/components/schemas/Customer'
+          $ref: 'https://github.com/eliashel/cobisapi/blob/master/private/customers/domain/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
         #ah_ced_ruc
         name: # field:ah_nombre
           description: 'Nombre de la cuenta'
@@ -222,7 +223,7 @@ components:
           format: int32
         #tipo_tran
         branch: #oficina
-          $ref: '#/components/schemas/Branch'
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         #usuario
         #terminal
         #correccion
@@ -235,13 +236,13 @@ components:
           type: string
           format: date
         account: 
-          $ref: '#/components/schemas/SavingsAccount' # #field:cta_banco
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/SavingsAccount' # #field:cta_banco
         finalWithdraw: # field:ret_efe # Retiro final
-          $ref: '#/components/schemas/Amount'
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #ret_chq
         #remoto_ssn
         currency: #moneda
-          $ref: '#/components/schemas/Currency'
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
         #control
         #saldo_lib
         #signo
@@ -280,7 +281,7 @@ components:
               format: int32
               minimum: 1
             description:
-              $ref: '#/components/schemas/CatalogDescription'
+              $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
             #status:
             #  $ref: '#/components/schemas/CatalogStatus'
         detailedCauseOfClosure: # field:causa, cobis..cl_catalogo[table:545:ah_causa_cierre_det]
@@ -293,7 +294,7 @@ components:
               format: int32
               minimum: 1
             description:
-              $ref: '#/components/schemas/CatalogDescription'
+              $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
             #status:
             #  $ref: '#/components/schemas/CatalogStatus'
     
@@ -366,7 +367,8 @@ components:
         #tm_signo
         #tm_fecha_ult_mov
         cashAmount: # field:tm_efectivo
-          $ref: '#/components/schemas/Amount'
+          #$ref: '#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         ownChecksAmount: # field:tm_chq_propios
           $ref: '#/components/schemas/Amount'
         localChecksAmount: # field:tm_chq_locales

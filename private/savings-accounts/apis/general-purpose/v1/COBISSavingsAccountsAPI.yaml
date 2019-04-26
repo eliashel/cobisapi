@@ -1215,7 +1215,8 @@ components:
       properties:
         savingsAccount:
           #$ref: '#/components/schemas/SavingsAccount'
-          $ref: './../../../domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+          #$ref: './../../../domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
         transaction:
           $ref: '#/components/schemas/Transaction'
     
