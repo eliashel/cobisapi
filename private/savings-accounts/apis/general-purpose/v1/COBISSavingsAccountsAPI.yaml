@@ -1214,7 +1214,8 @@ components:
       type: object
       properties:
         savingsAccount:
-          $ref: '#/components/schemas/SavingsAccount'
+          #$ref: '#/components/schemas/SavingsAccount'
+          $ref: './../../../domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
         transaction:
           $ref: '#/components/schemas/Transaction'
     
