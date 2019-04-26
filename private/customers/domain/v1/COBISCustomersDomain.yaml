@@ -236,7 +236,7 @@ definitions:
           minimum: 1
         #en_subtipo: N/A
         identification: #field:en_ced_ruc > Identification.number
-          $ref: '$ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+          $ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
         # field:en_tipo_ced > Identificacion.type
         names: # field:en_nombre
           type: string
@@ -255,7 +255,7 @@ definitions:
           minLength: 1
           maxLength: 1
         subsidiary: # field:en_filial
-          $ref: '$ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+          $ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:en_oficina
           $ref: '$ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         creationDate: # field:en_fecha_crea
