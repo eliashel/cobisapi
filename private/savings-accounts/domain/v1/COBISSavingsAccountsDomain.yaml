@@ -356,7 +356,7 @@ components:
         #transactionCode: #tm_tipo_tran,  table:cl_ttrasaccion 
         #finantialInstitution: #tm_filial table:cl_filial
         branch: #tm_oficina
-          $ref: '#/components/schemas/Branch'
+          $ref: './../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         #tm_usuario
         #tm_terminal
         #tm_corre ccion # boolean
