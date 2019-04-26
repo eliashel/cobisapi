@@ -1,0 +1,189 @@
+openapi: 3.0.0
+
+info:
+  description: 'This is the domain for definitions of COBIS ADMIN module. This include, users, references, catalogs, etc.'
+  version: '0.0.1'
+  title: 'COBIS Admin Domain'
+
+components:
+  schemas:
+    # OBJECTS
+    Branch: # table:cl_oficina
+      description: 'Oficina'
+      properties:
+        code: # field:of_oficina
+          type: integer
+          minimum: 1
+          maximum: 32767
+        name: # field:of_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+        #  of_filial
+        #  of_direccion
+        #  of_ciudad
+        #  of_telefono
+        #  of_subtipo
+        #  of_area
+        #  a_sucursal
+        #  of_regional
+        #  of_tip_punt_at
+        #  of_cir_comunic
+        #  of_nomb_encarg
+        #  of_ci_encarg
+        #  of_horario
+        #  of_tipo_horar
+        #  of_jefe_agenc
+        #  of_cod_fie_asf
+        #  of_fec_aut_asf
+        #  of_sector
+        #  of_depart_pais
+        #  of_provincia
+        #  of_barrio
+        #  of_relac_ofic
+        #  of_lat_coord
+        #  of_lat_grad
+        #  of_lat_min
+        #  of_lat_seg
+        #  of_long_coord
+        #  of_long_grad
+        #  of_long_min
+        #  of_long_seg
+        #  of_subregional
+        #  of_obs_horario
+        #  of_sucursal
+        #  of_zona
+        #  of_cob
+        #  of_bloqueada
+    
+    City: # table:cl_ciudad
+      description: 'Cuidad'
+      properties:
+        code: #  field:ci_ciudad
+          type: number
+          format: int32
+          minimum: 1
+        name: #  field:ci_descripcion
+          type: string
+          minLength: 1
+          maxLength: 64
+        status: #  field:ci_estado
+          type: string # TODO: Validar catálogo 
+          minLength: 1
+          maxLength: 1
+        #  ci_provincia
+        #  ci_cod_remesas
+        #  ci_pais
+        #  ci_canton
+
+    
+    Identification: # virtual object
+      description: 'Identificación de un cliente'
+      properties:
+        number:
+          $ref: '#/components/schemas/IdentificationNumber'
+        type:
+          $ref: '#/components/schemas/IdentificationType'
+        birthCity:
+          $ref: '#/components/schemas/City'
+        expedicionDate:
+          type: string
+          format: date
+    
+    IdentificationType: # table:cobis..cl_tipo_documento
+      description: 'Tipo de identificación de una persona natural o jurídica'
+      properties:
+        code: # field:td_codigo
+          $ref: '#/components/schemas/IdentificationTypeCode'
+        name: # field:td_descripcion
+          type: string
+          minLength: 3
+          maxLength: 30
+        status: # field:td_estado # TODO: Catálogo
+          type: string
+          minLength: 1
+          maxLength: 1
+        #td_secuencial
+        #td_mascara
+        #td_tipoper
+        #td_provincia
+        #td_aperrapida
+        #td_bloquea
+        #td_nacionalidad
+        #td_digito
+        #td_estado
+        #td_desc_corta
+        #td_compuesto
+        #td_nro_compuesto
+        #td_adicional
+        #td_creacion
+        #td_habilitado_mis
+        #td_habilitado_usu
+        #td_prefijo
+        #td_subfijo
+    
+    Subsidiary: # table:cl_filial
+      description: 'Filial'
+      properties:
+        code: # field:fi_filial
+          type: integer
+          minimum: 1
+          maximum: 255
+        name: # field:fi_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+        status: # field:fi_estado # TODO: Catálogo
+          type: string
+          minLength: 1
+          maxLength: 1
+        #  fi_direccion
+        #  fi_actividad
+        #  fi_abreviatura
+        #  fi_rep_nombre
+        #  fi_contador
+        #  fi_ruc
+        #  fi_cont_nivel
+
+
+  # KEY ELEMENTS
+    IdentificationTypeCode: # cobis..cl_tipo_documento.td_codigo
+      description: >
+        'Tipo de identificación de una persona natural o jurídica. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+      properties:
+        code: # field:td_codigo 
+          type: string
+          minLength: 1
+          maxLength: 4
+      
+    
+    IdentificationNumber: # cobis..cl_ente.en_ced_ruc # TODO: Revisar implementación en BD.
+      description: 'Número de identificación de una persona natural o jurídica'
+      type: string
+      minLength: 5
+      maxLength: 16
+    
+    
+
+  # pathitems:
+  #     GeneralRequest:
+  #       get:
+  #         responses:
+  #           '200':
+  #             $ref: '#/components/responses/GeneralError'
+
+  # responses:
+  #   GeneralError:
+  #     description: A general error
+  #     content:
+  #       application/json:
+  #         schema:
+  #           $ref: "#/components/schemas/ErrorModel"
+
+  # parameters:
+  #   skipParam:
+  #     name: skip
+  #     in: query
+  #     description: number of items to skip
+  #     schema:
+  #       type: integer

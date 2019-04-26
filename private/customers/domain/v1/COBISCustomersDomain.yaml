@@ -1,0 +1,476 @@
+info:
+  description: 'This is the domain for definitions of COBIS Customer module. This is all about customers objects like, identification, natural and legal persons, catalogs, etc.'
+  version: '0.0.1'
+  title: 'COBIS Customers Domain'
+
+definitions:
+  # OBJECTS
+    LegalPerson: # table: cobis..cl_ente (parcial - persona jurídica) TODO: Completar.
+      description: 'Cliente o prospecto de cliente de tipo persona natural que está interesado en adquirir un producto financiero.'
+      properties:
+        code: #field:en_ente
+          type: integer
+          format: int32
+          minimum: 1
+        #en_subtipo: N/A
+        identification: #field:en_ced_ruc > Identification.number
+          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Identification'
+        # field:en_tipo_ced > Identificacion.type
+        name: # field:en_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+        status:
+          type: string
+          minLength: 1
+          maxLength: 1
+        subsidiary: # field:en_filial
+          #$ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Subsidiary'
+          $ref: '../../../admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+        branch: # field:en_oficina
+          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Branch'
+        creationDate: # field:en_fecha_crea
+          type: string
+          format: date-time
+        lastUpdatedDate: # field:en_fecha_mod
+          type: string
+          format: date-time
+        #en_direccion
+        #en_referencia
+        #en_casilla
+        #en_casilla_def
+        #en_tipo_dp
+        #en_balance
+        #en_grupo
+        #en_pais
+        #en_oficial
+        #en_actividad
+        #en_retencion
+        #en_mala_referencia
+        #en_comentario
+        #en_cont_malas
+        #s_tipo_soc_hecho
+        #en_sector
+        #en_referido
+        #en_nit
+        #en_doc_validado
+        #en_rep_superban
+        #p_sexo
+        #p_fecha_nac
+        #p_ciudad_nac
+        #p_lugar_doc
+        #p_profesion
+        #p_pasaporte
+        #p_estado_civil
+        #p_num_cargas
+        #p_num_hijos
+        #p_nivel_ing
+        #p_nivel_egr
+        #p_nivel_estudio
+        #p_tipo_persona
+        #p_tipo_vivienda
+        #p_calif_cliente
+        #p_personal
+        #p_propiedad
+        #p_trabajo
+        #p_soc_hecho
+        #p_fecha_emision
+        #p_fecha_expira
+        #c_cap_suscrito
+        #en_asosciada
+        #c_posicion
+        #c_tipo_compania
+        #c_rep_legal
+        #c_activo
+        #c_pasivo
+        #c_es_grupo
+        #c_capital_social
+        #c_reserva_legal
+        #c_fecha_const
+        #en_nomlar
+        #c_plazo
+        #c_direccion_domicilio
+        #c_fecha_inscrp
+        #c_fecha_aum_capital
+        #c_cap_pagado
+        #c_tipo_nit
+        #c_tipo_soc
+        #c_total_activos
+        #c_num_empleados
+        #c_sigla
+        #c_escritura
+        #c_notaria
+        #c_ciudad
+        #c_fecha_exp
+        #c_fecha_vcto
+        #c_camara
+        #c_registro
+        #c_grado_soc
+        #c_fecha_registro
+        #c_fecha_modif
+        #c_fecha_verif
+        #c_vigencia
+        #c_verificado
+        #c_funcionario
+        #en_situacion_cliente
+        #en_patrimonio_tec
+        #en_fecha_patri_bruto
+        #en_gran_contribuyente
+        #en_calificacion
+        #en_reestructurado
+        #en_concurso_acreedores
+        #en_concordato
+        #en_vinculacion
+        #en_tipo_vinculacion
+        #en_oficial_sup
+        #en_cliente
+        #en_preferen
+        #c_edad_laboral_promedio
+        #c_empleados_ley_50
+        #en_exc_sipla
+        #en_exc_por2
+        #en_digito
+        #p_depa_nac
+        #p_pais_emi
+        #p_depa_emi
+        #en_categoria
+        #en_emala_referencia
+        #en_banca
+        #c_total_pasivos
+        #en_pensionado
+        #en_rep_sib
+        #en_max_riesgo
+        #en_riesgo
+        #en_mries_ant
+        #en_fmod_ries
+        #en_user_ries
+        #en_reservado
+        #en_pas_finan
+        #en_fpas_finan
+        #en_fbalance
+        #en_relacint
+        #en_otringr
+        #en_exento_cobro
+        #en_doctos_carpeta
+        #en_oficina_prod
+        #en_accion
+        #en_procedencia
+        #en_fecha_negocio
+        #en_estrato
+        #en_recurso_pub
+        #en_influencia
+        #en_persona_pub
+        #en_victima
+        #en_bancarizado
+        #en_alto_riesgo
+        #en_fecha_riesgo
+        #en_estado
+        #p_c_apellido
+        #p_s_nombre
+        #en_calif_cartera
+        #en_cod_otro_pais
+        #en_ingre
+        #en_nacionalidad
+        #p_dep_doc
+        #p_numord
+        #c_razon_social
+        #c_segmento
+        #en_cem
+        #en_promotor
+        #en_inss
+        #en_licencia
+        #en_id_tutor
+        #en_nom_tutor
+        #en_referidor_ecu
+        #p_carg_pub
+        #p_rel_carg_pub
+        #p_situacion_laboral
+        #p_bienes
+        #en_otros_ingresos
+        #en_origen_ingresos
+        #c_codsuper
+        #en_nro_ciclo
+        #en_emproblemado
+        #en_dinero_transac
+        #en_manejo_doc
+        #en_persona_pep
+        #en_rfc
+        #en_ing_SN
+        #en_nac_aux
+        #en_banco
+        #en_pais_nac
+        #en_provincia_nac
+        #en_naturalizado
+        #en_forma_migratoria
+        #en_nro_extranjero
+        #en_calle_orig
+        #en_exterior_orig
+        #en_estado_orig
+        #en_pais_nac_c
+        #en_naturalizado_c
+        #en_forma_mig_c
+        #en_numero_ext_c
+        #en_tipo_iden_c
+        #en_numero_iden_c
+        #en_localidad
+        #en_calle_orig_c
+        #en_exterior_orig_c
+        #en_estado_orig_c
+        #en_escolaridad_c
+        #en_ocupacion_c
+        #en_actividad_c
+        #en_dependientes_c
+        #en_ident_tipo_c
+        #en_ident_num_c
+        #en_email_c
+        #en_firma_electronica
+  
+    NaturalPerson: # table: cobis..cl_ente (parcial) TODO: Revisar implementación, definir persona natural y jurídica.
+      description: 'Cliente o prospecto de cliente de tipo persona natural que está interesado en adquirir un producto financiero.'
+      properties:
+        code: #field:en_ente
+          type: integer
+          format: int32
+          minimum: 1
+        #en_subtipo: N/A
+        identification: #field:en_ced_ruc > Identification.number
+          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Identification'
+        # field:en_tipo_ced > Identificacion.type
+        names: # field:en_nombre
+          type: string
+          minLength: 1
+          maxLength: 64
+        surname: # field:p_p_apellido
+          type: string
+          minLength: 1
+          maxLength: 16
+        secondSurname: # field:p_s_apellido
+          type: string
+          minLength: 1
+          maxLength: 16
+        status:
+          type: string
+          minLength: 1
+          maxLength: 1
+        subsidiary: # field:en_filial
+          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Subsidiary'
+        branch: # field:en_oficina
+          $ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Branch'
+        creationDate: # field:en_fecha_crea
+          type: string
+          format: date-time
+        lastUpdatedDate: # field:en_fecha_mod
+          type: string
+          format: date-time
+        #en_direccion
+        #en_referencia
+        #en_casilla
+        #en_casilla_def
+        #en_tipo_dp
+        #en_balance
+        #en_grupo
+        #en_pais
+        #en_oficial
+        #en_actividad
+        #en_retencion
+        #en_mala_referencia
+        #en_comentario
+        #en_cont_malas
+        #s_tipo_soc_hecho
+        #en_sector
+        #en_referido
+        #en_nit
+        #en_doc_validado
+        #en_rep_superban
+        #p_sexo
+        #p_fecha_nac
+        #p_ciudad_nac
+        #p_lugar_doc
+        #p_profesion
+        #p_pasaporte
+        #p_estado_civil
+        #p_num_cargas
+        #p_num_hijos
+        #p_nivel_ing
+        #p_nivel_egr
+        #p_nivel_estudio
+        #p_tipo_persona
+        #p_tipo_vivienda
+        #p_calif_cliente
+        #p_personal
+        #p_propiedad
+        #p_trabajo
+        #p_soc_hecho
+        #p_fecha_emision
+        #p_fecha_expira
+        #c_cap_suscrito
+        #en_asosciada
+        #c_posicion
+        #c_tipo_compania
+        #c_rep_legal
+        #c_activo
+        #c_pasivo
+        #c_es_grupo
+        #c_capital_social
+        #c_reserva_legal
+        #c_fecha_const
+        #en_nomlar
+        #c_plazo
+        #c_direccion_domicilio
+        #c_fecha_inscrp
+        #c_fecha_aum_capital
+        #c_cap_pagado
+        #c_tipo_nit
+        #c_tipo_soc
+        #c_total_activos
+        #c_num_empleados
+        #c_sigla
+        #c_escritura
+        #c_notaria
+        #c_ciudad
+        #c_fecha_exp
+        #c_fecha_vcto
+        #c_camara
+        #c_registro
+        #c_grado_soc
+        #c_fecha_registro
+        #c_fecha_modif
+        #c_fecha_verif
+        #c_vigencia
+        #c_verificado
+        #c_funcionario
+        #en_situacion_cliente
+        #en_patrimonio_tec
+        #en_fecha_patri_bruto
+        #en_gran_contribuyente
+        #en_calificacion
+        #en_reestructurado
+        #en_concurso_acreedores
+        #en_concordato
+        #en_vinculacion
+        #en_tipo_vinculacion
+        #en_oficial_sup
+        #en_cliente
+        #en_preferen
+        #c_edad_laboral_promedio
+        #c_empleados_ley_50
+        #en_exc_sipla
+        #en_exc_por2
+        #en_digito
+        #p_depa_nac
+        #p_pais_emi
+        #p_depa_emi
+        #en_categoria
+        #en_emala_referencia
+        #en_banca
+        #c_total_pasivos
+        #en_pensionado
+        #en_rep_sib
+        #en_max_riesgo
+        #en_riesgo
+        #en_mries_ant
+        #en_fmod_ries
+        #en_user_ries
+        #en_reservado
+        #en_pas_finan
+        #en_fpas_finan
+        #en_fbalance
+        #en_relacint
+        #en_otringr
+        #en_exento_cobro
+        #en_doctos_carpeta
+        #en_oficina_prod
+        #en_accion
+        #en_procedencia
+        #en_fecha_negocio
+        #en_estrato
+        #en_recurso_pub
+        #en_influencia
+        #en_persona_pub
+        #en_victima
+        #en_bancarizado
+        #en_alto_riesgo
+        #en_fecha_riesgo
+        #en_estado
+        #p_c_apellido
+        #p_s_nombre
+        #en_calif_cartera
+        #en_cod_otro_pais
+        #en_ingre
+        #en_nacionalidad
+        #p_dep_doc
+        #p_numord
+        #c_razon_social
+        #c_segmento
+        #en_cem
+        #en_promotor
+        #en_inss
+        #en_licencia
+        #en_id_tutor
+        #en_nom_tutor
+        #en_referidor_ecu
+        #p_carg_pub
+        #p_rel_carg_pub
+        #p_situacion_laboral
+        #p_bienes
+        #en_otros_ingresos
+        #en_origen_ingresos
+        #c_codsuper
+        #en_nro_ciclo
+        #en_emproblemado
+        #en_dinero_transac
+        #en_manejo_doc
+        #en_persona_pep
+        #en_rfc
+        #en_ing_SN
+        #en_nac_aux
+        #en_banco
+        #en_pais_nac
+        #en_provincia_nac
+        #en_naturalizado
+        #en_forma_migratoria
+        #en_nro_extranjero
+        #en_calle_orig
+        #en_exterior_orig
+        #en_estado_orig
+        #en_pais_nac_c
+        #en_naturalizado_c
+        #en_forma_mig_c
+        #en_numero_ext_c
+        #en_tipo_iden_c
+        #en_numero_iden_c
+        #en_localidad
+        #en_calle_orig_c
+        #en_exterior_orig_c
+        #en_estado_orig_c
+        #en_escolaridad_c
+        #en_ocupacion_c
+        #en_actividad_c
+        #en_dependientes_c
+        #en_ident_tipo_c
+        #en_ident_num_c
+        #en_email_c
+        #en_firma_electronica
+
+
+# responses:
+  # GeneralError:
+  #   description: General Error
+  #   schema:
+  #     $ref: '#/definitions/ErrorModel'
+
+# parameters:
+  # skipParam:
+  #   name: "skip"
+  #   in: "query"
+  #   description: "number of items to skip"
+  #   type: "integer"
+
+# pathitems:
+  # EntityOperations:
+  #   get:
+  #     description: "Returns a pet based on ID"
+  #     summary: "Find pet by ID"
+  #     responses:
+  #       default:
+  #         $ref: '#/responses/GeneralError'
