@@ -2035,15 +2035,15 @@ components:
           $ref: '#/components/schemas/Currency'
         indicator:
           $ref: '#/components/schemas/Transaction_indicator'
-        cause:
-          $ref: '#/components/schemas/Transaction_cause'
+        reason:
+          $ref: '#/components/schemas/Transaction_reason'
         department:
           $ref: '#/components/schemas/Department'
         account:
           $ref: '#/components/schemas/SavingsAccount'
         destinationAccount:
           $ref: '#/components/schemas/SavingsAccount'
-        transactionConcept:
+        transactionType:
           maxLength: 40
           type: string
           description: Descripcón del concepto de la transacción
@@ -2406,7 +2406,7 @@ components:
           $ref: '#/components/schemas/CatalogDescription'
       description: 'Indica el tipo de saldo que se afecta con la nota. Ver listado
         en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).'
-    Transaction_cause:
+    Transaction_reason:
       type: object
       properties:
         code:
