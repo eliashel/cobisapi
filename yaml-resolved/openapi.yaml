@@ -2221,7 +2221,7 @@ components:
           $ref: '#/components/schemas/IdentificationType'
         birthCity:
           $ref: '#/components/schemas/City'
-        generationDate:
+        issueDate:
           type: string
           format: date
       description: Identificación de un cliente
