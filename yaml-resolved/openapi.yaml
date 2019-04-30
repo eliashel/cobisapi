@@ -2027,7 +2027,7 @@ components:
           $ref: '#/components/schemas/Amount'
         localChecksAmount:
           $ref: '#/components/schemas/Amount'
-        othersChecksAmount:
+        otherChecksAmount:
           $ref: '#/components/schemas/Amount'
         totalAmount:
           $ref: '#/components/schemas/Amount'
