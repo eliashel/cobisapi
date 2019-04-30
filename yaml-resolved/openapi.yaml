@@ -2336,7 +2336,7 @@ components:
         el siguiente conjunto de resultados de la página.
       format: int32
       default: 0
-    Pagination:
+    Paging:
       type: object
       properties:
         self:
