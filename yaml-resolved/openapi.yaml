@@ -2153,7 +2153,7 @@ components:
         branch:
           $ref: '#/components/schemas/Branch'
       description: Departamento de la organización.
-    Official:
+    Officer:
       type: object
       properties:
         code:
@@ -2189,10 +2189,10 @@ components:
         assignmentDate:
           type: string
           format: date
-        lastUpdatedDate:
+        lastUpdateDate:
           type: string
           format: date
-        lastUpdatedPasswordDate:
+        lastUpdatePasswordDate:
           type: string
           format: date
         status:
@@ -2221,7 +2221,7 @@ components:
           $ref: '#/components/schemas/IdentificationType'
         birthCity:
           $ref: '#/components/schemas/City'
-        expeditionDate:
+        generationDate:
           type: string
           format: date
       description: Identificación de un cliente
