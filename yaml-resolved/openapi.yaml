@@ -1974,10 +1974,10 @@ components:
           $ref: '#/components/schemas/Amount'
         currency:
           $ref: '#/components/schemas/Currency'
-        causeOfClosure:
-          $ref: '#/components/schemas/ClosedSavingsAccount_causeOfClosure'
-        detailedCauseOfClosure:
-          $ref: '#/components/schemas/ClosedSavingsAccount_detailedCauseOfClosure'
+        closingReason:
+          $ref: '#/components/schemas/ClosedSavingsAccount_closingReason'
+        detailedReasonForClosing:
+          $ref: '#/components/schemas/ClosedSavingsAccount_detailedReasonForClosing'
       description: Cuenta de ahorros cerrada
     SavingsAccountNumber:
       maxLength: 16
@@ -2369,7 +2369,7 @@ components:
           minLength: 1
           type: string
       description: Cuidad
-    ClosedSavingsAccount_causeOfClosure:
+    ClosedSavingsAccount_closingReason:
       type: object
       properties:
         code:
@@ -2380,7 +2380,7 @@ components:
         description:
           $ref: '#/components/schemas/CatalogDescription'
       description: 'Causa de cierre de una cuenta de ahorros. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre).'
-    ClosedSavingsAccount_detailedCauseOfClosure:
+    ClosedSavingsAccount_detailedReasonForClosing:
       type: object
       properties:
         code:
