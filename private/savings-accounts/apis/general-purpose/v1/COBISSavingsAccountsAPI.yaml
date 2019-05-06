@@ -14,17 +14,11 @@ info:
     url: http://www.cobiscorp.com/licenses/LICENSE-1.0.html # TODO: Publicar licencia.
 
 servers:
-# Added by API Auto Mocking Plugin
-# Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/eliashel/TMPAPI/1.0.0
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPITransactionalSavingsAccount/1.0.0
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICoreBanking/1.0.0
-  - url: http://cobisapi.cobiscorp.com/lastest
+  #- description: SwaggerHub API Auto Mocking
+  #  url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICuentasAhorrosTransaccional/1.0.0
+  - url: http://cobisapi.cobiscorp.com/lastest/v1
     description: Main (production) server
-  - url: http://staging-cobisapi.cobiscorp.com
+  - url: http://staging-cobisapi.cobiscorp.com/v1
     description: Internal staging server for testing
 
 ##########################################################
