@@ -1,0 +1,337 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "This is the domain for definitions of COBIS ADMIN module. This include, users, references, catalogs, etc.",
+    "version": "1.0.0",
+    "title": "COBIS Admin Domain"
+  },
+  "components": {
+    "parameters": {
+      "X-Authorization": {
+        "name": "X-Authorization",
+        "description": "JSON Web Token (JWT) entregado al usuario en la autenticación",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": true
+      },
+      "X-Request-ID": {
+        "name": "X-Request-ID",
+        "description": "Identificación única de la solicitud o petición",
+        "in": "header",
+        "schema": {
+          "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/RequestID"
+        },
+        "required": true
+      },
+      "X-Financial-ID": {
+        "name": "X-Financial-ID",
+        "description": "ID del banco o entidad financiera que provee el servicio de cuentas de ahorros",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      },
+      "X-EndUser-Login": {
+        "name": "X-EndUser-Login",
+        "description": "Login de usuario en la aplicación de front-end que realiza la petición",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      },
+      "X-EndUser-RequestDateTime": {
+        "name": "X-EndUser-RequestDateTime",
+        "description": "Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end",
+        "in": "header",
+        "schema": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required": false
+      },
+      "X-EndUser-Terminal": {
+        "name": "X-EndUser-Terminal",
+        "description": "Terminal (IP, número de teléfono, o identificador del dispositivo) desde el cual se originó la solicitud o petición por el usuario en la aplicación de front-end",
+        "in": "header",
+        "schema": {
+          "type": "string"
+        },
+        "required": false
+      },
+      "X-EndUser-LastLoggedDateTime": {
+        "name": "X-EndUser-LastLoggedDateTime",
+        "description": "Fecha y hora del último logueo del usuario en la aplicación",
+        "in": "header",
+        "schema": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "required": false
+      },
+      "X-Channel": {
+        "name": "X-Channel",
+        "description": "Canal desde el cual se origina la solicitud",
+        "in": "header",
+        "schema": {
+          "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ChannelCode"
+        },
+        "required": false
+      },
+      "X-Correlation-ID": {
+        "name": "X-Correlation-ID",
+        "description": "ID que relaciona la respuesta con la solicitud. El valor de este campo debe coincidir con el valor X-Request-ID enviado en la solicitud.",
+        "in": "header",
+        "schema": {
+          "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/RequestID"
+        }
+      },
+      "pagingLimitSize": {
+        "name": "pagingLimitSize",
+        "description": "Tamaño límite de paginación para una consulta que retorne una lista de elementos.",
+        "in": "query",
+        "schema": {
+          "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/PagingLimitSize"
+        },
+        "required": false
+      },
+      "pagingOffset": {
+        "name": "pagingOffset",
+        "description": "Número del registro desde el cual, a partir del siguiente se inicia el siguiente conjunto de resultados de la página.",
+        "in": "query",
+        "schema": {
+          "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/PagingOffset"
+        },
+        "required": false
+      }
+    },
+    "responses": {
+      "400BadRequest": {
+        "description": "El mensaje de solicitud no se encuentra debidamente formateado.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            },
+            "example": {
+              "code": "400",
+              "message": "El mensaje de solicitud no se encuentra debidamente formateado."
+            }
+          }
+        }
+      },
+      "401Unauthorized": {
+        "description": "No se encuentra autorizado para ejecutar la operación.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            },
+            "example": {
+              "code": "401",
+              "message": "No se encuentra autorizado para ejecutar la operación."
+            }
+          }
+        }
+      },
+      "403Forbidden": {
+        "description": "La solicitud ha sido denegada.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            },
+            "example": {
+              "code": "403",
+              "message": "La solicitud ha sido denegada."
+            }
+          }
+        }
+      },
+      "404NotFound": {
+        "description": "El objeto no fue encontrado.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            },
+            "example": {
+              "code": "404",
+              "message": "El objeto no fue encontrado."
+            }
+          }
+        }
+      },
+      "405MethodNotAllowed": {
+        "description": "La operación (método, ej: GET, POST, etc.) que se trata de ejecutar no se encuentra soportado para el contexto.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            },
+            "example": {
+              "code": "405",
+              "message": "La operación no se encuentra soportada."
+            }
+          }
+        }
+      },
+      "406NotAcceptable": {
+        "description": "La solicitud no fue aceptada.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            },
+            "example": {
+              "code": "406",
+              "message": "La solicitud no fue aceptada."
+            }
+          }
+        }
+      },
+      "429TooManyRequests": {
+        "description": "Se ha realizado la solicitud más de una vez.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            },
+            "example": {
+              "code": "429",
+              "message": "Se ha realizado la solicitud más de una vez."
+            }
+          }
+        }
+      },
+      "500InternalServerError": {
+        "description": "Se presentó un error durante el procesamiento de la solicitud.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            },
+            "example": {
+              "code": "500",
+              "message": "Se presentó un error durante el procesamiento de la solicitud."
+            }
+          }
+        }
+      },
+      "502BadGateway": {
+        "description": "Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            },
+            "example": {
+              "code": "502",
+              "message": "Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud."
+            }
+          }
+        }
+      },
+      "503ServiceUnavailable": {
+        "description": "El servicio no se encuentra disponible en el momento.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            }
+          }
+        }
+      },
+      "504GatewayTimeout": {
+        "description": "El servicio proxy no respondió en el tiempo para procesar la solicitud.",
+        "headers": {
+          "X-Correlation-ID": {
+            "schema": {
+              "$ref": "#/components/parameters/X-Correlation-ID"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+            }
+          }
+        }
+      }
+    }
+  }
+}
