@@ -362,7 +362,7 @@ components:
     
     
     Identification: # virtual object
-      description: 'Identificación de un cliente'
+      description: 'Identificación de un cliente.'
       properties:
         number:
           $ref: '#/components/schemas/IdentificationNumber'
@@ -375,7 +375,7 @@ components:
           format: date
     
     IdentificationType: # table:cobis..cl_tipo_documento
-      description: 'Tipo de identificación de una persona natural o jurídica'
+      description: 'Tipo de identificación de una persona natural o jurídica.'
       properties:
         code: # field:td_codigo
           $ref: '#/components/schemas/IdentificationTypeCode'
@@ -449,13 +449,13 @@ components:
 #      maxLength: 10
       
     CatalogDescription: # cobis..cl_catalogo.descripcion
-      description: 'Descripción de un elemento de un catálogo'
+      description: 'Descripción de un elemento de un catálogo.'
       type: string
       minLength: 1
       maxLength: 64
     
     CatalogStatus: # cobis..cl_catalogo.estado
-      description: 'Estado de un elemento de un catálogo'
+      description: 'Estado de un elemento de un catálogo.'
       type: string
       minLength: 1
       maxLength: 1
@@ -485,7 +485,7 @@ components:
       
     
     IdentificationNumber: # cobis..cl_ente.en_ced_ruc # TODO: Revisar implementación en BD.
-      description: 'Número de identificación de una persona natural o jurídica'
+      description: 'Número de identificación de una persona natural o jurídica.'
       type: string
       minLength: 5
       maxLength: 16
@@ -509,25 +509,30 @@ components:
       description: 'Error específico que describe un problema presentado al ejecutar una operación.'
       properties:
         code:
+          description: 'Código de error específico.'
           #type: integer
           #format: int32
           type: string
           minLength: 1
           maxLength: 128
         id:
+          description: 'Id de referencia única para propósitos de auditoría.'
           type: string
           minLength: 1
           maxLength: 40
         message:
+          description: 'Descripción del error específico.'
           type: string
           minLength: 1
           #maxLength: 64
           maxLength: 500
         path:
+          description: 'Al referirse de un error debido a un campo específico, se describe la ruta del campo.'
           type: string
           minLength: 1
           maxLength: 500
         url:
+          description: 'URL de la documentación en donde se encuentra mayor información sobre el error.'
           type: string
           minLength: 1
           maxLength: 500
@@ -536,13 +541,16 @@ components:
       description: 'Mensaje de respuesta de error.'
       properties:
         code:
+          description: 'Código del error general.'
           type: integer
           format: int32
         message:
+          description: 'Descripción del error general.'
           type: string
           minLength: 1
           maxLength: 500
         error:
+          description: 'Lista de los errores específicos.'
           items:
             $ref: '#/components/schemas/Error'
           type: array
@@ -587,7 +595,7 @@ components:
         
     
     RequestID:
-      description: 'Identificación única de una petición o solicitud'
+      description: 'Identificación única de una petición o solicitud.'
       type: string
       format: uuid
 
