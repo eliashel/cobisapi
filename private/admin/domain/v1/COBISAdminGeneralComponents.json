@@ -121,7 +121,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             },
             "example": {
               "code": "400",
@@ -142,7 +142,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             },
             "example": {
               "code": "401",
@@ -163,7 +163,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             },
             "example": {
               "code": "403",
@@ -184,7 +184,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             },
             "example": {
               "code": "404",
@@ -205,7 +205,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             },
             "example": {
               "code": "405",
@@ -226,7 +226,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             },
             "example": {
               "code": "406",
@@ -247,7 +247,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             },
             "example": {
               "code": "429",
@@ -268,7 +268,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             },
             "example": {
               "code": "500",
@@ -289,7 +289,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             },
             "example": {
               "code": "502",
@@ -310,7 +310,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             }
           }
         }
@@ -327,7 +327,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage"
+              "$ref": "https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse"
             }
           }
         }

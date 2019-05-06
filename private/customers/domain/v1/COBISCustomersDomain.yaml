@@ -31,7 +31,7 @@ components:
           minLength: 1
           maxLength: 1
     
-    LegalPerson: # table: cobis..cl_ente (parcial - persona jurídica) TODO: Completar.
+    JuridicalPerson: # table: cobis..cl_ente (parcial - persona jurídica) TODO: Completar.
       description: 'Cliente o prospecto de cliente de tipo persona natural que está interesado en adquirir un producto financiero.'
       properties:
         code: #field:en_ente
@@ -58,7 +58,7 @@ components:
         creationDate: # field:en_fecha_crea
           type: string
           format: date-time
-        lastUpdatedDate: # field:en_fecha_mod
+        lastUpdateDate: # field:en_fecha_mod
           type: string
           format: date-time
         #en_direccion
@@ -262,15 +262,15 @@ components:
         identification: #field:en_ced_ruc > Identification.number
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
         # field:en_tipo_ced > Identificacion.type
-        names: # field:en_nombre
+        name: # field:en_nombre
           type: string
           minLength: 1
           maxLength: 64
-        surname: # field:p_p_apellido
+        firstLastName: # field:p_p_apellido
           type: string
           minLength: 1
           maxLength: 16
-        secondSurname: # field:p_s_apellido
+        secondLastName: # field:p_s_apellido
           type: string
           minLength: 1
           maxLength: 16
@@ -285,7 +285,7 @@ components:
         creationDate: # field:en_fecha_crea
           type: string
           format: date-time
-        lastUpdatedDate: # field:en_fecha_mod
+        lastUpdateDate: # field:en_fecha_mod
           type: string
           format: date-time
         #en_direccion

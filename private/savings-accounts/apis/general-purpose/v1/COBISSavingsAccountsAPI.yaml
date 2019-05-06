@@ -976,7 +976,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
           example:
             code: '400'
             message: 'El mensaje de solicitud no se encuentra debidamente formateado.'
@@ -989,7 +989,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
           example:
             code: '401'
             message: 'No se encuentra autorizado para ejecutar la operación.'
@@ -1002,7 +1002,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
           example:
             code: '403'
             message: 'La solicitud ha sido denegada.'
@@ -1015,7 +1015,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
           example:
             code: '404'
             message: 'El objeto no fue encontrado.'
@@ -1028,7 +1028,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
           example:
             code: '405'
             message: 'La operación no se encuentra soportada.'
@@ -1041,7 +1041,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
           example:
             code: '406'
             message: 'La solicitud no fue aceptada.'
@@ -1054,7 +1054,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
           example:
             code: '429'
             message: 'Se ha realizado la solicitud más de una vez.'
@@ -1067,7 +1067,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
           example:
             code: '500'
             message: 'Se presentó un error durante el procesamiento de la solicitud.'
@@ -1080,7 +1080,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
           example:
             code: '502'
             message: 'Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud.'
@@ -1093,7 +1093,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
     504GatewayTimeout:
       description: 'El servicio proxy no respondió en el tiempo para procesar la solicitud.'
       headers:
@@ -1103,7 +1103,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorMessage' 
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse' 
   
   ####################################################################
   # Reusable schemas (data models)
