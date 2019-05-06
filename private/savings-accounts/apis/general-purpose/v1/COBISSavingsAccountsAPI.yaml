@@ -119,21 +119,21 @@ paths:
                   name: 'THOMAS JEFFERSON'
                   #availableBalance: '600.00'
         400:
-          $ref: '#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
         401:
-          $ref: '#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/401Unauthorized'
         403:
-          $ref: '#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
         404:
-          $ref: '#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
         405:
-          $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
         406:
-          $ref: '#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
         429:
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
         500:
-          $ref: '#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
   
   
       
@@ -200,21 +200,21 @@ paths:
                 account:
                   number: '011201000019'
         400:
-          $ref: '#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
         401:
-          $ref: '#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/401Unauthorized'
         403:
-          $ref: '#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
         404:
-          $ref: '#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
         405:
-          $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
         406:
-          $ref: '#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
         429:
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
         500:
-          $ref: '#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
         
         
   /savings-accounts/deposit/initial:
@@ -297,21 +297,21 @@ paths:
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '600.00'
         400:
-          $ref: '#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
         401:
-          $ref: '#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/401Unauthorized'
         403:
-          $ref: '#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
         404:
-          $ref: '#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
         405:
-          $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
         406:
-          $ref: '#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
         429:
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
         500:
-          $ref: '#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
 
   /savings-accounts/withdraw:
     post:
@@ -392,21 +392,21 @@ paths:
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '1300.00'
         400:
-          $ref: '#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
         401:
-          $ref: '#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/401Unauthorized'
         403:
-          $ref: '#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
         404:
-          $ref: '#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
         405:
-          $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
         406:
-          $ref: '#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
         429:
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
         500:
-          $ref: '#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
 
   /savings-accounts/debit-note:
     post:
@@ -490,21 +490,21 @@ paths:
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '1600.00'
         400:
-          $ref: '#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
         401:
-          $ref: '#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/401Unauthorized'
         403:
-          $ref: '#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
         404:
-          $ref: '#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
         405:
-          $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
         406:
-          $ref: '#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
         429:
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
         500:
-          $ref: '#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
           
   /savings-accounts/credit-note:
     post:
@@ -588,21 +588,21 @@ paths:
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '1600.00'
         400:
-          $ref: '#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
         401:
-          $ref: '#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/401Unauthorized'
         403:
-          $ref: '#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
         404:
-          $ref: '#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
         405:
-          $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
         406:
-          $ref: '#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
         429:
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
         500:
-          $ref: '#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
 
   /savings-accounts/transfer:
     post:
@@ -693,21 +693,21 @@ paths:
                 #    lastName: 'Jefferson'
                 #  name: 'THOMAS JEFFERSON'
         400:
-          $ref: '#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
         401:
-          $ref: '#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/401Unauthorized'
         403:
-          $ref: '#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
         404:
-          $ref: '#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
         405:
-          $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
         406:
-          $ref: '#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
         429:
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
         500:
-          $ref: '#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
   
 
 #  /savings-accounts/book:
@@ -751,21 +751,21 @@ paths:
 #            X-Correlation-ID:
 #              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
 #        400:
-#          $ref: '#/components/responses/400BadRequest'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
 #        401:
-#          $ref: '#/components/responses/401Unauthorized'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/401Unauthorized'
 #        403:
-#          $ref: '#/components/responses/403Forbidden'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
 #        404:
-#          $ref: '#/components/responses/404NotFound'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
 #        405:
-#          $ref: '#/components/responses/405MethodNotAllowed'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
 #        406:
-#          $ref: '#/components/responses/406NotAcceptable'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
 #        429:
-#          $ref: '#/components/responses/429TooManyRequests'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
 #        500:
-#          $ref: '#/components/responses/500InternalServerError'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
 
   /savings-accounts/book/initizalization:
     put:
@@ -802,21 +802,21 @@ paths:
             X-Correlation-ID:
               $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
         400:
-          $ref: '#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
         401:
-          $ref: '#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/401Unauthorized'
         403:
-          $ref: '#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
         404:
-          $ref: '#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
         405:
-          $ref: '#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
         406:
-          $ref: '#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
         429:
-          $ref: '#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
         500:
-          $ref: '#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
 
 #  /savings-accounts/book/balance: # TODO: Validar descripciones de la operación, ya que la impresión la hace directamente el front-end.
 #    put:
@@ -857,19 +857,19 @@ paths:
 #            X-Correlation-ID:
 #              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
 #        400:
-#          $ref: '#/components/responses/400BadRequest'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
 #        403:
-#          $ref: '#/components/responses/403Forbidden'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
 #        404:
-#          $ref: '#/components/responses/404NotFound'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
 #        405:
-#          $ref: '#/components/responses/405MethodNotAllowed'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
 #        406:
-#          $ref: '#/components/responses/406NotAcceptable'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
 #        429:
-#          $ref: '#/components/responses/429TooManyRequests'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
 #        500:
-#          $ref: '#/components/responses/500InternalServerError'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
 
 
 #  /savings-accounts/close:
@@ -916,21 +916,21 @@ paths:
 #            X-Correlation-ID:
 #              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
 #        400:
-#          $ref: '#/components/responses/400BadRequest'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/400BadRequest'
 #        401:
-#          $ref: '#/components/responses/401Unauthorized'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/401Unauthorized'
 #        403:
-#          $ref: '#/components/responses/403Forbidden'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/403Forbidden'
 #        404:
-#          $ref: '#/components/responses/404NotFound'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/404NotFound'
 #        405:
-#          $ref: '#/components/responses/405MethodNotAllowed'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/405MethodNotAllowed'
 #        406:
-#          $ref: '#/components/responses/406NotAcceptable'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/406NotAcceptable'
 #        429:
-#          $ref: '#/components/responses/429TooManyRequests'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/429TooManyRequests'
 #        500:
-#          $ref: '#/components/responses/500InternalServerError'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/responses/500InternalServerError'
 
 
 #externalDocs:
@@ -969,134 +969,8 @@ components:
   ####################################################################
   # Reusable responses, such as 401 Unauthorized or 400 Bad Request
   ####################################################################
-  responses:
-    400BadRequest:
-      description: 'El mensaje de solicitud no se encuentra debidamente formateado.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
-          example:
-            code: '400'
-            message: 'El mensaje de solicitud no se encuentra debidamente formateado.'
-    401Unauthorized:
-      description: 'No se encuentra autorizado para ejecutar la operación.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
-          example:
-            code: '401'
-            message: 'No se encuentra autorizado para ejecutar la operación.'
-    403Forbidden:
-      description: 'La solicitud ha sido denegada.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
-          example:
-            code: '403'
-            message: 'La solicitud ha sido denegada.'
-    404NotFound:
-      description: 'El objeto no fue encontrado.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
-          example:
-            code: '404'
-            message: 'El objeto no fue encontrado.'
-    405MethodNotAllowed:
-      description: 'La operación (método, ej: GET, POST, etc.) que se trata de ejecutar no se encuentra soportado para el contexto.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
-          example:
-            code: '405'
-            message: 'La operación no se encuentra soportada.'
-    406NotAcceptable:
-      description: 'La solicitud no fue aceptada.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
-          example:
-            code: '406'
-            message: 'La solicitud no fue aceptada.'
-    429TooManyRequests:
-      description: 'Se ha realizado la solicitud más de una vez.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
-          example:
-            code: '429'
-            message: 'Se ha realizado la solicitud más de una vez.'
-    500InternalServerError:
-      description: 'Se presentó un error durante el procesamiento de la solicitud.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
-          example:
-            code: '500'
-            message: 'Se presentó un error durante el procesamiento de la solicitud.'
-    502BadGateway:
-      description: 'Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
-          example:
-            code: '502'
-            message: 'Se presentó un error al procesar la respuesta de un servicio proxy requerido para la solicitud.'
-    503ServiceUnavailable:
-      description: 'El servicio no se encuentra disponible en el momento.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse'
-    504GatewayTimeout:
-      description: 'El servicio proxy no respondió en el tiempo para procesar la solicitud.'
-      headers:
-        X-Correlation-ID:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
-      content:
-        application/json:
-          schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/ErrorResponse' 
-  
+  #responses:
+
   ####################################################################
   # Reusable schemas (data models)
   ####################################################################
