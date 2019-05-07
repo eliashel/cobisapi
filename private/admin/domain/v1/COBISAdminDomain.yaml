@@ -10,6 +10,14 @@ components:
   # Reusable path, query, header and cookie parameters
   ####################################################################
   parameters:
+    offsetParam:
+      in: query
+      name: offset
+      required: false
+      schema:
+        type: integer
+        minimum: 0
+      description: The number of items to skip before starting to collect the
     #############################
     # REQUEST HEADER PARAMETERS #
     #############################
