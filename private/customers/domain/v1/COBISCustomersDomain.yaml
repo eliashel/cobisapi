@@ -31,7 +31,7 @@ components:
           minLength: 1
           maxLength: 1
     
-    JuridicalPerson: # table: cobis..cl_ente (parcial - persona jurídica) TODO: Completar.
+    LegalEntity: # table: cobis..cl_ente (parcial - persona jurídica) TODO: Completar.
       description: 'Cliente o prospecto de cliente de tipo persona natural que está interesado en adquirir un producto financiero.'
       properties:
         code: #field:en_ente

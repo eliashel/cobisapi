@@ -36,9 +36,9 @@ components:
               * X: TRASLADADA-CANCELADA
           type: string
           enum: [A, C, G, I, N, T, X]
-        #ah_control: OK # savingsBook.controlNumber
-        savingsBook:
-          $ref: '#/components/schemas/SavingsBook'
+        #ah_control: OK # passbook.controlNumber
+        passbook:
+          $ref: '#/components/schemas/Passbook'
         subsidiary: # field:ah_filial -> cobis..cl_filial
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:ah_oficina
@@ -93,7 +93,7 @@ components:
         #ah_rem_hoy
         #ah_interes
         #ah_interes_ganado
-        #ah_saldo_libreta # SavingsBook.balance
+        #ah_saldo_libreta # Passbook.balance
         #ah_saldo_interes: # field:ah_saldo_interes
         #  description: 'Intereses la cuenta' # TODO: Ajustar descripción
         #  type: 
@@ -124,7 +124,7 @@ components:
         #ah_fecha_ult_corte
         #ah_fecha_ult_capi
         #ah_fecha_prx_capita
-        #ah_linea # SavingsBook.line
+        #ah_linea # Passbook.line
         #ah_ult_linea # no se usa
         #ah_cliente_ec
         #ah_direccion_ec
@@ -146,7 +146,7 @@ components:
         #ah_tipocta
         #ah_prod_banc
         #ah_origen
-        #ah_numlib # SavingsBook.number
+        #ah_numlib # Passbook.number
         #ah_dep_ini
         #ah_contador_firma
         #ah_telefono
@@ -315,7 +315,7 @@ components:
     #    status:
     #      $ref: '#/components/schemas/CatalogStatus'
     
-    SavingsBook: # table:ah_cuenta (virtual)
+    Passbook: # table:ah_cuenta (virtual)
       description: 'Libreta de cuenta de ahorros'
       properties:
         number: # field:ah_numlib

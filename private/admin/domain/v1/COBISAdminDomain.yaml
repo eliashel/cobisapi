@@ -669,7 +669,7 @@ components:
       minimum: 0
       default: 0
 
-    Paging:
+    Pagination:
       description: 'Paginación del resultado de una lista de elementos o registros.'
       properties:
         self:
