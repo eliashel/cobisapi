@@ -76,7 +76,8 @@ components:
           maxLength: 1
         #  ci_provincia
         #  ci_cod_remesas
-        #  ci_pais
+        country: #  ci_pais
+          $ref: '#/components/schemas/Country'
         #  ci_canton
     
     Country: # table:cl_pais
@@ -323,7 +324,7 @@ components:
         'Género o sexo de la persona.'
       properties:
         code:
-          description: 'Código del sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          description: 'Código del sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_sexo](http://www.cobiscorp.com/api/tabla#cl_sexo).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
           type: string
           minLength: 1
           maxLength: 1

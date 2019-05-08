@@ -14,7 +14,7 @@
         "schema" : {
           "type" : "string"
         },
-        "required" : true
+        "required" : false
       },
       "X-Request-ID" : {
         "name" : "X-Request-ID",
