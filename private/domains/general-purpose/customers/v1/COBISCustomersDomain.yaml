@@ -17,7 +17,7 @@ components:
           minimum: 1
           maximum: 9999999999
         identification:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
         name:
           type: string
           minLength: 1
@@ -40,7 +40,7 @@ components:
           minimum: 1
         #en_subtipo: N/A
         identification: #field:en_ced_ruc > Identification.number
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
         # field:en_tipo_ced > Identificacion.type
         name: # field:en_nombre
           type: string
@@ -52,9 +52,9 @@ components:
           maxLength: 1
         subsidiary: # field:en_filial
           #$ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Subsidiary'
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:en_oficina
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         creationDate: # field:en_fecha_crea
           type: string
           format: date-time
@@ -260,7 +260,7 @@ components:
           minimum: 1
         #en_subtipo: N/A
         identification: #field:en_ced_ruc > Identification.number
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
         # field:en_tipo_ced > Identificacion.type
         name: # field:en_nombre
           type: string
@@ -279,9 +279,9 @@ components:
           minLength: 1
           maxLength: 1
         subsidiary: # field:en_filial
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:en_oficina
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         creationDate: # field:en_fecha_crea
           type: string
           format: date-time

@@ -68,14 +68,14 @@ paths:
       operationId: SavingsAccountsGetByNumber
       parameters:
         # HEADER REQUEST
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
         # BODY REQUEST
         - name: number
           in: path
@@ -83,17 +83,17 @@ paths:
           #description: 'Identificador interno único de cuenta de ahorros.'
           description: 'Número de cuenta de ahorros.'
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccountNumber'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccountNumber'
       responses:
         200:
           description: 'Información de la cuenta de ahorros'
           headers:
             X-Correlation-ID:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
               example: # 
                 savingsAccount:
                   code: 345353
@@ -119,21 +119,21 @@ paths:
                   name: 'THOMAS JEFFERSON'
                   #availableBalance: '600.00'
         400:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
         403:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
         404:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
         405:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
         406:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
         429:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
         500:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
   
   
       
@@ -146,14 +146,14 @@ paths:
       operationId: SavingsAccountsDepositCreate
       parameters:
         # HEADER REQUEST
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
       # BODY REQUEST
       requestBody:
         description: 'Datos para realizar el déposito a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.'
@@ -179,11 +179,11 @@ paths:
           description: 'Se ha realizado la transacción exitosamente.'
           headers:
             X-Correlation-ID:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
               example:
                 postingDate: '2019-02-13'
                 primaryTransactionId: 1521020
@@ -200,21 +200,21 @@ paths:
                 account:
                   number: '011201000019'
         400:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
         403:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
         404:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
         405:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
         406:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
         429:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
         500:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
         
         
   /savings-accounts/deposit/initial:
@@ -226,14 +226,14 @@ paths:
       operationId: SavingsAccountsInitialDepositCreate
       parameters:
         # HEADER REQUEST
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
       # BODY REQUEST
       requestBody:
         description: 'Datos para realizar el déposito inicial a la cuenta de ahorros. Si el depósito es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.'
@@ -257,11 +257,11 @@ paths:
           description: 'El depósito inicial se ha realizado exitosamente.'
           headers:
             X-Correlation-ID:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
               example:
                 postingDate: '2019-02-13'
                 primaryTransactionId: 1521020
@@ -297,21 +297,21 @@ paths:
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '600.00'
         400:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
         403:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
         404:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
         405:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
         406:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
         429:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
         500:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
 
   /savings-accounts/withdraw:
     post:
@@ -322,14 +322,14 @@ paths:
       operationId: SavingsAccountsWithdrawCreate
       parameters:
         # HEADER REQUEST
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
       # BODY REQUEST
       requestBody:
         description: 'Datos para realizar el retiro en efectivo de una cuenta de ahorros. Si el retiro es con libreta, debe enviarse el elemento savingsBook. En caso contrario, el elemento savingsBook no es requerido.'
@@ -352,11 +352,11 @@ paths:
           description: 'El retiro se ha realizado exitosamente.'
           headers:
             X-Correlation-ID:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
               example:
                 postingDate: '2019-02-13'
                 primaryTransactionId: 12345678
@@ -392,21 +392,21 @@ paths:
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '1300.00'
         400:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
         403:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
         404:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
         405:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
         406:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
         429:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
         500:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
 
   /savings-accounts/debit-note:
     post:
@@ -417,14 +417,14 @@ paths:
       operationId: SavingsAccountsDebitNoteCreate
       parameters:
         # HEADER REQUEST
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
       # BODY REQUEST
       requestBody:
         description: 'Datos para realizar la nota débito a la cuenta de ahorros.'
@@ -447,11 +447,11 @@ paths:
           description: 'La nota débito se ha realizado exitosamente.'
           headers:
             X-Correlation-ID:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
               example:
                 postingDate: '2019-02-13'
                 primaryTransactionId: 1521020
@@ -490,21 +490,21 @@ paths:
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '1600.00'
         400:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
         403:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
         404:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
         405:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
         406:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
         429:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
         500:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
           
   /savings-accounts/credit-note:
     post:
@@ -515,14 +515,14 @@ paths:
       operationId: SavingsAccountsCreditNoteCreate
       parameters:
         # HEADER REQUEST
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
       # BODY REQUEST
       requestBody:
         description: 'Datos para realizar la nota crédito a la cuenta de ahorros.'
@@ -545,11 +545,11 @@ paths:
           description: 'La nota crédito se ha realizado exitosamente.'
           headers:
             X-Correlation-ID:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
               example:
                 postingDate: '2019-02-13'
                 primaryTransactionId: 1521020
@@ -588,21 +588,21 @@ paths:
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '1600.00'
         400:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
         403:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
         404:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
         405:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
         406:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
         429:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
         500:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
 
   /savings-accounts/transfer:
     post:
@@ -613,14 +613,14 @@ paths:
       operationId: SavingsAccountsTransferCreate
       parameters:
         # HEADER REQUEST
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
       # BODY REQUEST
       requestBody:
         description: 'Datos para realizar la transferencia entre las cuentas de ahorros.'
@@ -644,11 +644,11 @@ paths:
           description: 'Se ha realizado la transacción exitosamente.'
           headers:
             X-Correlation-ID:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction' # TODO: Revisar respuesta de la transacción
               example:
                 postingDate: '2019-02-13'
                 primaryTransactionId: 1521020 
@@ -693,21 +693,21 @@ paths:
                 #    lastName: 'Jefferson'
                 #  name: 'THOMAS JEFFERSON'
         400:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
         403:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
         404:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
         405:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
         406:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
         429:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
         500:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
   
 
 #  /savings-accounts/book:
@@ -719,14 +719,14 @@ paths:
 #      operationId: SavingsAccountBookUpdate
 #      parameters:
         # HEADER REQUEST
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
 #      #BODY REQUEST
 #      requestBody:
 #        description: 'Datos para actualizar la libreta de la cuenta de ahorros.'
@@ -749,23 +749,23 @@ paths:
 #          description: 'La libreta se ha actuailzado exitosamente.'
 #          headers:
 #            X-Correlation-ID:
-#              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+#              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
 #        400:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
 #        401:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/401Unauthorized'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
 #        403:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
 #        404:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
 #        405:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
 #        406:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
 #        429:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
 #        500:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
 
   /savings-accounts/book/initizalization:
     put:
@@ -776,14 +776,14 @@ paths:
       operationId: SavingsAccountsIniBookUpdate
       parameters:
         # HEADER REQUEST
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
       #BODY REQUEST
       requestBody:
         description: 'Datos para realizar la personificación de la libreta de la cuenta de ahorros.'
@@ -800,23 +800,23 @@ paths:
           description: 'La solicitud se ha ejecutado exitosamente.'
           headers:
             X-Correlation-ID:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
         400:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/401Unauthorized'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
         403:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
         404:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
         405:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
         406:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
         429:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
         500:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
 
 #  /savings-accounts/book/balance: # TODO: Validar descripciones de la operación, ya que la impresión la hace directamente el front-end.
 #    put:
@@ -827,14 +827,14 @@ paths:
 #      operationId: SavingsAccountsBalanceBookUpdate
 #      parameters:
 #        # HEADER REQUEST
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
 #      #BODY REQUEST
 #      requestBody:
 #        description: 'Datos para realizar la impresión del saldo en la libreta de la cuenta de ahorros.'
@@ -855,21 +855,21 @@ paths:
 #          description: 'Se han enviado los datos para la impresión del saldo en la libreta exitosamente.'
 #          headers:
 #            X-Correlation-ID:
-#              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+#              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
 #        400:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
 #        403:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
 #        404:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
 #        405:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
 #        406:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
 #        429:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
 #        500:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
 
 
 #  /savings-accounts/close:
@@ -881,14 +881,14 @@ paths:
 #      operationId: SavingsAccountsClose
 #      parameters:
 #        # HEADER REQUEST
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Authorization'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Request-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Financial-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Login'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Channel'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
 #      #BODY REQUEST
 #      requestBody:
 #        description: 'Datos para realizar el cierre de la cuenta de ahorros.'
@@ -914,23 +914,23 @@ paths:
 #          description: 'La solicitud se ha ejecutado exitosamente.'
 #          headers:
 #            X-Correlation-ID:
-#              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/parameters/X-Correlation-ID'
+#              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
 #        400:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/400BadRequest'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
 #        401:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/401Unauthorized'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
 #        403:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/403Forbidden'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
 #        404:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/404NotFound'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
 #        405:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/405MethodNotAllowed'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
 #        406:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/406NotAcceptable'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
 #        429:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/429TooManyRequests'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
 #        500:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminGeneralComponents.json#/components/responses/500InternalServerError'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
 
 
 #externalDocs:
@@ -985,62 +985,62 @@ components:
         savingsAccount:
           #$ref: '#/components/schemas/SavingsAccount'
           #$ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
         transaction:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
     
 #    CloseSavingsAccountRq: # REQUEST FOR:/close
 #      description: 'Cierre de cuenta de ahorros' 
 #      type: object
 #      properties:
 #        savingsAccount:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
 #        detailToCloseSavingsAccount:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/ClosedSavingsAccount'
+#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/ClosedSavingsAccount'
     
     DepositSavingsAccountRq: # REQUEST FOR:/deposit
       description: 'Depósito de cuenta de ahorros' 
       type: object
       properties:
         savingsAccount:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
         transaction:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
     
     DebitNoteSavingsAccountRq: # REQUEST FOR:/debit-note
       description: 'Depósito de cuenta de ahorros' 
       type: object
       properties:
         savingsAccount:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
         transaction:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
     
     InitialDepositSavingsAccountRq: # REQUEST FOR:/deposit/initial
       description: 'Depósito inicial de cuenta de ahorros' 
       type: object
       properties:
         savingsAccount:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
         transaction:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
     
     TransferSavingsAccountRq: # REQUEST FOR:/transfer
       description: 'Depósito de cuenta de ahorros' 
       type: object
       properties:
         originSavingsAccount:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
         destinationSavingsAccount:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
         transaction:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
     
     WithdrawSavingsAccountRq: # REQUEST FOR:/withdraw
       description: 'Depósito inicial de cuenta de ahorros' 
       type: object
       properties:
         savingsAccount:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
         transaction:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/savings-accounts/domain/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/Transaction'
