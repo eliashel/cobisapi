@@ -155,7 +155,7 @@ components:
         #de_o_departamento
         #de_nivel
     
-    Officer:
+    Officer: # table:cl_funcionario
       description: 'Funcionario o responsable de un usuario del sistema.'
       properties:
         code: # field:fu_funcionario
@@ -288,6 +288,34 @@ components:
         #  fi_ruc
         #  fi_cont_nivel
 
+    # CATALOGS
+    Gender: # cobis..cl_catalogo[table:4:cl_sexo]
+      description: >
+        'Género o sexo de la persona.'
+      properties:
+        code:
+          description: 'Código del sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_sexo](http://www.cobiscorp.com/api/catalogo#cl_sexo).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+              $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+  
+    MaritalStatus: # cobis..cl_catalogo[table:211:cl_ecivil]
+      description: >
+        'Estado civil de la persona.'
+      properties:
+        code:
+          description: 'Código del estado civil de la persona. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_ecivil](http://www.cobiscorp.com/api/catalogo#cl_ecivil).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+              $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
 
   # KEY ELEMENTS
     ChannelCode: # TODO: Validar implementación de objeto en BD.
@@ -319,19 +347,7 @@ components:
       minLength: 1
       maxLength: 1
     
-    Gender: # cobis..cl_catalogo[table:4:cl_sexo]
-      description: >
-        'Género o sexo de la persona.'
-      properties:
-        code:
-          description: 'Código del sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_sexo](http://www.cobiscorp.com/api/tabla#cl_sexo).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
-          type: string
-          minLength: 1
-          maxLength: 1
-        description:
-              $ref: '#/components/schemas/CatalogDescription'
-        status:
-          $ref: '#/components/schemas/CatalogStatus'
+    
     
     IdentificationTypeCode: # cobis..cl_tipo_documento.td_codigo
       description: >

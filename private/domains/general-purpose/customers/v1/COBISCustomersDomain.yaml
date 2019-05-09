@@ -17,7 +17,7 @@ components:
           minimum: 1
           maximum: 9999999999
         identification:
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
         name:
           type: string
           minLength: 1
@@ -40,7 +40,7 @@ components:
           minimum: 1
         #en_subtipo: N/A
         identification: #field:en_ced_ruc > Identification.number
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
         # field:en_tipo_ced > Identificacion.type
         name: # field:en_nombre
           type: string
@@ -52,9 +52,9 @@ components:
           maxLength: 1
         subsidiary: # field:en_filial
           #$ref: 'https://api.swaggerhub.com/domains/Cobiscorp/COBISAdmin/0.0.1#/components/schemas/Subsidiary'
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:en_oficina
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         creationDate: # field:en_fecha_crea
           type: string
           format: date-time
@@ -250,6 +250,7 @@ components:
         #en_ident_num_c
         #en_email_c
         #en_firma_electronica
+
   
     NaturalPerson: # table: cobis..cl_ente (parcial) TODO: Revisar implementación, definir persona natural y jurídica.
       description: 'Cliente o prospecto de cliente de tipo persona natural que está interesado en adquirir un producto financiero.'
@@ -260,7 +261,7 @@ components:
           minimum: 1
         #en_subtipo: N/A
         identification: #field:en_ced_ruc > Identification.number
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
         # field:en_tipo_ced > Identificacion.type
         name: # field:en_nombre
           type: string
@@ -279,9 +280,9 @@ components:
           minLength: 1
           maxLength: 1
         subsidiary: # field:en_filial
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:en_oficina
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         creationDate: # field:en_fecha_crea
           type: string
           format: date-time
@@ -308,13 +309,18 @@ components:
         #en_nit
         #en_doc_validado
         #en_rep_superban
-        #p_sexo
-        #p_fecha_nac
-        #p_ciudad_nac
+        gender: #field: p_sexo
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Gender'
+        birthDate: #p_fecha_nac
+          type: string
+          format: date
+        birthCity: # field:p_ciudad_nac
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/City'
         #p_lugar_doc
         #p_profesion
         #p_pasaporte
-        #p_estado_civil
+        maritalStatus: #p_estado_civil
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/MaritalStatus'
         #p_num_cargas
         #p_num_hijos
         #p_nivel_ing
@@ -450,8 +456,10 @@ components:
         #en_rfc
         #en_ing_SN
         #en_nac_aux
-        #en_banco
-        #en_pais_nac
+        ##externalCode: #en_banco
+
+        birthCountry: #field: en_pais_nac
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/admin/domain/v1/COBISAdminDomain.yaml#/components/schemas/Country'
         #en_provincia_nac
         #en_naturalizado
         #en_forma_migratoria
@@ -477,26 +485,4 @@ components:
         #en_ident_num_c
         #en_email_c
         #en_firma_electronica
-
-
-# responses:
-  # GeneralError:
-  #   description: General Error
-  #   schema:
-  #     $ref: '#/definitions/ErrorModel'
-
-# parameters:
-  # skipParam:
-  #   name: "skip"
-  #   in: "query"
-  #   description: "number of items to skip"
-  #   type: "integer"
-
-# pathitems:
-  # EntityOperations:
-  #   get:
-  #     description: "Returns a pet based on ID"
-  #     summary: "Find pet by ID"
-  #     responses:
-  #       default:
-  #         $ref: '#/responses/GeneralError'
+        #email:
