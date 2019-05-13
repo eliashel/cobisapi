@@ -19,7 +19,7 @@ components:
           maximum: 9999999999
         identification:
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
           description: 'Identificación del cliente o prospecto.'
         name:
           description: 'Nombres.'
@@ -48,7 +48,7 @@ components:
         #en_subtipo: N/A
         identification: #field:en_ced_ruc > Identification.number
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
           description: 'Identificación del cliente o prospecto.'
         # field:en_tipo_ced > Identificacion.type
         name: # field:en_nombre
@@ -63,11 +63,11 @@ components:
           maxLength: 1
         subsidiary: # field:en_filial
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
           description: 'Filial.'          
         branch: # field:en_oficina
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
           description: 'Oficina.'
         creationDate: # field:en_fecha_crea
           description: 'Fecha de creación.'
@@ -360,7 +360,7 @@ components:
         #en_subtipo: N/A
         identification: #field:en_ced_ruc > Identification.number
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
           description: 'Identificación del cliente o prospecto.'
         # field:en_tipo_ced > Identificacion.type
         names: # field:en_nombre
@@ -385,11 +385,11 @@ components:
           maxLength: 1
         subsidiary: # field:en_filial
           allOf: 
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
           description: 'Filial.'
         branch: # field:en_oficina
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
           description: 'Oficina.'
         enrollmentDate: # field:en_fecha_crea
           description: 'Fecha de creación.'
@@ -409,7 +409,7 @@ components:
         #en_pais
         officer: #field:en_oficial
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
           description: 'Oficial.'
         #en_actividad
         #en_retencion
@@ -424,7 +424,7 @@ components:
         #en_rep_superban
         gender: #field: p_sexo
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Gender'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Gender'
           description: 'Género.'
         birthDate: #p_fecha_nac
           description: 'Fecha de nacimiento'
@@ -432,14 +432,14 @@ components:
           format: date
         birthCity: # field:p_ciudad_nac
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/City'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/City'
           description: 'Ciudad de nacimiento.'
         #p_lugar_doc
         #p_profesion
         #p_pasaporte
         maritalStatus: #p_estado_civil
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/MaritalStatus'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/MaritalStatus'
           description: 'Estado civil.'
         #p_num_cargas
         #p_num_hijos
@@ -578,7 +578,7 @@ components:
         #en_persona_pep
         taxIdentification: #field:en_rfc > Identification.number
           allOf: 
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
           description: 'Identificación tributaria.'
         #en_ing_SN
         #en_nac_aux
@@ -588,7 +588,7 @@ components:
           maxLength: 30
         birthCountry: #field: en_pais_nac
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Country'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Country'
           description: 'Pais de nacimiento.'
         #en_provincia_nac
         #en_naturalizado
@@ -603,7 +603,7 @@ components:
         #en_numero_ext_c
         secondaryIdentification: #field:en_numero_iden_c > Identification.number, field:en_tipo_iden_c > Identification.type
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Identification'
           description: 'Segunda identificación.'
         #en_localidad
         #en_calle_orig_c
@@ -714,7 +714,7 @@ components:
           type: array
           items:
             allOf:
-              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Email'
+              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Email'
             description: 'Correo electrónico.'
         solidarityGroup:          
           allOf: 
@@ -725,14 +725,14 @@ components:
           type: array
           items:
             allOf:
-              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Address'
+              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Address'
             description: 'Dirección de correspondencia.'
         phones:
           description: 'Teléfonos de contacto.'
           type: array
           items:
             allOf:
-              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Phone'            
+              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Phone'            
             description: 'Teléfonos de contacto.'
 
     SolidarityGroup: #table: cobis..cl_grupo TODO: Definición de datos para un de grupos de clientes
@@ -752,7 +752,7 @@ components:
         #	gr_compania
         officer: #field:gr_oficial
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
           description: 'Oficial.'
         creationDate: # field:gr_fecha_registro
           description: 'Fecha de creación del grupo de clientes.'
@@ -777,7 +777,7 @@ components:
           maxLength: 125
         meetingDay: #field:gr_dia_reunion
             allOf:
-              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/WeekDay'
+              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/WeekDay'
             description: 'Día de la reunión'
         meetingHour: #field:gr_hora_reunion
           description: 'Hora de la reunión.'
@@ -794,11 +794,11 @@ components:
         #	gr_tipo
         account: #field:gr_cta_grupal
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Account'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Account'
           description: 'Cuenta grupal.'
         branch: # field:gr_sucursal
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
           description: 'Oficina.'
         #	gr_titular1
         #	gr_titular2
