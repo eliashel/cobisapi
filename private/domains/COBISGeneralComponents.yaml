@@ -6,6 +6,7 @@ info:
 components:
   headers:
     X-Authorization:
+      name: Authorization
       description: JSON Web Token (JWT) entregado al usuario en la autenticación
       schema:
         type: string
