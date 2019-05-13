@@ -11,14 +11,188 @@ components:
   ####################################################################
   schemas:
     # OBJECTS
+    Account: #virtual object
+      description: 'Cuenta Bancaria con la definición de las distintas naturalezas.'
+      properties:
+        AccountId:
+          description: 'Código interno de la cuenta.'
+          type: integer
+          format: int32
+          minimum: 1
+        number:
+          $ref: '#/components/schemas/AccountNumber'      
+        status:
+          description: >
+            'Estado de cuenta de ahorros'
+              * A: ACTIVA
+              * C: CANCELADA
+              * G: INGRESADA
+              * I: INACTIVA
+              * N: NO PERFECCIONADA
+              * T: TRASLADADA-INACTIVA
+              * X: TRASLADADA-CANCELADA
+          type: string
+          enum: [A, C, G, I, N, T, X]
+        subsidiary: 
+          $ref: '#/components/schemas/Subsidiary'
+        branch: 
+          $ref: '#/components/schemas/Branch'
+        currency: 
+          $ref: '#/components/schemas/Currency'
+        openingDate:
+          description: 'Fecha de apertura de la cuenta.'
+          type: string
+          format: date
+        customer: 
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
+        name:
+          description: 'Nombre de la cuenta.'
+          type: string
+          minLength: 1
+          maxLength: 60
+        availableBalance:
+          $ref: '#/components/schemas/Amount'
+        dateOfLastMovement:
+          description: 'Fecha de último movimiento de la cuenta.'
+          type: string
+          format: date
+        dateOfLastInternalMovement:
+          description: 'Fecha de último movimiento interno de la cuenta.'
+          type: string
+          format: date
+        dateOfLastUpdated:
+          description: 'Fecha de última actualización de la cuenta.'
+          type: string
+          format: date
+        AccountType:
+          description: > 
+            'Especifica el tipo de cuenta.'
+              *3: CORRIENTE
+              *4: AHORROS
+          type: string
+          enum: [3, 4]
+
+    AccountNumber: #virtual object
+      description: 'Número de cuenta.'
+      properties:
+        number:
+          description: 'Número de cuenta.'
+          type: string
+          #pattern: '[0-9]*'
+          minLength: 5
+          maxLength: 16
+
+    Address: # table:cl_direccion
+      description: 'Dirección.'
+      properties:
+        #di_ente
+        code: # field:di_direccion
+          description: 'Código de dirección de correspondencia.'
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 255
+        address: #field:di_descripcion
+          description: 'Dirección de correspondencia.'
+          type: string
+          maxLength: 254        
+        colony: #field:di_parroquia
+          $ref: '#/components/schemas/ZipCode'
+        city: #field:di_ciudad
+          $ref: '#/components/schemas/City'
+        type: #field:di_tipo
+          $ref: '#/components/schemas/AddressType'
+        #di_telefono
+        sector: #field:di_sector
+          $ref: '#/components/schemas/Sector'        
+        zone: #field:di_zona
+          $ref: '#/components/schemas/Zone'           
+        branch: # field:di_oficina
+          $ref: '#/components/schemas/Branch'
+        creationDate: # field:di_fecha_registro        
+          description: 'Fecha de creación.'
+          type: string
+          format: date-time
+        lastUpdatedDate: # field:di_fecha_modificacion
+          description: 'Fecha de modificación.'
+          type: string
+          format: date-time
+        validity: # field:di_vigencia
+          description: 'Indicador de vigencia.'
+          type: string
+          enum: [S, N]
+        verified: # field:di_verificado
+          description: 'Indicador de verificado.'
+          type: string
+          enum: [S, N]
+        clerk: # field:di_funcionario > cobis..cl_funcionario.fu_login
+          $ref: '#/components/schemas/Clerk'
+        #di_fecha_ver
+        primaryAddress: #field:di_principal
+          description: 'Dirección principal.'
+          type: string
+          maxLength: 1  
+        neighbourhood: #field:di_barrio
+          description: 'Vecindario.'
+          type: string
+          maxLength: 40        
+        province: #field:di_provincia
+          $ref: '#/components/schemas/Province'
+        #di_tienetel
+        #di_rural_urb
+        #di_observacion
+        #di_obs_verificado
+        #di_extfin
+        country: #field:di_pais
+          $ref: '#/components/schemas/Country'
+        #di_departamento
+        #di_tipo_prop
+        #di_rural_urbano
+        zipCode: #field:di_codpostal
+          $ref: '#/components/schemas/ZipCode'    
+        #di_casa
+        street: #field:di_calle
+          description: 'Información de la calle.'
+          type: string
+          maxLength: 70          
+        #di_codbarrio
+        #di_correspondencia
+        #di_alquilada
+        #di_cobro
+        #di_otrasenas
+        #di_canton
+        #di_distrito
+        #di_montoalquiler
+        #di_edificio
+        #di_so_igu_co
+        #di_fact_serv_pu
+        #di_nombre_agencia
+        #di_fuente_verif
+        #di_tiempo_reside
+        externalNumber: #field:di_nro
+          description: 'Número exterior.'
+          type: integer
+          format: int32        
+        #di_nro_residentes
+        internalNumber: #field:di_nro_interno
+          description: 'Número interior.'
+          type: integer
+          format: int32          
+        #di_negocio
+        #di_poblacion
+        #di_referencias_dom
+        #di_otro_tipo
+        #di_localidad      
+
     Branch: # table:cl_oficina
-      description: 'Oficina'
+      description: 'Oficina.'
       properties:
         code: # field:of_oficina
           type: integer
           minimum: 1
           maximum: 32767
         name: # field:of_nombre
+          description: 'Nombre de oficina.'
           type: string
           minLength: 1
           maxLength: 64
@@ -60,17 +234,20 @@ components:
         #  of_bloqueada
     
     City: # table:cl_ciudad
-      description: 'Cuidad'
+      description: 'Ciudad.'
       properties:
         code: #  field:ci_ciudad
+          description: 'Código de la ciudad.'
           type: number
           format: int32
           minimum: 1
         name: #  field:ci_descripcion
+          description: 'Nombre de la ciudad.'
           type: string
           minLength: 1
           maxLength: 64
         status: #  field:ci_estado
+          description: 'Estatus de la ciudad.'
           type: string # TODO: Validar catálogo 
           minLength: 1
           maxLength: 1
@@ -79,45 +256,53 @@ components:
         country: #  ci_pais
           $ref: '#/components/schemas/Country'
         #  ci_canton
-    
+
     Country: # table:cl_pais
-      description: 'Pais'
+      description: 'País.'
       properties:
         code: # field:pa_pais
+          description: 'Código del país.'
           type: number
           format: int32
           minimum: 1
         name: # field:pa_descripcion
+          description: 'Nombre del país.'
           type: string
           minLength: 1
           maxLength: 64
         isoCode: # field:pa_abreviatura
+          description: 'Código de país según la especificación ISO.'
           type: string
           minLength: 1
           maxLength: 3
         # pa_continente
         # pa_nacionalidad
         status: # field:pa_estado
+          description: 'Estatus de registro del país.'
           type: string
           minLength: 1
           maxLength: 1
     
     Currency: # table:cl_moneda
-      description: 'Moneda'
+      description: 'Moneda.'
       properties:
         code: # field:mo_moneda
+          description: 'Código de moneda.'
           type: integer
           minimum: 1
           maximum: 32767
         description: # field:mo_descripcion
+          description: 'Descripción de la moneda.'
           type: string
           minLength: 1
           maxLength: 64
         isoCode: # field:mo_nemonico
+          description: 'Código de la moneda según la especificación ISO.'
           type: string
           minLength: 3
           maxLength: 3
         symbol: # field:mo_simbolo
+          description: 'Símbolo de definición de la moneda.'
           type: string
           minLength: 1
           maxLength: 5
@@ -134,16 +319,97 @@ components:
           enum: [V,B,E]
           minLength: 1
           maxLength: 1
-    
+
+    Email: # table:cl_direccion
+      description: 'Correo electrónico.'
+      properties:
+        #di_ente
+        code: # field:di_direccion
+          description: 'Código del correo electrónico.'
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 255
+        mail: # field:di_descripcion
+          description: 'Dirección de correo electrónico.'
+          type: string
+          maxLength: 254
+        #di_parroquia
+        #di_ciudad
+        #di_tipo
+        #di_telefono
+        #di_sector
+        #di_zona        
+        branch: # field:di_oficina
+          $ref: '#/components/schemas/Branch'
+        creationDate: # field:di_fecha_registro
+          description: 'Fecha de creación.'
+          type: string
+          format: date-time
+        lastUpdatedDate: # field:di_fecha_modificacion
+          description: 'Fecha de modificación.'
+          type: string
+          format: date-time
+        validity: # field:di_vigencia
+          description: 'Indicador de vigencia.'
+          type: string
+          enum: [S, N]
+        verified: # field:di_verificado
+          description: 'Indicador de verificad.o'
+          type: string
+          enum: [S, N]
+        clerk: # field:di_funcionario > cobis..cl_funcionario.fu_login
+          $ref: '#/components/schemas/Clerk'
+        #di_fecha_ver
+        #di_principal
+        #di_barrio
+        #di_provincia
+        #di_tienetel
+        #di_rural_urb
+        #di_observacion
+        #di_obs_verificado
+        #di_extfin
+        #di_pais
+        #di_departamento
+        #di_tipo_prop
+        #di_rural_urbano
+        #di_codpostal
+        #di_casa
+        #di_calle
+        #di_codbarrio
+        #di_correspondencia
+        #di_alquilada
+        #di_cobro
+        #di_otrasenas
+        #di_canton
+        #di_distrito
+        #di_montoalquiler
+        #di_edificio
+        #di_so_igu_co
+        #di_fact_serv_pu
+        #di_nombre_agencia
+        #di_fuente_verif
+        #di_tiempo_reside
+        #di_nro
+        #di_nro_residentes
+        #di_nro_interno
+        #di_negocio
+        #di_poblacion
+        #di_referencias_dom
+        #di_otro_tipo
+        #di_localidad 
+
     Department: # table: cobis..cl_departamento
       description: 'Departamento de la organización.'
       properties:
         code: # field:de_departamento
+          description: 'Código del departamento.'
           type: integer
           format: int32
           minimum: 0
           maximum: 32767
         name: # field:de_descripcion
+          description: 'Nombre del departamento.'
           type: string
           minLength: 1
           maxLength: 64
@@ -155,15 +421,17 @@ components:
         #de_o_departamento
         #de_nivel
     
-    Officer: # table:cl_funcionario
+    Clerk: # table:cl_funcionario
       description: 'Funcionario o responsable de un usuario del sistema.'
       properties:
         code: # field:fu_funcionario
+          description: 'Código del funcionario.'
           type: integer
           format: int32
           minimum: 0
           maximum: 32767
         name: # field:fu_nombre
+          description: 'Nombre del funcionario.'
           type: string
           minLength: 1
           maxLength: 64
@@ -179,6 +447,7 @@ components:
         # fu_jefe
         # fu_nivel
         creationDate: # field:fu_fecha_ing
+          description: 'Fecha de creación.'
           type: string
           format: date
         user: # field:us_login -> cobis..ad_usuario
@@ -192,33 +461,7 @@ components:
         identification: #fu_cedruc -> 
           $ref: '#/components/schemas/Identification'
         # fu_causa_bloqueo
-        # fu_fecha_cargo
-    
-    User: # table:ad_usuario
-      description: 'Usuario'
-      properties:
-        subsidiary: # field:us_filial
-          $ref: '#/components/schemas/Subsidiary'
-        branch: # field:us_oficina
-          $ref: '#/components/schemas/Branch'
-        #us_nodo
-        login: # field:us_login
-          $ref: '#/components/schemas/UserLogin'
-        assignmentDate: # filed:us_fecha_asig
-          type: string
-          format: date
-        # us_creador
-        lastUpdateDate: # filed:us_fecha_ult_mod
-          type: string
-          format: date
-        lastUpdatePasswordDate: # filed:us_fecha_ult_pwd
-          type: string
-          format: date
-        status: # field: us_estado
-          type: string
-          minLength: 1
-          maxLength: 1
-    
+        # fu_fecha_cargo    
     
     Identification: # virtual object
       description: 'Identificación de un cliente.'
@@ -230,6 +473,7 @@ components:
         birthCity:
           $ref: '#/components/schemas/City'
         issueDate:
+          description: 'Fecha de emisión.' 
           type: string
           format: date
     
@@ -239,10 +483,12 @@ components:
         code: # field:td_codigo
           $ref: '#/components/schemas/IdentificationTypeCode'
         name: # field:td_descripcion
+          description: 'Descripción del tipo de identifiación.'
           type: string
           minLength: 3
           maxLength: 30
         status: # field:td_estado # TODO: Catálogo
+          description: 'Estado del tipo de identificación.'
           type: string
           minLength: 1
           maxLength: 1
@@ -264,15 +510,110 @@ components:
         #td_habilitado_usu
         #td_prefijo
         #td_subfijo
+
+    Officer:  # table:cobis..cc_oficial
+      description: 'Asesor comercial definido como oficial de la entidad financiera.' #TODO Verificar definición
+      properties:
+        code: # field:oc_oficial 
+          description: 'Código del oficial.'
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 32767
+        clerk: # field:oc_funcionario > cobis..cl_funcionario.fu_funcionario
+          $ref: '#/components/schemas/Clerk'
+        segment: #field:oc_sector
+          $ref: '#/components/schemas/Segment'
+        #	oc_actividad
+        #	oc_ofi_nsuperior
+        #	oc_ofi_sustituto
+        officerType: #field:oc_tipo_oficial
+          $ref: '#/components/schemas/OfficerType'
+        #	oc_nivel
+        #	oc_categoria
+        email: #field:	oc_mail 
+          description: 'Dirección de correo electrónico del oficial.'
+          type: string
+          maxLength: 254
     
+    Phone:
+      description: 'Teléfono'
+      properties:
+        #field:te_ente
+        #field:te_direccion        
+        code: #field:te_secuencial
+          type: integer
+          minimum: 1
+          maximum: 255        
+        number: #field:te_valor
+          description: 'Número de teléfono'
+          type: string        
+          maxLength: 16        
+        type: #field:te_tipo_telefono
+          $ref: '#/components/schemas/PhoneType'
+        prefix: #field:te_prefijo
+          description: 'Prefijo'
+          type: string        
+          maxLength: 10
+        creationDate: #field:te_fecha_registro
+          description: 'Fecha de creación del grupo de clientes.'
+          type: string
+          format: date-time
+        lastUpdatedDate: #field:te_fecha_mod
+          description: 'Fecha de última actualización del grupo de clientes.'
+          type: string
+          format: date-time                        
+        PhoneOperator: #field:te_tipo_operador
+          $ref: '#/components/schemas/PhoneOperator'
+        area: #field:te_area
+          description: 'Área'
+          type: string
+          maxLength: 10
+        collectionManagement: #field:te_telf_cobro //TODO Validar traducción (Teléfono de para la gestión cobranza)
+          description: 'Indicador de teléfono para la gestión de cobranza.'
+          type: string
+          enum: [S, N]        
+        clerk: # #field:te_funcionario > cobis..cl_funcionario.fu_login
+          $ref: '#/components/schemas/Clerk' 
+        validity: #field:te_verificado
+          description: 'Indicador de vigencia.'
+          type: string
+          enum: [S, N]
+        #field:te_fecha_ver
+        #field:te_fecha_modificacion
+
+    Province: # table:cl_provincia
+      description: 'Provincia.'
+      properties:
+        code: #field:pv_provincia
+          description: 'Código de la provincia.'
+          type: integer
+          format: int32
+        name: #field:pv_descripcion
+          description: 'Nombre de la provincia.'
+          type: string
+          minLength: 1
+          maxLength: 64
+        #field:pv_region_nat
+        #field:pv_region_ope
+        country: #field:pv_pais
+          $ref: '#/components/schemas/Country'
+        status: #field:pv_estado
+          type: string # TODO: Validar catálogo 
+          minLength: 1
+          maxLength: 1
+        #pv_depart_pais //TODO Validar tabla / catálogo
+        
     Subsidiary: # table:cl_filial
-      description: 'Filial'
+      description: 'Filial.'
       properties:
         code: # field:fi_filial
+          description: 'Código de la filial.'
           type: integer
           minimum: 1
           maximum: 255
         name: # field:fi_nombre
+          description: 'Nombre de la filial.'
           type: string
           minLength: 1
           maxLength: 64
@@ -288,7 +629,67 @@ components:
         #  fi_ruc
         #  fi_cont_nivel
 
+    User: # table:ad_usuario
+      description: 'Usuario.'
+      properties:
+        subsidiary: # field:us_filial
+          $ref: '#/components/schemas/Subsidiary'
+        branch: # field:us_oficina
+          $ref: '#/components/schemas/Branch'
+        #us_nodo
+        login: # field:us_login
+          $ref: '#/components/schemas/UserLogin'
+        assignmentDate: # filed:us_fecha_asig
+          description: 'Fecha de asiganación.'
+          type: string
+          format: date
+        # us_creador
+        lastUpdateDate: # filed:us_fecha_ult_mod
+          description: 'Fecha de última modificación.'
+          type: string
+          format: date
+        lastUpdatePasswordDate: # filed:us_fecha_ult_pwd
+          description: 'Fecha de última modificación de la contraseña.'
+          type: string
+          format: date
+        status: # field: us_estado
+          type: string
+          minLength: 1
+          maxLength: 1
+
+    ZipCode: # table:cl_codigo_postal
+      description: >
+        'Código postal.'
+      properties:
+        code: #field:cp_codigo
+          description: 'Código postal.'
+          type: string
+          maxLength: 10          
+        #field:cp_estado
+        city: #field:cp_municipio
+          $ref: '#/components/schemas/City'
+        #field:cp_colonia
+        country: #field:cp_pais
+          $ref: '#/components/schemas/Country'
+        #field:cp_estado_h //TODO      
+        #field:cp_municipio_h //TODO     
+        #field:cp_colonia_h //TODO
+
     # CATALOGS
+    AddressType: # cobis..cl_catalogo[table:202:cl_tdireccion]
+      description: >
+        'Tipo de dirección.'
+      properties:
+        code:
+          description: 'Código del tipo de dirección. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_tdireccion](http://www.cobiscorp.com/api/catalogo#cl_tdireccion).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
     Gender: # cobis..cl_catalogo[table:4:cl_sexo]
       description: >
         'Género o sexo de la persona.'
@@ -299,10 +700,10 @@ components:
           minLength: 1
           maxLength: 1
         description:
-              $ref: '#/components/schemas/CatalogDescription'
+          $ref: '#/components/schemas/CatalogDescription'
         status:
           $ref: '#/components/schemas/CatalogStatus'
-  
+
     MaritalStatus: # cobis..cl_catalogo[table:211:cl_ecivil]
       description: >
         'Estado civil de la persona.'
@@ -313,7 +714,105 @@ components:
           minLength: 1
           maxLength: 1
         description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    OfficerType: # cobis..cl_catalogo[table:23:cc_tipo_oficial]
+      description: >
+        'Tipo de oficial.' 
+      properties:
+        code:
+          description: 'Código del tipo de oficial. Ver listado en: [http://www.cobiscorp.com/api/cl_catalogo#cc_tipo_oficial](http://www.cobiscorp.com/api/cl_catalogo#cc_tipo_oficial).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    Sector: # cobis..cl_catalogo[table:19:cl_sector]
+      description: >
+        'Sector donde se encuentra ubicada la dirección.'
+      properties:
+        code:
+          description: 'Código del sector de la dirección. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_sector](http://www.cobiscorp.com/api/catalogo#cl_sector).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    Segment: # cobis..cl_catalogo[table:5116:ah_sector] # TODO Revisar definicion del tipo de Catalogo
+      description: >
+        'Naturaleza del segmento de clientes.' 
+      properties:
+        code:
+          description: 'Código del segmento de cliente. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_sector](http://www.cobiscorp.com/api/catalogo#cl_sector).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    PhoneOperator: # cobis..cl_catalogo[table:378:cl_tipo_operador]
+      description: >
+        'Operador telefónico.'
+      properties:
+        code:
+          description: 'Código del Operador telefónico. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_tipo_operador](http://www.cobiscorp.com/api/catalogo#cl_tipo_operador).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
               $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    PhoneType: # cobis..cl_catalogo[table:203:cl_ttelefono]
+      description: >
+        'Tipo de teléfono.'
+      properties:
+        code:
+          description: 'Código del tipo de teléfono. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_ttelefono](http://www.cobiscorp.com/api/catalogo#cl_ttelefono).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+              $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    Zone: # cobis..cl_catalogo[table:213:cl_zona]
+      description: >
+        'Zona donde se encuentra ubicada la dirección.'
+      properties:
+        code:
+          description: 'Código de la zona de la dirección. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_zona](http://www.cobiscorp.com/api/catalogo#cl_zona).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus' 
+          
+    WeekDay: # cobis..cl_catalogo[table:644:cr_dias_semana]
+      description: >
+        'Días de la semana.'
+      properties:
+        code:
+          description: 'Código del día de la semana. Ver listado en: [http://www.cobiscorp.com/api/cl_catalogo#cr_dias_semana](http://www.cobiscorp.com/api/cl_catalogo#cr_dias_semana).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
         status:
           $ref: '#/components/schemas/CatalogStatus'
 
@@ -347,8 +846,6 @@ components:
       minLength: 1
       maxLength: 1
     
-    
-    
     IdentificationTypeCode: # cobis..cl_tipo_documento.td_codigo
       description: >
         'Tipo de identificación de una persona natural o jurídica. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
@@ -358,7 +855,6 @@ components:
           minLength: 1
           maxLength: 4
       
-    
     IdentificationNumber: # cobis..cl_ente.en_ced_ruc # TODO: Revisar implementación en BD.
       description: 'Número de identificación de una persona natural o jurídica.'
       type: string
@@ -370,7 +866,6 @@ components:
       type: string
       minLength: 1
       maxLength: 30
-    
     
     #########################
     #  GENERAL COMPONENTS   #
