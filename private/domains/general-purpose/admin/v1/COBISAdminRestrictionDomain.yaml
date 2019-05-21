@@ -1,0 +1,62 @@
+openapi: 3.0.0
+
+info:
+  description: 'This is the domain for definitions of restrictions of COBIS ADMIN module. This include, users, references, catalogs, etc.'
+  version: '1.0.0'
+  title: 'COBIS Admin Restriction Domain'
+
+components:
+  ####################################################################
+  # Reusable schemas (data models)
+  ####################################################################
+  schemas:
+    # RESTRICTIONS
+    Branch_PK: 
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+        - type: object
+          required:
+            - code
+
+    Cause_PK: 
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Cause'
+        - type: object
+          required:
+            - code
+
+    City_PK: 
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/City'
+        - type: object
+          required:
+            - code  
+
+    Country_PK: 
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Country'
+        - type: object
+          required:
+            - code  
+
+    Gender_PK: 
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Gender'
+        - type: object
+          required:
+            - code                                    
+
+    Indicator_PK: 
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Indicator'
+        - type: object
+          required:
+            - code 
+
+    MaritalStatus_PK: 
+      allOf:
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/MaritalStatus'
+        - type: object
+          required:
+            - code              
+            

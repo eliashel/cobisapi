@@ -82,108 +82,6 @@ components:
           minLength: 5
           maxLength: 16
 
-    Address: # table:cl_direccion
-      description: 'Dirección.'
-      properties:
-        #di_ente
-        code: # field:di_direccion
-          description: 'Código de dirección de correspondencia.'
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 255
-        address: #field:di_descripcion
-          description: 'Dirección de correspondencia.'
-          type: string
-          maxLength: 254        
-        colony: #field:di_parroquia
-          $ref: '#/components/schemas/ZipCode'
-        city: #field:di_ciudad
-          $ref: '#/components/schemas/City'
-        type: #field:di_tipo
-          $ref: '#/components/schemas/AddressType'
-        #di_telefono
-        sector: #field:di_sector
-          $ref: '#/components/schemas/Sector'        
-        zone: #field:di_zona
-          $ref: '#/components/schemas/Zone'           
-        branch: # field:di_oficina
-          $ref: '#/components/schemas/Branch'
-        creationDate: # field:di_fecha_registro        
-          description: 'Fecha de creación.'
-          type: string
-          format: date-time
-        lastUpdatedDate: # field:di_fecha_modificacion
-          description: 'Fecha de modificación.'
-          type: string
-          format: date-time
-        validity: # field:di_vigencia
-          description: 'Indicador de vigencia.'
-          type: string
-          enum: [S, N]
-        verified: # field:di_verificado
-          description: 'Indicador de verificado.'
-          type: string
-          enum: [S, N]
-        clerk: # field:di_funcionario > cobis..cl_funcionario.fu_login
-          $ref: '#/components/schemas/Clerk'
-        #di_fecha_ver
-        primaryAddress: #field:di_principal
-          description: 'Dirección principal.'
-          type: string
-          maxLength: 1  
-        neighbourhood: #field:di_barrio
-          description: 'Vecindario.'
-          type: string
-          maxLength: 40        
-        province: #field:di_provincia
-          $ref: '#/components/schemas/Province'
-        #di_tienetel
-        #di_rural_urb
-        #di_observacion
-        #di_obs_verificado
-        #di_extfin
-        country: #field:di_pais
-          $ref: '#/components/schemas/Country'
-        #di_departamento
-        #di_tipo_prop
-        #di_rural_urbano
-        zipCode: #field:di_codpostal
-          $ref: '#/components/schemas/ZipCode'    
-        #di_casa
-        street: #field:di_calle
-          description: 'Información de la calle.'
-          type: string
-          maxLength: 70          
-        #di_codbarrio
-        #di_correspondencia
-        #di_alquilada
-        #di_cobro
-        #di_otrasenas
-        #di_canton
-        #di_distrito
-        #di_montoalquiler
-        #di_edificio
-        #di_so_igu_co
-        #di_fact_serv_pu
-        #di_nombre_agencia
-        #di_fuente_verif
-        #di_tiempo_reside
-        externalNumber: #field:di_nro
-          description: 'Número exterior.'
-          type: integer
-          format: int32        
-        #di_nro_residentes
-        internalNumber: #field:di_nro_interno
-          description: 'Número interior.'
-          type: integer
-          format: int32          
-        #di_negocio
-        #di_poblacion
-        #di_referencias_dom
-        #di_otro_tipo
-        #di_localidad      
-
     Branch: # table:cl_oficina
       description: 'Oficina.'
       properties:
@@ -319,85 +217,6 @@ components:
           enum: [V,B,E]
           minLength: 1
           maxLength: 1
-
-    Email: # table:cl_direccion
-      description: 'Correo electrónico.'
-      properties:
-        #di_ente
-        code: # field:di_direccion
-          description: 'Código del correo electrónico.'
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 255
-        mail: # field:di_descripcion
-          description: 'Dirección de correo electrónico.'
-          type: string
-          maxLength: 254
-        #di_parroquia
-        #di_ciudad
-        #di_tipo
-        #di_telefono
-        #di_sector
-        #di_zona        
-        branch: # field:di_oficina
-          $ref: '#/components/schemas/Branch'
-        creationDate: # field:di_fecha_registro
-          description: 'Fecha de creación.'
-          type: string
-          format: date-time
-        lastUpdatedDate: # field:di_fecha_modificacion
-          description: 'Fecha de modificación.'
-          type: string
-          format: date-time
-        validity: # field:di_vigencia
-          description: 'Indicador de vigencia.'
-          type: string
-          enum: [S, N]
-        verified: # field:di_verificado
-          description: 'Indicador de verificad.o'
-          type: string
-          enum: [S, N]
-        clerk: # field:di_funcionario > cobis..cl_funcionario.fu_login
-          $ref: '#/components/schemas/Clerk'
-        #di_fecha_ver
-        #di_principal
-        #di_barrio
-        #di_provincia
-        #di_tienetel
-        #di_rural_urb
-        #di_observacion
-        #di_obs_verificado
-        #di_extfin
-        #di_pais
-        #di_departamento
-        #di_tipo_prop
-        #di_rural_urbano
-        #di_codpostal
-        #di_casa
-        #di_calle
-        #di_codbarrio
-        #di_correspondencia
-        #di_alquilada
-        #di_cobro
-        #di_otrasenas
-        #di_canton
-        #di_distrito
-        #di_montoalquiler
-        #di_edificio
-        #di_so_igu_co
-        #di_fact_serv_pu
-        #di_nombre_agencia
-        #di_fuente_verif
-        #di_tiempo_reside
-        #di_nro
-        #di_nro_residentes
-        #di_nro_interno
-        #di_negocio
-        #di_poblacion
-        #di_referencias_dom
-        #di_otro_tipo
-        #di_localidad 
 
     Department: # table: cobis..cl_departamento
       description: 'Departamento de la organización.'
@@ -536,52 +355,6 @@ components:
           type: string
           maxLength: 254
     
-    Phone:
-      description: 'Teléfono'
-      properties:
-        #field:te_ente
-        #field:te_direccion        
-        code: #field:te_secuencial
-          type: integer
-          minimum: 1
-          maximum: 255        
-        number: #field:te_valor
-          description: 'Número de teléfono'
-          type: string        
-          maxLength: 16        
-        type: #field:te_tipo_telefono
-          $ref: '#/components/schemas/PhoneType'
-        prefix: #field:te_prefijo
-          description: 'Prefijo'
-          type: string        
-          maxLength: 10
-        creationDate: #field:te_fecha_registro
-          description: 'Fecha de creación del grupo de clientes.'
-          type: string
-          format: date-time
-        lastUpdatedDate: #field:te_fecha_mod
-          description: 'Fecha de última actualización del grupo de clientes.'
-          type: string
-          format: date-time                        
-        PhoneOperator: #field:te_tipo_operador
-          $ref: '#/components/schemas/PhoneOperator'
-        area: #field:te_area
-          description: 'Área'
-          type: string
-          maxLength: 10
-        collectionManagement: #field:te_telf_cobro //TODO Validar traducción (Teléfono de para la gestión cobranza)
-          description: 'Indicador de teléfono para la gestión de cobranza.'
-          type: string
-          enum: [S, N]        
-        clerk: # #field:te_funcionario > cobis..cl_funcionario.fu_login
-          $ref: '#/components/schemas/Clerk' 
-        validity: #field:te_verificado
-          description: 'Indicador de vigencia.'
-          type: string
-          enum: [S, N]
-        #field:te_fecha_ver
-        #field:te_fecha_modificacion
-
     Province: # table:cl_provincia
       description: 'Provincia.'
       properties:
@@ -676,15 +449,70 @@ components:
         #field:cp_colonia_h //TODO
 
     # CATALOGS
-    AddressType: # cobis..cl_catalogo[table:202:cl_tdireccion]
-      description: >
-        'Tipo de dirección.'
+    AccountCategory: # cobis..cl_catalogo[table:5881:ah_categoria] 
+      description: 'Categoría de la cuenta de ahorro.'
+      type: object
       properties:
         code:
-          description: 'Código del tipo de dirección. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_tdireccion](http://www.cobiscorp.com/api/catalogo#cl_tdireccion).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          description: 'Código de categoría de la cuenta de ahorro: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_categoria](http://www.cobiscorp.com/api/catlogo#ah_categoria)' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
           type: string
           minLength: 1
-          maxLength: 1
+          maxLength: 10
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    AccountSourceType: # cobis..cl_catalogo[table:5892:ah_tipocta] 
+      description: 'Tipo origen de la apertura de la cuenta.'
+      type: object
+      properties:
+        code:
+          description: 'Código del tipo origen de la apertura de la cuenta: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipocta](http://www.cobiscorp.com/api/catlogo#ah_tipocta).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 10
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    CapitalizationPeriodType: # cobis..cl_catalogo[table:5870:ah_capitalizacion] 
+      description: 'Periodo para la capitalización de intereses sobre la cuenta de ahorros.'
+      type: object
+      properties:
+        code:
+          description: 'Código del periodo para la capitalización de intereses sobre la cuenta de ahorros: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_capitalizacion](http://www.cobiscorp.com/api/catlogo#ah_capitalizacion).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 10
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    Cause: # cobis..cl_catalogo[table:1289:ah_causa_nc:cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
+      description: 'Razón por la cual se hace el ajuste para una nota débito o una nota crédito, ayudando a generar una contabilidad espeficica.'
+      type: object
+      properties:
+        code:
+          description: 'Código de la causal. Según el tipo de transacción, este campo puede ser diligenciado con diferentes listas. Para una transacción de nota crédito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nc](http://www.cobiscorp.com/api/catlogo#ah_causa_nc). Para una transacción de nota débito: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_nd](http://www.cobiscorp.com/api/catlogo#ah_causa_nd)' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 10
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    FrequencyAccountStatement: # cobis..cl_catalogo[table:5883:ah_ciclo] 
+      description: 'Frecuencia o ciclo de emisión de estado de cuenta.'
+      properties:
+        code:
+          description: 'Código de la frecuencia o ciclo de emisión de estado de cuenta: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_ciclo](http://www.cobiscorp.com/api/catlogo#ah_ciclo).' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 10
         description:
           $ref: '#/components/schemas/CatalogDescription'
         status:
@@ -696,6 +524,19 @@ components:
       properties:
         code:
           description: 'Código del sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_sexo](http://www.cobiscorp.com/api/catalogo#cl_sexo).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          type: string
+          minLength: 1
+          maxLength: 1
+        description:
+          $ref: '#/components/schemas/CatalogDescription'
+        status:
+          $ref: '#/components/schemas/CatalogStatus'
+
+    Indicator: #cobis..cl_catalogo[table:1787:ah_tipo_indicador]
+      description: 'Indica el tipo de saldo que se afecta con la nota.'
+      properties:
+        code:
+          description: 'Código del tipo de indicador.. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador](http://www.cobiscorp.com/api/catlogo#ah_tipo_indicador).' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
           type: string
           minLength: 1
           maxLength: 1
@@ -732,12 +573,12 @@ components:
         status:
           $ref: '#/components/schemas/CatalogStatus'
 
-    Sector: # cobis..cl_catalogo[table:19:cl_sector]
+    AveragePeriodType : # cobis..cl_catalogo[table:5884:ah_tpromedio]
       description: >
-        'Sector donde se encuentra ubicada la dirección.'
+        'Periodo en que se calcula el promedio de la cuenta de ahorro.'
       properties:
         code:
-          description: 'Código del sector de la dirección. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_sector](http://www.cobiscorp.com/api/catalogo#cl_sector).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+          description: 'Código del periodo en que se calcula el promedio de la cuenta de ahorro.. Ver listado en: [http://www.cobiscorp.com/api/catalogo#ah_tpromedio](http://www.cobiscorp.com/api/catalogo#ah_tpromedio).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
           type: string
           minLength: 1
           maxLength: 1
@@ -759,48 +600,6 @@ components:
           $ref: '#/components/schemas/CatalogDescription'
         status:
           $ref: '#/components/schemas/CatalogStatus'
-
-    PhoneOperator: # cobis..cl_catalogo[table:378:cl_tipo_operador]
-      description: >
-        'Operador telefónico.'
-      properties:
-        code:
-          description: 'Código del Operador telefónico. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_tipo_operador](http://www.cobiscorp.com/api/catalogo#cl_tipo_operador).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
-          type: string
-          minLength: 1
-          maxLength: 1
-        description:
-              $ref: '#/components/schemas/CatalogDescription'
-        status:
-          $ref: '#/components/schemas/CatalogStatus'
-
-    PhoneType: # cobis..cl_catalogo[table:203:cl_ttelefono]
-      description: >
-        'Tipo de teléfono.'
-      properties:
-        code:
-          description: 'Código del tipo de teléfono. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_ttelefono](http://www.cobiscorp.com/api/catalogo#cl_ttelefono).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
-          type: string
-          minLength: 1
-          maxLength: 1
-        description:
-              $ref: '#/components/schemas/CatalogDescription'
-        status:
-          $ref: '#/components/schemas/CatalogStatus'
-
-    Zone: # cobis..cl_catalogo[table:213:cl_zona]
-      description: >
-        'Zona donde se encuentra ubicada la dirección.'
-      properties:
-        code:
-          description: 'Código de la zona de la dirección. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_zona](http://www.cobiscorp.com/api/catalogo#cl_zona).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
-          type: string
-          minLength: 1
-          maxLength: 1
-        description:
-          $ref: '#/components/schemas/CatalogDescription'
-        status:
-          $ref: '#/components/schemas/CatalogStatus' 
           
     WeekDay: # cobis..cl_catalogo[table:644:cr_dias_semana]
       description: >

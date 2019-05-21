@@ -1,0 +1,2615 @@
+openapi: 3.0.0
+
+info:
+  title: COBIS API Clientes # COBIS API Customers
+  description: 'Este es el API del sistema de clientes del Core Banking System. Se encuentran definidos los servicios esenciales para realizar las operaciones transaccionales de clientes y permite gestionar los clientes de un sistema financiero. Puedes conseguir mas información en nuestra sitio web: [http://www.cobiscorp.com](http://www.cobiscorp.com).' # TODO: Actualizar enlace al sitio del producto de clientes o mejor de APIs.
+  version: 1.0.0
+  termsOfService: http://cobiscorp.com/terms/cobisapi # TODO: Términos de servicio
+  contact:
+    name: COBIS Support Center
+    url: http://www.cobiscorp.com/contact-us/customer-technical-support/
+    email: support.center@cobiscorp.com
+  license:
+    name: COBIS API License # TODO: Definir el tipo y nombre de la licencia. Condiciones de uso y Legal
+    url: http://www.cobiscorp.com/licenses/LICENSE-1.0.html # TODO: Publicar licencia.
+
+servers:
+  #- description: SwaggerHub API Auto Mocking
+  #  url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICuentasAhorrosTransaccional/1.0.0
+# Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/eliashel/TMPAPI/1.0.0
+  - url: http://cobisapi.cobiscorp.com/lastest/v1
+    description: Main (production) server
+  - url: http://staging-cobisapi.cobiscorp.com/v1
+    description: Internal staging server for testing
+
+##########################################################
+##                       FOR AWS                        ##
+##########################################################
+# Validación de solicitudes desde el API Gateway 
+#x-amazon-apigateway-request-validators: {
+#  all: {
+#     validateRequestBody: true,
+#     validateRequestParameters: true
+#  },
+#  params-only: {
+#     validateRequestBody: false,
+#     validateRequestParameters: true
+#  }
+#}
+# Por defecto valida todas las operaciones, tanto parámetros como cuerpo del mensaje.
+#x-amazon-apigateway-request-validator: "all"
+##########################################################
+
+
+tags:
+- name: NaturalPersons # retrieve
+  description: 'Operaciones de consulta, creación y modificación de clientes de tipo persona natural.'
+  # Puede inclurse más documentación
+  #externalDocs: 
+  #  description: 'Encuentre más información en'
+  #  url: http://www.cobiscorp.com/customers/natural-persons
+- name: Addresses # retrieve
+  description: 'Operaciones de consulta, creación y modificación de direcciones de correspondecia.'
+  # Puede inclurse más documentación
+  #externalDocs: 
+  #  description: 'Encuentre más información en'
+  #  url: http://www.cobiscorp.com/customers/natural-persons
+- name: Emails # retrieve
+  description: 'Operaciones de consulta, creación y modificación de diercciones de correo electrónico.'
+  # Puede inclurse más documentación
+  #externalDocs: 
+  #  description: 'Encuentre más información en'
+  #  url: http://www.cobiscorp.com/customers/natural-persons
+- name: Phones # retrieve
+  description: 'Operaciones de consulta, creación y modificación de teléfonos de contacto.'
+  # Puede inclurse más documentación
+  #externalDocs: 
+  #  description: 'Encuentre más información en'
+  #  url: http://www.cobiscorp.com/customers/natural-persons      
+- name: SolidarityGroups # retrieve
+  description: 'Operaciones de consulta, creación y modificación de grupos solidarios.'
+  # Puede inclurse más documentación
+  #externalDocs: 
+  #  description: 'Encuentre más información en'
+  #  url: http://www.cobiscorp.com/customers/natural-persons        
+
+paths:
+
+  /customers/natural-persons/{customerId}:
+    get:
+      tags:
+        - NaturalPersons
+      summary: 'Consulta un cliente por el código COBIS del cliente'
+      description: 'Retorna la información básica del cliente.'
+      operationId: NaturalPersonsGETByCode
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
+      responses:
+        200:
+          description: 'Información del cliente'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/NaturalPerson'
+              example: # Creación de un cliente o prospecto
+                naturalPerson: 
+                  code: 65412
+                  identification:
+                    number: '654310000'
+                    type:
+                      code: 'CC'                  
+                  names: 'Maria'
+                  surname: 'Perez'
+                  secondSurname: 'Perez'
+                  branch: 
+                    code: 5
+                  gender: 
+                    code: 'F'
+                  birthDate: '1992-09-01'
+                  birthCity: 
+                    code: 41
+                  maritalStatus: 
+                    code: "S"
+                  cycleNumber:  1
+                  birthCountry: 
+                    code: 65
+               
+                  emails:
+                    - email: 
+                      code: 1
+                      mail: 'maria.perez@test.com'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'                 
+
+                  addresses:
+                    - address: 
+                        code: 1
+                        address: 'cra 7 26 20'
+                        colony:
+                          code: '9874'
+                        city:
+                          code: 54
+                          description: 'Nava'                        
+                        addressType:
+                          code: 'RE' 
+                          description: 'DOMICILIO' 
+                        sector:
+                          code: 'U' 
+                          description: 'URBANO'   
+                        zone:
+                          code: 'CE' 
+                          description: 'CENTRO'
+                        branch:
+                          code: 54 
+                        creationDate: '2019-05-15'     
+                        lastUpdatedDate: '2019-05-15 09:00:05'
+                        validity: true   
+                        verified: true   
+                        clerk:
+                          user: 'admuser'                      
+                        primaryAddress: true
+                        neighbourhood: 'Zona central'
+                        province:
+                          code: 1
+                          description: 'Aguascalientes'
+                        zipCode:
+                          code: '1120'
+                        street: 'Cll 122'
+                        externalNumber: 41
+                        internalNumber: 4                
+
+                  phones:
+                    - phone: 
+                        code: 1
+                        number: '3124569874'
+                        type:
+                          code: 'C'
+                          description: 'CELULAR'
+                        creationDate: '2019-05-15'     
+                        lastUpdatedDate: '2019-05-15 09:00:05'                         
+                        phoneOperator:
+                          code: '02'    
+                          description: 'MOVISTAR'
+                        area: '52'
+                        collectionManagement: false
+                        clerk:
+                          user: 'admuser'
+                        validity: true                
+                Links:
+                  Self: '/customers/natural-persons/65412'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'
+      
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+  /customers/natural-persons/{identificationTypeCode}/{identificationNumber}:
+    get:
+      tags:
+        - NaturalPersons
+      summary: 'Consulta un cliente por el tipo y número de identificación'
+      description: 'Retorna la información básica del cliente.'
+      operationId: NaturalPersonsGETByIdentification
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: identificationTypeCode
+          in: path
+          required: true
+          #description: 'Identificador interno del tipo de documento.'
+          description: 'Código COBIS del tipo de documento.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/IdentificationTypeCode'
+
+        - name: identificationNumber
+          in: path
+          required: true
+          #description: 'Número de identificación del cliente.'
+          description: 'Número de documento de identidad.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/IdentificationNumber'
+      responses:
+        200:
+          description: 'Información del cliente'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/NaturalPerson'
+              example: # Creación de un cliente o prospecto
+                naturalPerson: 
+                  code: 65412
+                  identification:
+                    number: '654310000'
+                    type:
+                      code: 'CC'                  
+                  names: 'Maria'
+                  surname: 'Perez'
+                  secondSurname: 'Perez'
+                  branch: 
+                    code: 5
+                  gender: 
+                    code: 'F'
+                  birthDate: '1992-09-01'
+                  birthCity: 
+                    code: 41
+                  maritalStatus: 
+                    code: "S"
+                  cycleNumber:  1
+                  birthCountry: 
+                    code: 65
+
+                  emails:
+                    - email: 
+                      code: 1
+                      mail: 'maria.perez@test.com'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'                 
+
+                  addresses:
+                    - address: 
+                        code: 1
+                        address: 'cra 7 26 20'
+                        colony:
+                          code: '9874'
+                        city:
+                          code: 54
+                          description: 'Nava'                        
+                        addressType:
+                          code: 'RE' 
+                          description: 'DOMICILIO' 
+                        sector:
+                          code: 'U' 
+                          description: 'URBANO'   
+                        zone:
+                          code: 'CE' 
+                          description: 'CENTRO'
+                        branch:
+                          code: 54 
+                        creationDate: '2019-05-15'     
+                        lastUpdatedDate: '2019-05-15 09:00:05'
+                        validity: true   
+                        verified: true   
+                        clerk:
+                          user: 'admuser'                      
+                        primaryAddress: true
+                        neighbourhood: 'Zona central'
+                        province:
+                          code: 1
+                          description: 'Aguascalientes'
+                        zipCode:
+                          code: '1120'
+                        street: 'Cll 122'
+                        externalNumber: 41
+                        internalNumber: 4                 
+
+                  phones:
+                    - phone: 
+                        code: 1
+                        number: '3124569874'
+                        type:
+                          code: 'C'
+                          description: 'CELULAR'
+                        creationDate: '2019-05-15'     
+                        lastUpdatedDate: '2019-05-15 09:00:05'                         
+                        phoneOperator:
+                          code: '02'   
+                          description: 'MOVISTAR'                   
+                        area: '52'
+                        collectionManagement: false
+                        clerk:
+                          user: 'admuser'
+                        validity: true
+                Links:
+                  Self: '/customers/natural-persons/CC/654310000'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'       
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+  /customers/natural-persons:
+    post:
+      tags:
+        - NaturalPersons
+      summary: 'Realiza la creación de un cliente o prospecto de tipo persona natural.'
+      description: 'Realiza la creación de un cliente o prospecto de tipo persona natural.'
+      operationId: NaturalPersonsPST
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la creación del cliente o prospecto.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NaturalPersonPSTRq'
+            example: # Creación de un cliente o prospecto
+              naturalPerson: 
+                names: 'Maria'
+                surname: 'Perez'
+                secondSurname: 'Perez'
+                branch: 
+                  code: 5
+                gender: 
+                  code: 'F'
+                birthDate: '1992-09-01'
+                birthCity: 
+                  code: 41
+                maritalStatus: 
+                  code: "S"
+                cycleNumber:  1
+                birthCountry: 
+                  code: 65
+
+                emails:
+                  - email: 
+                      code: 1
+                      mail: 'maria.perez@test.com'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'                
+
+                addresses:
+                  - address: 
+                      code: 1
+                      address: 'cra 7 26 20'
+                      colony:
+                        code: '9874'
+                      city:
+                        code: 54
+                        description: 'Nava'                        
+                      addressType:
+                        code: 'RE' 
+                        description: 'DOMICILIO' 
+                      sector:
+                        code: 'U' 
+                        description: 'URBANO'   
+                      zone:
+                        code: 'CE' 
+                        description: 'CENTRO'
+                      branch:
+                        code: 54 
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'                      
+                      primaryAddress: true
+                      neighbourhood: 'Zona central'
+                      province:
+                        code: 1
+                        description: 'Aguascalientes'
+                      zipCode:
+                        code: '1120'
+                      street: 'Cll 122'
+                      externalNumber: 41
+                      internalNumber: 4               
+
+                phones:
+                  - phone: 
+                      code: 1
+                      number: '3124569874'
+                      type:
+                        code: 'C'
+                        description: 'CELULAR'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'                         
+                      phoneOperator:
+                        code: '02'    
+                        description: 'MOVISTAR'
+                      area: '52'
+                      collectionManagement: false
+                      clerk:
+                        user: 'admuser'
+                      validity: true
+      responses:
+        201:
+          description: 'Se ha creado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/NaturalPerson' # TODO: Revisar respuesta del cliente
+              example: # Creación de un cliente o prospecto
+                naturalPerson: 
+                  code: 65412
+                  identification:
+                    number: '654310000'
+                    type:
+                      code: 'CC'                  
+                  names: 'Maria'
+                  surname: 'Perez'
+                  secondSurname: 'Perez'
+                  branch: 
+                    code: 5
+                  gender: 
+                    code: 'F'
+                  birthDate: '1992-09-01'
+                  birthCity: 
+                    code: 41
+                  maritalStatus: 
+                    code: "S"
+                  cycleNumber:  1
+                  birthCountry: 
+                    code: 65
+
+                  emails:
+                    - email: 
+                      code: 1
+                      mail: 'maria.perez@test.com'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'                   
+
+                  addresses:
+                    - address:
+                        code: 1
+                        address: 'cra 7 26 20'
+                        street: 'Cll 122'
+                        externalNumber: 54
+                        internalNumber: 2
+                        colony:
+                          code: 6
+                        city:
+                          code: 54
+                        province:
+                          code: 3
+                        zipCode:
+                          code: '1120'
+                        addressType:
+                          code: 'R'                  
+
+                  phones:
+                    - phone: 
+                        code: 1
+                        number: '3124569874'
+                        type:
+                          code: 'C'
+                          description: 'CELULAR'
+                        creationDate: '2019-05-15'     
+                        lastUpdatedDate: '2019-05-15 09:00:05'                         
+                        phoneOperator:
+                          code: '02' 
+                          description: 'MOVISTAR'                     
+                        area: '52'
+                        collectionManagement: false
+                        clerk:
+                          user: 'admuser'
+                        validity: true    
+                Links:
+                  Self: '/customers/natural-persons'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'        
+       
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+    
+    patch:
+      tags:
+        - NaturalPersons
+      summary: 'Realiza la modificación de un cliente o prospecto de tipo persona natural.'
+      description: 'Realiza la modificación de un cliente o prospecto de tipo persona natural.'
+      operationId: NaturalPersonsPTC
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la modificación del cliente o prospecto.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NaturalPersonsPTCRq'
+            example: # Modificación de un cliente o prospecto
+              naturalPerson: 
+                code: 65412
+                identification:
+                  number: '654310000'
+                  type:
+                    code: 'CC'                
+                names: 'Maria'
+                surname: 'Perez'
+                secondSurname: 'Perez'
+                branch: 
+                  code: 5
+                gender: 
+                  code: 'F'
+                birthDate: '1992-09-01'
+                birthCity: 
+                  code: 41
+                maritalStatus: 
+                  code: "S"
+                cycleNumber:  1
+                birthCountry: 
+                  code: 65
+
+                emails:
+                  - email: 
+                      code: 1
+                      mail: 'maria.perez@test.com'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'                   
+
+                addresses:
+                  - address: 
+                      code: 1
+                      address: 'cra 7 26 20'
+                      colony:
+                        code: '9874'
+                      city:
+                        code: 54
+                        description: 'Nava'                        
+                      addressType:
+                        code: 'RE' 
+                        description: 'DOMICILIO' 
+                      sector:
+                        code: 'U' 
+                        description: 'URBANO'   
+                      zone:
+                        code: 'CE' 
+                        description: 'CENTRO'
+                      branch:
+                        code: 54 
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'                      
+                      primaryAddress: true
+                      neighbourhood: 'Zona central'
+                      province:
+                        code: 1
+                        description: 'Aguascalientes'
+                      zipCode:
+                        code: '1120'
+                      street: 'Cll 122'
+                      externalNumber: 41
+                      internalNumber: 4                
+
+                phones:
+                  - phone: 
+                      code: 1
+                      number: '3124569874'
+                      type:
+                        code: 'C'
+                        description: 'CELULAR'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'                         
+                      phoneOperator:
+                        code: '02'    
+                        description: 'MOVISTAR'                  
+                      area: '52'
+                      collectionManagement: false
+                      clerk:
+                        user: 'admuser'
+                      validity: true
+      responses:
+        201:
+          description: 'Se ha modificado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/NaturalPerson' # TODO: Revisar respuesta del cliente
+              example: # Creación de un cliente o prospecto
+                naturalPerson: 
+                  code: 65412
+                  identification:
+                    number: '654310000'
+                    type:
+                      code: 'CC'
+                  names: 'Maria'
+                  surname: 'Perez'
+                  secondSurname: 'Perez'
+                  branch: 
+                    code: 5
+                  gender: 
+                    code: 'F'
+                  birthDate: '1992-09-01'
+                  birthCity: 
+                    code: 41
+                  maritalStatus: 
+                    code: "S"
+                  cycleNumber:  1
+                  birthCountry: 
+                    code: 65
+
+                  emails:
+                    - email: 
+                      code: 1
+                      mail: 'maria.perez@test.com'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'                   
+
+                  addresses:
+                    - address:
+                        code: 1
+                        address: 'cra 7 26 20'
+                        street: 'Cll 122'
+                        externalNumber: 54
+                        internalNumber: 2
+                        colony:
+                          code: 6
+                        city:
+                          code: 54
+                        province:
+                          code: 3
+                        zipCode:
+                          code: '1120'
+                        addressType:
+                          code: 'R'                  
+
+                  phones:
+                    - phone: 
+                        code: 1
+                        number: '3124569874'
+                        type:
+                          code: 'C'
+                          description: 'CELULAR'
+                        creationDate: '2019-05-15'     
+                        lastUpdatedDate: '2019-05-15 09:00:05'                         
+                        phoneOperator:
+                          code: '02'    
+                          description: 'MOVISTAR'
+                        area: '52'
+                        collectionManagement: false
+                        clerk:
+                          user: 'admuser'
+                        validity: true
+                Links:
+                  Self: '/customers/natural-persons/65412'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'               
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'    
+  
+  /customers/{customerId}/addresses:
+    get:
+      tags:
+        - Addresses
+      summary: 'Consulta las direcciones asociadas a un cliente.'
+      description: 'Retorna la información de las direcciones de correspondencia de un cliente.'
+      operationId: AddressesGETAll
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
+      responses:
+        200:
+          description: 'Información de direcciones'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Address'
+              example: # Consulta de direcciones de un cliente
+                addresses:
+                  - address: 
+                      code: 1
+                      address: 'cra 7 26 20'
+                      colony:
+                        code: '9874'
+                      city:
+                        code: 54
+                        description: 'Nava'                        
+                      addressType:
+                        code: 'RE' 
+                        description: 'DOMICILIO' 
+                      sector:
+                        code: 'U' 
+                        description: 'URBANO'   
+                      zone:
+                        code: 'CE' 
+                        description: 'CENTRO'
+                      branch:
+                        code: 54 
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'                      
+                      primaryAddress: true
+                      neighbourhood: 'Zona central'
+                      province:
+                        code: 1
+                        description: 'Aguascalientes'
+                      zipCode:
+                        code: '1120'
+                      street: 'Cll 122'
+                      externalNumber: 41
+                      internalNumber: 4
+
+                  - address: 
+                      code: 2
+                      address: 'cra 8 92 25'
+                      colony:
+                        code: '9874'
+                      city:
+                        code: 54
+                        description: 'Nava'                        
+                      addressType:
+                        code: 'RE' 
+                        description: 'DOMICILIO' 
+                      sector:
+                        code: 'U' 
+                        description: 'URBANO'   
+                      zone:
+                        code: 'CE' 
+                        description: 'CENTRO'
+                      branch:
+                        code: 54 
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'                      
+                      primaryAddress: true
+                      neighbourhood: 'Zona central'
+                      province:
+                        code: 1
+                        description: 'Aguascalientes'
+                      zipCode:
+                        code: '9741'
+                      street: 'Cll 415'
+                      externalNumber: 41
+                      internalNumber: 4                      
+                Links:
+                  Self: '/customers/65412/addresses'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/65412/addresses/1'
+                        rel: 'addresses'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/addresses/2'
+                        rel: 'addresses'
+                        type: 'GET'                        
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+    post:
+      tags:
+        - Addresses
+      summary: 'Realiza la creación de una dirección de correspondencia a un cliente.'
+      description: 'Realiza la creación de una dirección de correspondencia a un cliente.'
+      operationId: AddressesPST
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la creación de una dirección de correspondencia.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressesPSTRq'
+            example: # Creación de una dirección de correspondencia a un cliente
+                address: 
+                  address: 'cra 7 26 20'
+                  colony:
+                    code: '9874'
+                  city:
+                    code: 54
+                    description: 'Nava'                        
+                  addressType:
+                    code: 'RE' 
+                  sector:
+                    code: 'U' 
+                  zone:
+                    code: 'CE' 
+                  branch:
+                    code: 54 
+                  validity: true   
+                  verified: true   
+                  clerk:
+                    user: 'admuser'                      
+                  primaryAddress: true
+                  neighbourhood: 'Zona central'
+                  province:
+                    code: 1
+                  zipCode:
+                    code: '1120'
+                  street: 'Cll 122'
+                  externalNumber: 41
+                  internalNumber: 4               
+      responses:
+        201:
+          description: 'Se ha creado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Address' # TODO: Revisar respuesta del cliente
+              example: # Creación de una dirección de correspondencia a un cliente
+                address: 
+                  code: 3
+                  address: 'cra 7 26 20'
+                  colony:
+                    code: '9874'
+                  city:
+                    code: 54
+                    description: 'Nava'                        
+                  addressType:
+                    code: 'RE' 
+                  sector:
+                    code: 'U' 
+                  zone:
+                    code: 'CE' 
+                  branch:
+                    code: 54 
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:00:05'                    
+                  validity: true   
+                  verified: true   
+                  clerk:
+                    user: 'admuser'                      
+                  primaryAddress: true
+                  neighbourhood: 'Zona central'
+                  province:
+                    code: 1
+                  zipCode:
+                    code: '1120'
+                  street: 'Cll 122'
+                  externalNumber: 41
+                  internalNumber: 4                
+                Links:
+                  Self: '/customers/65412/addresses'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/addresses/3'
+                        rel: 'addresses'
+                        type: 'GET'                        
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+    patch:
+      tags:
+        - Addresses
+      summary: 'Realiza la modificación de una dirección de correspondencia a un cliente.'
+      description: 'Realiza la modificación de una dirección de correspondencia a un cliente.'
+      operationId: AddressesPTC
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la modificación de una dirección de correspondencia.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddressesPTCRq'
+            example: # Modificación de una dirección de correspondencia a un cliente
+                address: 
+                  code: 3
+                  address: 'cra 7 26 20'
+                  colony:
+                    code: '9874'
+                  city:
+                    code: 54
+                    description: 'Nava'                        
+                  addressType:
+                    code: 'RE' 
+                  sector:
+                    code: 'U' 
+                  zone:
+                    code: 'CE' 
+                  branch:
+                    code: 54                     
+                  validity: true   
+                  verified: true   
+                  clerk:
+                    user: 'admuser'                      
+                  primaryAddress: true
+                  neighbourhood: 'Zona central'
+                  province:
+                    code: 1
+                  zipCode:
+                    code: '1120'
+                  street: 'Cll 122'
+                  externalNumber: 41
+                  internalNumber: 4               
+      responses:
+        201:
+          description: 'Se ha modificado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Address' # TODO: Revisar respuesta del cliente
+              example: # Modificación de una dirección de correspondencia a un cliente
+                address: 
+                  code: 3
+                  address: 'cra 7 26 20'
+                  colony:
+                    code: '9874'
+                  city:
+                    code: 54
+                    description: 'Nava'                        
+                  addressType:
+                    code: 'RE' 
+                  sector:
+                    code: 'U' 
+                  zone:
+                    code: 'CE' 
+                  branch:
+                    code: 54 
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:00:05'                    
+                  validity: true   
+                  verified: true   
+                  clerk:
+                    user: 'admuser'                      
+                  primaryAddress: true
+                  neighbourhood: 'Zona central'
+                  province:
+                    code: 1
+                  zipCode:
+                    code: '1120'
+                  street: 'Cll 122'
+                  externalNumber: 41
+                  internalNumber: 4                 
+                Links:
+                  Self: '/customers/65412/addresses/3'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'                    
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+    
+  /customers/{customerId}/addresses/{addressId}:
+    get:
+      tags:
+        - Addresses
+      summary: 'Consulta las direcciones asociadas a un cliente.'
+      description: 'Retorna la información de las direcciones de correspondencia de un cliente.'
+      operationId: AddressesGETById
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
+        - name: addressId
+          in: path
+          required: true
+          #description: 'Identificador interno de la dirección.'
+          description: 'Código COBIS de la dirección.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CodeNumber'
+      responses:
+        200:
+          description: 'Información de una dirección'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                description: 'Address response'
+                type: object
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Address'
+              example: # Consulta una dirección específica de un cliente
+                address: 
+                  code: 1
+                  address: 'cra 7 26 20'
+                  colony:
+                    code: '9874'
+                  city:
+                    code: 54
+                    description: 'Nava'                        
+                  addressType:
+                    code: 'RE' 
+                    description: 'DOMICILIO' 
+                  sector:
+                    code: 'U' 
+                    description: 'URBANO'   
+                  zone:
+                    code: 'CE' 
+                    description: 'CENTRO'
+                  branch:
+                    code: 54 
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:00:05'
+                  validity: true   
+                  verified: true   
+                  clerk:
+                    user: 'admuser'                      
+                  primaryAddress: true
+                  neighbourhood: 'Zona central'
+                  province:
+                    code: 1
+                    description: 'Aguascalientes'
+                  zipCode:
+                    code: '1120'
+                  street: 'Cll 122'
+                  externalNumber: 41
+                  internalNumber: 4
+                Links:
+                  Self: '/customers/65412/addresses/1'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'                    
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+  /customers/{customerId}/emails:
+    get:
+      tags:
+        - Emails
+      summary: 'Consulta los emails asociadas a un cliente.'
+      description: 'Retorna la información de los emails de un cliente.'
+      operationId: EmailsGETAll
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
+      responses:
+        200:
+          description: 'Información de direcciones de correo electrónico'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Email'
+              example: # Consulta de direcciones de correo electrónico de un cliente
+                emails:
+                  - email: 
+                      code: 1
+                      mail: 'maria.perez@test.com'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'
+                      validity: true   
+                      verified: true   
+                      clerk:
+                        user: 'admuser'
+                Links:
+                  Self: '/customers/65412/emails'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'  
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'                                            
+                    - LinkDetail:
+                        href: '/customers/65412/emails/1'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+    post:
+      tags:
+        - Emails
+      summary: 'Realiza la creación de una dirección de correo electrónico a un cliente.'
+      description: 'Realiza la creación de una dirección de correo electrónico a un cliente.'
+      operationId: EmailsPST
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la creación de una dirección  de correo electrónico.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailsPSTRq'
+            example: # Creación de una dirección de correo electrónico a un cliente
+                email: 
+                  mail: 'maria.perez2@test.com'
+                  clerk:
+                    user: 'admuser'
+
+      responses:
+        201:
+          description: 'Se ha creado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Email' # TODO: Revisar respuesta del cliente
+              example: # Creación de una dirección de correspondencia a un cliente
+                email: 
+                  code: 2
+                  mail: 'maria.perez2@test.com'
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:10:05'
+                  validity: false   
+                  verified: false   
+                  clerk:
+                    user: 'admuser'              
+
+                Links:
+                  Self: '/customers/65412/emails'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'  
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'                                            
+                    - LinkDetail:
+                        href: '/customers/65412/emails/2'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+    patch:
+      tags:
+        - Emails
+      summary: 'Realiza la modificación de una dirección de correo electrónico a un cliente.'
+      description: 'Realiza la modificación de una dirección de correo electrónico a un cliente.'
+      operationId: EmailsPTC
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la modificación de una dirección  de correo electrónico.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailsPTCRq'
+            example: # Modificación de una dirección de correo electrónico a un cliente
+              email: 
+                code: 1
+                mail: 'maria.perez@test.com'
+                creationDate: '2019-05-15'     
+                lastUpdatedDate: '2019-05-15 09:00:05'                
+                validity: true   
+                verified: true   
+
+      responses:
+        201:
+          description: 'Se ha modificado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Email' # TODO: Revisar respuesta del cliente
+              example: # Modificación de una dirección de correspondencia a un cliente
+                email: 
+                  code: 2
+                  mail: 'maria.perez2@test.com'
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:10:05'
+                  validity: false   
+                  verified: false   
+                  clerk:
+                    user: 'admuser'   
+
+                Links:
+                  Self: '/customers/65412/emails/2'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'  
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'                                            
+                    - LinkDetail:
+                        href: '/customers/65412/emails/2'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'                              
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+    
+  /customers/{customerId}/emails/{emailId}:
+    get:
+      tags:
+        - Emails
+      summary: 'Consulta el email de un cliente.'
+      description: 'Retorna la información de un email de un cliente.'
+      operationId: EmailsGETById
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
+        - name: emailId
+          in: path
+          required: true
+          #description: 'Identificador interno único del email.'
+          description: 'Código COBIS del email.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CodeNumber'
+      responses:
+        200:
+          description: 'Información de una dirección de correo electrónico'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                description: 'Email response'
+                type: object
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Email'
+              example: # Consulta de una dirección de correo electrónico de un cliente
+                email: 
+                  code: 1
+                  mail: 'maria.perez@test.com'
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:00:05'
+                  validity: true   
+                  verified: true   
+                  clerk:
+                    user: 'admuser'
+                Links:
+                  Self: '/customers/65412/emails/1'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'  
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'                                            
+                    - LinkDetail:
+                        href: '/customers/65412/emails/1'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+  /customers/{customerId}/phones:
+    get:
+      tags:
+        - Phones
+      summary: 'Consulta los télefonos asociados a un cliente.'
+      description: 'Retorna la información de los teléfonos de contacto de un cliente.'
+      operationId: PhonesGETAll
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
+      responses:
+        200:
+          description: 'Información de teléfonos'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  allOf:
+                    - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Phone'
+              example: # Consulta de teléfonos de un cliente
+                phones:
+                  - phone: 
+                      code: 1
+                      number: '3124569874'
+                      type:
+                        code: 'C'
+                        description: 'CELULAR'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'                         
+                      phoneOperator:
+                        code: '02'  
+                        description: 'MOVISTAR'                    
+                      area: '52'
+                      collectionManagement: false
+                      clerk:
+                        user: 'admuser'
+                      validity: true
+                  - phone: 
+                      code: 2
+                      number: '987456312'
+                      type:
+                        code: 'D'
+                        description: 'DIRECTO'
+                      creationDate: '2019-05-15'     
+                      lastUpdatedDate: '2019-05-15 09:00:05'                                             
+                      area: '222'
+                      collectionManagement: false
+                      clerk:
+                        user: 'admuser'
+                      validity: true                      
+                Links:
+                  Self: '/customers/65412/phones'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'  
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'                                            
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones/1'
+                        rel: 'phones'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones/2'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+    post:
+      tags:
+        - Phones
+      summary: 'Realiza la creación de un teléfono de contacto a un cliente.'
+      description: 'Realiza la creación de un teléfono de contacto a un cliente.'
+      operationId: PhonesPST
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la creación de un teléfono de contacto.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhonesPSTRq'
+            example: # Creación de un teléfono de contacto a un cliente
+              phone: 
+                number: '987456312'
+                type:
+                  code: 'D'
+                area: '222'
+                collectionManagement: false
+                clerk:
+                  user: 'admuser'
+      responses:
+        201:
+          description: 'Se ha creado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Phone' # TODO: Revisar respuesta del cliente
+              example: # Creación de un teléfono de contacto a un cliente
+                phone: 
+                  code: 3
+                  number: '987456312'
+                  type:
+                    code: 'D'
+                    description: 'DIRECTO'
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:00:05'                                             
+                  area: '222'
+                  collectionManagement: false
+                  clerk:
+                    user: 'admuser'
+                  validity: false             
+                Links:
+                  Self: '/customers/65412/phones'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'  
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'                                            
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones/3'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+    patch:
+      tags:
+        - Phones
+      summary: 'Realiza la modificación de un teléfono de contacto a un cliente.'
+      description: 'Realiza la modificación de un teléfono de contacto a un cliente.'
+      operationId: PhonesPTC
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la modificación de un teléfono de contacto.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PhonesPTCRq'
+            example: # Modificación de un teléfono de contacto a un cliente
+              phone: 
+                code: 3
+                number: '987456312'
+                type:
+                  code: 'D'
+                  description: 'DIRECTO'                                           
+                area: '222'
+                collectionManagement: false
+                validity: false   
+      responses:
+        201:
+          description: 'Se ha modificado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Phone' # TODO: Revisar respuesta del cliente
+              example: # Modificación de un teléfono de contacto de un cliente
+                phone: 
+                  code: 3
+                  number: '987456312'
+                  type:
+                    code: 'D'
+                    description: 'DIRECTO'
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:00:05'                                             
+                  area: '222'
+                  collectionManagement: false
+                  clerk:
+                    user: 'admuser'
+                  validity: false             
+                Links:
+                  Self: '/customers/65412/phones'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'  
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'                                            
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones/3'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+   
+  /customers/{customerId}/phones/{phoneId}:
+    get:
+      tags:
+        - Phones
+      summary: 'Consulta el télefono de un cliente.'
+      description: 'Retorna la información del teléfono de contacto de un cliente.'
+      operationId: PhonesGETById
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: customerId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
+        - name: phoneId
+          in: path
+          required: true
+          #description: 'Identificador interno único del teléfono.'
+          description: 'Código COBIS del cliente.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CodeNumber'            
+      responses:
+        200:
+          description: 'Información del teléfono'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                description: 'Phone response'
+                type: object
+                allOf:
+                  - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Phone'
+              example: # Consulta el teléfono de un cliente
+                phone: 
+                  code: 1
+                  number: '3124569874'
+                  type:
+                    code: 'C'
+                    description: 'CELULAR'
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:00:05'                         
+                  phoneOperator:
+                    code: '02'  
+                    description: 'MOVISTAR'                    
+                  area: '52'
+                  collectionManagement: false
+                  clerk:
+                    user: 'admuser'
+                  validity: true                             
+                Links:
+                  Self: '/customers/65412/phones/1'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/natural-persons/65412'
+                        rel: 'natural-persons'
+                        type: 'GET'  
+                    - LinkDetail:
+                        href: '/customers/65412/addresses'
+                        rel: 'addresses'
+                        type: 'GET'                                            
+                    - LinkDetail:
+                        href: '/customers/65412/emails'
+                        rel: 'emails'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/customers/65412/phones/1'
+                        rel: 'phones'
+                        type: 'GET'
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+  /customers/solidarity-groups/{groupId}:
+    get:
+      tags:
+        - SolidarityGroups
+      summary: 'Consulta los clientes asociados a un grupo solidario.'
+      description: 'Retorna la información básica de los clientes.'
+      operationId: SolidarityGroupsGETById
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: groupId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del grupo solidario.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/SolidarityGroupCode'
+      responses:
+        200:
+          description: 'Información del grupo solidario'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/SolidarityGroup'
+              example: # Consulta de un grupo solidario
+                solidarityGroup: 
+                  code: 18
+                  name: 'NUEVA GENERACION'
+                  officer: 
+                    code: 38
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:00:05'                  
+                  meetingAddress: 'CALLE CDA GUERRERO SN , San Mateo Huitzilzingo, Chalco, MEXICO'
+                  meetingDay: 
+                    code: 5
+                    description: 'VIERNES'
+                  meetingHour: '2018-01-23 12:00:34.617'
+                  cycleNumber:  1
+                  account: 
+                    code: 185
+                    number: '103201000019'
+                    status: 'A'
+                  branch: 
+                    code: 5 
+                Links:
+                  Self: '/customers/solidarity-group/18'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/solidarity-group/18'
+                        rel: 'solidarity-groups'
+                        type: 'PÖST'  
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+    post:
+      tags:
+        - SolidarityGroups
+      summary: 'Realiza la asignación de uno o varios clientes a un grupo solidario.'
+      description: 'Realiza la asignación de uno o varios clientes a un grupo solidario.'
+      operationId: SolidarityGroupsCustomersPST
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+        # PATH PARAMS
+        - name: groupId
+          in: path
+          required: true
+          #description: 'Identificador interno único del cliente.'
+          description: 'Código COBIS del grupo solidario.'
+          schema:
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/SolidarityGroupCode'        
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la asignación de uno o varios clientes a un grupo solidario.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SolidarityGroupsCustomersPSTRq'
+            example: # Creación de un grupo solidario
+              naturalPersons: 
+                - naturalPerson:
+                    code: 1234
+                - naturalPerson:
+                    code: 123
+                - naturalPerson:
+                    code: 5789                                       
+      responses:
+        201:
+          description: 'Se ha creado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/NaturalPerson' # TODO: Revisar respuesta del cliente
+              example: # Asignación de uno o varios clientes a un grupo solidario.
+                solidarityGroup: 
+                  code: 18
+                  name: 'NUEVA GENERACION'
+                  officer: 
+                    code: 38
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:00:05'                  
+                  meetingAddress: 'CALLE CDA GUERRERO SN , San Mateo Huitzilzingo, Chalco, MEXICO'
+                  meetingDay: 
+                    code: 5
+                    description: 'VIERNES'
+                  meetingHour: '2018-01-23 12:00:34.617'
+                  cycleNumber:  1
+                  account: 
+                    code: 185
+                    number: '103201000019'
+                    status: 'A'
+                  branch: 
+                    code: 5   
+                Links:
+                  Self: '/customers/solidarity-group/18'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/solidarity-group/18'
+                        rel: 'solidarity-groups'
+                        type: 'GET'  
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+  /customers/solidarity-groups:
+    post:
+      tags:
+        - SolidarityGroups
+      summary: 'Realiza la creación de un grupo solidario.'
+      description: 'Realiza la creación de un grupo solidario.'
+      operationId: SolidarityGroupsPST
+      parameters:
+        # HEADER REQUEST
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
+        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
+      # BODY REQUEST
+      requestBody:
+        description: 'Datos para realizar la creación de un grupo solidario.'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SolidarityGroupsPSTRq'
+            example: # Creación de un grupo solidario
+              solidarityGroup: 
+                name: 'NUEVA GENERACION'
+                secondSurname: 'Perez'
+                officer: 
+                  code: 38
+                creationDate: '2019-05-15'     
+                lastUpdatedDate: '2019-05-15 09:00:05'                  
+                meetingAddress: 'CALLE CDA GUERRERO SN , San Mateo Huitzilzingo, Chalco, MEXICO'
+                meetingDay: 
+                  code: 5
+                  description: 'VIERNES'
+                meetingHour: '2018-01-23 12:00:34.617'
+                cycleNumber:  1
+                account: 
+                  number: '103201000019'
+                branch: 
+                  code: 5                  
+      responses:
+        201:
+          description: 'Se ha creado exitosamente.'
+          headers:
+            X-Correlation-ID:
+              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/NaturalPerson' # TODO: Revisar respuesta del cliente
+              example: # Creación de un grupo solidario
+                solidarityGroup: 
+                  code: 19
+                  name: 'NUEVA GENERACION'
+                  secondSurname: 'Perez'
+                  officer: 
+                    code: 38
+                  creationDate: '2019-05-15'     
+                  lastUpdatedDate: '2019-05-15 09:00:05'                  
+                  meetingAddress: 'CALLE CDA GUERRERO SN , San Mateo Huitzilzingo, Chalco, MEXICO'
+                  meetingDay: 
+                    code: 5
+                    description: 'VIERNES'
+                  meetingHour: '2018-01-23 12:00:34.617'
+                  cycleNumber:  1
+                  account: 
+                    code: 185
+                    number: '103201000019'
+                    status: 'A'
+                  branch: 
+                    code: 5   
+                Links:
+                  Self: '/customers/solidarity-group'
+                  Navs:
+                    - LinkDetail:
+                        href: '/customers/solidarity-group/19'
+                        rel: 'solidarity-groups'
+                        type: 'GET'  
+
+        400:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
+        401:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
+        403:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
+        404:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
+        405:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
+        406:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
+        429:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
+        500:
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
+
+#externalDocs:
+#  description: 'Encuentra más información acerca de Cobiscorp en http://www.cobiscorp.com'
+#  url: 'http://www.cobiscorp.com'
+
+components:
+  ####################################################################
+  # Reusable path, query, header and cookie parameters
+  ####################################################################
+  #parameters:
+  
+  ####################################################################
+  # Security scheme definitions (see Authentication)
+  ####################################################################
+  #securitySchemes:
+  #  cobiscbs_auth:
+  #    type: oauth2
+  #    flows:
+  #      implicit:
+  #        authorizationUrl: 'http://cobisapi.cobiscorp.com/oauth/dialog'
+  #        scopes:
+  #          'write:savings-accounts': 'Modificar y eliminar cuentas de ahorros'
+  #          'read:savints-accounts': 'Consultar información de cuentas de ahorros'
+  #          
+  #  api_key:
+  #    type: apiKey
+  #    name: api_key # TODO: Revisar implementación y concordancia con el header X-Authorization de cada servicio.
+  #    in: header
+  
+  ####################################################################
+  # Reusable request bodies
+  ####################################################################
+  #requestBodies:
+  
+  ####################################################################
+  # Reusable responses, such as 401 Unauthorized or 400 Bad Request
+  ####################################################################
+  #responses:
+
+  ####################################################################
+  # Reusable schemas (data models)
+  ####################################################################
+  schemas:
+    #########################
+    #    COMPLEX REQUEST    #
+    #########################
+
+    AddressesPSTRq: 
+      description: 'Crear una dirección de correspondencia.'
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Address'
+            - type: object
+          required:
+            - address  
+            - type
+
+    EmailsPSTRq: 
+      description: 'Crear una dirección de correo electrónico.'
+      type: object
+      required:
+        - email
+      properties:
+        phone:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Email'
+            - type: object
+          required:
+            - mail         
+
+    NaturalPersonPSTRq: 
+      description: 'Crear un cliente o prospecto.'
+      type: object
+      required:
+        - naturalPerson
+      properties:
+        naturalPerson:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/NaturalPerson'
+            - type: object
+          required:
+            - names
+            - surname
+            - secondSurname
+            - branch
+            - gender
+            - birthDate
+            - birthCity
+            - maritalStatus  
+            - birthCountry
+            - emails
+            - addresses  
+            - phones            
+
+    PhonesPSTRq: 
+      description: 'Crear un teléfono de contacto.'
+      type: object
+      required:
+        - phone
+      properties:
+        phone:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Phone'
+            - type: object
+          required:
+            - number 
+            - type   
+
+    SolidarityGroupsPSTRq: 
+      description: 'Crear un grupo solidario.'
+      type: object
+      required:
+        - solidarityGroup
+      properties:
+        solidarityGroup:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/SolidarityGroup'
+            - type: object
+          required:
+            - name
+            - meetingAddress
+            - meetingDay
+            - meetingHour       
+
+    SolidarityGroupsCustomersPSTRq: 
+      description: 'Asignar clientes a un grupo solidario.'
+      type: object
+      required:
+        - naturalPersons
+      properties:
+        naturalPersons:
+          type: array
+          items:
+            allOf:
+              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
+              - type: object
+            required:
+              - code
+
+    AddressesPTCRq: 
+      description: 'Modificar una dirección de correspondencia.'
+      type: object
+      required:
+        - address
+      properties:
+        address:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Address'
+            - type: object
+          required:
+            - code       
+
+    EmailsPTCRq: 
+      description: 'Modificar una dirección de correo electrónico.'
+      type: object
+      required:
+        - email
+      properties:
+        phone:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Email'
+            - type: object
+          required:
+            - code  
+
+    NaturalPersonsPTCRq: 
+      description: 'Modificar un cliente o prospecto.'
+      type: object
+      required:
+        - naturalPerson
+      properties:
+        naturalPerson:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/NaturalPerson'
+            - type: object
+          required:
+            - code       
+
+    PhonesPTCRq: 
+      description: 'Modificar un teléfono de contacto.'
+      type: object
+      required:
+        - phone
+      properties:
+        phone:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Phone'
+            - type: object
+          required:
+            - code    
