@@ -267,7 +267,7 @@ components:
         accountingBalance: #Virtual
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
-          description: 'Monto disponible para girar sumado al monto de los cheques próximos a hacerse disponibles.'
+          description: 'Monto disponible sumado al monto de los cheques próximos a hacerse disponibles.'
           
     BankingProductSavingAccount: #table:cob_remesas..pe_pro_bancario
       description: 'Define el tipo de producto bancario asociado a cuentas de ahorros.'

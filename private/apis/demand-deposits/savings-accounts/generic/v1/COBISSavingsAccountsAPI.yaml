@@ -118,6 +118,7 @@ paths:
           description: 'Código del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/IdentificationNumber'
+            
       responses:
         200:
           description: 'Información de las cuentas de ahorro asociada al cliente.'
@@ -127,8 +128,43 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
-              example: # 
+                type: array
+                items:
+                  allOf:
+                    - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+              example: # Consulta de cuentas de un cliente
+                savingsAccounts:
+                  - savingsAccount:
+                      code: 345353
+                      number: '011201000019'
+                      status: 'A'
+                      savingsBook:
+                        number: 1234
+                      currency:
+                        code: 5
+                        isoCode: 'USD'
+                      name: 'THOMAS JEFFERSON'
+                  - savingsAccount:
+                      code: 342254
+                      number: '011201000020'
+                      status: 'A'
+                      savingsBook:
+                        number: 1234
+                      currency:
+                        code: 5
+                        isoCode: 'USD'
+                      name: 'THOMAS JEFFERSON'
+                Links:
+                  Self: '/savings-accounts/89865412'
+                  Navs:
+                    - LinkDetail:
+                        href: '/savings-accounts/345353'
+                        rel: 'savings-accounts'
+                        type: 'GET'
+                    - LinkDetail:
+                        href: '/savings-accounts/345353/balances'
+                        rel: 'balances'
+                        type: 'GET'
                 
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
@@ -190,23 +226,17 @@ paths:
                   status: 'A'
                   savingsBook:
                     number: 1234
-                  #  controlNumber: 12
-                  #  balance: '600.00'
-                  #branch:
-                  #  code: 123
                   currency:
                     code: 5
                     isoCode: 'USD'
-                  #openingDate: '2019-02-13'
-                  #customer:
-                  #  identification:
-                  #    number: '123123123'
-                  #    type:
-                  #      code: 'CC'
-                  #  name: 'Thomas'
-                  #  lastName: 'Jefferson'
                   name: 'THOMAS JEFFERSON'
-                  #availableBalance: '600.00'
+                Links:
+                  Self: '/savings-accounts/345353'
+                  Navs:
+                    - LinkDetail:
+                        href: '/savings-accounts/345353/balances'
+                        rel: 'balances'
+                        type: 'GET'
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
@@ -258,8 +288,45 @@ paths:
             application/json:
               schema:
                 $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
-              example: # 
-                
+              example: # Consulta de saldos de la cuenta de ahorros
+                savingsAccount:
+                  code: 225353
+                  number: '011201000217'
+                  status: 'A'
+                  savingsBook:
+                    number: 1234
+                    balance:  '50.00'
+                  currency:
+                    code: 5
+                    isoCode: 'USD'
+                  name: 'THOMAS JEFFERSON'
+                  frozenBalance: '60.00'
+                  availableBalance: '500.00'
+                  availableBalanceNext12Hours:  '50.00'
+                  deferredAvailableBalanceNext12Hours: '60.00'
+                  availableBalanceNext24Hours: '100.00'
+                  availableAmount: '450.00'
+                  accountingBalance: '710.00'
+                  
+                Links:
+                  Self: '/savings-accounts/225353/balances'
+                  Navs:
+                    - LinkDetail:
+                        href: '/savings-accounts/transfer'
+                        rel: 'transfer'
+                        type: 'POST'
+                    - LinkDetail:
+                        href: '/savings-accounts/credit-note'
+                        rel: 'credit-note'
+                        type: 'POST'
+                    - LinkDetail:
+                        href: '/savings-accounts/debit-note'
+                        rel: 'debit-note'
+                        type: 'POST'
+                    - LinkDetail:
+                        href: '/savings-accounts/withdraw'
+                        rel: 'withdraw'
+                        type: 'POST'
             
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
@@ -340,6 +407,13 @@ paths:
                   description: 'USD'
                 account:
                   number: '011201000019'
+                Links:
+                  Self: '/savings-accounts/deposit'
+                  Navs:
+                    - LinkDetail:
+                        href: '/savings-accounts/345353/balances'
+                        rel: 'balances'
+                        type: 'GET'
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
@@ -436,6 +510,13 @@ paths:
                 #    lastName: 'Jefferson'
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '600.00'
+                Links:
+                  Self: '/savings-accounts/deposit/initial'
+                  Navs:
+                    - LinkDetail:
+                        href: '/savings-accounts/345353/balances'
+                        rel: 'balances'
+                        type: 'GET'
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
@@ -531,6 +612,13 @@ paths:
                 #    lastName: 'Jefferson'
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '1300.00'
+                Links:
+                  Self: '/savings-accounts/withdraw'
+                  Navs:
+                    - LinkDetail:
+                        href: '/savings-accounts/345353/balances'
+                        rel: 'balances'
+                        type: 'GET'
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
@@ -727,6 +815,13 @@ paths:
                 #    lastName: 'Jefferson'
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '1600.00'
+                Links:
+                  Self: '/savings-accounts/credit-note'
+                  Navs:
+                    - LinkDetail:
+                        href: '/savings-accounts/345353/balances'
+                        rel: 'balances'
+                        type: 'GET'
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
@@ -832,6 +927,13 @@ paths:
                 #    name: 'Thomas'
                 #    lastName: 'Jefferson'
                 #  name: 'THOMAS JEFFERSON'
+                Links:
+                  Self: '/savings-accounts/transfer'
+                  Navs:
+                    - LinkDetail:
+                        href: '/savings-accounts/345353/balances'
+                        rel: 'balances'
+                        type: 'GET'
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
@@ -1136,11 +1238,6 @@ components:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
-          properties:
-            cause:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminRestrictionDomain.yaml#/components/schemas/Cause_Code'
-            indicator:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminRestrictionDomain.yaml#/components/schemas/Indicator_Code'          
           required:
             - cause
             - indicator
@@ -1196,11 +1293,6 @@ components:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
-          properties:
-            cause:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminRestrictionDomain.yaml#/components/schemas/Cause_Code'
-            indicator:
-              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminRestrictionDomain.yaml#/components/schemas/Indicator_Code'
           required:
             - cause
             - indicator
