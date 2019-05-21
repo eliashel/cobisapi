@@ -81,7 +81,7 @@ paths:
     get:
       tags:
         - NaturalPersons
-      summary: 'Consulta un cliente por el código COBIS del cliente'
+      summary: 'Consulta un cliente por el código COBIS del cliente.'
       description: 'Retorna la información básica del cliente.'
       operationId: NaturalPersonsGETByCode
       parameters:
@@ -97,13 +97,12 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
       responses:
         200:
-          description: 'Información del cliente'
+          description: 'Información del cliente.'
           headers:
             X-Correlation-ID:
               $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
@@ -236,7 +235,7 @@ paths:
     get:
       tags:
         - NaturalPersons
-      summary: 'Consulta un cliente por el tipo y número de identificación'
+      summary: 'Consulta un cliente por el tipo y número de identificación.'
       description: 'Retorna la información básica del cliente.'
       operationId: NaturalPersonsGETByIdentification
       parameters:
@@ -252,7 +251,6 @@ paths:
         - name: identificationTypeCode
           in: path
           required: true
-          #description: 'Identificador interno del tipo de documento.'
           description: 'Código COBIS del tipo de documento.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/IdentificationTypeCode'
@@ -260,13 +258,12 @@ paths:
         - name: identificationNumber
           in: path
           required: true
-          #description: 'Número de identificación del cliente.'
           description: 'Número de documento de identidad.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/IdentificationNumber'
       responses:
         200:
-          description: 'Información del cliente'
+          description: 'Información del cliente.'
           headers:
             X-Correlation-ID:
               $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
@@ -855,13 +852,12 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
       responses:
         200:
-          description: 'Información de direcciones'
+          description: 'Información de direcciones.'
           headers:
             X-Correlation-ID:
               $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
@@ -1001,7 +997,6 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
@@ -1140,7 +1135,6 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
@@ -1277,27 +1271,25 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
         - name: addressId
           in: path
           required: true
-          #description: 'Identificador interno de la dirección.'
           description: 'Código COBIS de la dirección.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CodeNumber'
       responses:
         200:
-          description: 'Información de una dirección'
+          description: 'Información de una dirección.'
           headers:
             X-Correlation-ID:
               $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
-                description: 'Address response'
+                description: 'Address response.'
                 type: object
                 allOf:
                   - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Address'
@@ -1390,7 +1382,6 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
@@ -1474,7 +1465,6 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
@@ -1569,7 +1559,6 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
@@ -1668,14 +1657,12 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
         - name: emailId
           in: path
           required: true
-          #description: 'Identificador interno único del email.'
           description: 'Código COBIS del email.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CodeNumber'
@@ -1688,7 +1675,7 @@ paths:
           content:
             application/json:
               schema:
-                description: 'Email response'
+                description: 'Email response.'
                 type: object
                 allOf:
                   - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Email'
@@ -1759,13 +1746,12 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
       responses:
         200:
-          description: 'Información de teléfonos'
+          description: 'Información de teléfonos.'
           headers:
             X-Correlation-ID:
               $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
@@ -1867,7 +1853,6 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
@@ -1968,7 +1953,6 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'        
@@ -2071,27 +2055,25 @@ paths:
         - name: customerId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
         - name: phoneId
           in: path
           required: true
-          #description: 'Identificador interno único del teléfono.'
           description: 'Código COBIS del cliente.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CodeNumber'            
       responses:
         200:
-          description: 'Información del teléfono'
+          description: 'Información del teléfono.'
           headers:
             X-Correlation-ID:
               $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
           content:
             application/json:
               schema:
-                description: 'Phone response'
+                description: 'Phone response.'
                 type: object
                 allOf:
                   - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Phone'
@@ -2169,13 +2151,12 @@ paths:
         - name: groupId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del grupo solidario.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/SolidarityGroupCode'
       responses:
         200:
-          description: 'Información del grupo solidario'
+          description: 'Información del grupo solidario.'
           headers:
             X-Correlation-ID:
               $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
@@ -2247,7 +2228,6 @@ paths:
         - name: groupId
           in: path
           required: true
-          #description: 'Identificador interno único del cliente.'
           description: 'Código COBIS del grupo solidario.'
           schema:
             $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/SolidarityGroupCode'        

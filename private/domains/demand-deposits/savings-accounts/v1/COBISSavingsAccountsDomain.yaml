@@ -16,10 +16,7 @@ components:
       type: object
       properties:
         code: # field:ah_cuenta
-          description: 'Código interno de la cuenta de ahorros.' # field:ah_cuenta
-          type: integer
-          format: int32
-          minimum: 1
+          $ref: '#/components/schemas/SavingsAccountCode'
         number: # field:ah_cta_banco
             $ref: '#/components/schemas/SavingsAccountNumber'
         status: # field:ah_estado
@@ -176,7 +173,7 @@ components:
         #ah_zona
         availableBalanceAverage: #field:ah_prom_disponible
           allOf:
-              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Address'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Valor del promedio disponible para la cuenta de ahorros.'
         #ah_promedio1
         #ah_promedio2
@@ -301,10 +298,7 @@ components:
       type: object
       properties:
         code: # field:ah_cuenta
-          description: 'Código interno de la cuenta de ahorros.' # field:ah_cuenta
-          type: integer
-          minimum: 1
-          maximum: 9999
+          $ref: '#/components/schemas/SavingsAccountCode'
         number: # field:ah_cta_banco
             $ref: '#/components/schemas/SavingsAccountNumber'
         primaryTransactionId: # field:secuencial
@@ -437,7 +431,7 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Saldo de la libreta.'
              
-    Transaction: # table:ah_tran_monet
+    TransactionSavingsAccount: # table:ah_tran_monet
       description: 'Transacción monetaria de una cuenta de ahorros.'
       type: object
       properties:
@@ -559,6 +553,12 @@ components:
       #pattern: '[0-9]*'
       minLength: 5
       maxLength: 16   
+    
+    SavingsAccountCode: # field:ah_cuenta
+        description: 'Código interno de la cuenta de ahorros.' # field:ah_cuenta
+        type: integer
+        minimum: 1
+        maximum: 9999
 
   # pathitems:
   #     GeneralRequest:

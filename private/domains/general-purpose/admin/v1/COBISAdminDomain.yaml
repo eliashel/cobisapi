@@ -295,6 +295,8 @@ components:
           description: 'Fecha de emisión.' 
           type: string
           format: date
+        issueCity:
+          $ref: '#/components/schemas/City'          
     
     IdentificationType: # table:cobis..cl_tipo_documento
       description: 'Tipo de identificación de una persona natural o jurídica.'
