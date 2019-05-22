@@ -53,8 +53,8 @@ components:
         #di_fecha_ver
         primaryAddress: #field:di_principal
           description: 'Dirección principal.'
-          type: string
-          maxLength: 1  
+          type: boolean
+          nullable: false
         neighbourhood: #field:di_barrio
           description: 'Vecindario.'
           type: string
@@ -93,12 +93,12 @@ components:
         #di_fuente_verif
         #di_tiempo_reside
         externalNumber: #field:di_nro
-          description: 'Número exterior.'
+          description: 'Número externo.'
           type: integer
           format: int32        
         #di_nro_residentes
         internalNumber: #field:di_nro_interno
-          description: 'Número interior.'
+          description: 'Número interno.'
           type: integer
           format: int32          
         #di_negocio
@@ -339,7 +339,7 @@ components:
           type: boolean
           nullable: false
         #field:en_mala_referencia
-        comment: #en_comentario
+        comment: #field:en_comentario
           description: 'Comentarios'
           type: string
           maxLength: 254
@@ -403,7 +403,7 @@ components:
           description: 'Indica si es un grupo.'
           type: boolean
           nullable: false        
-        fullname: #en_nomlar
+        fullname: #field:en_nomlar
           description: 'Nombre completo de la compañía.'
           type: string
           maxLength: 254          
@@ -458,18 +458,18 @@ components:
           type: boolean
           nullable: false          
         exempt: #field:en_exc_sipla
-          description: 'Excento de reporte SIPLA.'
+          description: 'Exento de reporte SIPLA.'
           type: boolean
           nullable: false         
         exempt3000: #field:en_exc_por2
-          description: 'Excento 3/000.'
+          description: 'Exento de 3 x 1000.'
           type: boolean
           nullable: false          
         category: #field:en_categoria
           allOf:
             - $ref: '#/components/schemas/Category'
         exemptRIOE: #field:en_rep_sib
-          description: 'Excento RIOE.'
+          description: 'Exento RIOE.'
           type: boolean
           nullable: false         
         indebtednessFinancialSector: #field:en_pas_finan
@@ -528,9 +528,7 @@ components:
         sourceOfIncome: #field:ea_fuente_ing
           allOf:
             - $ref: '#/components/schemas/SourceOfIncome'        
-        amlCategory: #field:ea_cat_aml
-          allOf:
-            - $ref: '#/components/schemas/AMLCategory'         
+        #field:ea_cat_aml      
         disability: #field:ea_tipo_discapacidad
           allOf:
             - $ref: '#/components/schemas/Disability'        
@@ -559,13 +557,7 @@ components:
           type: array
           items:
             allOf:
-              - $ref: '#/components/schemas/Phone' 
-        businesses:
-          description: 'Negocios del cliente.'
-          type: array
-          items: 
-            allOf:
-              - $ref: '#/components/schemas/Business'      
+              - $ref: '#/components/schemas/Phone'       
         personalReferences:
           description: 'Referencias personales del cliente.'
           type: array
@@ -881,11 +873,11 @@ components:
         #field:c_edad_laboral_promedio
         #field:c_empleados_ley_50
         exempt: #field:en_exc_sipla
-          description: 'Excento de reporte SIPLA.'
+          description: 'Exento de reporte SIPLA.'
           type: boolean
           nullable: false         
         exempt3000: #field:en_exc_por2
-          description: 'Excento 3/000.'
+          description: 'Exento 3/000.'
           type: boolean
           nullable: false          
         #field:en_digito
@@ -900,7 +892,7 @@ components:
         #field:c_total_pasivos
         #field:en_pensionado
         exemptRIOE: #field:en_rep_sib
-          description: 'Excento RIOE.'
+          description: 'Exento RIOE.'
           type: boolean
           nullable: false         
         #field:en_max_riesgo
@@ -1409,9 +1401,7 @@ components:
         #field:ea_act_prin
         #field:ea_detalle
         #field:ea_act_dol
-        amlCategory: #field:ea_cat_aml
-          allOf:
-            - $ref: '#/components/schemas/AMLCategory'         
+        #field:ea_cat_aml        
         #field:ea_fecha_vincula
         #field:ea_observacion_vincula
         #field:ea_ced_ruc
@@ -1495,13 +1485,7 @@ components:
           type: array
           items:
             allOf:
-              - $ref: '#/components/schemas/Phone' 
-        businesses:
-          description: 'Negocios del cliente.'
-          type: array
-          items: 
-            allOf:
-              - $ref: '#/components/schemas/Business'      
+              - $ref: '#/components/schemas/Phone'      
         personalReferences:
           description: 'Referencias personales del cliente.'
           type: array
@@ -1544,7 +1528,7 @@ components:
           type: string
           minLength: 1
           maxLength: 255        
-        homePrhone: #field: rp_telefono_d
+        homePhone: #field: rp_telefono_d
           description: 'Teléfono Domicilio.'
           type: string
           minLength: 1
@@ -1773,7 +1757,7 @@ components:
         status:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/CatalogStatus'
 
-    AMLCategory: # cobis..cl_catalogo[table:399:cl_categoria_AML]
+    AMLCategory: # cobis..cl_catalogo[table:399:cl_categoria_AML] //TODO validar para que sirve
       description: 'Categoría AML.'
       properties:
         code:
@@ -1891,8 +1875,7 @@ components:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/CatalogStatus'
 
     PhoneOperator: # cobis..cl_catalogo[table:378:cl_tipo_operador]
-      description: >
-        'Operador telefónico.'
+      description: 'Operador telefónico.'
       properties:
         code:
           description: 'Código del Operador telefónico. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_tipo_operador](http://www.cobiscorp.com/api/catalogo#cl_tipo_operador).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
