@@ -11,17 +11,17 @@ components:
   ####################################################################
   schemas:
     # OBJECTS
-    Account: #virtual object
+    Account: #table virtual object
       description: 'Cuenta Bancaria con la definición de las distintas naturalezas.'
       properties:
-        AccountId:
+        accountId: #field virtual
           description: 'Código interno de la cuenta.'
           type: integer
           format: int32
           minimum: 1
-        number:
+        number: #field virtual
           $ref: '#/components/schemas/AccountNumber'      
-        status:
+        status: #field virtual
           description: >
             'Estado de cuenta de ahorros'
               * A: ACTIVA
@@ -33,38 +33,38 @@ components:
               * X: TRASLADADA-CANCELADA
           type: string
           enum: [A, C, G, I, N, T, X]
-        subsidiary: 
+        subsidiary: #field virtual
           $ref: '#/components/schemas/Subsidiary'
-        branch: 
+        branch: #field virtual
           $ref: '#/components/schemas/Branch'
-        currency: 
+        currency: #field virtual
           $ref: '#/components/schemas/Currency'
-        openingDate:
+        openingDate: #field virtual
           description: 'Fecha de apertura de la cuenta.'
           type: string
           format: date
-        customer: 
+        customer: #field virtual
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
-        name:
+        name: #field virtual
           description: 'Nombre de la cuenta.'
           type: string
           minLength: 1
           maxLength: 60
-        availableBalance:
+        availableBalance: #field virtual
           $ref: '#/components/schemas/Amount'
-        dateOfLastMovement:
+        dateOfLastMovement: #field virtual
           description: 'Fecha de último movimiento de la cuenta.'
           type: string
           format: date
-        dateOfLastInternalMovement:
+        dateOfLastInternalMovement: #field virtual
           description: 'Fecha de último movimiento interno de la cuenta.'
           type: string
           format: date
-        dateOfLastUpdated:
+        dateOfLastUpdated:  #field virtual
           description: 'Fecha de última actualización de la cuenta.'
           type: string
           format: date
-        AccountType:
+        AccountType:  #field virtual
           description: > 
             'Especifica el tipo de cuenta.'
               *3: CORRIENTE
@@ -72,17 +72,17 @@ components:
           type: string
           enum: [3, 4]
 
-    AccountNumber: #virtual object
+    AccountNumber: #table virtual object
       description: 'Número de cuenta.'
       properties:
-        number:
+        number: #field virtual
           description: 'Número de cuenta.'
           type: string
           #pattern: '[0-9]*'
           minLength: 5
           maxLength: 16
 
-    Branch: # table:cl_oficina
+    Branch: # table:cobis..cl_oficina
       description: 'Oficina.'
       properties:
         code: # field:of_oficina
@@ -131,7 +131,7 @@ components:
         #  of_cob
         #  of_bloqueada
     
-    City: # table:cl_ciudad
+    City: # table:cobis..cl_ciudad
       description: 'Ciudad.'
       properties:
         code: #  field:ci_ciudad
@@ -155,7 +155,7 @@ components:
           $ref: '#/components/schemas/Country'
         #  ci_canton
 
-    Country: # table:cl_pais
+    Country: # table:cobis..cl_pais
       description: 'País.'
       properties:
         code: # field:pa_pais
@@ -181,7 +181,7 @@ components:
           minLength: 1
           maxLength: 1
     
-    Currency: # table:cl_moneda
+    Currency: # table:cobis..cl_moneda
       description: 'Moneda.'
       properties:
         code: # field:mo_moneda
@@ -240,7 +240,7 @@ components:
         #de_o_departamento
         #de_nivel
     
-    Clerk: # table:cl_funcionario
+    Clerk: # table:cobis..cl_funcionario
       description: 'Funcionario o responsable de un usuario del sistema.'
       properties:
         code: # field:fu_funcionario
@@ -282,20 +282,20 @@ components:
         # fu_causa_bloqueo
         # fu_fecha_cargo    
     
-    Identification: # virtual object
+    Identification: # table virtual object
       description: 'Identificación de un cliente.'
       properties:
-        number:
+        number: #field virtual
           $ref: '#/components/schemas/IdentificationNumber'
-        type:
+        type: #field virtual
           $ref: '#/components/schemas/IdentificationType'
-        birthCity:
+        birthCity: #field virtual
           $ref: '#/components/schemas/City'
-        issueDate:
+        issueDate: #field virtual
           description: 'Fecha de emisión.' 
           type: string
           format: date
-        issueCity:
+        issueCity: #field virtual
           $ref: '#/components/schemas/City'          
     
     IdentificationType: # table:cobis..cl_tipo_documento
@@ -357,7 +357,7 @@ components:
           type: string
           maxLength: 254
     
-    Province: # table:cl_provincia
+    Province: # table:cobis..cl_provincia
       description: 'Provincia.'
       properties:
         code: #field:pv_provincia
@@ -379,7 +379,7 @@ components:
           maxLength: 1
         #pv_depart_pais //TODO Validar tabla / catálogo
         
-    Subsidiary: # table:cl_filial
+    Subsidiary: # table:cobis..cl_filial
       description: 'Filial.'
       properties:
         code: # field:fi_filial
@@ -404,7 +404,7 @@ components:
         #  fi_ruc
         #  fi_cont_nivel
 
-    User: # table:ad_usuario
+    User: # table:cobis..ad_usuario
       description: 'Usuario.'
       properties:
         subsidiary: # field:us_filial
@@ -414,16 +414,16 @@ components:
         #us_nodo
         login: # field:us_login
           $ref: '#/components/schemas/UserLogin'
-        assignmentDate: # filed:us_fecha_asig
+        assignmentDate: # field:us_fecha_asig
           description: 'Fecha de asiganación.'
           type: string
           format: date
         # us_creador
-        lastUpdateDate: # filed:us_fecha_ult_mod
+        lastUpdateDate: # field:us_fecha_ult_mod
           description: 'Fecha de última modificación.'
           type: string
           format: date
-        lastUpdatePasswordDate: # filed:us_fecha_ult_pwd
+        lastUpdatePasswordDate: # field:us_fecha_ult_pwd
           description: 'Fecha de última modificación de la contraseña.'
           type: string
           format: date
@@ -432,30 +432,29 @@ components:
           minLength: 1
           maxLength: 1
 
-    ZipCode: # table:cl_codigo_postal
-      description: >
-        'Código postal.'
+    ZipCode: # table:cobis..cl_codigo_postal
+      description: 'Código postal.'
       properties:
         code: #field:cp_codigo
           description: 'Código postal.'
           type: string
           maxLength: 10          
-        #field:cp_estado
+        #cp_estado
         city: #field:cp_municipio
           $ref: '#/components/schemas/City'
-        #field:cp_colonia
+        #cp_colonia
         country: #field:cp_pais
           $ref: '#/components/schemas/Country'
-        #field:cp_estado_h //TODO      
-        #field:cp_municipio_h //TODO     
-        #field:cp_colonia_h //TODO
+        #cp_estado_h //TODO      
+        #cp_municipio_h //TODO     
+        #cp_colonia_h //TODO
 
     # CATALOGS
     AccountCategory: # cobis..cl_catalogo[table:5881:ah_categoria] 
       description: 'Categoría de la cuenta de ahorro.'
       type: object
       properties:
-        code:
+        code: 
           description: 'Código de categoría de la cuenta de ahorro: Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_categoria](http://www.cobiscorp.com/api/catlogo#ah_categoria)' # TODO: Ajustar descripción. TODO: Actualizar enlace a documentación de catálogos dinámicos.
           type: string
           minLength: 1
@@ -521,8 +520,7 @@ components:
           $ref: '#/components/schemas/CatalogStatus'
 
     Gender: # cobis..cl_catalogo[table:4:cl_sexo]
-      description: >
-        'Género o sexo de la persona.'
+      description: 'Género o sexo de la persona.'
       properties:
         code:
           description: 'Código del sexo de la persona. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_sexo](http://www.cobiscorp.com/api/catalogo#cl_sexo).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
@@ -548,8 +546,7 @@ components:
           $ref: '#/components/schemas/CatalogStatus'
 
     MaritalStatus: # cobis..cl_catalogo[table:211:cl_ecivil]
-      description: >
-        'Estado civil de la persona.'
+      description: 'Estado civil de la persona.'
       properties:
         code:
           description: 'Código del estado civil de la persona. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_ecivil](http://www.cobiscorp.com/api/catalogo#cl_ecivil).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
@@ -562,8 +559,7 @@ components:
           $ref: '#/components/schemas/CatalogStatus'
 
     OfficerType: # cobis..cl_catalogo[table:23:cc_tipo_oficial]
-      description: >
-        'Tipo de oficial.' 
+      description: 'Tipo de oficial.' 
       properties:
         code:
           description: 'Código del tipo de oficial. Ver listado en: [http://www.cobiscorp.com/api/cl_catalogo#cc_tipo_oficial](http://www.cobiscorp.com/api/cl_catalogo#cc_tipo_oficial).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
@@ -576,8 +572,7 @@ components:
           $ref: '#/components/schemas/CatalogStatus'
 
     AveragePeriodType : # cobis..cl_catalogo[table:5884:ah_tpromedio]
-      description: >
-        'Periodo en que se calcula el promedio de la cuenta de ahorro.'
+      description: 'Periodo en que se calcula el promedio de la cuenta de ahorro.'
       properties:
         code:
           description: 'Código del periodo en que se calcula el promedio de la cuenta de ahorro.. Ver listado en: [http://www.cobiscorp.com/api/catalogo#ah_tpromedio](http://www.cobiscorp.com/api/catalogo#ah_tpromedio).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
@@ -590,8 +585,7 @@ components:
           $ref: '#/components/schemas/CatalogStatus'
 
     Segment: # cobis..cl_catalogo[table:5116:ah_sector] # TODO Revisar definicion del tipo de Catalogo
-      description: >
-        'Naturaleza del segmento de clientes.' 
+      description: 'Naturaleza del segmento de clientes.' 
       properties:
         code:
           description: 'Código del segmento de cliente. Ver listado en: [http://www.cobiscorp.com/api/catalogo#cl_sector](http://www.cobiscorp.com/api/catalogo#cl_sector).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
@@ -604,8 +598,7 @@ components:
           $ref: '#/components/schemas/CatalogStatus'
           
     WeekDay: # cobis..cl_catalogo[table:644:cr_dias_semana]
-      description: >
-        'Días de la semana.'
+      description: 'Días de la semana.'
       properties:
         code:
           description: 'Código del día de la semana. Ver listado en: [http://www.cobiscorp.com/api/cl_catalogo#cr_dias_semana](http://www.cobiscorp.com/api/cl_catalogo#cr_dias_semana).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
@@ -635,34 +628,33 @@ components:
 #      minLength: 1
 #      maxLength: 10
       
-    CatalogDescription: # cobis..cl_catalogo.descripcion
+    CatalogDescription: # key cobis..cl_catalogo.descripcion
       description: 'Descripción de un elemento de un catálogo.'
       type: string
       minLength: 1
       maxLength: 64
     
-    CatalogStatus: # cobis..cl_catalogo.estado
+    CatalogStatus: # key cobis..cl_catalogo.estado
       description: 'Estado de un elemento de un catálogo.'
       type: string
       minLength: 1
       maxLength: 1
     
-    IdentificationTypeCode: # cobis..cl_tipo_documento.td_codigo
-      description: >
-        'Tipo de identificación de una persona natural o jurídica. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
+    IdentificationTypeCode: #key cobis..cl_tipo_documento.td_codigo
+      description: 'Tipo de identificación de una persona natural o jurídica. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
       properties:
         code: # field:td_codigo 
           type: string
           minLength: 1
           maxLength: 4
       
-    IdentificationNumber: # cobis..cl_ente.en_ced_ruc # TODO: Revisar implementación en BD.
+    IdentificationNumber: #key cobis..cl_ente.en_ced_ruc # TODO: Revisar implementación en BD.
       description: 'Número de identificación de una persona natural o jurídica.'
       type: string
       minLength: 5
       maxLength: 16
     
-    UserLogin: # cobis..ad_usuario.us_login
+    UserLogin: #key cobis..ad_usuario.us_login
       description: 'Login de usuario en el sistema CORE. Los usuarios autorizados realizan y autorizan transacciones en  el sistema.'
       type: string
       minLength: 1
@@ -671,7 +663,7 @@ components:
     #########################
     #  GENERAL COMPONENTS   #
     #########################
-    Amount:
+    Amount: #table Object
       description: 'Valor monetario'
       type: string
       pattern: '[0-9]{1,16}(\.[0-9]{1,2})'

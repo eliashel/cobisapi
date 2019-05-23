@@ -34,7 +34,7 @@ components:
           type: string
           enum: [A, C, G, I, N, T, X]
         #ah_control: OK # passbook.controlNumber
-        passbook:
+        passbook: #field
           allOf:
             - $ref: '#/components/schemas/Passbook'
           description: 'Libreta de la cuenta de ahorros.'
@@ -52,7 +52,7 @@ components:
         #  $ref: '#/components/schemas/XXX'
         currency: # field:ah_moneda
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
-        openingDate:
+        openingDate:  #field:ah_fecha_aper
           description: 'Fecha de apertura de la cuenta.'
           type: string
           format: date
@@ -199,7 +199,7 @@ components:
             enum: [C, P]
         bankingProductSavingAccount: #field:ah_prod_banc
           $ref: '#/components/schemas/BankingProductSavingAccount'
-        AccountSourceType: #field:ah_origen
+        accountSourceType: #field:ah_origen
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/AccountSourceType'
         #ah_numlib # Passbook.number
         #ah_dep_ini
@@ -260,11 +260,11 @@ components:
         #ah_num_cred_mes_ant
         #ah_num_con_mes_ant
         #ah_fecha_ult_proceso
-        availableAmount: #Virtual
+        availableAmount: #field:virtual
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto disponible para girar.'
-        accountingBalance: #Virtual
+        accountingBalance: #field:virtual
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto disponible sumado al monto de los cheques próximos a hacerse disponibles.'
@@ -306,7 +306,7 @@ components:
           type: number
           format: int32
         #tipo_tran
-        branch: #oficina
+        branch: #field:oficina
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
           description: 'Oficina relacionada a la cuenta ahorros.'
@@ -321,15 +321,15 @@ components:
           description: 'Fecha de proceso de la transacción.'
           type: string
           format: date
-        account: 
-          $ref: '#/components/schemas/SavingsAccount' # #field:cta_banco
+        account:  #field:cta_banco
+          $ref: '#/components/schemas/SavingsAccount'
         finalWithdraw: # field:ret_efe # Retiro final
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Retiro Final de la cuenta de ahorros.'
         #ret_chq
         #remoto_ssn
-        currency: #moneda
+        currency: #field:moneda
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
           description: 'Moneda asociada a la cuenta de ahorros.'
@@ -361,16 +361,16 @@ components:
         #indicador
         #base_gmf
         #clase_clte
-        causeOfClosure: # field:causa, cobis..cl_catalogo[table:1300:ah_causa_cierre]
+        causeOfClosure: # field:causa
           description: 'Causa de cierre de una cuenta de ahorros. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
           type: object
           properties:
-            code:
+            code: #field
               description: 'Código de causal de cierre de cuenta.'
               type: number
               format: int32
               minimum: 1
-            description:
+            description:  #field
               allOf:
                 - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
               description: 'Descripcion del causal de cierre de cuenta.'
@@ -380,12 +380,12 @@ components:
           description: 'Detalle de la causa de cierre de una cuenta de ahorros. La lista de causales detalladas depende de la causa de cierre (causeOfClosure).  Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
           type: object
           properties:
-            code:
+            code: #field
               description: 'Código del causal de cierre de cuenta.'
               type: number
               format: int32
               minimum: 1
-            description:
+            description:  #field
               allOf:
                 - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
               description: 'Descripción del detalle del causal de cierre de cuenta.'
@@ -426,36 +426,41 @@ components:
           format: int32
           minimum: 1
           maximum: 32767
-        balance: # fiield:ah_saldo_libreta
+        balance: # field:ah_saldo_libreta
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Saldo de la libreta.'
              
-    TransactionSavingsAccount: # table:ah_tran_monet
+    TransactionSavingsAccount: # table:cob_ahorros..ah_tran_monet/cob_ahorros_his..ah_his_movimiento
       description: 'Transacción monetaria de una cuenta de ahorros.'
       type: object
       properties:
-        postingDate:  #field:tm_fecha
+        postingDate:  #field:tm_fecha/hm_fecha
           description: 'Fecha de proceso de la transacción.'
           type: string
           format: date
-        primaryTransactionId: # field:tm_secuencial
+        primaryTransactionId: # field:tm_secuencial/hm_secuencial
           description: 'Número de secuencial de transacción.'
           type: number
           format: int32
         #tm_ssn_branch
-        secondaryTransactionId: #field:tm_cod_alterno
+        secondaryTransactionId: #field:tm_cod_alterno/hm_cod_alterno
           description: 'Número de alterno de secuencial de transacción.'
           type: number
           format: int32
         #transactionCode: #tm_tipo_tran,  table:cl_ttrasaccion 
-        #finantialInstitution: #tm_filial table:cl_filial
-        branch: #tm_oficina
+        subsidiary: #field:tm_filial /hm_filial 
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+        branch: #field:tm_oficina/hm_oficina
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
           description: 'Oficina asociada a la transacción.'
-        #tm_usuario
-        #tm_terminal
+        user: # field: tm_usuario/hm_usuario
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/UserLogin'
+        terminal: #field:tm_terminal/hm_terminal
+          description: 'Terminal de origen de la transacción.'
+          type: string
+          maxLength: 10
         #tm_corre ccion # boolean
         #tm_sec_correccion
         #tm_origen
@@ -463,63 +468,72 @@ components:
         #tm_reentry
         #tm_signo
         #tm_fecha_ult_mov
-        cashAmount: # field:tm_efectivo
+        cashAmount: # field:tm_efectivo/hm_efectivo
           #$ref: '#/components/schemas/Amount'
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto  efectivo.'
-        ownChecksAmount: # field:tm_chq_propios
+        ownChecksAmount: # field:tm_chq_propios/hm_chq_propios
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto de cheques propios.'
-        localChecksAmount: # field:tm_chq_locales
+        localChecksAmount: # field:tm_chq_locales/hm_chq_locales
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto de cheques locales.'
-        othersChecksAmount: # field: tm_chq_ot_plazas
+        othersChecksAmount: # field: tm_chq_ot_plazas/hm_chq_ot_plazas
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto de cheques de otras plazas.'
-        totalAmount: # field: tm_valor
+        totalAmount: # field: tm_valor/hm_valor
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto de la transacción.'
         #tm_remoto_ssn
-        currency: #tm_moneda
+        currency: #field:tm_moneda/hm_moneda
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
           description: 'Moneda de la transacción.'
-        indicator: # field:tm_indicador, cobis..cl_catalogo[table:1787:ah_tipo_indicador] 
+        indicator: # field:tm_indicador/hm_indicador, cobis..cl_catalogo[table:1787:ah_tipo_indicador] 
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Indicator'
-        cause: # field:tm_causa, cobis..cl_catalogo[table:1289:ah_causa_nc: cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
+        cause: # field:tm_causa/hm_causa, cobis..cl_catalogo[table:1289:ah_causa_nc: cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Cause'
-        department: # field:tm_departamento
+        department: # field:tm_departamento/hm_departamento
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Department'
         #tm_saldo_lib
-        #tm_saldo_contable
-        #tm_saldo_disponible
+        accountingBalance:  #field:tm_saldo_contable/hm_saldo_contable
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          description: 'Saldo contable de la cuenta origen luego de la transacción.'
+        availableBalance: # field:tm_saldo_disponible/hm_saldo_disponible
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          description: 'Saldo disponible de la cuenta origen luego de la transacción.'
         #tm_saldo_interes
         #tm_fecha_efec
         #tm_interes
         #tm_control
-        account: 
+        account: #field:tm_cta_banco/hm_cta_banco
           allOf:
-            - $ref: '#/components/schemas/SavingsAccount' # #field:tm_cta_banco
+            - $ref: '#/components/schemas/SavingsAccount'
           description: 'Cuenta de origen en la entidad financiera.'
-        destinationAccount: #tm_ctadestino # banco destino
+        destinationAccount: #field:tm_ctadestino/hm_ctadestino # banco destino
           allOf:
             - $ref: '#/components/schemas/SavingsAccount'
           description: 'Cuenta destino.'
         #tm_tipo_xfer
         #tm_estado
-        transactionConcept: #tm_concepto
+        transactionConcept: #field: tm_concepto/hm_concepto
           description: 'Descripcón del concepto de la transacción.'
           type: string
           maxLength: 40
         #tm_oficina_cta # oficina en la que fue creada la cuenta 
-        #timestamp: #tm_hora
+        hourTransaction:  #field: #tm_hora/hm_hora
+          description: 'Fecha y hora de proceso de la transacción.'
+          type: string
+          format: datetime
         #tm_banco
         #tm_valor_comision
         #tm_prod_banc

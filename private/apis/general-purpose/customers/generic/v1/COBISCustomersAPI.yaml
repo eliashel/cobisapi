@@ -510,73 +510,8 @@ paths:
                 $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/NaturalPerson' # TODO: Revisar respuesta del cliente
               example: # Creación de un cliente o prospecto
                 naturalPerson: 
-                  code: 65412
-                  identification:
-                    number: '654310000'
-                    type:
-                      code: 'CC'                  
-                  names: 'Maria'
-                  surname: 'Perez'
-                  secondSurname: 'Perez'
-                  branch: 
-                    code: 5
-                  gender: 
-                    code: 'F'
-                  birthDate: '1992-09-01'
-                  birthCity: 
-                    code: 41
-                  maritalStatus: 
-                    code: "S"
-                  cycleNumber:  1
-                  birthCountry: 
-                    code: 65
-
-                  emails:
-                    - email: 
-                      code: 1
-                      mail: 'maria.perez@test.com'
-                      creationDate: '2019-05-15'     
-                      lastUpdatedDate: '2019-05-15 09:00:05'
-                      validity: true   
-                      verified: true   
-                      clerk:
-                        user: 'admuser'                   
-
-                  addresses:
-                    - address:
-                        code: 1
-                        address: 'cra 7 26 20'
-                        street: 'Cll 122'
-                        externalNumber: 54
-                        internalNumber: 2
-                        colony:
-                          code: 6
-                        city:
-                          code: 54
-                        province:
-                          code: 3
-                        zipCode:
-                          code: '1120'
-                        addressType:
-                          code: 'R'                  
-
-                  phones:
-                    - phone: 
-                        code: 1
-                        number: '3124569874'
-                        type:
-                          code: 'C'
-                          description: 'CELULAR'
-                        creationDate: '2019-05-15'     
-                        lastUpdatedDate: '2019-05-15 09:00:05'                         
-                        phoneOperator:
-                          code: '02' 
-                          description: 'MOVISTAR'                     
-                        area: '52'
-                        collectionManagement: false
-                        clerk:
-                          user: 'admuser'
-                        validity: true    
+                  code: 65412                 
+  
                 Links:
                   Self: '/customers/natural-persons'
                   Navs:
@@ -733,73 +668,8 @@ paths:
                 $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/NaturalPerson' # TODO: Revisar respuesta del cliente
               example: # Creación de un cliente o prospecto
                 naturalPerson: 
-                  code: 65412
-                  identification:
-                    number: '654310000'
-                    type:
-                      code: 'CC'
-                  names: 'Maria'
-                  surname: 'Perez'
-                  secondSurname: 'Perez'
-                  branch: 
-                    code: 5
-                  gender: 
-                    code: 'F'
-                  birthDate: '1992-09-01'
-                  birthCity: 
-                    code: 41
-                  maritalStatus: 
-                    code: "S"
-                  cycleNumber:  1
-                  birthCountry: 
-                    code: 65
+                  code: 65412                
 
-                  emails:
-                    - email: 
-                      code: 1
-                      mail: 'maria.perez@test.com'
-                      creationDate: '2019-05-15'     
-                      lastUpdatedDate: '2019-05-15 09:00:05'
-                      validity: true   
-                      verified: true   
-                      clerk:
-                        user: 'admuser'                   
-
-                  addresses:
-                    - address:
-                        code: 1
-                        address: 'cra 7 26 20'
-                        street: 'Cll 122'
-                        externalNumber: 54
-                        internalNumber: 2
-                        colony:
-                          code: 6
-                        city:
-                          code: 54
-                        province:
-                          code: 3
-                        zipCode:
-                          code: '1120'
-                        addressType:
-                          code: 'R'                  
-
-                  phones:
-                    - phone: 
-                        code: 1
-                        number: '3124569874'
-                        type:
-                          code: 'C'
-                          description: 'CELULAR'
-                        creationDate: '2019-05-15'     
-                        lastUpdatedDate: '2019-05-15 09:00:05'                         
-                        phoneOperator:
-                          code: '02'    
-                          description: 'MOVISTAR'
-                        area: '52'
-                        collectionManagement: false
-                        clerk:
-                          user: 'admuser'
-                        validity: true
                 Links:
                   Self: '/customers/natural-persons/65412'
                   Navs:
@@ -1049,36 +919,7 @@ paths:
                 $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Address' # TODO: Revisar respuesta del cliente
               example: # Creación de una dirección de correspondencia a un cliente
                 address: 
-                  code: 3
-                  address: 'cra 7 26 20'
-                  colony:
-                    code: '9874'
-                  city:
-                    code: 54
-                    description: 'Nava'                        
-                  addressType:
-                    code: 'RE' 
-                  sector:
-                    code: 'U' 
-                  zone:
-                    code: 'CE' 
-                  branch:
-                    code: 54 
-                  creationDate: '2019-05-15'     
-                  lastUpdatedDate: '2019-05-15 09:00:05'                    
-                  validity: true   
-                  verified: true   
-                  clerk:
-                    user: 'admuser'                      
-                  primaryAddress: true
-                  neighbourhood: 'Zona central'
-                  province:
-                    code: 1
-                  zipCode:
-                    code: '1120'
-                  street: 'Cll 122'
-                  externalNumber: 41
-                  internalNumber: 4                
+                  code: 3              
                 Links:
                   Self: '/customers/65412/addresses'
                   Navs:
@@ -1188,36 +1029,7 @@ paths:
                 $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Address' # TODO: Revisar respuesta del cliente
               example: # Modificación de una dirección de correspondencia a un cliente
                 address: 
-                  code: 3
-                  address: 'cra 7 26 20'
-                  colony:
-                    code: '9874'
-                  city:
-                    code: 54
-                    description: 'Nava'                        
-                  addressType:
-                    code: 'RE' 
-                  sector:
-                    code: 'U' 
-                  zone:
-                    code: 'CE' 
-                  branch:
-                    code: 54 
-                  creationDate: '2019-05-15'     
-                  lastUpdatedDate: '2019-05-15 09:00:05'                    
-                  validity: true   
-                  verified: true   
-                  clerk:
-                    user: 'admuser'                      
-                  primaryAddress: true
-                  neighbourhood: 'Zona central'
-                  province:
-                    code: 1
-                  zipCode:
-                    code: '1120'
-                  street: 'Cll 122'
-                  externalNumber: 41
-                  internalNumber: 4                 
+                  code: 3               
                 Links:
                   Self: '/customers/65412/addresses/3'
                   Navs:
@@ -1494,15 +1306,7 @@ paths:
                 $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Email' # TODO: Revisar respuesta del cliente
               example: # Creación de una dirección de correspondencia a un cliente
                 email: 
-                  code: 2
-                  mail: 'maria.perez2@test.com'
-                  creationDate: '2019-05-15'     
-                  lastUpdatedDate: '2019-05-15 09:10:05'
-                  validity: false   
-                  verified: false   
-                  clerk:
-                    user: 'admuser'              
-
+                  code: 2          
                 Links:
                   Self: '/customers/65412/emails'
                   Navs:
@@ -1592,14 +1396,6 @@ paths:
               example: # Modificación de una dirección de correspondencia a un cliente
                 email: 
                   code: 2
-                  mail: 'maria.perez2@test.com'
-                  creationDate: '2019-05-15'     
-                  lastUpdatedDate: '2019-05-15 09:10:05'
-                  validity: false   
-                  verified: false   
-                  clerk:
-                    user: 'admuser'   
-
                 Links:
                   Self: '/customers/65412/emails/2'
                   Navs:
@@ -1885,18 +1681,7 @@ paths:
                 $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Phone' # TODO: Revisar respuesta del cliente
               example: # Creación de un teléfono de contacto a un cliente
                 phone: 
-                  code: 3
-                  number: '987456312'
-                  type:
-                    code: 'D'
-                    description: 'DIRECTO'
-                  creationDate: '2019-05-15'     
-                  lastUpdatedDate: '2019-05-15 09:00:05'                                             
-                  area: '222'
-                  collectionManagement: false
-                  clerk:
-                    user: 'admuser'
-                  validity: false             
+                  code: 3           
                 Links:
                   Self: '/customers/65412/phones'
                   Navs:
@@ -1986,18 +1771,7 @@ paths:
                 $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Phone' # TODO: Revisar respuesta del cliente
               example: # Modificación de un teléfono de contacto de un cliente
                 phone: 
-                  code: 3
-                  number: '987456312'
-                  type:
-                    code: 'D'
-                    description: 'DIRECTO'
-                  creationDate: '2019-05-15'     
-                  lastUpdatedDate: '2019-05-15 09:00:05'                                             
-                  area: '222'
-                  collectionManagement: false
-                  clerk:
-                    user: 'admuser'
-                  validity: false             
+                  code: 3          
                 Links:
                   Self: '/customers/65412/phones'
                   Navs:
@@ -2260,23 +2034,6 @@ paths:
               example: # Asignación de uno o varios clientes a un grupo solidario.
                 solidarityGroup: 
                   code: 18
-                  name: 'NUEVA GENERACION'
-                  officer: 
-                    code: 38
-                  creationDate: '2019-05-15'     
-                  lastUpdatedDate: '2019-05-15 09:00:05'                  
-                  meetingAddress: 'CALLE CDA GUERRERO SN , San Mateo Huitzilzingo, Chalco, MEXICO'
-                  meetingDay: 
-                    code: 5
-                    description: 'VIERNES'
-                  meetingHour: '2018-01-23 12:00:34.617'
-                  cycleNumber:  1
-                  account: 
-                    code: 185
-                    number: '103201000019'
-                    status: 'A'
-                  branch: 
-                    code: 5   
                 Links:
                   Self: '/customers/solidarity-group/18'
                   Navs:
@@ -2357,24 +2114,6 @@ paths:
               example: # Creación de un grupo solidario
                 solidarityGroup: 
                   code: 19
-                  name: 'NUEVA GENERACION'
-                  secondSurname: 'Perez'
-                  officer: 
-                    code: 38
-                  creationDate: '2019-05-15'     
-                  lastUpdatedDate: '2019-05-15 09:00:05'                  
-                  meetingAddress: 'CALLE CDA GUERRERO SN , San Mateo Huitzilzingo, Chalco, MEXICO'
-                  meetingDay: 
-                    code: 5
-                    description: 'VIERNES'
-                  meetingHour: '2018-01-23 12:00:34.617'
-                  cycleNumber:  1
-                  account: 
-                    code: 185
-                    number: '103201000019'
-                    status: 'A'
-                  branch: 
-                    code: 5   
                 Links:
                   Self: '/customers/solidarity-group'
                   Navs:

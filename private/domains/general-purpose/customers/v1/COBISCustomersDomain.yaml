@@ -1589,7 +1589,7 @@ components:
 
         # KEY ELEMENTS
 
-    Phone:
+    Phone: # table:cl_telefono
       description: 'Teléfono.'
       type: object
       properties:
@@ -1991,7 +1991,7 @@ components:
         status:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/CatalogStatus'
 
-    TypeOfPerson: # cobis..cl_catalogo[table:213:cl_tipo_persona]
+    TypeOfPerson: # cobis..cl_catalogo[table:405:cl_tipo_persona]
       description: 'Tipo de persona.'
       properties:
         code:
