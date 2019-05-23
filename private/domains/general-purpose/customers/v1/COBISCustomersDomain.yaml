@@ -168,8 +168,7 @@ components:
         #field:nc_atiende
         #field:nc_empleados
         businessAnalysis:
-          allOf:
-            - $ref: '#/components/schemas/BusinessAnalysis'
+          $ref: '#/components/schemas/BusinessAnalysis'
 
     BusinessAnalysis: #table: cobis..cl_analisis_negocio //TODO: Validar campos de la entidad
       description: 'Análisis del negocio.'
@@ -311,11 +310,9 @@ components:
           minLength: 1
           maxLength: 1
         subsidiary: # field:en_filial
-          allOf: 
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:en_oficina
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         enrollmentDate: # field:en_fecha_crea
           description: 'Fecha de creación.'
           type: string
@@ -325,15 +322,12 @@ components:
           type: string
           format: date-time
         producerType: #field:en_casilla_def
-         allOf:
-           - $ref: '#/components/schemas/ProducerType'
+          $ref: '#/components/schemas/ProducerType'
         #field:en_pais > Identificacion.issueCity.country.code
         officer: #field:en_oficial
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
         activity: #field:en_actividad
-          allOf:
-            - $ref: '#/components/schemas/Activity'
+          $ref: '#/components/schemas/Activity'
         retention: #field:en_retencion
           description: 'Indica si el cliente tiene retención.'
           type: boolean
@@ -352,8 +346,7 @@ components:
           type: boolean
           nullable: false                   
         gender: #field: p_sexo
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Gender'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Gender'
         birthDate: #field:p_fecha_nac
           description: 'Fecha de nacimiento'
           type: string
@@ -364,37 +357,29 @@ components:
           description: 'Ciudad de nacimiento.'
         #field:p_lugar_doc > Identificacion.issueCity.code
         profession: #field:p_profesion
-          allOf:
-            - $ref: '#/components/schemas/Profession'
+          $ref: '#/components/schemas/Profession'
         maritalStatus: #field:p_estado_civil
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/MaritalStatus'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/MaritalStatus'
         income: #field:p_nivel_ing
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         outgoings: #field:p_nivel_egr
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         levelOfEducation: #field:p_nivel_estudio
-          allOf:
-            - $ref: '#/components/schemas/LevelOfEducation'
+          $ref: '#/components/schemas/LevelOfEducation'
         typeOfPerson: #field:p_tipo_persona
-          allOf:
-            - $ref: '#/components/schemas/TypeOfPerson'        
+          $ref: '#/components/schemas/TypeOfPerson'        
         typeOfHousing: #field:p_tipo_vivienda
-          allOf:
-            - $ref: '#/components/schemas/TypeOfHousing'        
+          $ref: '#/components/schemas/TypeOfHousing'        
         customerQualification: #field:p_calif_cliente
-          allOf:
-            - $ref: '#/components/schemas/CustomerQualification'         
+          $ref: '#/components/schemas/CustomerQualification'         
         issueDate: #field:p_fecha_emision
           description: 'Fecha de emisión.'
           type: string
           format: date-time        
         qualification: #field:c_posicion
-          allOf: 
-            - $ref: '#/components/schemas/Qualification' 
+          $ref: '#/components/schemas/Qualification' 
         typeOfCompany: #field:c_tipo_compania
-          allOf: 
-            - $ref: '#/components/schemas/TypeOfCompany'         
+          $ref: '#/components/schemas/TypeOfCompany'         
         assets: #field:c_activo
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'        
         liabilities: #field:c_pasivo
@@ -408,8 +393,7 @@ components:
           type: string
           maxLength: 254          
         kindOfSociety: #field:c_tipo_soc
-          allOf:
-            - $ref: '#/components/schemas/KindOfSociety'
+          $ref: '#/components/schemas/KindOfSociety'
         totalAssets: #field:c_total_activos
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'        
         employeesNumber: #field:c_num_empleados
@@ -430,8 +414,7 @@ components:
           type: boolean
           nullable: false        
         customerSituation: #field:en_situacion_cliente
-          allOf:
-            - $ref: '#/components/schemas/CustomerSituation'
+          $ref: '#/components/schemas/CustomerSituation'
         technicalEqity: #field:en_patrimonio_tec
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         grossEquityDate: #field:en_fecha_patri_bruto
@@ -451,8 +434,7 @@ components:
           type: boolean
           nullable: false           
         typeOfRelationShip: #field:en_tipo_vinculacion
-          allOf:
-            - $ref: '#/components/schemas/TypeOfRelationShip'        
+          $ref: '#/components/schemas/TypeOfRelationShip'        
         preferencialCustomer: #field:en_preferen
           description: 'Indica si el cliente es preferencial.'
           type: boolean
@@ -466,8 +448,7 @@ components:
           type: boolean
           nullable: false          
         category: #field:en_categoria
-          allOf:
-            - $ref: '#/components/schemas/Category'
+          $ref: '#/components/schemas/Category'
         exemptRIOE: #field:en_rep_sib
           description: 'Exento RIOE.'
           type: boolean
@@ -523,52 +504,44 @@ components:
           minLength: 1
           maxLength: 1
         economicSector: #field:ea_sector_eco
-          allOf:
-            - $ref: '#/components/schemas/EconomicSector'        
+          $ref: '#/components/schemas/EconomicSector'        
         sourceOfIncome: #field:ea_fuente_ing
-          allOf:
-            - $ref: '#/components/schemas/SourceOfIncome'        
-        #field:ea_cat_aml      
+          $ref: '#/components/schemas/SourceOfIncome'        
+        #field:ea_cat_aml  
         disability: #field:ea_tipo_discapacidad
-          allOf:
-            - $ref: '#/components/schemas/Disability'        
+          $ref: '#/components/schemas/Disability'        
         levelOfOutgoings: #field:ea_nivel_egresos
-          allOf:
-            - $ref: '#/components/schemas/LevelOfOutgoings'         
-
+          $ref: '#/components/schemas/LevelOfOutgoings'
         #semofoSIC
         emails:
           description: 'Correos electrónicos.'
           type: array
           items:
-            allOf:
-              - $ref: '#/components/schemas/Email'
-        solidarityGroup:          
-          allOf: 
-            - $ref: '#/components/schemas/SolidarityGroup'
+            $ref: '#/components/schemas/Email'
         addresses:
           description: 'Direcciones de correspondencia.'
           type: array
           items:
-            allOf:
-              - $ref: '#/components/schemas/Address'
+            $ref: '#/components/schemas/Address'
         phones:
           description: 'Teléfonos de contacto.'
           type: array
           items:
-            allOf:
-              - $ref: '#/components/schemas/Phone'       
+            $ref: '#/components/schemas/Phone' 
+        businesses:
+          description: 'Negocios del cliente.'
+          type: array
+          items: 
+            $ref: '#/components/schemas/Business'      
         personalReferences:
           description: 'Referencias personales del cliente.'
           type: array
           items:     
-            allOf: 
-              - $ref: '#/components/schemas/PersonalReference'   
+            $ref: '#/components/schemas/PersonalReference'   
         relationShips:
           type: array
           items: 
-            allOf:
-              - $ref: '#/components/schemas/RelationShip'  
+            $ref: '#/components/schemas/RelationShip'  
 
     Email: # table:cl_direccion
       description: 'Correo electrónico.'
@@ -718,8 +691,7 @@ components:
         #field:en_referencia
         #field:en_casilla
         producerType: #field:en_casilla_def
-          allOf:
-            - $ref: '#/components/schemas/ProducerType'
+          $ref: '#/components/schemas/ProducerType'
         #field:en_tipo_dp
         #field:en_balance
         #field:en_grupo
@@ -760,8 +732,7 @@ components:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'                         
         #field:p_nivel_estudio
         typeOfPerson: #field:p_tipo_persona
-          allOf:
-            - $ref: '#/components/schemas/TypeOfPerson'   
+          $ref: '#/components/schemas/TypeOfPerson'   
         #field:p_tipo_vivienda
         #field:p_calif_cliente
         #field:p_personal
@@ -776,11 +747,9 @@ components:
         #field:c_cap_suscrito
         #field:en_asosciada
         qualification: #field:c_posicion
-          allOf: 
-            - $ref: '#/components/schemas/Qualification' 
+          $ref: '#/components/schemas/Qualification' 
         typeOfCompany: #field:c_tipo_compania
-          allOf: 
-            - $ref: '#/components/schemas/TypeOfCompany'         
+          $ref: '#/components/schemas/TypeOfCompany'         
         #field:c_rep_legal
         assets: #field:c_activo
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'        
@@ -804,8 +773,7 @@ components:
         #field:c_cap_pagado
         #field:c_tipo_nit
         kindOfSociety: #field:c_tipo_soc
-          allOf:
-            - $ref: '#/components/schemas/KindOfSociety'
+          $ref: '#/components/schemas/KindOfSociety'
         totalAssets: #field:c_total_activos
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'        
         employeesNumber: #field:c_num_empleados
@@ -838,8 +806,7 @@ components:
           nullable: false        
         #field:c_funcionario
         customerSituation: #field:en_situacion_cliente
-          allOf:
-            - $ref: '#/components/schemas/CustomerSituation'
+          $ref: '#/components/schemas/CustomerSituation'
         technicalEqity: #field:en_patrimonio_tec
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         grossEquityDate: #field:en_fecha_patri_bruto
@@ -862,8 +829,7 @@ components:
           type: boolean
           nullable: false           
         typeOfRelationShip: #field:en_tipo_vinculacion
-          allOf:
-            - $ref: '#/components/schemas/TypeOfRelationShip'        
+          $ref: '#/components/schemas/TypeOfRelationShip'        
         #field:en_oficial_sup
         #field:en_cliente
         preferencialCustomer: #field:en_preferen
@@ -885,8 +851,7 @@ components:
         #field:p_pais_emi
         #field:p_depa_emi
         category: #field:en_categoria
-          allOf:
-            - $ref: '#/components/schemas/Category'
+          $ref: '#/components/schemas/Category'
         #field:en_emala_referencia
         #field:en_banca
         #field:c_total_pasivos
@@ -1117,11 +1082,9 @@ components:
           minLength: 1
           maxLength: 1
         subsidiary: # field:en_filial
-          allOf: 
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:en_oficina
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
         enrollmentDate: # field:en_fecha_crea
           description: 'Fecha de creación.'
           type: string
@@ -1139,11 +1102,9 @@ components:
         #field:en_grupo
         #field:en_pais > Identificacion.issueCity.country.code
         officer: #field:en_oficial
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
         activity: #field:en_actividad
-          allOf:
-            - $ref: '#/components/schemas/Activity'
+          $ref: '#/components/schemas/Activity'
         retention: #field:en_retencion
           description: 'Indica si el cliente tiene retención.'
           type: boolean
@@ -1164,8 +1125,7 @@ components:
           nullable: false
         #field:en_rep_superban
         gender: #field: p_sexo
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Gender'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Gender'
         birthDate: #field:p_fecha_nac
           description: 'Fecha de nacimiento'
           type: string
@@ -1176,28 +1136,22 @@ components:
           description: 'Ciudad de nacimiento.'
         #field:p_lugar_doc > Identificacion.issueCity.code
         profession: #field:p_profesion
-          allOf:
-            - $ref: '#/components/schemas/Profession'
+          $ref: '#/components/schemas/Profession'
         #field:p_pasaporte
         maritalStatus: #field:p_estado_civil
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/MaritalStatus'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/MaritalStatus'
         #field:p_num_cargas
         #field:p_num_hijos
         #field:p_nivel_ing
         #field:p_nivel_egr
         levelOfEducation: #field:p_nivel_estudio
-          allOf:
-            - $ref: '#/components/schemas/LevelOfEducation'
+          $ref: '#/components/schemas/LevelOfEducation'
         typeOfPerson: #field:p_tipo_persona
-          allOf:
-            - $ref: '#/components/schemas/TypeOfPerson'        
+          $ref: '#/components/schemas/TypeOfPerson'        
         typeOfHousing: #field:p_tipo_vivienda
-          allOf:
-            - $ref: '#/components/schemas/TypeOfHousing'        
+          $ref: '#/components/schemas/TypeOfHousing'        
         CustomerQualification: #field:p_calif_cliente
-          allOf:
-            - $ref: '#/components/schemas/CustomerQualification'         
+          $ref: '#/components/schemas/CustomerQualification'         
         #field:p_personal
         #field:p_propiedad
         #field:p_trabajo
@@ -1384,8 +1338,7 @@ components:
         #field:ea_cliente_planilla
         #field:ea_cod_risk
         economicSector: #field:ea_sector_eco
-          allOf:
-            - $ref: '#/components/schemas/EconomicSector'        
+          $ref: '#/components/schemas/EconomicSector'        
         #field:ea_actividad
         #field:ea_lin_neg
         #field:ea_seg_neg
@@ -1396,26 +1349,23 @@ components:
         #field:ea_apoderado_legal
         #field:ea_no_req_kyc_comp
         sourceOfIncome: #field:ea_fuente_ing
-          allOf:
-            - $ref: '#/components/schemas/SourceOfIncome'        
+          $ref: '#/components/schemas/SourceOfIncome'        
         #field:ea_act_prin
         #field:ea_detalle
         #field:ea_act_dol
-        #field:ea_cat_aml        
+        #field:ea_cat_aml       
         #field:ea_fecha_vincula
         #field:ea_observacion_vincula
         #field:ea_ced_ruc
         #field:ea_discapacidad
         disability: #field:ea_tipo_discapacidad
-          allOf:
-            - $ref: '#/components/schemas/Disability'        
+          $ref: '#/components/schemas/Disability'        
         #field:ea_ced_discapacidad
         #field:ea_id_prefijo
         #field:ea_id_sufijo
         #field:ea_duplicado
         levelOfOutgoings: #field:ea_nivel_egresos
-          allOf:
-            - $ref: '#/components/schemas/LevelOfOutgoings'         
+          $ref: '#/components/schemas/LevelOfOutgoings'         
         #field:ea_ifi
         #field:ea_asfi
         #field:ea_path_foto
@@ -1469,34 +1419,28 @@ components:
           description: 'Correos electrónicos.'
           type: array
           items:
-            allOf:
-              - $ref: '#/components/schemas/Email'
+            $ref: '#/components/schemas/Email'
         solidarityGroup:          
-          allOf: 
-            - $ref: '#/components/schemas/SolidarityGroup'
+          $ref: '#/components/schemas/SolidarityGroup'
         addresses:
           description: 'Direcciones de correspondencia.'
           type: array
           items:
-            allOf:
-              - $ref: '#/components/schemas/Address'
+            $ref: '#/components/schemas/Address'
         phones:
           description: 'Teléfonos de contacto.'
           type: array
           items:
-            allOf:
-              - $ref: '#/components/schemas/Phone'      
+            $ref: '#/components/schemas/Phone'      
         personalReferences:
           description: 'Referencias personales del cliente.'
           type: array
           items:     
-            allOf: 
-              - $ref: '#/components/schemas/PersonalReference'   
+            $ref: '#/components/schemas/PersonalReference'   
         relationShips:
           type: array
           items: 
-            allOf:
-              - $ref: '#/components/schemas/RelationShip'  
+            $ref: '#/components/schemas/RelationShip'  
 
     PersonalReference: #table: cobis..cl_ref_personal
       description: 'Negocios del cliente.'
@@ -1589,7 +1533,7 @@ components:
 
         # KEY ELEMENTS
 
-    Phone: # table:cl_telefono
+    Phone: # table: cobis..cl_telefono
       description: 'Teléfono.'
       type: object
       properties:
@@ -1674,8 +1618,7 @@ components:
         #	gr_representante
         #	gr_compania
         officer: #field:gr_oficial
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
         creationDate: # field:gr_fecha_registro
           description: 'Fecha de creación del grupo de clientes.'
           type: string
@@ -1692,15 +1635,23 @@ components:
         #	gr_usuario
         #	gr_reservado
         #	gr_tipo_grupo
-        #	gr_estado
+        status: #field:gr_estado
+          description: >
+            'Estado:'
+              * C: Cancelado
+              * V: Vigente
+          type: string
+          enum: [C,V]
+          minLength: 1
+          maxLength: 1        
         meetingAddress: #field:gr_dir_reunion
           description: 'Dirección de reunión.'
           type: string
           maxLength: 125
         meetingDay: #field:gr_dia_reunion
-            allOf:
-              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/WeekDay'
-            description: 'Día de la reunión'
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/WeekDay'
+          description: 'Día de la reunión'
         meetingHour: #field:gr_hora_reunion
           description: 'Hora de la reunión.'
           type: string

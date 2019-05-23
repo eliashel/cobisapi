@@ -94,7 +94,7 @@ tags:
   #  url: http://www.cobiscorp.com/
 
 paths:
-  /savings-accounts/{customerId}:
+  /savings-accounts/customers/{customerId}:
     get:
       tags:
         - SavingsAccounts
@@ -231,7 +231,7 @@ paths:
                     isoCode: 'USD'
                   name: 'THOMAS JEFFERSON'
                 Links:
-                  Self: '/savings-accounts/345353'
+                  Self: '/savings-accounts/customers/345353'
                   Navs:
                     - LinkDetail:
                         href: '/savings-accounts/345353/balances'
@@ -377,7 +377,7 @@ paths:
                   number: 1234
                   controlNumber: 12
                   balance: '1000.00'
-              transaction:
+              transactionSavingsAccount:
                 cashAmount: '300.00'
                 localChecksAmount: '200.00'
                 othersChecksAmount: '100.00'
@@ -391,22 +391,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount' # TODO: Revisar respuesta de la transacción
+                $ref: '#/components/schemas/DepositSavingsAccountPSTRs' 
               example:
-                postingDate: '2019-02-13'
-                primaryTransactionId: 1521020
-                secondaryTransactionId: 13395
-                branch:
-                  code: 123
-                cashAmount: '300.00'
-                localChecksAmount: '200.00'
-                othersChecksAmount: '100.00'
-                totalAmount: '600.00'
-                currency:
-                  code: 5
-                  description: 'USD'
-                account:
-                  number: '011201000019'
+                transactionSavingsAccount:
+                  primaryTransactionId: '234234'
+               
                 Links:
                   Self: '/savings-accounts/deposit'
                   Navs:
@@ -461,7 +450,7 @@ paths:
                 number: '011201000019'
                 savingsBook:
                   number: 1234
-              transaction:
+              transactionSavingsAccount:
                 cashAmount: '300.00'
                 localChecksAmount: '200.00'
                 othersChecksAmount: '100.00'
@@ -475,22 +464,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount' # TODO: Revisar respuesta de la transacción
+                $ref: '#/components/schemas/InitialDepositSavingsAccountPSTRs'
               example:
-                postingDate: '2019-02-13'
-                primaryTransactionId: 1521020
-                secondaryTransactionId: 13395
-                branch:
-                  code: 123
-                cashAmount: '300.00'
-                localChecksAmount: '200.00'
-                othersChecksAmount: '100.00'
-                totalAmount: '600.00'
-                currency:
-                  code: 5
-                  isoCode: 'USD'
-                account:
-                  number: '011201000019'
+                transactionSavingsAccount:
+                  primaryTransactionId: '234234'
                 #  status:
                 #    code: 'A'
                 #  savingsBook:
@@ -566,7 +543,7 @@ paths:
                   number: 1234
                   controlNumber: 12
                   balance: '1000.00'
-              transaction:
+              transactionSavingsAccount:
                 cashAmount: '300.00' # TODO: Validar campo
       responses:
         201:
@@ -577,22 +554,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount' # TODO: Revisar respuesta de la transacción
+                $ref: '#/components/schemas/WithdrawSavingsAccountPSTRs'
               example:
-                postingDate: '2019-02-13'
-                primaryTransactionId: 12345678
-                secondaryTransactionId: 13395
-                branch:
-                  code: 123
-                cashAmount: '300.00'
-                #localChecksAmount: '200.00'
-                #othersChecksAmount: '100.00'
-                #totalAmount: '600.00'
-                currency:
-                  code: 5
-                  isoCode: 'USD'
-                account:
-                  number: '1234567890'
+                transactionSavingsAccount:
+                  primaryTransactionId: '234234'
                 #  status:
                 #    code: 'A'
                 #  savingsBook:
@@ -612,13 +577,13 @@ paths:
                 #    lastName: 'Jefferson'
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '1300.00'
-                Links:
-                  Self: '/savings-accounts/withdraw'
-                  Navs:
-                    - LinkDetail:
-                        href: '/savings-accounts/345353/balances'
-                        rel: 'balances'
-                        type: 'GET'
+                  Links:
+                    Self: '/savings-accounts/withdraw'
+                    Navs:
+                      - LinkDetail:
+                          href: '/savings-accounts/345353/balances'
+                          rel: 'balances'
+                          type: 'GET'
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
@@ -664,7 +629,7 @@ paths:
             example: # TODO: Ajustar request. 
               savingsAccount:
                 number: '011201000019'
-              transaction:
+              transactionSavingsAccount:
                 cause: '10' # COMISION GASTO CORRESPONSAL CHEQUE REMESA
                 indicator: 1 # Disponible
                 department: 1 # Operaciones
@@ -679,25 +644,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount' # TODO: Revisar respuesta de la transacción
+                $ref: '#/components/schemas/DebitNoteSavingsAccountPSTRs'
               example:
-                postingDate: '2019-02-13'
-                primaryTransactionId: 1521020
-                secondaryTransactionId: 13395
-                branch:
-                  code: 123
-                cause: '10'
-                indicator: 1 
-                department: 1 
-                #cashAmount: '300.00'
-                #localChecksAmount: '200.00'
-                #othersChecksAmount: '100.00'
-                totalAmount: '600.00'
-                currency:
-                  code: 5
-                  isoCode: 'USD'
-                account:
-                  number: '1234567890'
+                transactionSavingsAccount:
+                  primaryTransactionId: '234234'
                 #  status:
                 #    code: 'A'
                 #  savingsBook:
@@ -717,6 +667,13 @@ paths:
                 #    lastName: 'Jefferson'
                 #  name: 'THOMAS JEFFERSON'
                 #  availableBalance: '1600.00'
+                Links:
+                  Self: '/savings-accounts/debit-note'
+                  Navs:
+                    - LinkDetail:
+                        href: '/savings-accounts/345353/balances'
+                        rel: 'balances'
+                        type: 'GET'
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
@@ -762,7 +719,7 @@ paths:
             example: # TODO: Ajustar request. 
               savingsAccount:
                 number: '011201000019'
-              transaction:
+              transactionSavingsAccount:
                 cause: '1' # Por ajuste
                 indicator: 1 # Disponible
                 departament: 1 # Operaciones
@@ -777,25 +734,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount' # TODO: Revisar respuesta de la transacción
+                $ref: '#/components/schemas/CreditNoteSavingsAccountPSTRs'
               example:
-                postingDate: '2019-02-13'
-                primaryTransactionId: 1521020
-                secondaryTransactionId: 13395
-                branch:
-                  code: 123
-                cause: '1' 
-                indicator: 1 
-                departament: 1 
-                #cashAmount: '300.00'
-                #localChecksAmount: '200.00'
-                #othersChecksAmount: '100.00'
-                totalAmount: '600.00'
-                currency:
-                  code: 5
-                  isoCode: 'USD'
-                account:
-                  number: '1234567890'
+                transactionSavingsAccount:
+                  primaryTransactionId: '234234'
                 #  status:
                 #    code: 'A'
                 #  savingsBook:
@@ -871,7 +813,7 @@ paths:
               destinationSavingsAccount:
                 #type: "AHO"
                 number: '011303400453'
-              transaction:
+              transactionSavingsAccount:
                 totalAmount: '600.00'
                 transactionConcept: 'Transferencia para pago de servicios'
       responses:
@@ -883,37 +825,11 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount' # TODO: Revisar respuesta de la transacción
+                  $ref: '#/components/schemas/TransferSavingsAccountPSTRs'
               example:
-                postingDate: '2019-02-13'
-                primaryTransactionId: 1521020 
-                secondaryTransactionId: 13395
-                branch:
-                  code: 123
-                #cashAmount: '300.00'
-                #localChecksAmount: '200.00'
-                #othersChecksAmount: '100.00'
-                totalAmount: '600.00'
-                currency:
-                  code: 5
-                  isoCode: 'USD'
-                account:
-                  number: '011201000019'
-                #  status:
-                #    code: 'A'
-                #  currency:
-                #    code: 5
-                #    isoCode: 'USD'
-                #  customer:
-                #    identification:
-                #      number: '123123123'
-                #      type:
-                #        code: 'CC'
-                #    name: 'Thomas'
-                #    lastName: 'Jefferson'
-                #  name: 'THOMAS JEFFERSON'
-                destinationAccount:
-                  number: '011303400453'
+                transactionSavingsAccount:
+                  primaryTransactionId: '234234'
+              
                 #  status:
                 #    code: 'A'
                 #  currency:
@@ -1043,6 +959,18 @@ paths:
           headers:
             X-Correlation-ID:
               $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitialDepositSavingsAccountPTCRs'
+              example: 
+                savingsAccount:
+                  code: '234234'
+                  passbook:
+                    controlNumber:  '2342342'
+                  transactionSavingsAccount:
+                    primaryTransactionId: '234234'
+                    
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
         401:
@@ -1234,7 +1162,7 @@ components:
           required:
             - number
 
-        transaction:
+        transactionSavingsAccount:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
@@ -1265,7 +1193,7 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
             - type: object
 
-        transaction:
+        transactionSavingsAccount:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
@@ -1289,7 +1217,7 @@ components:
           required:
             - number
 
-        transaction:
+        transactionSavingsAccount:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
@@ -1313,7 +1241,7 @@ components:
           required:
             - number
 
-        transaction:
+        transactionSavingsAccount:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
@@ -1337,7 +1265,7 @@ components:
           required:
             - number
 
-        transaction:
+        transactionSavingsAccount:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
@@ -1366,7 +1294,7 @@ components:
             - type: object
           required:
             - number
-        transaction:
+        transactionSavingsAccount:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
@@ -1388,9 +1316,134 @@ components:
           required:
             - number
 
-        transaction:
+        transactionSavingsAccount:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
           required:
             - cashAmount
+    
+    #########################
+    #    COMPLEX RESPONSE   #
+    #########################
+            
+    DepositSavingsAccountPSTRs: 
+      description: 'Respuesta de creación de un depósito de cuenta de ahorros.'
+      type: object
+      required:
+        - transactionSavingsAccount
+      properties:
+        transactionSavingsAccount:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
+            - type: object
+          required:
+            - primaryTransactionId 
+        Links:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
+            
+    InitialDepositSavingsAccountPSTRs: 
+      description: 'Respuesta de creación de un depósito inicial de cuenta de ahorros.'
+      type: object
+      required:
+        - transactionSavingsAccount
+      properties:
+        transactionSavingsAccount:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
+            - type: object
+          required:
+            - primaryTransactionId 
+        Links:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
+      
+    WithdrawSavingsAccountPSTRs: 
+      description: 'Respuesta un retiro en efectivo con o sin libreta de una cuenta de ahorros.'
+      type: object
+      required:
+        - transactionSavingsAccount
+      properties:
+        transactionSavingsAccount:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
+            - type: object
+          required:
+            - primaryTransactionId 
+        Links:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
+            
+    DebitNoteSavingsAccountPSTRs: 
+      description: 'Respuesta de creación de un depósito de cuenta de ahorros.'
+      type: object
+      required:
+        - transactionSavingsAccount
+      properties:
+        transactionSavingsAccount:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
+            - type: object
+          required:
+            - primaryTransactionId 
+        Links:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
+    
+    CreditNoteSavingsAccountPSTRs: 
+      description: 'Respuesta de creación de un depósito de cuenta de ahorros.'
+      type: object
+      required:
+        - transactionSavingsAccount
+      properties:
+        transactionSavingsAccount:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
+            - type: object
+          required:
+            - primaryTransactionId 
+        Links:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links' 
+            
+    TransferSavingsAccountPSTRs: 
+      description: 'Respuesta de creación de un depósito de cuenta de ahorros.'
+      type: object
+      required:
+        - transactionSavingsAccount
+      properties:
+        transactionSavingsAccount:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
+            - type: object
+          required:
+            - primaryTransactionId 
+        Links:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
+            
+    InitialDepositSavingsAccountPTCRs:
+      description: 'Depósito inicial de cuenta de ahorros' 
+      type: object
+      required:
+        - savingsAccount
+        - transaction      
+      properties:
+        savingsAccount:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+            - type: object
+          required:
+            - code
+            - passbook
+            - controlNumber
+
+        transactionSavingsAccount:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
+            - type: object
+          required:
+            - primaryTransactionId
+    
+          

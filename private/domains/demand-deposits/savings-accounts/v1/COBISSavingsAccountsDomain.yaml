@@ -431,33 +431,33 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Saldo de la libreta.'
              
-    TransactionSavingsAccount: # table:cob_ahorros..ah_tran_monet/cob_ahorros_his..ah_his_movimiento
+    TransactionSavingsAccount: # table:cob_ahorros..ah_tran_monet- table:cob_ahorros_his..ah_his_movimiento
       description: 'Transacción monetaria de una cuenta de ahorros.'
       type: object
       properties:
-        postingDate:  #field:tm_fecha/hm_fecha
+        postingDate:  #field:tm_fecha- field: hm_fecha
           description: 'Fecha de proceso de la transacción.'
           type: string
           format: date
-        primaryTransactionId: # field:tm_secuencial/hm_secuencial
+        primaryTransactionId: # field:tm_secuencial- field: hm_secuencial
           description: 'Número de secuencial de transacción.'
           type: number
           format: int32
         #tm_ssn_branch
-        secondaryTransactionId: #field:tm_cod_alterno/hm_cod_alterno
+        secondaryTransactionId: #field:tm_cod_alterno- field: hm_cod_alterno
           description: 'Número de alterno de secuencial de transacción.'
           type: number
           format: int32
         #transactionCode: #tm_tipo_tran,  table:cl_ttrasaccion 
-        subsidiary: #field:tm_filial /hm_filial 
+        subsidiary: #field:tm_filial - field: hm_filial 
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
-        branch: #field:tm_oficina/hm_oficina
+        branch: #field:tm_oficina- field: hm_oficina
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
           description: 'Oficina asociada a la transacción.'
-        user: # field: tm_usuario/hm_usuario
+        user: # field: tm_usuario- field: hm_usuario
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/UserLogin'
-        terminal: #field:tm_terminal/hm_terminal
+        terminal: #field:tm_terminal- field: hm_terminal
           description: 'Terminal de origen de la transacción.'
           type: string
           maxLength: 10
@@ -468,46 +468,46 @@ components:
         #tm_reentry
         #tm_signo
         #tm_fecha_ult_mov
-        cashAmount: # field:tm_efectivo/hm_efectivo
+        cashAmount: # field:tm_efectivo- field: hm_efectivo
           #$ref: '#/components/schemas/Amount'
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto  efectivo.'
-        ownChecksAmount: # field:tm_chq_propios/hm_chq_propios
+        ownChecksAmount: # field:tm_chq_propios- field: hm_chq_propios
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto de cheques propios.'
-        localChecksAmount: # field:tm_chq_locales/hm_chq_locales
+        localChecksAmount: # field:tm_chq_locales- field: hm_chq_locales
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto de cheques locales.'
-        othersChecksAmount: # field: tm_chq_ot_plazas/hm_chq_ot_plazas
+        othersChecksAmount: # field: tm_chq_ot_plazas- field: hm_chq_ot_plazas
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto de cheques de otras plazas.'
-        totalAmount: # field: tm_valor/hm_valor
+        totalAmount: # field: tm_valor- field: hm_valor
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto de la transacción.'
         #tm_remoto_ssn
-        currency: #field:tm_moneda/hm_moneda
+        currency: #field:tm_moneda- field: hm_moneda
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
           description: 'Moneda de la transacción.'
-        indicator: # field:tm_indicador/hm_indicador, cobis..cl_catalogo[table:1787:ah_tipo_indicador] 
+        indicator: # field:tm_indicador- field: hm_indicador, cobis..cl_catalogo[table:1787:ah_tipo_indicador] 
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Indicator'
-        cause: # field:tm_causa/hm_causa, cobis..cl_catalogo[table:1289:ah_causa_nc: cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
+        cause: # field:tm_causa- field: hm_causa, cobis..cl_catalogo[table:1289:ah_causa_nc: cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Cause'
-        department: # field:tm_departamento/hm_departamento
+        department: # field:tm_departamento- field: hm_departamento
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Department'
         #tm_saldo_lib
-        accountingBalance:  #field:tm_saldo_contable/hm_saldo_contable
+        accountingBalance:  #field:tm_saldo_contable- field: hm_saldo_contable
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Saldo contable de la cuenta origen luego de la transacción.'
-        availableBalance: # field:tm_saldo_disponible/hm_saldo_disponible
+        availableBalance: # field:tm_saldo_disponible- field: hm_saldo_disponible
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Saldo disponible de la cuenta origen luego de la transacción.'
@@ -515,25 +515,25 @@ components:
         #tm_fecha_efec
         #tm_interes
         #tm_control
-        account: #field:tm_cta_banco/hm_cta_banco
+        account: #field:tm_cta_banco- field: hm_cta_banco
           allOf:
             - $ref: '#/components/schemas/SavingsAccount'
           description: 'Cuenta de origen en la entidad financiera.'
-        destinationAccount: #field:tm_ctadestino/hm_ctadestino # banco destino
+        destinationAccount: #field:tm_ctadestino- field: hm_ctadestino # banco destino
           allOf:
             - $ref: '#/components/schemas/SavingsAccount'
           description: 'Cuenta destino.'
         #tm_tipo_xfer
         #tm_estado
-        transactionConcept: #field: tm_concepto/hm_concepto
+        transactionConcept: #field: tm_concepto- field: hm_concepto
           description: 'Descripcón del concepto de la transacción.'
           type: string
           maxLength: 40
         #tm_oficina_cta # oficina en la que fue creada la cuenta 
-        hourTransaction:  #field: #tm_hora/hm_hora
+        hourTransaction:  #field: #tm_hora- field: hm_hora
           description: 'Fecha y hora de proceso de la transacción.'
           type: string
-          format: datetime
+          format: date-time
         #tm_banco
         #tm_valor_comision
         #tm_prod_banc
