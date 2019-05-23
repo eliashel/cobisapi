@@ -2168,9 +2168,9 @@ components:
       description: 'Respuesta de consulta de todas las direcciones de correspondencia de un cliente.'
       type: object
       required:
-        - address
+        - addresses
       properties:
-        address:
+        addresses:
           type: array
           items:
             allOf:
@@ -2274,7 +2274,7 @@ components:
       description: 'Respuesta de  consulta de todas las direcciones de correo electrónico de un cliente.'
       type: object
       required:
-        - email
+        - emails
       properties:
         emails:
           type: array
@@ -2504,7 +2504,7 @@ components:
       description: 'Respuesta de consulta de todos los teléfonos de contacto de un cliente.'
       type: object
       required:
-        - phone
+        - phones
       properties:
         phones:
           type: array

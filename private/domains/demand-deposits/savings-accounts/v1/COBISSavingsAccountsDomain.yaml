@@ -439,7 +439,7 @@ components:
           description: 'Fecha de proceso de la transacción.'
           type: string
           format: date
-        primaryTransactionId: # field:tm_secuencial- field: hm_secuencial
+        code: # field:tm_secuencial- field: hm_secuencial
           description: 'Número de secuencial de transacción.'
           type: number
           format: int32

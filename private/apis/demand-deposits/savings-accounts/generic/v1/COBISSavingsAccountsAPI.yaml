@@ -117,7 +117,7 @@ paths:
           required: true
           description: 'Código del cliente.'
           schema:
-            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/IdentificationNumber'
+            $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/CustomerCode'
             
       responses:
         200:
@@ -128,17 +128,14 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  allOf:
-                    - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+                $ref: '#/components/schemas/SavingsAccountAllGETByCustomerIdRs'
               example: # Consulta de cuentas de un cliente
                 savingsAccounts:
                   - savingsAccount:
                       code: 345353
                       number: '011201000019'
                       status: 'A'
-                      savingsBook:
+                      passbook:
                         number: 1234
                       currency:
                         code: 5
@@ -148,7 +145,7 @@ paths:
                       code: 342254
                       number: '011201000020'
                       status: 'A'
-                      savingsBook:
+                      passbook:
                         number: 1234
                       currency:
                         code: 5
@@ -218,13 +215,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+                $ref: '#/components/schemas/SavingsAccountGETByAccountIdRs'
               example: # 
                 savingsAccount:
                   code: 345353
                   number: '011201000019'
                   status: 'A'
-                  savingsBook:
+                  passbook:
                     number: 1234
                   currency:
                     code: 5
@@ -260,7 +257,7 @@ paths:
         - Balances
       summary: 'Consulta saldos de una cuenta de ahorros por el número de cuenta.'
       description: 'Retorna la información del saldo de la cuenta de ahorros.'
-      operationId: SavingsAccountsAccountsBalancesGetByAccountId
+      operationId: SavingsAccountsBalancesGetByAccountId
       parameters:
         # HEADER REQUEST
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
@@ -287,7 +284,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
+                $ref: '#/components/schemas/SavingsAccountsBalancesGetByAccountIdRs'
               example: # Consulta de saldos de la cuenta de ahorros
                 savingsAccount:
                   code: 225353
@@ -394,7 +391,7 @@ paths:
                 $ref: '#/components/schemas/DepositSavingsAccountPSTRs' 
               example:
                 transactionSavingsAccount:
-                  primaryTransactionId: '234234'
+                  code: '234234'
                
                 Links:
                   Self: '/savings-accounts/deposit'
@@ -467,7 +464,7 @@ paths:
                 $ref: '#/components/schemas/InitialDepositSavingsAccountPSTRs'
               example:
                 transactionSavingsAccount:
-                  primaryTransactionId: '234234'
+                  code: '234234'
                 #  status:
                 #    code: 'A'
                 #  savingsBook:
@@ -557,7 +554,7 @@ paths:
                 $ref: '#/components/schemas/WithdrawSavingsAccountPSTRs'
               example:
                 transactionSavingsAccount:
-                  primaryTransactionId: '234234'
+                  code: '234234'
                 #  status:
                 #    code: 'A'
                 #  savingsBook:
@@ -647,7 +644,7 @@ paths:
                 $ref: '#/components/schemas/DebitNoteSavingsAccountPSTRs'
               example:
                 transactionSavingsAccount:
-                  primaryTransactionId: '234234'
+                  code: '234234'
                 #  status:
                 #    code: 'A'
                 #  savingsBook:
@@ -737,7 +734,7 @@ paths:
                 $ref: '#/components/schemas/CreditNoteSavingsAccountPSTRs'
               example:
                 transactionSavingsAccount:
-                  primaryTransactionId: '234234'
+                  code: '234234'
                 #  status:
                 #    code: 'A'
                 #  savingsBook:
@@ -828,7 +825,7 @@ paths:
                   $ref: '#/components/schemas/TransferSavingsAccountPSTRs'
               example:
                 transactionSavingsAccount:
-                  primaryTransactionId: '234234'
+                  code: '234234'
               
                 #  status:
                 #    code: 'A'
@@ -929,7 +926,7 @@ paths:
     patch:
       tags:
         - Passbooks
-      summary: 'Personifica la libreta de una cuenta de ahorros.'
+      summary: 'Inicialización de la libreta de una cuenta de ahorros.'
       description: 'Personifica la libreta de una cuenta de ahorros.'
       operationId: SavingsAccountsIniBookUpdate
       parameters:
@@ -953,6 +950,10 @@ paths:
             example:
               savingsAccount:
                 number: '011201000019'
+              transactionSavingsAccount:
+                totalAmount: '600.00'
+                cashamount: '600.00'
+                transactionConcept: 'Pago inicial libreta de ahorro.'
       responses:
         200:
           description: 'La solicitud se ha ejecutado exitosamente.'
@@ -969,7 +970,7 @@ paths:
                   passbook:
                     controlNumber:  '2342342'
                   transactionSavingsAccount:
-                    primaryTransactionId: '234234'
+                    code: '234234'
                     
         400:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
@@ -1153,7 +1154,7 @@ components:
       type: object
       required:
         - savingsAccount
-        - transaction
+        - transactionSavingsAccount
       properties:
         savingsAccount:
           allOf:
@@ -1186,7 +1187,7 @@ components:
       type: object
       required:
         - savingsAccount
-        - transaction      
+        - transactionSavingsAccount      
       properties:
         savingsAccount:
           allOf:
@@ -1208,7 +1209,7 @@ components:
       type: object
       required:
         - savingsAccount
-        - transaction
+        - transactionSavingsAccount
       properties:
         savingsAccount:
           allOf:
@@ -1232,7 +1233,7 @@ components:
       type: object
       required:
         - savingsAccount
-        - transaction      
+        - transactionSavingsAccount      
       properties:
         savingsAccount:
           allOf:
@@ -1256,7 +1257,7 @@ components:
       type: object
       required:
         - savingsAccount
-        - transaction      
+        - transactionSavingsAccount      
       properties:
         savingsAccount:
           allOf:
@@ -1280,7 +1281,7 @@ components:
       type: object
       required:
         - savingsAccount
-        - transaction      
+        - transactionSavingsAccount      
       properties:
         originSavingsAccount:
           allOf:
@@ -1307,7 +1308,7 @@ components:
       type: object
       required:
         - savingsAccount
-        - transaction      
+        - transactionSavingsAccount      
       properties:
         savingsAccount:
           allOf:
@@ -1338,7 +1339,7 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
           required:
-            - primaryTransactionId 
+            - code 
         Links:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
@@ -1354,7 +1355,7 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
           required:
-            - primaryTransactionId 
+            - code 
         Links:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
@@ -1370,7 +1371,7 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
           required:
-            - primaryTransactionId 
+            - code 
         Links:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
@@ -1386,7 +1387,7 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
           required:
-            - primaryTransactionId 
+            - code 
         Links:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
@@ -1402,7 +1403,7 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
           required:
-            - primaryTransactionId 
+            - code 
         Links:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links' 
@@ -1418,7 +1419,7 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
           required:
-            - primaryTransactionId 
+            - code 
         Links:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
@@ -1428,7 +1429,7 @@ components:
       type: object
       required:
         - savingsAccount
-        - transaction      
+        - transactionSavingsAccount      
       properties:
         savingsAccount:
           allOf:
@@ -1444,6 +1445,68 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/TransactionSavingsAccount'
             - type: object
           required:
-            - primaryTransactionId
-    
+            - code
+            
+    SavingsAccountAllGETByCustomerIdRs: 
+      description: 'Respuesta de consulta de todas las cuentas de ahorro asociadas a un cliente.'
+      type: object
+      required:
+        - savingsAccounts
+      properties:
+        savingsAccounts:
+          type: array
+          items:
+            allOf:
+              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'        
+            required:
+              - code 
+              - number
+              - passbook
+              - name
+        Links:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
+          
+
+    SavingsAccountGETByAccountIdRs: 
+      description: 'Respuesta de consulta la cuenta de ahorro.'
+      type: object
+      required:
+        - savingsAccount
+      properties:
+        savingsAccount:
+          type: object
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'        
+          required:
+            - code 
+            - number
+            - passbook
+            - name
+        Links:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
+            
+    SavingsAccountsBalancesGetByAccountIdRs: 
+      description: 'Respuesta de consulta de saldo una cuenta de ahorro.'
+      type: object
+      required:
+        - savingsAccount
+      properties:
+        savingsAccount:
+          type: object
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'        
+          required:
+            - code 
+            - number
+            - passbook
+            - name
+            - frozenBalance
+            - availableBalance
+            - availableAmount
+            - accountingBalance
+        Links:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
           
