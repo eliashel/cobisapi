@@ -1500,10 +1500,15 @@ components:
           required:
             - code 
             - number
+            - branch
             - passbook
             - name
             - frozenBalance
             - availableBalance
+            - availableBalanceNext12Hours
+            - availableBalanceNext24Hours
+            - availableBalanceNext48Hours
+            - availableRemittancesBalance
             - availableAmount
             - accountingBalance
         Links:
