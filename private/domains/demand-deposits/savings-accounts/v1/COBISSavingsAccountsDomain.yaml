@@ -18,7 +18,7 @@ components:
         code: # field:ah_cuenta
           $ref: '#/components/schemas/SavingsAccountCode'
         number: # field:ah_cta_banco
-            $ref: '#/components/schemas/SavingsAccountNumber'
+          $ref: '#/components/schemas/SavingsAccountNumber'
         status: # field:ah_estado
           #$ref: '#/components/schemas/SavingsAccountStatus'
           #SavingsAccountStatusCode: # cobis..cl_catalogo[table:ah_estado_cta] # TODO: No existe en la base
@@ -117,7 +117,7 @@ components:
           description: 'Monto de cheque propios disponibles en la cuenta en las próximas 48 horas.'
         availableRemittancesBalance: #field:ah_remesas
           allOf:
-              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Monto de cheques depositados a la cuenta por concepto de remesas.'
         #ah_rem_hoy
         #ah_interes
@@ -125,7 +125,7 @@ components:
         #ah_saldo_libreta # Passbook.balance
         savingsinterest: #ah_saldo_interes: # field:ah_saldo_interes
           allOf:
-              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Intereses provisionales no pagados a la fecha.'
         #ah_saldo_anterior
         #ah_saldo_ult_corte
@@ -300,7 +300,7 @@ components:
         code: # field:ah_cuenta
           $ref: '#/components/schemas/SavingsAccountCode'
         number: # field:ah_cta_banco
-            $ref: '#/components/schemas/SavingsAccountNumber'
+          $ref: '#/components/schemas/SavingsAccountNumber'
         primaryTransactionId: # field:secuencial
           description: 'Número de secuencial de transacción.'
           type: number
