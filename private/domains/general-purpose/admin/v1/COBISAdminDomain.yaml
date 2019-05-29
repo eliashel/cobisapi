@@ -606,7 +606,7 @@ components:
         status:
           $ref: '#/components/schemas/CatalogStatus'
 
-  # KEY ELEMENTS
+    # KEY ELEMENTS
     ChannelCode: # TODO: Validar implementación de objeto en BD.
       description: >
         'Canal transccional'
@@ -617,13 +617,7 @@ components:
           * 5: APP Móvil
       type: integer
       enum: [1,2,3,4,5]
-    
-#    CatalogCode: # cobis..cl_catalogo.codigo
-#      description: 'Código de un elemento de un catálogo'
-#      type: string
-#      minLength: 1
-#      maxLength: 10
-      
+         
     CatalogDescription: # key cobis..cl_catalogo.descripcion
       description: 'Descripción de un elemento de un catálogo.'
       type: string

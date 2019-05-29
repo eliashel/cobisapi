@@ -554,26 +554,3 @@ components:
       type: integer
       minimum: 1
       maximum: 9999
-
-  # pathitems:
-  #     GeneralRequest:
-  #       get:
-  #         responses:
-  #           '200':
-  #             $ref: '#/components/responses/GeneralError'
-
-  # responses:
-  #   GeneralError:
-  #     description: A general error
-  #     content:
-  #       application/json:
-  #         schema:
-  #           $ref: "#/components/schemas/ErrorModel"
-
-  # parameters:
-  #   skipParam:
-  #     name: skip
-  #     in: query
-  #     description: number of items to skip
-  #     schema:
-  #       type: integer
