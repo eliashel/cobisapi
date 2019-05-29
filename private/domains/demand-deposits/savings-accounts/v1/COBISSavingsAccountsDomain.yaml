@@ -188,8 +188,8 @@ components:
               'Indica si la cuenta pertenece a un funcionario de la institución financiera.'
                 * true: PERTENECE
                 * false: NO PERTENECE
-          type: string
-          enum: [true, false]
+          type: boolean
+          nullable: false
         accountType: #field:#ah_tipocta
           description: >
            'Indica si la cuenta es Personal o Juridica.'
@@ -552,5 +552,6 @@ components:
     SavingsAccountCode: # field:ah_cuenta
       description: 'Código interno de la cuenta de ahorros.' # field:ah_cuenta
       type: integer
+      format: int32      
       minimum: 1
       maximum: 9999
