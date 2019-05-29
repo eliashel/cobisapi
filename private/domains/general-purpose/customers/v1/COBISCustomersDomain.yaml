@@ -528,20 +528,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Phone' 
-        businesses:
-          description: 'Negocios del cliente.'
-          type: array
-          items: 
-            $ref: '#/components/schemas/Business'      
         personalReferences:
           description: 'Referencias personales del cliente.'
           type: array
           items:     
             $ref: '#/components/schemas/PersonalReference'   
-        relationShips:
-          type: array
-          items: 
-            $ref: '#/components/schemas/RelationShip'  
 
     Email: # table:cl_direccion
       description: 'Correo electrónico.'
