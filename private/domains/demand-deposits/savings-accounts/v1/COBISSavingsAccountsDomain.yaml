@@ -20,7 +20,7 @@ components:
         number: # field:ah_cta_banco
             $ref: '#/components/schemas/SavingsAccountNumber'
         status: # field:ah_estado
-        #  $ref: '#/components/schemas/SavingsAccountStatus'
+          #$ref: '#/components/schemas/SavingsAccountStatus'
           #SavingsAccountStatusCode: # cobis..cl_catalogo[table:ah_estado_cta] # TODO: No existe en la base
           description: >
             'Estado de cuenta de ahorros'
