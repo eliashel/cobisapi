@@ -820,7 +820,7 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/TransferSavingsAccountPSTRs'
+                $ref: '#/components/schemas/TransferSavingsAccountPSTRs'
               example:
                 transactionSavingsAccount:
                   code: '234234'

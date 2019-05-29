@@ -97,7 +97,7 @@ components:
         #ah_rol_ente # cobis..cl_catalogo[table:cl_rol]
         availableBalance: #field:ah_disponible
           allOf:
-          - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           description: 'Saldo disponible en la cuenta.'
         availableBalanceNext12Hours: #field:ah_12h
           allOf:
