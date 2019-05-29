@@ -392,23 +392,6 @@ components:
             #status:
             #  $ref: '#/components/schemas/CatalogStatus'
     
-    # REFERENCES & CATALOGS
-    #SavingsAccountStatus: # No tiene tabla asignada.
-    #  description: >
-    #    'Estado de cuenta de ahorros'
-    #      * A: Activa
-    #      * G: Aperturada (pendiente primer depósito)
-    #      * I: Inactiva
-    #      * C: Cancelada
-    #  type: object
-    #  properties:
-    #    code:
-    #      $ref: '#/components/schemas/SavingsAccountStatusCode'
-    #    description:
-    #      $ref: '#/components/schemas/CatalogDescription'
-    #    status:
-    #      $ref: '#/components/schemas/CatalogStatus'
-    
     Passbook: # table:ah_cuenta (virtual)
       description: 'Libreta de cuenta de ahorros.'
       properties:
@@ -569,10 +552,10 @@ components:
       maxLength: 16   
     
     SavingsAccountCode: # field:ah_cuenta
-        description: 'Código interno de la cuenta de ahorros.' # field:ah_cuenta
-        type: integer
-        minimum: 1
-        maximum: 9999
+      description: 'Código interno de la cuenta de ahorros.' # field:ah_cuenta
+      type: integer
+      minimum: 1
+      maximum: 9999
 
   # pathitems:
   #     GeneralRequest:

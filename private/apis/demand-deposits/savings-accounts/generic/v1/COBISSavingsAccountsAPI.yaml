@@ -16,7 +16,7 @@ info:
 servers:
   #- description: SwaggerHub API Auto Mocking
   #  url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICuentasAhorrosTransaccional/1.0.0
-# Added by API Auto Mocking Plugin
+  # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/eliashel/TMPAPI/1.0.0
   - url: http://cobisapi.cobiscorp.com/lastest/v1
@@ -179,8 +179,6 @@ paths:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
         500:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
-
-  
 
   /savings-accounts/{accountId}:
     get:
@@ -864,64 +862,6 @@ paths:
         500:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
   
-
-#  /savings-accounts/book:
-#    put:
-#      tags:
-#        - solicitudes
-#      summary: 'Actualiza la libreta de una cuenta de ahorros.'
-#      description: 'Actualiza los datos de una libreta de una cuenta de ahorros.'
-#      operationId: SavingsAccountBookUpdate
-#      parameters:
-        # HEADER REQUEST
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
-#      #BODY REQUEST
-#      requestBody:
-#        description: 'Datos para actualizar la libreta de la cuenta de ahorros.'
-#        required: true
-#        content:
-#          application/json:
-#            schema: # TODO: Ajustar request
-#              type: object
-#              properties:
-#                savingsAccount:
-#                  $ref: '#/components/schemas/SavingsAccount'
-#            example: # Cerrar cuenta de ahorros. 
-#              number: '1234567890'
-#              savingsBook:
-#                number: 1234
-#                controlNumber: 12
-#                balance: '1000.00'
-#      responses:
-#        200:
-#          description: 'La libreta se ha actuailzado exitosamente.'
-#          headers:
-#            X-Correlation-ID:
-#              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
-#        400:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
-#        401:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
-#        403:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
-#        404:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
-#        405:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
-#        406:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
-#        429:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
-#        500:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
-
   /savings-accounts/passbook/initizalization:
     patch:
       tags:
@@ -988,121 +928,6 @@ paths:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
         500:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
-
-#  /savings-accounts/book/balance: # TODO: Validar descripciones de la operación, ya que la impresión la hace directamente el front-end.
-#    put:
-#      tags:
-#        - solicitudes
-#      summary: 'Imprime el saldo en la libreta de una cuenta de ahorros.'
-#      description: 'Imprime el saldo en la libreta de una cuenta de ahorros.'
-#      operationId: SavingsAccountsBalanceBookUpdate
-#      parameters:
-#        # HEADER REQUEST
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
-#      #BODY REQUEST
-#      requestBody:
-#        description: 'Datos para realizar la impresión del saldo en la libreta de la cuenta de ahorros.'
-#        required: true
-#        content:
-#          application/json:
-#            schema: # TODO: Ajustar request
-#              type: object
-#              properties:
-#                savingsAccount:
-#                  $ref: '#/components/schemas/SavingsAccount'
-#            example: # Impresión del saldo de la libreta. 
-#              number: '1234567890'
-#              savingsBook:
-#                number: 1234
-#      responses:
-#        200:
-#          description: 'Se han enviado los datos para la impresión del saldo en la libreta exitosamente.'
-#          headers:
-#            X-Correlation-ID:
-#              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
-#        400:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
-#        403:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
-#        404:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
-#        405:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
-#        406:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
-#        429:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
-#        500:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
-
-
-#  /savings-accounts/close:
-#    delete:
-#      tags:
-#        - terminaciones
-#      summary: 'Cancela una cuenta de ahorros.'
-#      description: 'Cierra y cancela una cuenta de ahorros.'
-#      operationId: SavingsAccountsClose
-#      parameters:
-#        # HEADER REQUEST
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
-#        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Channel'
-#      #BODY REQUEST
-#      requestBody:
-#        description: 'Datos para realizar el cierre de la cuenta de ahorros.'
-#        required: true
-#        content:
-#          application/json:
-#            schema: # TODO: Ajustar request
-#              $ref: '#/components/schemas/CloseSavingsAccountRq'
-#            example: # Cerrar cuenta de ahorros.
-#              savingsAccount:
-#                number: '1234567890'
-#                savingsBook:
-#                  number: 1234
-#                  controlNumber: 12
-#                  balance: '1000.00'
-#              detailToCloseSavingsAccount:
-#                closingWithdraw: '1000.00'
-#                #causeOfClosure: Solo se requiere el detalle, por usabilidad.
-#                detailedReasonForClosing:
-#                  code: 1 # Detalle, para algún CauseOfClosure, ej: 1 (Decisión del cliente) # TODO: Validar autorizante
-#      responses:
-#        200:
-#          description: 'La solicitud se ha ejecutado exitosamente.'
-#          headers:
-#            X-Correlation-ID:
-#              $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Correlation-ID'
-#        400:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/400BadRequest'
-#        401:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/401Unauthorized'
-#        403:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/403Forbidden'
-#        404:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/404NotFound'
-#        405:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/405MethodNotAllowed'
-#        406:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/406NotAcceptable'
-#        429:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/429TooManyRequests'
-#        500:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
-
 
 #externalDocs:
 #  description: 'Encuentra más información acerca de Cobiscorp en http://www.cobiscorp.com'
@@ -1172,16 +997,7 @@ components:
             - indicator
             - department
             - totalAmount
-    
-#    CloseSavingsAccountRq: # REQUEST FOR:/close
-#      description: 'Cierre de cuenta de ahorros' 
-#      type: object
-#      properties:
-#        savingsAccount:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'
-#        detailToCloseSavingsAccount:
-#          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/ClosedSavingsAccount'
-    
+      
     DepositSavingsAccountPSTRq: # REQUEST FOR:/deposit
       description: 'Depósito de cuenta de ahorros' 
       type: object
@@ -1324,10 +1140,6 @@ components:
           required:
             - cashAmount
     
-    #########################
-    #    COMPLEX RESPONSE   #
-    #########################
-            
     DepositSavingsAccountPSTRs: 
       description: 'Respuesta de creación de un depósito de cuenta de ahorros.'
       type: object
@@ -1467,7 +1279,6 @@ components:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
           
-
     SavingsAccountGETByAccountIdRs: 
       description: 'Respuesta de consulta la cuenta de ahorro.'
       type: object

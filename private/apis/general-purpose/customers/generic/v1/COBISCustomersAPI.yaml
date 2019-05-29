@@ -231,7 +231,7 @@ paths:
         500:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
 
-  /customers/natural-persons/{identificationTypeCode}/{identificationNumber}:
+  /customers/natural-persons/type/{identificationTypeCode}/number/{identificationNumber}:
     get:
       tags:
         - NaturalPersons
