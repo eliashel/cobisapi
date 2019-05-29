@@ -195,8 +195,8 @@ components:
            'Indica si la cuenta es Personal o Juridica.'
                 * C: COMPAÑIA
                 * P: PERSONAL
-            type: string
-            enum: [C, P]
+          type: string
+          enum: [C, P]
         bankingProductSavingAccount: #field:ah_prod_banc
           $ref: '#/components/schemas/BankingProductSavingAccount'
         accountSourceType: #field:ah_origen
