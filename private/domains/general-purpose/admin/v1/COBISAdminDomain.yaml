@@ -74,10 +74,9 @@ components:
 
     AccountNumber: #table virtual object
       description: 'Número de cuenta.'
-      properties:
-        type: string
-        minLength: 5
-        maxLength: 16
+      type: string
+      minLength: 5
+      maxLength: 16
 
     Branch: # table:cobis..cl_oficina
       description: 'Oficina.'
