@@ -132,7 +132,7 @@ components:
       properties:
         code: #  field:ci_ciudad
           description: 'Código de la ciudad.'
-          type: number
+          type: interger
           format: int32
           minimum: 1
         name: #  field:ci_descripcion
@@ -156,7 +156,7 @@ components:
       properties:
         code: # field:pa_pais
           description: 'Código del país.'
-          type: number
+          type: integer
           format: int32
           minimum: 1
         name: # field:pa_descripcion
