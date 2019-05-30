@@ -57,12 +57,11 @@ components:
           type: string
           format: date
         officer: #field:en_oficial
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
+        customer: # field:ah_cliente
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
-        #customer: # field:ah_cliente
-          #allOf:
-            #- $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
-          #description: 'Cliente al que pertenece la cuenta de ahorros.'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
+          description: 'Cliente al que pertenece la cuenta de ahorros.'
         #ah_ced_ruc
         name: # field:ah_nombre
           description: 'Nombre de la cuenta.'
