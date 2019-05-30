@@ -86,8 +86,7 @@ components:
         #ah_bloqueos
         #ah_condiciones
         frozenBalance: # field: ah_monto_bloq
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Saldo bloqueado en la cuenta.'
         #ah_num_blqmonto
         #ah_cred_24
@@ -96,36 +95,29 @@ components:
         #ah_default
         #ah_rol_ente # cobis..cl_catalogo[table:cl_rol]
         availableBalance: #field:ah_disponible
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Saldo disponible en la cuenta.'
         availableBalanceNext12Hours: #field:ah_12h
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto de cheques propios disponibles en la cuenta en las próximas 12 horas.'
         deferredAvailableBalanceNext12Hours: #field:ah_12h_dif
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto de cheques diferidos disponibles en la cuenta en las próximas 12 horas.'
         availableBalanceNext24Hours: #field:ah_24h
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto de cheque propios disponibles en la cuenta en las próximas 24 horas.'
         availableBalanceNext48Hours: #field:ah_48h
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto de cheque propios disponibles en la cuenta en las próximas 48 horas.'
         availableRemittancesBalance: #field:ah_remesas
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto de cheques depositados a la cuenta por concepto de remesas.'
         #ah_rem_hoy
         #ah_interes
         #ah_interes_ganado
         #ah_saldo_libreta # Passbook.balance
         savingsinterest: #ah_saldo_interes: # field:ah_saldo_interes
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Intereses provisionales no pagados a la fecha.'
         #ah_saldo_anterior
         #ah_saldo_ult_corte
@@ -172,8 +164,7 @@ components:
         #ah_parroquia
         #ah_zona
         availableBalanceAverage: #field:ah_prom_disponible
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Valor del promedio disponible para la cuenta de ahorros.'
         #ah_promedio1
         #ah_promedio2
@@ -261,12 +252,10 @@ components:
         #ah_num_con_mes_ant
         #ah_fecha_ult_proceso
         availableAmount: #field:virtual
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto disponible para girar.'
         accountingBalance: #field:virtual
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto disponible sumado al monto de los cheques próximos a hacerse disponibles.'
           
     BankingProductSavingAccount: #table:cob_remesas..pe_pro_bancario
@@ -324,8 +313,7 @@ components:
         account:  #field:cta_banco
           $ref: '#/components/schemas/SavingsAccount'
         finalWithdraw: # field:ret_efe # Retiro final
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Retiro Final de la cuenta de ahorros.'
         #ret_chq
         #remoto_ssn
@@ -410,8 +398,7 @@ components:
           minimum: 1
           maximum: 32767
         balance: # field:ah_saldo_libreta
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Saldo de la libreta.'
              
     TransactionSavingsAccount: # table:cob_ahorros..ah_tran_monet- table:cob_ahorros_his..ah_his_movimiento
@@ -453,24 +440,19 @@ components:
         #tm_fecha_ult_mov
         cashAmount: # field:tm_efectivo- field: hm_efectivo
           #$ref: '#/components/schemas/Amount'
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto  efectivo.'
         ownChecksAmount: # field:tm_chq_propios- field: hm_chq_propios
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto de cheques propios.'
         localChecksAmount: # field:tm_chq_locales- field: hm_chq_locales
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto de cheques locales.'
         othersChecksAmount: # field: tm_chq_ot_plazas- field: hm_chq_ot_plazas
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto de cheques de otras plazas.'
         totalAmount: # field: tm_valor- field: hm_valor
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Monto de la transacción.'
         #tm_remoto_ssn
         currency: #field:tm_moneda- field: hm_moneda
@@ -485,12 +467,10 @@ components:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Department'
         #tm_saldo_lib
         accountingBalance:  #field:tm_saldo_contable- field: hm_saldo_contable
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
-          description: 'Saldo contable de la cuenta origen luego de la transacción.'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          #description: 'Saldo contable de la cuenta origen luego de la transacción.'
         availableBalance: # field:tm_saldo_disponible- field: hm_saldo_disponible
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
           #description: 'Saldo disponible de la cuenta origen luego de la transacción.'
         #tm_saldo_interes
         #tm_fecha_efec
