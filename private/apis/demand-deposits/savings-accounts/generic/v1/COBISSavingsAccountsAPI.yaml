@@ -17,8 +17,8 @@ servers:
   #- description: SwaggerHub API Auto Mocking
   #  url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICuentasAhorrosTransaccional/1.0.0
   # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/eliashel/TMPAPI/1.0.0
+  - url: https://virtserver.swaggerhub.com/eliashel/TMPAPI/1.0.0
+    description: SwaggerHub API Auto Mocking
   - url: http://cobisapi.cobiscorp.com/lastest/v1
     description: Main (production) server
   - url: http://staging-cobisapi.cobiscorp.com/v1
@@ -1186,6 +1186,7 @@ components:
           items:
             allOf:
               - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'        
+              - type: object              
             required:
               - code 
               - number
@@ -1202,9 +1203,9 @@ components:
         - savingsAccount
       properties:
         savingsAccount:
-          type: object
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'        
+            - type: object
           required:
             - code 
             - number
@@ -1220,10 +1221,10 @@ components:
       required:
         - savingsAccount
       properties:
-        savingsAccount:
-          type: object
+        savingsAccount:          
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/demand-deposits/savings-accounts/v1/COBISSavingsAccountsDomain.yaml#/components/schemas/SavingsAccount'        
+            - type: object
           required:
             - code 
             - number
