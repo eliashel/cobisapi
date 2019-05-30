@@ -133,7 +133,7 @@ components:
       properties:
         code: #  field:ci_ciudad
           description: 'Código de la ciudad.'
-          type: interger
+          type: integer
           format: int32
           minimum: 1
         name: #  field:ci_descripcion
