@@ -67,8 +67,8 @@ components:
         AccountType:  #field virtual
           description: > 
             'Especifica el tipo de cuenta.'
-              *3: CORRIENTE
-              *4: AHORROS
+              * 3: CORRIENTE
+              * 4: AHORROS
           type: string
           enum: [3, 4]
 
