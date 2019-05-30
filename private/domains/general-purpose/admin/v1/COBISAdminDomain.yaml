@@ -83,6 +83,7 @@ components:
       properties:
         code: # field:of_oficina
           type: integer
+          format: int32
           minimum: 1
           maximum: 32767
         name: # field:of_nombre
@@ -183,6 +184,7 @@ components:
         code: # field:mo_moneda
           description: 'Código de moneda.'
           type: integer
+          format: int32
           minimum: 1
           maximum: 32767
         description: # field:mo_descripcion
@@ -381,6 +383,7 @@ components:
         code: # field:fi_filial
           description: 'Código de la filial.'
           type: integer
+          format: int32
           minimum: 1
           maximum: 255
         name: # field:fi_nombre
@@ -616,6 +619,7 @@ components:
           * 4: ATM
           * 5: APP Móvil
       type: integer
+      format: int32
       enum: [1,2,3,4,5]
          
     CatalogDescription: # key cobis..cl_catalogo.descripcion
