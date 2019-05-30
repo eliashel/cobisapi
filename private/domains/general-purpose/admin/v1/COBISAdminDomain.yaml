@@ -70,7 +70,7 @@ components:
               * 3: CORRIENTE
               * 4: AHORROS
           type: string
-          enum: [3, 4]
+          enum: ['3', '4']
 
     AccountNumber: #table virtual object
       description: 'Número de cuenta.'

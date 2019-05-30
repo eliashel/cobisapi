@@ -516,7 +516,6 @@ components:
     SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
       description: 'Número de cuenta de ahorros.'
       type: string
-      #pattern: '[0-9]*'
       minLength: 5
       maxLength: 16   
     
