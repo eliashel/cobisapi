@@ -16,7 +16,7 @@ info:
 servers:
   #- description: SwaggerHub API Auto Mocking
   #  url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICuentasAhorrosTransaccional/1.0.0
-# Added by API Auto Mocking Plugin
+  # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/eliashel/TMPAPI/1.0.0
   - url: http://cobisapi.cobiscorp.com/lastest/v1

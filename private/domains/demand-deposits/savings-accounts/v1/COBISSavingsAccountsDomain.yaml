@@ -303,7 +303,7 @@ components:
           $ref: '#/components/schemas/SavingsAccountNumber'
         primaryTransactionId: # field:secuencial
           description: 'Número de secuencial de transacción.'
-          type: number
+          type: integer
           format: int32
         #tipo_tran
         branch: #field:oficina
@@ -367,7 +367,7 @@ components:
           properties:
             code: #field
               description: 'Código de causal de cierre de cuenta.'
-              type: number
+              type: integer
               format: int32
               minimum: 1
             description:  #field
@@ -382,7 +382,7 @@ components:
           properties:
             code: #field
               description: 'Código del causal de cierre de cuenta.'
-              type: number
+              type: integer
               format: int32
               minimum: 1
             description:  #field
@@ -397,15 +397,15 @@ components:
       properties:
         number: # field:ah_numlib
           description: 'Número de la libreta de ahorros.'
-          type: number
+          type: integer
           format: int32
         controlNumber: # field:ah_control
           description: 'Número de control de la libreta.'
-          type: number
+          type: integer
           format: int32
         line: # field:ah_linea
           description: 'Número de lineas impresas en la libreta.'
-          type: number
+          type: integer
           format: int32
           minimum: 1
           maximum: 32767
@@ -424,12 +424,12 @@ components:
           format: date
         code: # field:tm_secuencial- field: hm_secuencial
           description: 'Número de secuencial de transacción.'
-          type: number
+          type: integer
           format: int32
         #tm_ssn_branch
         secondaryTransactionId: #field:tm_cod_alterno- field: hm_cod_alterno
           description: 'Número de alterno de secuencial de transacción.'
-          type: number
+          type: integer
           format: int32
         #transactionCode: #tm_tipo_tran,  table:cl_ttrasaccion 
         subsidiary: #field:tm_filial - field: hm_filial 
