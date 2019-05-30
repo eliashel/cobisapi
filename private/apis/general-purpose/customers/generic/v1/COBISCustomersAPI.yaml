@@ -2599,21 +2599,19 @@ components:
       description: 'Respuesta de consulta de un grupo solidario.'
       type: object
       properties:
-        naturalPersons:
-          type: array
-          items:
-            allOf:
-              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
-              - type: object
-            required:
-              - code
-              - name
-              - creationDate
-              - lastUpdatedDate
-              - status              
-              - meetingAddress
-              - meetingDay
-              - meetingHour
+        solidarityGroups:
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/SolidarityGroup'
+            - type: object
+          required:
+            - code
+            - name
+            - creationDate
+            - lastUpdatedDate
+            - status              
+            - meetingAddress
+            - meetingDay
+            - meetingHour
         Links:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'              
