@@ -32,7 +32,7 @@ components:
               * T: TRASLADADA-INACTIVA
               * X: TRASLADADA-CANCELADA
           type: string
-          enum: [A, C, G, I, \N, T, X]
+          enum: [A, C, G, I, N, T, X]
         subsidiary: #field virtual
           $ref: '#/components/schemas/Subsidiary'
         branch: #field virtual
