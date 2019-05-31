@@ -34,9 +34,7 @@ components:
             - $ref: '#/components/schemas/Passbook'
           description: 'Libreta de la cuenta de ahorros.'
         subsidiary: # field:ah_filial -> cobis..cl_filial
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
-          description: 'Filial de la cuenta de ahorros.'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:ah_oficina
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
@@ -272,105 +270,7 @@ components:
         dateState: #field:	pb_fecha_estado
           type: string
           format: date-time
-
-    ClosedSavingsAccount: # table:ah_cierre
-      description: 'Cuenta de ahorros cerrada.' 
-      type: object
-      properties:
-        code: # field:ah_cuenta
-          $ref: '#/components/schemas/SavingsAccountCode'
-        number: # field:ah_cta_banco
-          $ref: '#/components/schemas/SavingsAccountNumber'
-        primaryTransactionId: # field:secuencial
-          description: 'Número de secuencial de transacción.'
-          type: integer
-          format: int32
-        #tipo_tran
-        branch: #field:oficina
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
-          description: 'Oficina relacionada a la cuenta ahorros.'
-        #usuario
-        #terminal
-        #correccion
-        #sec_correccion
-        #reentry
-        #origen
-        #nodo
-        postingDate:  #field:fecha
-          description: 'Fecha de proceso de la transacción.'
-          type: string
-          format: date
-        account:  #field:cta_banco
-          $ref: '#/components/schemas/SavingsAccount'
-        finalWithdraw: # field:ret_efe # Retiro final
-          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
-          #description: 'Retiro Final de la cuenta de ahorros.'
-        #ret_chq
-        #remoto_ssn
-        currency: #field:moneda
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
-          description: 'Moneda asociada a la cuenta de ahorros.'
-        #control
-        #saldo_lib
-        #signo
-        #alterno
-        #saldocont
-        #saldodisp
-        #saldoint
-        #impuesto
-        #multa
-        #oficina_cta
-        #hora
-        #estado
-        #prod_banc
-        #categoria
-        #monto_imp
-        #tipo_exoneracion
-        #ssn_branch
-        #tipocta_super
-        #turno
-        #forma_pago
-        #cheque
-        #ctadestino
-        #serial
-        #canal
-        #cliente
-        #indicador
-        #base_gmf
-        #clase_clte
-        causeOfClosure: # field:causa
-          description: 'Causa de cierre de una cuenta de ahorros. Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
-          type: object
-          properties:
-            code: #field
-              description: 'Código de causal de cierre de cuenta.'
-              type: integer
-              format: int32
-              minimum: 1
-            description:  #field
-              allOf:
-                - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
-              description: 'Descripcion del causal de cierre de cuenta.'
-            #status:
-            #  $ref: '#/components/schemas/CatalogStatus'
-        detailedCauseOfClosure: # field:causa, cobis..cl_catalogo[table:545:ah_causa_cierre_det]
-          description: 'Detalle de la causa de cierre de una cuenta de ahorros. La lista de causales detalladas depende de la causa de cierre (causeOfClosure).  Ver listado en: [http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det](http://www.cobiscorp.com/api/catlogo#ah_causa_cierre_det).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
-          type: object
-          properties:
-            code: #field
-              description: 'Código del causal de cierre de cuenta.'
-              type: integer
-              format: int32
-              minimum: 1
-            description:  #field
-              allOf:
-                - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/CatalogDescription'
-              description: 'Descripción del detalle del causal de cierre de cuenta.'
-            #status:
-            #  $ref: '#/components/schemas/CatalogStatus'
-    
+ 
     Passbook: # table:ah_cuenta (virtual)
       description: 'Libreta de cuenta de ahorros.'
       properties:

@@ -67,23 +67,23 @@ components:
         AccountType:  #field virtual
           description: > 
             'Especifica el tipo de cuenta.'
-              * 3: CORRIENTE
-              * 4: AHORROS
+              *3: CORRIENTE
+              *4: AHORROS
           type: string
-          enum: ['3', '4']
+          enum: [3, 4]
 
     AccountNumber: #table virtual object
       description: 'Número de cuenta.'
-      type: string
-      minLength: 5
-      maxLength: 16
+      properties:
+        type: string
+        minLength: 5
+        maxLength: 16
 
     Branch: # table:cobis..cl_oficina
       description: 'Oficina.'
       properties:
         code: # field:of_oficina
           type: integer
-          format: int32
           minimum: 1
           maximum: 32767
         name: # field:of_nombre
@@ -133,7 +133,7 @@ components:
       properties:
         code: #  field:ci_ciudad
           description: 'Código de la ciudad.'
-          type: integer
+          type: number
           format: int32
           minimum: 1
         name: #  field:ci_descripcion
@@ -157,7 +157,7 @@ components:
       properties:
         code: # field:pa_pais
           description: 'Código del país.'
-          type: integer
+          type: number
           format: int32
           minimum: 1
         name: # field:pa_descripcion
@@ -184,7 +184,6 @@ components:
         code: # field:mo_moneda
           description: 'Código de moneda.'
           type: integer
-          format: int32
           minimum: 1
           maximum: 32767
         description: # field:mo_descripcion
@@ -383,7 +382,6 @@ components:
         code: # field:fi_filial
           description: 'Código de la filial.'
           type: integer
-          format: int32
           minimum: 1
           maximum: 255
         name: # field:fi_nombre
@@ -609,7 +607,7 @@ components:
         status:
           $ref: '#/components/schemas/CatalogStatus'
 
-    # KEY ELEMENTS
+  # KEY ELEMENTS
     ChannelCode: # TODO: Validar implementación de objeto en BD.
       description: >
         'Canal transccional'
@@ -619,9 +617,14 @@ components:
           * 4: ATM
           * 5: APP Móvil
       type: integer
-      format: int32
       enum: [1,2,3,4,5]
-         
+    
+#    CatalogCode: # cobis..cl_catalogo.codigo
+#      description: 'Código de un elemento de un catálogo'
+#      type: string
+#      minLength: 1
+#      maxLength: 10
+      
     CatalogDescription: # key cobis..cl_catalogo.descripcion
       description: 'Descripción de un elemento de un catálogo.'
       type: string
