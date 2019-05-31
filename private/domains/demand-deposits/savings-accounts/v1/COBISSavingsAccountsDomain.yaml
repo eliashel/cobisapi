@@ -35,9 +35,7 @@ components:
           enum: [A, C, G, I, N, T, X]
         #ah_control: OK # passbook.controlNumber
         passbook: #field
-          allOf:
-            - $ref: '#/components/schemas/Passbook'
-          description: 'Libreta de la cuenta de ahorros.'
+          $ref: '#/components/schemas/Passbook'
         subsidiary: # field:ah_filial -> cobis..cl_filial
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: # field:ah_oficina
@@ -55,9 +53,7 @@ components:
         officer: #field:en_oficial
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
         customer: # field:ah_cliente
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
-          description: 'Cliente al que pertenece la cuenta de ahorros.'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
         #ah_ced_ruc
         name: # field:ah_nombre
           description: 'Nombre de la cuenta.'
@@ -330,9 +326,7 @@ components:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #tm_remoto_ssn
         currency: #field:tm_moneda- field: hm_moneda
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
-          description: 'Moneda de la transacción.'
+          $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
         indicator: # field:tm_indicador- field: hm_indicador, cobis..cl_catalogo[table:1787:ah_tipo_indicador] 
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Indicator'
         cause: # field:tm_causa- field: hm_causa, cobis..cl_catalogo[table:1289:ah_causa_nc: cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
@@ -349,13 +343,9 @@ components:
         #tm_interes
         #tm_control
         account: #field:tm_cta_banco- field: hm_cta_banco
-          allOf:
-            - $ref: '#/components/schemas/SavingsAccount'
-          description: 'Cuenta de origen en la entidad financiera.'
+          $ref: '#/components/schemas/SavingsAccount'
         destinationAccount: #field:tm_ctadestino- field: hm_ctadestino # banco destino
-          allOf:
-            - $ref: '#/components/schemas/SavingsAccount'
-          description: 'Cuenta destino.'
+          $ref: '#/components/schemas/SavingsAccount'
         #tm_tipo_xfer
         #tm_estado
         transactionConcept: #field: tm_concepto- field: hm_concepto
