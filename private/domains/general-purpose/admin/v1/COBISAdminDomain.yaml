@@ -32,7 +32,7 @@ components:
               * T: TRASLADADA-INACTIVA
               * X: TRASLADADA-CANCELADA
           type: string
-          enum: [A, C, G, I, N, T, X]
+          enum: [A, C, G, I, \N, T, X]
         subsidiary: #field virtual
           $ref: '#/components/schemas/Subsidiary'
         branch: #field virtual
@@ -67,17 +67,16 @@ components:
         AccountType:  #field virtual
           description: > 
             'Especifica el tipo de cuenta.'
-              *3: CORRIENTE
-              *4: AHORROS
+              * 3: CORRIENTE
+              * 4: AHORROS
           type: string
           enum: [3, 4]
 
     AccountNumber: #table virtual object
       description: 'Número de cuenta.'
-      properties:
-        type: string
-        minLength: 5
-        maxLength: 16
+      type: string
+      minLength: 5
+      maxLength: 16
 
     Branch: # table:cobis..cl_oficina
       description: 'Oficina.'
@@ -639,11 +638,9 @@ components:
     
     IdentificationTypeCode: #key cobis..cl_tipo_documento.td_codigo
       description: 'Tipo de identificación de una persona natural o jurídica. Ver listado en: [http://www.cobiscorp.com/api/tabla#cl_tipo_documento](http://www.cobiscorp.com/api/tabla#cl_tipo_documento).' # TODO: Actualizar enlace a documentación de catálogos dinámicos.
-      properties:
-        code: # field:td_codigo 
-          type: string
-          minLength: 1
-          maxLength: 4
+      type: string
+      minLength: 1
+      maxLength: 4
       
     IdentificationNumber: #key cobis..cl_ente.en_ced_ruc # TODO: Revisar implementación en BD.
       description: 'Número de identificación de una persona natural o jurídica.'
