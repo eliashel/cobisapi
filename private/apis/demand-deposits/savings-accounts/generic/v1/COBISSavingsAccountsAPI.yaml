@@ -17,8 +17,8 @@ servers:
   #- description: SwaggerHub API Auto Mocking
   #  url: https://virtserver.swaggerhub.com/Cobiscorp/COBISAPICuentasAhorrosTransaccional/1.0.0
   # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/eliashel/TMPAPI/1.0.0
+  - url: https://virtserver.swaggerhub.com/eliashel/TMPAPI/1.0.0
+    description: SwaggerHub API Auto Mocking    
   - url: http://cobisapi.cobiscorp.com/lastest/v1
     description: Main (production) server
   - url: http://staging-cobisapi.cobiscorp.com/v1
@@ -1197,8 +1197,7 @@ components:
               - name
         Links:
           allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
-          
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'          
 
     SavingsAccountGETByAccountIdRs: 
       description: 'Respuesta de consulta la cuenta de ahorro.'
