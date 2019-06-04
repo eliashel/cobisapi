@@ -262,7 +262,7 @@ components:
       properties:
         externalApplication: #field:	ue_id_aplicacion
           $ref: '#/components/schemas/ExternalApplication'
-        externalUser: #field:	ue_usuario
+        user: #field:	ue_usuario
           description: 'Usuario externo.'
           type: string
           maxLength: 30
