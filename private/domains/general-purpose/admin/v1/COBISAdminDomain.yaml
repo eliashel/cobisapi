@@ -430,9 +430,7 @@ components:
           minimum: 1
           maximum: 255
         subsidiary: # field:#	ro_filial
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
-          description: 'Filial del rol.'
+          $ref: '#/components/schemas/Subsidiary'
         description:  #filed:	ro_descripcion
           description: 'Descripción del rol.'
           type: string
@@ -451,9 +449,7 @@ components:
         #	ro_admin_seg
         #	ro_departamento
         branch: #field:	ro_oficina
-          allOf:
-            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
-          description: 'Oficina del rol.'
+          $ref: '#/components/schemas/Branch'
         
     Subsidiary: # table:cobis..cl_filial
       description: 'Filial.'
