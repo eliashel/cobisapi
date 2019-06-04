@@ -15,8 +15,8 @@ info:
 
 servers:
 # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/eliashel/TMPAPI/1.0.0
+  - url: https://virtserver.swaggerhub.com/eliashel/TMPAPI/1.0.0
+    description: SwaggerHub API Auto Mocking    
   - url: http://cobisapi.cobiscorp.com/lastest/v1
     description: Main (production) server
   - url: http://staging-cobisapi.cobiscorp.com/v1
@@ -320,15 +320,16 @@ components:
       required:
         - payload
       properties:
-        payload:
-          type: object
+        payload:          
           properties:
             user:
               allOf:
                 - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/UserLogin'
+                - type: object
             password:
               allOf:
                 - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Password'
+                - type: object
           required:
               - user
               - password
