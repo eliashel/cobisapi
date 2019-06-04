@@ -267,7 +267,6 @@ components:
         externalUser: #field:	ue_usuario
           description: 'Usuario externo.'
           type: string
-          minLength:  0
           maxLength: 30
         role: # field:	ue_rol
           allOf:
