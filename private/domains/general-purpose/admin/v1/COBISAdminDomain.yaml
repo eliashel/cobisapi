@@ -235,6 +235,50 @@ components:
         #de_o_oficina
         #de_o_departamento
         #de_nivel
+
+    ExternalApplication: # table: cobis..cts_aplicacion
+      description: 'Aplicación externa que consulta y procesa información financiera de COBIS.'
+      properties:
+        code: #field	ap_id_aplicacion
+          description: 'Código de la aplicación.'
+          type: integer
+          format: int32
+          minimum: 0
+        name: #field: ap_nombre 
+          description: 'Nombre de la aplicación externa.'
+          type: string
+          minLength: 1
+          maxLength: 24
+        terminal: #field:	ap_terminal
+          description: 'Terminal desde donde se conecta la aplicación.'
+          type: string
+          minLength: 1
+          maxLength: 10
+        #	ap_estado
+        
+    ExternalUser: #table:cts_usuario_externo
+      description: 'Usuario externo para aplicación que se conecta al core COBIS.'
+      type: object
+      properties:
+        externalApplication: #field:	ue_id_aplicacion
+          allOf:
+            - $ref: '#/components/schemas/ExternalApplication'
+            - description: 'Código aplicación que utiliza el usuario externo.'
+        externalUser: #field:	ue_usuario
+          description: 'Usuario externo.'
+          type: string
+          minLength:  0
+          maxLength: 30
+        role: # field:	ue_rol
+          allOf:
+            - $ref: '#/components/schemas/Role'
+            - description:  'Rol de usuario externo.'
+        trustrelationship:  #field:	ue_id_relacion
+          allOf:
+            - $ref: '#/components/schemas/Trustrelationship'
+            - description: 'Relación de confianza generada para este usuario externo.'  
+        #	ue_estado
+
     
     Clerk: # table:cobis..cl_funcionario
       description: 'Funcionario o responsable de un usuario del sistema.'
@@ -270,7 +314,8 @@ components:
         # fu_telefono
         # fu_fec_inicio
         # fu_fec_final
-        # fu_clave
+        password: #field: fu_clave
+          $ref: '#/components/schemas/Password'
         # fu_estado
         # fu_offset
         identification: #fu_cedruc -> 
@@ -374,6 +419,42 @@ components:
           minLength: 1
           maxLength: 1
         #pv_depart_pais //TODO Validar tabla / catálogo
+
+    Role: #table: cobis..ad_rol
+      description: 'Rol de cliente funcionario de la entidad financiera.'
+      type: object
+      properties:        
+        code: #field:ro_rol
+          description: 'Código del rol de cliente.'
+          type:  integer
+          format: int32
+          minimum: 1
+          maximum: 255
+        subsidiary: # field:#	ro_filial
+          allOf:
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
+          description: 'Filial del rol.'
+        description:  #filed:	ro_descripcion
+          description: 'Descripción del rol.'
+          type: string
+          maxLength: 64
+        creationDate: # field:ro_fecha_crea
+          description: 'Fecha de creación del rol.'
+          type: string
+          format: date-time
+        #	ro_creador
+        #	ro_estado
+        lastUpdatedDate: # field:ro_fecha_ult_mod
+          description: 'Fecha de última actualización del rol.'
+          type: string
+          format: date-time
+        #	ro_time_out
+        #	ro_admin_seg
+        #	ro_departamento
+        branch: #field:	ro_oficina
+          allOf:
+              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+          description: 'Oficina del rol.'
         
     Subsidiary: # table:cobis..cl_filial
       description: 'Filial.'
@@ -399,6 +480,42 @@ components:
         #  fi_contador
         #  fi_ruc
         #  fi_cont_nivel
+
+    Trustrelationship: #table:cobis..cts_relacion_confianza
+      description:  'Configuración de la relación de confianza para usuarios externos que se conectan al core COBIS.'
+      type: object
+      properties:
+        code: #filed:	rc_secuencial
+          description: 'Código de la configuración de la relación de confianza.'
+          type: integer
+          format: int32
+          minimum: 1
+        relationshipCode: #field:	rc_id_relacion
+          description: 'Código que relaciona la configuración de relación de confianza con el usuario y la aplicación externa.'
+          type: integer
+          format: int32
+          minimum: 1
+        #	rc_usuario
+        #	rc_rol
+        #	rc_oficina
+        #	rc_terminal
+        server: #field:	rc_servidor
+          description: 'Servidor CTS donde se genera la configuración de relación de confianza.'
+          type: string
+          minLength: 1
+          maxLength: 30
+        sessionIdetification: #field	rc_id_sesion
+          description: 'Identificador de la sesión que se genera en CTS.'
+          type: string
+          minLength: 1
+          maxLength: 24
+        ctsSession:   #field:rc_id_sesion_cts
+          description: 'Sesión generada en CTS.'
+          type: string
+          minLength: 1
+          maxLength: 51
+        #	rc_estado
+
 
     User: # table:cobis..ad_usuario
       description: 'Usuario.'
@@ -617,12 +734,6 @@ components:
           * 5: APP Móvil
       type: integer
       enum: [1,2,3,4,5]
-    
-#    CatalogCode: # cobis..cl_catalogo.codigo
-#      description: 'Código de un elemento de un catálogo'
-#      type: string
-#      minLength: 1
-#      maxLength: 10
       
     CatalogDescription: # key cobis..cl_catalogo.descripcion
       description: 'Descripción de un elemento de un catálogo.'
@@ -653,6 +764,12 @@ components:
       type: string
       minLength: 1
       maxLength: 30
+
+    Password: #key cobis..cl_funcionario.fu_clave
+      description:  'Contraseña del usuario funcionario.'
+      type: string
+      format: password
+      maxLength:  30
     
     #########################
     #  GENERAL COMPONENTS   #
