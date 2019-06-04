@@ -453,7 +453,7 @@ components:
         #	ro_departamento
         branch: #field:	ro_oficina
           allOf:
-              - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
+            - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
           description: 'Oficina del rol.'
         
     Subsidiary: # table:cobis..cl_filial
