@@ -263,7 +263,7 @@ components:
         externalApplication: #field:	ue_id_aplicacion
           allOf:
             - $ref: '#/components/schemas/ExternalApplication'
-            - description: 'Código aplicación que utiliza el usuario externo.'
+          description: 'Código aplicación que utiliza el usuario externo.'
         externalUser: #field:	ue_usuario
           description: 'Usuario externo.'
           type: string
@@ -271,11 +271,11 @@ components:
         role: # field:	ue_rol
           allOf:
             - $ref: '#/components/schemas/Role'
-            - description:  'Rol de usuario externo.'
+          description:  'Rol de usuario externo.'
         trustrelationship:  #field:	ue_id_relacion
           allOf:
             - $ref: '#/components/schemas/Trustrelationship'
-            - description: 'Relación de confianza generada para este usuario externo.'  
+          description: 'Relación de confianza generada para este usuario externo.'  
         #	ue_estado
 
     
