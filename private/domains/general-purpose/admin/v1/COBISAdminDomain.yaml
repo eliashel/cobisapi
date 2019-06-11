@@ -260,7 +260,7 @@ components:
       description: 'Usuario externo para aplicación que se conecta al core COBIS.'
       type: object
       properties:
-        externalApplication: #field:	ue_id_aplicacion
+        application: #field:	ue_id_aplicacion
           $ref: '#/components/schemas/ExternalApplication'
         user: #field:	ue_usuario
           description: 'Usuario externo.'
@@ -268,8 +268,8 @@ components:
           maxLength: 30
         role: # field:	ue_rol
           $ref: '#/components/schemas/Role'
-        trustrelationship:  #field:	ue_id_relacion
-          $ref: '#/components/schemas/Trustrelationship'
+        trustRelationShip:  #field:	ue_id_relacion
+          $ref: '#/components/schemas/TrustRelationShip'
         #	ue_estado
 
     
@@ -470,7 +470,7 @@ components:
         #  fi_ruc
         #  fi_cont_nivel
 
-    Trustrelationship: #table:cobis..cts_relacion_confianza
+    TrustRelationShip: #table:cobis..cts_relacion_confianza
       description:  'Configuración de la relación de confianza para usuarios externos que se conectan al core COBIS.'
       type: object
       properties:

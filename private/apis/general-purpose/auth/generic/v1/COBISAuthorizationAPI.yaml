@@ -60,9 +60,15 @@ tags:
   #externalDocs: 
   #  description: 'Encuentre más información en'
   #  url: http://www.cobiscorp.com/auth/authorization
+- name: Logout # retrieve
+  description: 'Operaciones culminar la sesión de los usuarios que operan sobre el core bancario.'
+  # Puede inclurse más documentación
+  #externalDocs: 
+  #  description: 'Encuentre más información en'
+  #  url: http://www.cobiscorp.com/auth/authorization
 
 paths:
-  /auth/authentication/:
+  /auth/authentication:
     post:
       tags:
         - Authentication
@@ -71,10 +77,18 @@ paths:
       operationId: AuthenticationPSTByClerk
       parameters:
         # HEADER REQUEST
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - in: header
+          name: 'X-Authorization'
+          description: 'JSON Web Token (JWT) entregado al usuario en la autenticación'
+          schema:
+            type: string
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - in: header
+          name: 'X-EndUser-Login'
+          description: 'Login de usuario en la aplicación de front-end que realiza la petición'
+          schema:
+            type: string
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
@@ -142,7 +156,7 @@ paths:
         500:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
 
-  /auth/authorization/:
+  /auth/authorization:
     post:
       tags:
         - Authorization
@@ -205,10 +219,10 @@ paths:
         500:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
           
-  /auth/authorization/logout:
+  /auth/logout:
     get:
       tags:
-        - Authorization
+        - Logout
       summary: 'Proceso de cierre de sesión de usuarios COBIS.'
       operationId: AuthorizationGETLogout
       parameters:
@@ -222,7 +236,7 @@ paths:
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
       
       responses:
-        201:
+        200:
           description: 'El proceso de cierre de la sesión se ha realizado con éxito.'
           headers:
             X-Correlation-ID:
@@ -245,7 +259,7 @@ paths:
         500:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/responses/500InternalServerError'
 
-  /auth/trustrelationship/:
+  /auth/trustrelationship:
     post:
       tags:
         - TrustRelationship
@@ -254,10 +268,18 @@ paths:
       operationId: TrustRelationshipPSTByApplication
       parameters:
         # HEADER REQUEST
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Authorization'
+        - in: header
+          name: 'X-Authorization'
+          description: 'JSON Web Token (JWT) entregado al usuario en la autenticación'
+          schema:
+            type: string
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Request-ID'
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-Financial-ID'
-        - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Login'
+        - in: header
+          name: 'X-EndUser-Login'
+          description: 'Login de usuario en la aplicación de front-end que realiza la petición'
+          schema:
+            type: string
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-RequestDateTime'
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-Terminal'
         - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/parameters/X-EndUser-LastLoggedDateTime'
@@ -360,8 +382,8 @@ components:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/ExternalUser'
             - type: object
           required:
-            - externalUser
-            - externalApplication
+            - user
+            - application
             
     #########################
     #    COMPLEX RESPONSE   #
@@ -402,4 +424,3 @@ components:
         Links:
           allOf:
             - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/COBISGeneralComponents.json#/components/schemas/Links'
-            
