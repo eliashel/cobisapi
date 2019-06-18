@@ -11,15 +11,16 @@ components:
     #  COBIS SAVINGS MODEL  #
     #########################
     # OBJECTS
-    SavingsAccount: # table:ah_cuenta
+    SavingsAccount: #table:ah_cuenta
       description: 'Cuenta de ahorros.' 
       type: object
+      
       properties:
-        code: # field:ah_cuenta
+        code: #field:ah_cuenta
           $ref: '#/components/schemas/SavingsAccountCode'
-        number: # field:ah_cta_banco
+        number: #field:ah_cta_banco
           $ref: '#/components/schemas/SavingsAccountNumber'
-        status: # field:ah_estado
+        status: #field:ah_estado
           #$ref: '#/components/schemas/SavingsAccountStatus'
           #SavingsAccountStatusCode: # cobis..cl_catalogo[table:ah_estado_cta] # TODO: No existe en la base
           description: >
@@ -36,15 +37,15 @@ components:
         #ah_control: OK # passbook.controlNumber
         passbook: #field
           $ref: '#/components/schemas/Passbook'
-        subsidiary: # field:ah_filial -> cobis..cl_filial
+        subsidiary: #field:ah_filial -> cobis..cl_filial
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
-        branch: # field:ah_oficina
+        branch: #field:ah_oficina
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
-        #product: # field:ah_producto
+        #product: #ah_producto
         #  $ref: '#/components/schemas/Product'
-        #type: # field:ah_tipo
+        #type: #ah_tipo
         #  $ref: '#/components/schemas/XXX'
-        currency: # field:ah_moneda
+        currency: #field:ah_moneda
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
         openingDate:  #field:ah_fecha_aper
           description: 'Fecha de apertura de la cuenta.'
@@ -52,10 +53,10 @@ components:
           format: date
         officer: #field:en_oficial
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Officer'
-        customer: # field:ah_cliente
+        customer: #field:ah_cliente
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/customers/v1/COBISCustomersDomain.yaml#/components/schemas/Customer'
         #ah_ced_ruc
-        name: # field:ah_nombre
+        name: #field:ah_nombre
           description: 'Nombre de la cuenta.'
           type: string
           minLength: 1
@@ -68,7 +69,7 @@ components:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/CapitalizationPeriodType'
         frequencyAccountStatement: #field:ah_ciclo
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/FrequencyAccountStatement'
-        #suspenceCount: #field:ah_suspensos
+        #suspenceCount: #ah_suspensos
         #  description: 'Cantidad de suspensos'
         #  type: number
         #  format: int32
@@ -76,7 +77,7 @@ components:
         #  maximum: 32767
         #ah_bloqueos
         #ah_condiciones
-        frozenBalance: # field: ah_monto_bloq
+        frozenBalance: #field:ah_monto_bloq
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #ah_num_blqmonto
         #ah_cred_24
@@ -100,7 +101,7 @@ components:
         #ah_interes
         #ah_interes_ganado
         #ah_saldo_libreta # Passbook.balance
-        savingsinterest: #ah_saldo_interes: # field:ah_saldo_interes
+        savingsinterest: #ah_saldo_interes: #field:ah_saldo_interes
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #ah_saldo_anterior
         #ah_saldo_ult_corte
@@ -112,7 +113,7 @@ components:
         #ah_debitos
         #ah_creditos_hoy
         #ah_debitos_hoy
-        dateOfLastMovement: # field:ah_fecha_ult_mov
+        dateOfLastMovement: #field:ah_fecha_ult_mov
           description: 'Fecha de último movimiento de la cuenta.'
           type: string
           format: date
@@ -126,7 +127,7 @@ components:
           format: date
         #ah_fecha_prx_corte
         #ah_fecha_ult_corte
-        dateOfLastCapitalization: # field:ah_fecha_ult_capi
+        dateOfLastCapitalization: #field:ah_fecha_ult_capi
           description: 'Fecha de la última capitalización de intereses sobre la cuenta.'
           type: string
           format: date
@@ -259,27 +260,27 @@ components:
           type: string
           format: date-time
   
-    Passbook: # table:ah_cuenta (virtual)
+    Passbook: #table:ah_cuenta (virtual)
       description: 'Libreta de cuenta de ahorros.'
       properties:
-        number: # field:ah_numlib
+        number: #field:ah_numlib
           description: 'Número de la libreta de ahorros.'
           type: integer
           format: int32
-        controlNumber: # field:ah_control
+        controlNumber: #field:ah_control
           description: 'Número de control de la libreta.'
           type: integer
           format: int32
-        line: # field:ah_linea
+        line: #field:ah_linea
           description: 'Número de lineas impresas en la libreta.'
           type: integer
           format: int32
           minimum: 1
           maximum: 32767
-        balance: # field:ah_saldo_libreta
+        balance: #field:ah_saldo_libreta
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
              
-    TransactionSavingsAccount: # table:cob_ahorros..ah_tran_monet- table:cob_ahorros_his..ah_his_movimiento
+    TransactionSavingsAccount: #table:cob_ahorros..ah_tran_monet- table:cob_ahorros_his..ah_his_movimiento
       description: 'Transacción monetaria de una cuenta de ahorros.'
       type: object
       properties:
@@ -287,7 +288,7 @@ components:
           description: 'Fecha de proceso de la transacción.'
           type: string
           format: date
-        code: # field:tm_secuencial- field: hm_secuencial
+        code: #field:tm_secuencial- field: hm_secuencial
           description: 'Número de secuencial de transacción.'
           type: integer
           format: int32
@@ -301,7 +302,7 @@ components:
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Subsidiary'
         branch: #field:tm_oficina- field: hm_oficina
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Branch'
-        user: # field: tm_usuario- field: hm_usuario
+        user: #field:tm_usuario- field: hm_usuario
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/UserLogin'
         terminal: #field:tm_terminal- field: hm_terminal
           description: 'Terminal de origen de la transacción.'
@@ -314,29 +315,29 @@ components:
         #tm_reentry
         #tm_signo
         #tm_fecha_ult_mov
-        cashAmount: # field:tm_efectivo- field: hm_efectivo
+        cashAmount: #field:tm_efectivo- field: hm_efectivo
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
-        ownChecksAmount: # field:tm_chq_propios- field: hm_chq_propios
+        ownChecksAmount: #field:tm_chq_propios- field: hm_chq_propios
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
-        localChecksAmount: # field:tm_chq_locales- field: hm_chq_locales
+        localChecksAmount: #field:tm_chq_locales- field: hm_chq_locales
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
-        othersChecksAmount: # field: tm_chq_ot_plazas- field: hm_chq_ot_plazas
+        othersChecksAmount: #field:tm_chq_ot_plazas- field: hm_chq_ot_plazas
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
-        totalAmount: # field: tm_valor- field: hm_valor
+        totalAmount: #field:tm_valor- field: hm_valor
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #tm_remoto_ssn
         currency: #field:tm_moneda- field: hm_moneda
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Currency'
-        indicator: # field:tm_indicador- field: hm_indicador, cobis..cl_catalogo[table:1787:ah_tipo_indicador] 
+        indicator: #field:tm_indicador- field: hm_indicador, cobis..cl_catalogo[table:1787:ah_tipo_indicador] 
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Indicator'
-        cause: # field:tm_causa- field: hm_causa, cobis..cl_catalogo[table:1289:ah_causa_nc: cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
+        cause: #field:tm_causa- field: hm_causa, cobis..cl_catalogo[table:1289:ah_causa_nc: cuando la transacción es una nota crédito, table:1290:ah_causa_nd: cuando la transacción es una nota débito] 
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Cause'
-        department: # field:tm_departamento- field: hm_departamento
+        department: #field:tm_departamento- field: hm_departamento
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Department'
         #tm_saldo_lib
         accountingBalance:  #field:tm_saldo_contable- field: hm_saldo_contable
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
-        availableBalance: # field:tm_saldo_disponible- field: hm_saldo_disponible
+        availableBalance: #field:tm_saldo_disponible- field: hm_saldo_disponible
           $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Amount'
         #tm_saldo_interes
         #tm_fecha_efec
@@ -348,12 +349,12 @@ components:
           $ref: '#/components/schemas/SavingsAccount'
         #tm_tipo_xfer
         #tm_estado
-        transactionConcept: #field: tm_concepto- field: hm_concepto
+        transactionConcept: #field:tm_concepto- field: hm_concepto
           description: 'Descripcón del concepto de la transacción.'
           type: string
           maxLength: 40
         #tm_oficina_cta # oficina en la que fue creada la cuenta 
-        hourTransaction:  #field: #tm_hora- field: hm_hora
+        hourTransaction:  #field:#tm_hora- field: hm_hora
           description: 'Fecha y hora de proceso de la transacción.'
           type: string
           format: date-time
@@ -384,15 +385,15 @@ components:
         #tm_ref_canal
     
     # KEY ELEMENTS
-    SavingsAccountNumber: # field:ah_cta_banco # TODO: Revisar implementación en BD.
+    SavingsAccountNumber: #key:ah_cta_banco # TODO: Revisar implementación en BD.
       description: 'Número de cuenta de ahorros.'
       type: string
       #pattern: '[0-9]*'
       minLength: 5
       maxLength: 16   
     
-    SavingsAccountCode: # field:ah_cuenta
-      description: 'Código interno de la cuenta de ahorros.' # field:ah_cuenta
+    SavingsAccountCode: #key:ah_cuenta
+      description: 'Código interno de la cuenta de ahorros.' #ah_cuenta
       type: integer
       minimum: 1
       maximum: 9999
