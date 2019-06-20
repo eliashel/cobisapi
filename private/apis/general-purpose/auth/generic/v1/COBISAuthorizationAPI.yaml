@@ -349,9 +349,10 @@ components:
                 - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/UserLogin'
                 - type: object
             password:
-              allOf:
-                - $ref: 'https://raw.githubusercontent.com/eliashel/cobisapi/master/private/domains/general-purpose/admin/v1/COBISAdminDomain.yaml#/components/schemas/Password'
-                - type: object
+              description:  'Contraseña del usuario funcionario.'
+              type: string
+              format: password
+              maxLength:  30
           required:
               - user
               - password

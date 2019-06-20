@@ -48,8 +48,7 @@
         "description": "Fecha y hora en la que se originó la solicitud o petición por el usuario en la aplicación de front-end",
         "in": "header",
         "schema": {
-          "type": "string",
-          "format": "date-time"
+          "type": "string"
         },
         "required": true
       },
@@ -67,8 +66,7 @@
         "description": "Fecha y hora del último logueo del usuario en la aplicación",
         "in": "header",
         "schema": {
-          "type": "string",
-          "format": "date-time"
+          "type": "string"
         },
         "required": false
       },

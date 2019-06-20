@@ -714,7 +714,7 @@ components:
           $ref: '#/components/schemas/CatalogStatus'
 
   # KEY ELEMENTS
-    ChannelCode: # TODO: Validar implementación de objeto en BD.
+    ChannelCode: #key TODO: Validar implementación de objeto en BD.
       description: >
         'Canal transccional'
           * 1: Oficina
@@ -754,17 +754,11 @@ components:
       type: string
       minLength: 1
       maxLength: 30
-
-    Password: #key cobis..cl_funcionario.fu_clave
-      description:  'Contraseña del usuario funcionario.'
-      type: string
-      format: password
-      maxLength:  30
     
     #########################
     #  GENERAL COMPONENTS   #
     #########################
-    Amount: #table Object
+    Amount: #table virtual Object
       description: 'Valor monetario'
       type: string
       pattern: '[0-9]{1,16}(\.[0-9]{1,2})'
